@@ -1,0 +1,127 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationsController : Controller
+    {
+		private readonly IOrganizationRepository organizationRepository;
+		private readonly IOrganizationCategoryRepository organizationcategoryRepository;
+        public OrganizationsController(IOrganizationRepository organizationRepository, IOrganizationCategoryRepository organizationcategoryRepository)
+        {
+			this.organizationRepository = organizationRepository;
+			this.organizationcategoryRepository = organizationcategoryRepository;
+        }
+
+        //
+        // GET: /Organizations/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationRepository.AllIncluding(organization => organization.ParentOrganization, organization => organization.OrganizationCategory));
+        }
+		
+		public ViewResult Search(Organization searchOrganization)
+        {
+			if(searchOrganization!=null)
+			{
+							}
+						return View("Index",organizationRepository.AllIncluding(organization => organization.ParentOrganization, organization => organization.OrganizationCategory));
+		}
+
+        //
+        // GET: /Organizations/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationRepository.Find(id));
+        }
+
+        //
+        // GET: /Organizations/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			Organization organization = new Organization();
+			ViewBag.PossibleParentOrganizations = organizationRepository.All;
+			ViewBag.PossibleOrganizationCategories = organizationcategoryRepository.All;
+            return View(organization);
+        } 
+
+        //
+        // POST: /Organizations/Create
+        [HttpPost]
+        public ActionResult Create(Organization organization)
+        {
+            if (ModelState.IsValid) {
+                organizationRepository.InsertOrUpdate(organization);
+                organizationRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleParentOrganizations = organizationRepository.All;
+				ViewBag.PossibleOrganizationCategories = organizationcategoryRepository.All;
+				return View(organization);
+			}
+        }
+        
+        //
+        // GET: /Organizations/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleParentOrganizations = organizationRepository.All;
+			ViewBag.PossibleOrganizationCategories = organizationcategoryRepository.All;
+             return View(organizationRepository.Find(id));
+        }
+
+        //
+        // POST: /Organizations/Edit/5
+        [HttpPost]
+        public ActionResult Edit(Organization organization)
+        {
+            if (ModelState.IsValid) {
+                organizationRepository.InsertOrUpdate(organization);
+                organizationRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleParentOrganizations = organizationRepository.All;
+				ViewBag.PossibleOrganizationCategories = organizationcategoryRepository.All;
+				return View(organization);
+			}
+        }
+
+        //
+        // GET: /Organizations/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationRepository.Find(id));
+        }
+
+        //
+        // POST: /Organizations/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationRepository.Delete(id);
+            organizationRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

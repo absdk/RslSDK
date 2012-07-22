@@ -1,0 +1,21 @@
+@model SoftwareGrid.DataLogic.Models.Company
+@{
+    ViewBag.Title = Model.CompanyName;
+    Layout = "~/Views/Shared/_LayoutCRM.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Company</h2>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="box grid_16">
+        <div class="block">
+            <h2 class="box_head">
+                Company</h2>
+            @Html.HiddenFor(model => model.CompanyID)
+            @Html.HiddenFor(model => model.CompanyDisplayId)
+            @Html.Partial("_CreateOrEdit", Model)
+        </div>
+    </div>
+}

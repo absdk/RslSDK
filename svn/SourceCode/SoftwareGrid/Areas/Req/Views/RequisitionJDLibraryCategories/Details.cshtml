@@ -1,0 +1,31 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionJDLibraryCategory
+
+@{
+    ViewBag.Title = "RequisitionJDLibraryCategory";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition J D Library Category</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition J D Library Category</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>ParentRequisitionJDLibraryCategory</label>
+    <div class="display-field">@(Model.ParentRequisitionJDLibraryCategory == null ? "None" : Model.ParentRequisitionJDLibraryCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionJDLibraryCategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

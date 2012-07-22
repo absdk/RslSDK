@@ -1,0 +1,372 @@
+
+
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  Http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using SoftwareGrid.DataLogic.Attributes;
+
+namespace SoftwareGrid.DataLogic.Models
+{
+
+    public class Task
+	{
+		
+		[Required]
+		[Display(AutoGenerateField=false)]
+		[Key]
+    	public Int32 TaskID { get; set; }
+
+        [Display(Name = "Display ID")]
+        [StringLength(75)]
+        [IncludeInList(Sequence = 1, AllowSearch = true, Width = 5, AllowWidthInPercentage = true)]
+        public String TaskDisplayId { get; set; }
+     
+		[Required]
+        [ForeignKey("CreatedByUser")]
+        [Display(AutoGenerateField = false)]
+        [IncludeInList(Sequence = 2, Width = 20, AllowWidthInPercentage = true, AllowFiltering = true, AllowGrouping = true, AllowSorting = true)]
+    	public Int32 CreatedByUserID { get; set; }
+        //Created by Logged In User dont have to be in create view, only in List, auto selected logged in user Full Name, not first name
+
+		[Required]
+        [DataType(DataType.DateTime)]
+        [IncludeInList(Sequence = 1, Width = 10, AllowWidthInPercentage = true, AllowFiltering = true, AllowGrouping = true, AllowSorting = true)]
+        public DateTime TaskCreatedDate { get; set; }
+        //auto selected display current date - in create dont need, in grid it should show
+
+        [Display(Name="Priority")]
+        [ForeignKey("TaskPriorityCategory")]
+        [IncludeInList(Sequence = 3, Width = 10, AllowWidthInPercentage = true, AllowFiltering = true, AllowGrouping = true, AllowSorting = true)]
+		public Int32? TaskPriorityCategoryID { get; set; }
+        //By default priority Low, not mandatory
+
+
+        [Required(ErrorMessage = "Task Status is required")]
+        [Display(Name = "Status")]
+        [ForeignKey("TaskStatus")]
+        [IncludeInList(Sequence = 5, Width = 10, AllowWidthInPercentage = true, AllowFiltering = true, AllowGrouping = true, AllowSorting = true)]
+        public Int32? TaskStatusID { get; set; }
+        ////By default open  | add parallel to Priority
+
+       	[Required(ErrorMessage="Subject is required")]
+		[Display(Name="Subject")]
+        [IncludeInList(Sequence = 4, Width = 40, AllowWidthInPercentage = true, AllowFiltering = true, AllowGrouping = true, AllowSorting = true)]
+		[StringLength(250)]
+    	public String Subject { get; set; }
+        //Default as main
+
+		[Display(Name="Description")]
+		[StringLength(2000)]
+        [DataType(DataType.Html)]
+    	public String Description { get; set; }
+        
+        [Display(Name = "Completion Percentage")]
+        [IncludeInList(Sequence = 6, Width = 10, AllowWidthInPercentage = true, AllowFiltering = true, AllowGrouping = true, AllowSorting = true)]
+        [DataType("Percent")]
+        public Double CompletionPercentage { get; set; }
+        //need to see the data type
+        
+        [Display(Name = "Completion Info")]
+        [StringLength(500)]
+        public String CompletionInfo { get; set; }
+
+        [Display(Name = "Completion Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime CompletionDate { get; set; }
+
+        //This section is to create Task as Template
+        [Display(Name = "Is Template")]
+        public Boolean IsTemplate { get; set; }
+        //Create view as "TaskTemplate" in that it will show
+
+        [Display(Name = "Task Library Category")]
+        [ForeignKey("TaskLibraryCategory")]
+        public Int32? TaskLibraryCategoryID { get; set; }
+        //wont show in the task display, it will be in different one
+
+        [ForeignKey("Requisition")]
+        public Int32? RequisitionID { get; set; }
+     
+        [ForeignKey("Company")]
+        public Int32? CompanyID { get; set; }
+        public virtual Company Company { get; set; }
+
+        [ForeignKey("Vendor")]
+        public Int32? VendorID { get; set; }
+      
+        [ForeignKey("Applicant")]
+        public Int32? ApplicantID { get; set; }
+        
+        //Drag and drop the task to applicant profile, or click to create a task in applicant dashboar, 
+
+        [ForeignKey("Organization")]
+        public Int32? OrganizationID { get; set; }
+       
+        [ForeignKey("SpmProject")]
+        public Int32? SpmProjectID { get; set; }
+    
+        [ForeignKey("Employee")]
+        public Int32? EmployeeID { get; set; }
+        
+        public virtual Employee Employee { get; set; }
+        public virtual SpmProject SpmProject { get; set; }
+        public virtual Organization Organization { get; set; }
+        public virtual Vendor Vendor { get; set; }
+        public virtual Requisition Requisition { get; set; }
+        public virtual Applicant Applicant { get; set; }
+
+        public virtual TaskPriorityCategory TaskPriorityCategory { get; set; }
+        public virtual TaskStatusCategory TaskStatus { get; set; }
+        public virtual TaskLibraryCategory TaskLibraryCategory { get; set; }
+        public virtual User CreatedByUser { get; set; }
+        
+	}
+
+    public class TaskStatusCategory
+    {
+
+        [Required(ErrorMessage = "Task Status ID is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskStatusCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(100)]
+        public String Name { get; set; }
+
+    }
+    public class TaskPriorityCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskPriorityCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(100)]
+        public String Name { get; set; }
+
+    }
+    public class TaskLibraryCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskLibraryCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(100)]
+        public String Name { get; set; }
+
+        [Display(Name = "Description")]
+        [StringLength(500)]
+        public String Description { get; set; }
+
+    }
+
+    public class TaskDocumentInfo
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskDocumentInfoID { get; set; }
+
+        [Required]
+        [ForeignKey("Task")]
+        public Int32 TaskID { get; set; }
+
+        [Display(Name = "Document Title")]
+        [StringLength(100)]
+        public String DocumentTitle { get; set; }
+
+        [Display(Name = "Upload Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime UploadDate { get; set; }
+        //auto insert current date
+
+        [Required(ErrorMessage = "Image File is required")]
+        [Display(Name = "Image File")]
+        public Byte[] ImageFile { get; set; }
+
+        public virtual Task Task { get; set; }
+
+    }
+    public class TaskSkillsExpEdu
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskSkillsExpEduID { get; set; }
+
+        [Required]
+        [ForeignKey("Task")]
+        public Int32 TaskID { get; set; }
+
+        [Required(ErrorMessage = "SkillsExpEdu is required")]
+        [Display(Name = "Required SkillsExpEdu or skillset")]
+        [ForeignKey("SkillsExpEdu")]
+        public Int32 SkillsExpEduID { get; set; }
+
+        public virtual Task Task { get; set; }
+        public virtual SkillsExpEdu SkillsExpEdu { get; set; }
+
+    }
+    public class TaskAssignedTeam
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskAssignedTeamID { get; set; }
+
+        [Required]
+        [ForeignKey("Task")]
+        public Int32 TaskID { get; set; }
+
+        [Required(ErrorMessage = "Assign By User is required")]
+        [Display(Name = "Assign By")]
+        [ForeignKey("AssignByUser")]
+        public Int32? AssignByUserID { get; set; }
+
+        [Required(ErrorMessage = "Assign To Member is required")]
+        [Display(Name = "Assign To")]
+        [ForeignKey("AssignToUser")]
+        public Int32? AssignedToUserID { get; set; }
+
+        [Required(ErrorMessage = "Assign Date is required")]
+        [Display(Name = "Assign Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime AssignDate { get; set; }
+
+        [Display(Name = "EmailNotificationTemplate")]
+        public Boolean IsEmailNotification { get; set; }
+
+        [Display(Name = "Task Percentage")]
+        //[DataType(DataType.Percent)]
+        public Double TaskPercentage { get; set; }
+
+        public virtual Task Task { get; set; }
+        public virtual User AssignToUser { get; set; }
+        public virtual User AssignByUser { get; set; }
+
+
+    }
+    public class TaskTimeCostEstimation
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskTimeCostEstimationID { get; set; }
+
+        [Required]
+        [ForeignKey("Task")]
+        public Int32 TaskID { get; set; }
+
+        [Display(Name = "Estimated Work Hour Days")]
+        public Int32 EstimatedWorkHourDays { get; set; }
+
+        [Display(Name = "Actual Work Hour or Days")]
+        public Int32 ActualWorkHourDays { get; set; }
+
+        [Display(Name = "Cost Rate")]
+        public Double CostRate { get; set; }
+        //different view [Task Cost and Billing Rate
+
+        [Display(Name = "Total Cost Amount")]
+        public Double EstimatedCost { get; set; }
+        //use function to calculate the amount, no entry
+
+        [Display(Name = "Blling Rate")]
+        public Double ClientBllingRate { get; set; }
+        //Different View
+
+        [Display(Name = "Total Billing Amount")]
+
+        public Double TotalBillingAmount { get; set; }
+        //use function to calculate the amount, no entry
+
+        [ForeignKey("Currency")]
+        [Display(Name = "Currency")]
+        public Int32? CurrencyID { get; set; }
+
+        public virtual Task Task { get; set; }
+        public virtual Currency Currency { get; set; }
+    }
+
+    public class TaskEvaluation
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskEvaluationID { get; set; }
+
+        [Required]
+        [ForeignKey("Task")]
+        public Int32 TaskID { get; set; }
+        //display will be hidden
+        
+        [ForeignKey("EvalutedByManager")]
+        public Int32 EvalutedByManagerID { get; set; }
+        //this section below will be in a different tab or with + Sign only manager will have access to it [ Task Evaluation]
+
+        [Display(Name = "Evaluation Rating")]
+        [ForeignKey("TaskRatingScale")]
+        //[DataType(DataType.RatingScale)]
+        public Int32 TaskRatingScaleID { get; set; }
+        //this will be in Employee Task Assessment Report Grid
+
+        [Display(Name = "Manager Evaluation Notes")]
+        [StringLength(300)]
+        public String AssessmentNotes { get; set; }
+
+        public virtual User EvalutedByManager { get; set; }
+        public virtual Task Task { get; set; }
+        public virtual RatingScale TaskRatingScale { get; set; }
+
+    }
+
+    public class TaskScheduleReference
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 TaskScheduleReferenceID { get; set; }
+
+        [Required]
+        [ForeignKey("Task")]
+        public Int32 TaskID { get; set; }
+        //display will be hidden
+
+
+        [ForeignKey("Schedule")]
+        public Int32 ScheduleID { get; set; }
+        //Drag and drop the task to applicant profile, or click to create a task in requisition landing page, 
+
+        public virtual Task Task { get; set; }
+        public virtual Schedule Schedule { get; set; }
+
+    }
+    
+   
+      
+        
+
+}
+	

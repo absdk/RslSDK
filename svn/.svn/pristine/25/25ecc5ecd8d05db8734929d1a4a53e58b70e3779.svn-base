@@ -1,0 +1,123 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationProjectsController : Controller
+    {
+		private readonly IOrganizationRepository organizationRepository;
+		private readonly IOrganizationProjectRepository organizationprojectRepository;
+        public OrganizationProjectsController(IOrganizationRepository organizationRepository, IOrganizationProjectRepository organizationprojectRepository)
+        {
+			this.organizationRepository = organizationRepository;
+			this.organizationprojectRepository = organizationprojectRepository;
+        }
+
+        //
+        // GET: /OrganizationProjects/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationprojectRepository.AllIncluding(organizationproject => organizationproject.Organization));
+        }
+		
+		public ViewResult Search(OrganizationProject searchOrganizationProject)
+        {
+			if(searchOrganizationProject!=null)
+			{
+							}
+						return View("Index",organizationprojectRepository.AllIncluding(organizationproject => organizationproject.Organization));
+		}
+
+        //
+        // GET: /OrganizationProjects/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationprojectRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationProjects/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationProject organizationproject = new OrganizationProject();
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+            return View(organizationproject);
+        } 
+
+        //
+        // POST: /OrganizationProjects/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationProject organizationproject)
+        {
+            if (ModelState.IsValid) {
+                organizationprojectRepository.InsertOrUpdate(organizationproject);
+                organizationprojectRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				return View(organizationproject);
+			}
+        }
+        
+        //
+        // GET: /OrganizationProjects/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+             return View(organizationprojectRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationProjects/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationProject organizationproject)
+        {
+            if (ModelState.IsValid) {
+                organizationprojectRepository.InsertOrUpdate(organizationproject);
+                organizationprojectRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				return View(organizationproject);
+			}
+        }
+
+        //
+        // GET: /OrganizationProjects/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationprojectRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationProjects/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationprojectRepository.Delete(id);
+            organizationprojectRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

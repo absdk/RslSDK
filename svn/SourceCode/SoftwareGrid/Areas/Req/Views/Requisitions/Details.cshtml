@@ -1,0 +1,91 @@
+@model SoftwareGrid.DataLogic.Models.Requisition
+
+@{
+    ViewBag.Title = "Requisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition</h2>
+		<fieldset>
+
+    <label>CreateDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CreateDate)</div>
+
+    <label>RequisitionDisplayId</label>
+    <div class="display-field">@Model.RequisitionDisplayId</div>
+
+    <label>IsJdLibraryTemplate</label>
+    <div class="display-field">@Model.IsJdLibraryTemplate</div>
+
+    <label>IsOrganizationPositionTemplate</label>
+    <div class="display-field">@Model.IsOrganizationPositionTemplate</div>
+
+    <label>JobTitle</label>
+    <div class="display-field">@Model.JobTitle</div>
+
+    <label>NumberOfOpenings</label>
+    <div class="display-field">@String.Format("{0:F}", Model.NumberOfOpenings)</div>
+
+    <label>EmploymentContractDuration</label>
+    <div class="display-field">@Model.EmploymentContractDuration</div>
+
+    <label>HireByDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.HireByDate)</div>
+
+    <label>SalaryRange</label>
+    <div class="display-field">@Model.SalaryRange</div>
+
+    <label>WorkAddress</label>
+    <div class="display-field">@Model.WorkAddress</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>ZipCode</label>
+    <div class="display-field">@Model.ZipCode</div>
+
+    <label>JobDescription</label>
+    <div class="display-field">@Model.JobDescription</div>
+
+    <label>RequisitionJDLibraryCategory</label>
+    <div class="display-field">@(Model.RequisitionJDLibraryCategory == null ? "None" : Model.RequisitionJDLibraryCategory.Name)</div>
+
+    <label>RequisitionStatusCategory</label>
+    <div class="display-field">@(Model.RequisitionStatusCategory == null ? "None" : Model.RequisitionStatusCategory.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>SalaryRateType</label>
+    <div class="display-field">@(Model.SalaryRateType == null ? "None" : Model.SalaryRateType.Name)</div>
+
+    <label>Currency</label>
+    <div class="display-field">@(Model.Currency == null ? "None" : Model.Currency.Name)</div>
+
+    <label>EmploymentType</label>
+    <div class="display-field">@(Model.EmploymentType == null ? "None" : Model.EmploymentType.Name)</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>ExperienceLevelCategory</label>
+    <div class="display-field">@(Model.ExperienceLevelCategory == null ? "None" : Model.ExperienceLevelCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

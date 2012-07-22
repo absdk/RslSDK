@@ -1,0 +1,103 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfileWidgetAccess
+
+@{
+    ViewBag.Title = "Applicant Profile Widget Access";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Profile Widget Access</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>ContactInfoWidget</label>
+		    <div class="display-field">@Model.ContactInfoWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>NoteWidget</label>
+		    <div class="display-field">@Model.NoteWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>DocumentWidget</label>
+		    <div class="display-field">@Model.DocumentWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>ProfileWidget</label>
+		    <div class="display-field">@Model.ProfileWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>PassportInfoWidget</label>
+		    <div class="display-field">@Model.PassportInfoWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>DriverLicenseWidget</label>
+		    <div class="display-field">@Model.DriverLicenseWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>VisaInfoWidget</label>
+		    <div class="display-field">@Model.VisaInfoWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>AdditionalPersonalDataWidget</label>
+		    <div class="display-field">@Model.AdditionalPersonalDataWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>JobCartWidget</label>
+		    <div class="display-field">@Model.JobCartWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>ReferenceInfoWidget</label>
+		    <div class="display-field">@Model.ReferenceInfoWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>PhotoProfileWidget</label>
+		    <div class="display-field">@Model.PhotoProfileWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>VideoProfileWidget</label>
+		    <div class="display-field">@Model.VideoProfileWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>SecurityClearanceInfoWidget</label>
+		    <div class="display-field">@Model.SecurityClearanceInfoWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>SubmissionReportWidget</label>
+		    <div class="display-field">@Model.SubmissionReportWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>SocialNetworkWidget</label>
+		    <div class="display-field">@Model.SocialNetworkWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>ViewerListWidget</label>
+		    <div class="display-field">@Model.ViewerListWidget</div>
+		</div>
+				<div class="form-item">
+		    <label>Applicant</label>
+		    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>ProfileAccessUser</label>
+		    <div class="display-field">@(Model.ProfileAccessUser == null ? "None" : Model.ProfileAccessUser.LastName)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

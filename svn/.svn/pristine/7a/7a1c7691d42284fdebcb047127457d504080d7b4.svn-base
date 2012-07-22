@@ -1,0 +1,130 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantPassportInfo
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.NationalityCountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.NationalityCountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleNationalityCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.NationalityCountryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.PassportNumber)
+            <div>
+								@Html.EditorFor(model => model.PassportNumber)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PassportType)
+            <div>
+								@Html.EditorFor(model => model.PassportType)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PassportProfession)
+            <div>
+								@Html.EditorFor(model => model.PassportProfession)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IssuanceCity)
+            <div>
+								@Html.EditorFor(model => model.IssuanceCity)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.IssuanceCountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.IssuanceCountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleIssuanceCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.IssuanceCountryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.StateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.StateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.StateID.ToString(),
+			        Selected = (Model != null) && (option.StateID == Model.StateID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.IssueDate)
+            <div>
+								@Html.EditorFor(model => model.IssueDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ExpireDate)
+            <div>
+								@Html.EditorFor(model => model.ExpireDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsVerified)
+            <div>
+								@Html.EditorFor(model => model.IsVerified)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.VerifiedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.VerifiedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleVerifiedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.VerifiedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VerificationDate)
+            <div>
+								@Html.EditorFor(model => model.VerificationDate)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

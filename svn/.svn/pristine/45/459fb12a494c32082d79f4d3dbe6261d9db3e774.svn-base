@@ -1,0 +1,22 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionStatusForVendorCategory
+
+@{
+    ViewBag.Title = "Requisition Status For Vendor Category";
+}
+<div class="flat_area grid_16">
+<h2>Requisition Status For Vendor Category</h2>
+</div>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Requisition Status For Vendor Category</h2>
+
+			@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}
+

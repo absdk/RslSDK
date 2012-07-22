@@ -1,0 +1,14 @@
+﻿@model SoftwareGrid.DataLogic.Models.AppMenu
+<div class="form-item">
+    @Html.LabelFor(model => model.AppMenuCategoryID)
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.AppMenuCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.AppMenuCategory>)ViewBag.PossibleAppMenuCategories).Select(option => new SelectListItem
+    {
+        Text = (option == null ? "None" : option.Name),
+        Value = option.AppMenuCategoryID.ToString(),
+        Selected = (Model != null) && (option.AppMenuCategoryID == Model.AppMenuCategoryID)
+    }), "Choose...", new { data_action = "SelectParentMenus" })
+    </div>
+    <div class="required_tag">
+    </div>
+</div>

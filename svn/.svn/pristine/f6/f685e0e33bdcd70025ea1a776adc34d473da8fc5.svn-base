@@ -1,0 +1,121 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationWorkforcePlanDetail
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationWorkforcePlanID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationWorkforcePlanID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationWorkforcePlan>)ViewBag.PossibleOrganizationWorkforcePlans).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Title), 
+			        Value = option.OrganizationWorkforcePlanID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationWorkforcePlanID == Model.OrganizationWorkforcePlanID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationBusinessDivisionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationBusinessDivisionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationBusinessDivision>)ViewBag.PossibleOrganizationBusinessDivisions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationBusinessDivisionID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationBusinessDivisionID == Model.OrganizationBusinessDivisionID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationProjectID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationProjectID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationProject>)ViewBag.PossibleOrganizationProjects).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationProjectID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationProjectID == Model.OrganizationProjectID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationDepartmentID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationDepartmentID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationDepartment>)ViewBag.PossibleOrganizationDepartments).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationDepartmentID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationDepartmentID == Model.OrganizationDepartmentID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationPositionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationPositionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationPosition>)ViewBag.PossibleOrganizationPositions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationPositionID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationPositionID == Model.OrganizationPositionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.NumberOfEmployeeTobeHired)
+            <div>
+								@Html.EditorFor(model => model.NumberOfEmployeeTobeHired)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.HiredNumberEmployee)
+            <div>
+								@Html.EditorFor(model => model.HiredNumberEmployee)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.EmploymentTypeID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.EmploymentTypeID, ((IEnumerable<SoftwareGrid.DataLogic.Models.EmploymentType>)ViewBag.PossibleEmploymentTypes).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.EmploymentTypeID.ToString(),
+			        Selected = (Model != null) && (option.EmploymentTypeID == Model.EmploymentTypeID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ContractPeriod)
+            <div>
+								@Html.EditorFor(model => model.ContractPeriod)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PlannedStartDate)
+            <div>
+								@Html.EditorFor(model => model.PlannedStartDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Notes)
+            <div>
+								@Html.EditorFor(model => model.Notes)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.HierarchicalSequence)
+            <div>
+								@Html.EditorFor(model => model.HierarchicalSequence)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionOrganization
+
+@{
+    ViewBag.Title = "RequisitionOrganization";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Organization</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Organization</h2>
+		<fieldset>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+
+    <label>OrganizationProject</label>
+    <div class="display-field">@(Model.OrganizationProject == null ? "None" : Model.OrganizationProject.Name)</div>
+
+    <label>OrganizationDepartment</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationDepartment).ToString()</div>
+
+    <label>OrganizationPosition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationPosition).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionOrganizationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

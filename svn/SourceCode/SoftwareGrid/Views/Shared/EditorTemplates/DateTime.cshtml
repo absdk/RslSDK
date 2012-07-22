@@ -1,0 +1,9 @@
+@model DateTime?
+
+@(Html.Telerik().DateTimePicker()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+        .HtmlAttributes(new { id = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) + "_wrapper" })
+            .InputHtmlAttributes(new { style = "color:Black; padding-left:5px; float:none;" })
+        .HtmlAttributes(new { style = "width:200px;" })
+        .Value(Model > DateTime.MinValue? Model : DateTime.Today)
+)

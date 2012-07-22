@@ -1,0 +1,221 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant";
+    Layout = "_LayoutATS";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "Applicant"))
+{
+	<div class="box grid_16">
+        <h2 class="box_head">Search</h2>
+        <a href="#" class="grabber">&nbsp;</a>
+        <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+				<div class="search-item">
+									    <div class="search-item-left">
+										        <div class="label-container">
+				            @Html.Label("Display ID") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("ApplicantDisplayId") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("First Name") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("FirstName") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Last Name") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("LastName") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Primary Professional Category") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("ContactProfessionTypeID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ContactProfessionType>)ViewBag.PossibleContactProfessionTypes).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.ContactProfessionTypeID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Experience Level") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("ExperienceLevelCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ExperienceLevelCategory>)ViewBag.PossibleExperienceLevelCategories).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.ExperienceLevelCategoryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Professional Summary") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("ProfessionalSummary") 
+											        </div>
+									    </div>
+				    <div class="search-item-right">
+										        <div class="label-container">
+				            @Html.Label("City") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("City") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Country") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("CountryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.CountryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("State") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("StateID", ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.StateID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Applicant Availability Status") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("ApplicantAvailabilityStatusCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantAvailabilityStatusCategory>)ViewBag.PossibleApplicantAvailabilityStatusCategories).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.ApplicantAvailabilityStatusCategoryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Applicant Source Info") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("ApplicantSourceCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantSourceCategory>)ViewBag.PossibleApplicantSourceCategories).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.ApplicantSourceCategoryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									    </div>
+										</div>
+				<div style="width:50%; float:left;">
+				&nbsp;
+				</div>
+				<div class="button_bar clearfix" style="float:left;">
+					<button class="green" type="submit">
+							<span>Search</span>
+					</button>
+				</div>
+			</div>
+        </div>
+    </div>
+}
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.ApplicantID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.ApplicantDisplayId).Title("Display ID").Width("5%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.FullName).Title("Full Name").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.JobTitle).Title("Job Title").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.ProfessionalSummary).Title("Professional Summary").Width("100px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.City).Title("City").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.State.Name).Title("State").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Country.Name).Title("Country").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Phone).Title("Phone").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.ApplicantAvailabilityStatusCategory.Name).Title("Applicant Availability Status").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.EmailAddress).Title("Email Address").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "Applicant", new { id = @item.ApplicantID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "Applicant", new { id = @item.ApplicantID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			            if (ViewData["ApplicantDisplayId"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.ApplicantDisplayId).Contains(ViewData["ApplicantDisplayId"].ToString(true));
+				            }
+			            if (ViewData["FirstName"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.FirstName).Contains(ViewData["FirstName"].ToString(true));
+				            }
+			            if (ViewData["LastName"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.LastName).Contains(ViewData["LastName"].ToString(true));
+				            }
+			            if (ViewData["ContactProfessionTypeID"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.ContactProfessionTypeID).IsEqualTo(ViewData["ContactProfessionTypeID"].ToInteger(true));
+				            }
+			            if (ViewData["ExperienceLevelCategoryID"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.ExperienceLevelCategoryID).IsEqualTo(ViewData["ExperienceLevelCategoryID"].ToInteger(true));
+				            }
+			            if (ViewData["ProfessionalSummary"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.ProfessionalSummary).Contains(ViewData["ProfessionalSummary"].ToString(true));
+				            }
+			            if (ViewData["City"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.City).Contains(ViewData["City"].ToString(true));
+				            }
+			            if (ViewData["CountryID"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.CountryID).IsEqualTo(ViewData["CountryID"].ToInteger(true));
+				            }
+			            if (ViewData["StateID"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.StateID).IsEqualTo(ViewData["StateID"].ToInteger(true));
+				            }
+			            if (ViewData["ApplicantAvailabilityStatusCategoryID"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.ApplicantAvailabilityStatusCategoryID).IsEqualTo(ViewData["ApplicantAvailabilityStatusCategoryID"].ToInteger(true));
+				            }
+			            if (ViewData["ApplicantSourceCategoryID"].ToString(true) != string.Empty)
+            {
+				                filters.Add(o => o.ApplicantSourceCategoryID).IsEqualTo(ViewData["ApplicantSourceCategoryID"].ToInteger(true));
+				            }
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

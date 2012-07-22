@@ -1,0 +1,92 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantProfilePublish
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantProfileThemeLibraryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantProfileThemeLibraryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantProfileThemeLibrary>)ViewBag.PossibleApplicantProfileThemeLibraries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ApplicantProfileThemeLibraryID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantProfileThemeLibraryID == Model.ApplicantProfileThemeLibraryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.WebUrl)
+            <div>
+								@Html.EditorFor(model => model.WebUrl)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SeoTag)
+            <div>
+								@Html.EditorFor(model => model.SeoTag)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.StartPublishDate)
+            <div>
+								@Html.EditorFor(model => model.StartPublishDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EndPublishDate)
+            <div>
+								@Html.EditorFor(model => model.EndPublishDate)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.PublishedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.PublishedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossiblePublishedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.PublishedByUserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsCurrentlyPublish)
+            <div>
+								@Html.EditorFor(model => model.IsCurrentlyPublish)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsPremiumProfile)
+            <div>
+								@Html.EditorFor(model => model.IsPremiumProfile)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

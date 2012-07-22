@@ -1,0 +1,62 @@
+﻿using System.Web;
+using System.Web.Mvc;
+using EasySoft.Helper;
+using SoftwareGrid.BusinessLogic.Helpers;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.Common;
+using SoftwareGrid.DataLogic.Models;
+namespace SoftwareGrid
+{
+    public class BaseController : Controller
+    {
+        public User CurrentLoggedInUser
+        {
+            get
+            {
+                User user = WebHelper.CurrentSession.Content.LoggedInUser;
+                if (user == null)
+                {
+                    if (HttpContext.User != null && HttpContext.User.Identity != null && HttpContext.User.Identity.IsAuthenticated)
+                    {
+                        CookieHelper newCookieHelper = new CookieHelper();
+                        int userId = newCookieHelper.GetUserDataFromLoginCookie().ToInteger(true);
+                        if (userId > 0)
+                        {
+                            IUserRepository userRepository = DependencyResolver.Current.GetService(typeof(IUserRepository)) as IUserRepository;
+                            user = userRepository.Find(userId);
+                            WebHelper.CurrentSession.Content.LoggedInUser = user;
+                        }
+                    }
+                    if (user == null)
+                    {
+                        user = new User();
+                    }
+                }
+                return user;
+            }
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            object currentControllerName = string.Empty;
+            this.RouteData.Values.TryGetValue("controller", out currentControllerName);
+            object currentActionName = string.Empty;
+            this.RouteData.Values.TryGetValue("action", out currentActionName);
+            if (currentControllerName.ToString() != Constants.CommonConstants.UserDefaultControllerName && currentActionName.ToString() != Constants.CommonConstants.UserDefaultActionName)
+            {
+                if (User.Identity.IsAuthenticated && CurrentLoggedInUser != null)
+                {
+                    filterContext.HttpContext.Response.Redirect("~/" + Constants.CommonConstants.UserDefaultControllerName + "/" + Constants.CommonConstants.UserDefaultActionName + "", true);
+                }
+                else
+                {
+                    base.OnActionExecuted(filterContext);
+                }
+            }
+            else
+            {
+                base.OnActionExecuted(filterContext);
+            }
+        }
+    }
+}

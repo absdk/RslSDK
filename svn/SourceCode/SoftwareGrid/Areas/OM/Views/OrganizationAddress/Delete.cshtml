@@ -1,0 +1,79 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationAddress
+
+@{
+    ViewBag.Title = "Organization Address";
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Organization Address</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>LocationName</label>
+		    <div class="display-field">@Model.LocationName</div>
+		</div>
+				<div class="form-item">
+		    <label>AddressLine</label>
+		    <div class="display-field">@Model.AddressLine</div>
+		</div>
+				<div class="form-item">
+		    <label>PostBoxNumber</label>
+		    <div class="display-field">@Model.PostBoxNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>CityName</label>
+		    <div class="display-field">@Model.CityName</div>
+		</div>
+				<div class="form-item">
+		    <label>ZipCode</label>
+		    <div class="display-field">@Model.ZipCode</div>
+		</div>
+				<div class="form-item">
+		    <label>OfficePhone</label>
+		    <div class="display-field">@Model.OfficePhone</div>
+		</div>
+				<div class="form-item">
+		    <label>FaxNumber</label>
+		    <div class="display-field">@Model.FaxNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>EmailAddress</label>
+		    <div class="display-field">@Model.EmailAddress</div>
+		</div>
+				<div class="form-item">
+		    <label>Organization</label>
+		    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>OrganizationAddressCategory</label>
+		    <div class="display-field">@(Model.OrganizationAddressCategory == null ? "None" : Model.OrganizationAddressCategory.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>Country</label>
+		    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>State</label>
+		    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Back to List", "Index",new { organizationId = ViewBag.OrganizationId })
+</p>
+	

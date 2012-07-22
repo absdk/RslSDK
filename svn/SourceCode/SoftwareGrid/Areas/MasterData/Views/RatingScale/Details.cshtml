@@ -1,0 +1,31 @@
+@model SoftwareGrid.DataLogic.Models.RatingScale
+
+@{
+    ViewBag.Title = "RatingScale";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Rating Scale</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Rating Scale</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>Score</label>
+    <div class="display-field">@String.Format("{0:F}", Model.Score)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RatingScaleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

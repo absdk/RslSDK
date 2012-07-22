@@ -1,0 +1,28 @@
+@model SoftwareGrid.DataLogic.Models.PayCycle
+
+@{
+    ViewBag.Title = "PayCycle";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Pay Cycle</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Pay Cycle</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PayCycleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

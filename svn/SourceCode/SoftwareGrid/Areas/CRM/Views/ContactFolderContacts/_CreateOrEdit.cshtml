@@ -1,0 +1,47 @@
+
+@model SoftwareGrid.DataLogic.Models.ContactFolderContact
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ContactFolderID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ContactFolderID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ContactFolder>)ViewBag.PossibleContactFolders).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.ContactFolderID.ToString(),
+			        Selected = (Model != null) && (option.ContactFolderID == Model.ContactFolderID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.CompanyID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CompanyID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Company>)ViewBag.PossibleCompanies).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.CompanyID.ToString(),
+			        Selected = (Model != null) && (option.CompanyID == Model.CompanyID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ContactID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ContactID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Contact>)ViewBag.PossibleContacts).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ContactID.ToString(),
+			        Selected = (Model != null) && (option.ContactID == Model.ContactID)
+			    }), "Choose...")
+			</div>
+			</div>
+			
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

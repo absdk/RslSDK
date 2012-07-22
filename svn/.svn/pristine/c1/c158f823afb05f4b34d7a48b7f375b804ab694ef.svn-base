@@ -1,0 +1,57 @@
+
+@model SoftwareGrid.DataLogic.Models.RequisitionDocument
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.RequisitionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.RequisitionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Requisition>)ViewBag.PossibleRequisitions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.RequisitionID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionID == Model.RequisitionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Title)
+            <div>
+								@Html.EditorFor(model => model.Title)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ImageFile)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("ImageFile")
+                        .Async(async => async
+                            .Save("UploadFile", "RequisitionDocument")
+                            .Remove("RemoveFile", "RequisitionDocument"))
+                )
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.OriginalFileNameSize)
+            <div>
+								@Html.EditorFor(model => model.OriginalFileNameSize)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

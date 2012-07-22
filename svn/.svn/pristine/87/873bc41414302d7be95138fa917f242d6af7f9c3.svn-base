@@ -1,0 +1,35 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantInResumeFolder
+
+@{
+    ViewBag.Title = "ApplicantInResumeFolder";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant In Resume Folder</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant In Resume Folder</h2>
+		<fieldset>
+
+    <label>ResumeFolderID</label>
+    <div class="display-field">@Model.ResumeFolderID</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ApplicantResumeFolder</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ApplicantResumeFolder).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantInResumeFolderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

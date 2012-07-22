@@ -1,0 +1,63 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.VendorAddress>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Vendor Address";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>Vendor Address List</h2>
+    <p>
+			@Html.ActionLink("Create New", "Create",new { vendorId = ViewBag.VendorId })
+	    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.VendorAddressID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.VendorAddressCategory.Name).Title("Address Category").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.CityName).Title("City Name").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.State.Name).Title("State").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Country.Name).Title("Country").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.MobilePhone).Title("Mobile Phone").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.PersonalEmail).Title("Personal Email").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "VendorAddress", new { id = @item.VendorAddressID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "VendorAddress", new { id = @item.VendorAddressID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

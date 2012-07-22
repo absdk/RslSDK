@@ -1,0 +1,68 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantWorkReferenceRecommendation
+
+@{
+    ViewBag.Title = "ApplicantWorkReferenceRecommendation";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Work Reference Recommendation</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Work Reference Recommendation</h2>
+		<fieldset>
+
+    <label>CompanyName</label>
+    <div class="display-field">@Model.CompanyName</div>
+
+    <label>FirstName</label>
+    <div class="display-field">@Model.FirstName</div>
+
+    <label>LastName</label>
+    <div class="display-field">@Model.LastName</div>
+
+    <label>JobTitle</label>
+    <div class="display-field">@Model.JobTitle</div>
+
+    <label>OfficePhone</label>
+    <div class="display-field">@Model.OfficePhone</div>
+
+    <label>MobileNumber</label>
+    <div class="display-field">@Model.MobileNumber</div>
+
+    <label>Email</label>
+    <div class="display-field">@Model.Email</div>
+
+    <label>RecommendationInfo</label>
+    <div class="display-field">@Model.RecommendationInfo</div>
+
+    <label>ShowOrHideRecommendation</label>
+    <div class="display-field">@Model.ShowOrHideRecommendation</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ApplicantExperience</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ApplicantExperience).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantWorkReferenceRecommendationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

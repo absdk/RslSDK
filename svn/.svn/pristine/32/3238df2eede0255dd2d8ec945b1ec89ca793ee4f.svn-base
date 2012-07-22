@@ -1,0 +1,157 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.CRM.Controllers
+{   
+    public class ContactsController : Controller
+    {
+		private readonly ICompanyRepository companyRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly IContactProfessionTypeRepository contactprofessiontypeRepository;
+		private readonly IRatingScaleRepository ratingscaleRepository;
+		private readonly IUserRepository userRepository;
+		private readonly IContactRepository contactRepository;
+        public ContactsController(ICompanyRepository companyRepository, ICountryRepository countryRepository, IStateRepository stateRepository, IContactProfessionTypeRepository contactprofessiontypeRepository, IRatingScaleRepository ratingscaleRepository, IUserRepository userRepository, IContactRepository contactRepository)
+        {
+			this.companyRepository = companyRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.contactprofessiontypeRepository = contactprofessiontypeRepository;
+			this.ratingscaleRepository = ratingscaleRepository;
+			this.userRepository = userRepository;
+			this.contactRepository = contactRepository;
+        }
+
+        //
+        // GET: /Contacts/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(contactRepository.AllIncluding(contact => contact.Company, contact => contact.Country, contact => contact.State, contact => contact.ContactProfessionType, contact => contact.ContactRatingScale, contact => contact.CreatedByUser, contact => contact.VerifiedByUser));
+        }
+		
+		public ViewResult Search(Contact searchContact)
+        {
+			if(searchContact!=null)
+			{
+							}
+						return View("Index",contactRepository.AllIncluding(contact => contact.Company, contact => contact.Country, contact => contact.State, contact => contact.ContactProfessionType, contact => contact.ContactRatingScale, contact => contact.CreatedByUser, contact => contact.VerifiedByUser));
+		}
+
+        //
+        // GET: /Contacts/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(contactRepository.Find(id));
+        }
+
+        //
+        // GET: /Contacts/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			Contact contact = new Contact();
+			ViewBag.PossibleCompanies = companyRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleContactProfessionTypes = contactprofessiontypeRepository.All;
+			ViewBag.PossibleContactRatingScales = ratingscaleRepository.All;
+			ViewBag.PossibleCreatedByUsers = userRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+            return View(contact);
+        } 
+
+        //
+        // POST: /Contacts/Create
+        [HttpPost]
+        public ActionResult Create(Contact contact)
+        {
+            if (ModelState.IsValid) {
+                contactRepository.InsertOrUpdate(contact);
+                contactRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleCompanies = companyRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleContactProfessionTypes = contactprofessiontypeRepository.All;
+				ViewBag.PossibleContactRatingScales = ratingscaleRepository.All;
+				ViewBag.PossibleCreatedByUsers = userRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(contact);
+			}
+        }
+        
+        //
+        // GET: /Contacts/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleCompanies = companyRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleContactProfessionTypes = contactprofessiontypeRepository.All;
+			ViewBag.PossibleContactRatingScales = ratingscaleRepository.All;
+			ViewBag.PossibleCreatedByUsers = userRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+             return View(contactRepository.Find(id));
+        }
+
+        //
+        // POST: /Contacts/Edit/5
+        [HttpPost]
+        public ActionResult Edit(Contact contact)
+        {
+            if (ModelState.IsValid) {
+                contactRepository.InsertOrUpdate(contact);
+                contactRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleCompanies = companyRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleContactProfessionTypes = contactprofessiontypeRepository.All;
+				ViewBag.PossibleContactRatingScales = ratingscaleRepository.All;
+				ViewBag.PossibleCreatedByUsers = userRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(contact);
+			}
+        }
+
+        //
+        // GET: /Contacts/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(contactRepository.Find(id));
+        }
+
+        //
+        // POST: /Contacts/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            contactRepository.Delete(id);
+            contactRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

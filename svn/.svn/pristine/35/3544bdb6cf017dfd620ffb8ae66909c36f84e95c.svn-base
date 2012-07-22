@@ -1,0 +1,75 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationDocument
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.OrganizationID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationDocumentFolderID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationDocumentFolderID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationDocumentFolder>)ViewBag.PossibleOrganizationDocumentFolders).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationDocumentFolderID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationDocumentFolderID == Model.OrganizationDocumentFolderID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationDocumentCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationDocumentCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationDocumentCategory>)ViewBag.PossibleOrganizationDocumentCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationDocumentCategoryID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationDocumentCategoryID == Model.OrganizationDocumentCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.DocumentTitle)
+            <div>
+								@Html.EditorFor(model => model.DocumentTitle)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DocumentFile)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("DocumentFile")
+                        .Async(async => async
+                            .Save("UploadFile", "OrganizationDocument")
+                            .Remove("RemoveFile", "OrganizationDocument"))
+                )
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.OriginalFileInfo)
+            <div>
+								@Html.EditorFor(model => model.OriginalFileInfo)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

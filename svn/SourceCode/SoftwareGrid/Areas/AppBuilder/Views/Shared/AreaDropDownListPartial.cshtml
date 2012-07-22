@@ -1,0 +1,12 @@
+﻿@model SoftwareGrid.DataLogic.Models.AppMenu
+<div class="form-item">
+    @Html.LabelFor(model => model.AreaName)
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.AreaName, ((IEnumerable<SelectListItem>)ViewBag.PossibleAreaNames).Select(option => new SelectListItem
+    {
+        Text = (option == null ? "None" : option.Text),
+        Value = option.Value,
+        Selected = (Model != null) && (option.Value == Model.AreaName)
+    }), "Choose...", new { data_action = "SelectControllers" })
+    </div>
+</div>

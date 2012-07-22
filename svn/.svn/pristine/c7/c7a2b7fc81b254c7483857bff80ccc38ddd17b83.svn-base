@@ -1,0 +1,62 @@
+
+@model SoftwareGrid.DataLogic.Models.RequisitionClientInfo
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.RequisitionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.RequisitionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Requisition>)ViewBag.PossibleRequisitions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.RequisitionID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionID == Model.RequisitionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.CompanyID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CompanyID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Company>)ViewBag.PossibleCompanies).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.CompanyID.ToString(),
+			        Selected = (Model != null) && (option.CompanyID == Model.CompanyID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ClientRate)
+            <div>
+								@Html.EditorFor(model => model.ClientRate)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.SalaryRateTypeID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SalaryRateTypeID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SalaryRateType>)ViewBag.PossibleSalaryRateTypes).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SalaryRateTypeID.ToString(),
+			        Selected = (Model != null) && (option.SalaryRateTypeID == Model.SalaryRateTypeID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ClientRequisitionNumber)
+            <div>
+								@Html.EditorFor(model => model.ClientRequisitionNumber)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

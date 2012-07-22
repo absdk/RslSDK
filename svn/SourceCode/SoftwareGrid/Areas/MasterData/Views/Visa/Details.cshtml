@@ -1,0 +1,28 @@
+@model SoftwareGrid.DataLogic.Models.Visa
+
+@{
+    ViewBag.Title = "Visa";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Visa</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Visa</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.VisaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

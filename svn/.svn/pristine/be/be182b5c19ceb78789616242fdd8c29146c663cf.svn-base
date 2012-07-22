@@ -1,0 +1,71 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationBankInfo
+
+@{
+    ViewBag.Title = "Organization Bank Info";
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Organization Bank Info</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>BankName</label>
+		    <div class="display-field">@Model.BankName</div>
+		</div>
+				<div class="form-item">
+		    <label>BankAddress</label>
+		    <div class="display-field">@Model.BankAddress</div>
+		</div>
+				<div class="form-item">
+		    <label>POBox</label>
+		    <div class="display-field">@Model.POBox</div>
+		</div>
+				<div class="form-item">
+		    <label>BankCity</label>
+		    <div class="display-field">@Model.BankCity</div>
+		</div>
+				<div class="form-item">
+		    <label>ZipCode</label>
+		    <div class="display-field">@Model.ZipCode</div>
+		</div>
+				<div class="form-item">
+		    <label>ComanyBankAccountNumber</label>
+		    <div class="display-field">@Model.ComanyBankAccountNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>BankAccountType</label>
+		    <div class="display-field">@Model.BankAccountType</div>
+		</div>
+				<div class="form-item">
+		    <label>SwipeCode</label>
+		    <div class="display-field">@Model.SwipeCode</div>
+		</div>
+				<div class="form-item">
+		    <label>RoutingNo</label>
+		    <div class="display-field">@Model.RoutingNo</div>
+		</div>
+				<div class="form-item">
+		    <label>Organization</label>
+		    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Back to List", "Index",new { organizationId = ViewBag.OrganizationId })
+</p>
+	

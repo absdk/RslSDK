@@ -1,0 +1,49 @@
+@model SoftwareGrid.DataLogic.Models.AppMenu
+
+@{
+    ViewBag.Title = "AppMenu";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        App Menu</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            App Menu</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>MenuIcon</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.MenuIcon).ToString()</div>
+
+    <label>IsBlank</label>
+    <div class="display-field">@Model.IsBlank</div>
+
+    <label>AreaName</label>
+    <div class="display-field">@Model.AreaName</div>
+
+    <label>ControllerName</label>
+    <div class="display-field">@Model.ControllerName</div>
+
+    <label>ActionName</label>
+    <div class="display-field">@Model.ActionName</div>
+
+    <label>MenuSequenceNumber</label>
+    <div class="display-field">@String.Format("{0:F}", Model.MenuSequenceNumber)</div>
+
+    <label>AppMenuCategory</label>
+    <div class="display-field">@(Model.AppMenuCategory == null ? "None" : Model.AppMenuCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AppMenuID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.SkillsExpEdu
+
+@{
+    ViewBag.Title = "Skills Exp Edu";
+}
+
+<div class="flat_area grid_16">
+	<h2>Skills Exp Edu</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Skills Exp Edu</h2>
+						        @Html.HiddenFor(model => model.SkillsExpEduID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

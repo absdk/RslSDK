@@ -1,0 +1,150 @@
+﻿@model SoftwareGrid.DataLogic.Models.Applicant
+
+@{
+    ViewBag.Title = Model.FullName;
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="box grid_8">
+	<h2 class="box_head grad_black">Applicant Details</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Competency</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_black">Experience</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_black">Project Information</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Education</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Certification</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Languages</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">References</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Notes</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Documents</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">History</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Profile Viewer List</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>

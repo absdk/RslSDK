@@ -1,0 +1,72 @@
+@model SoftwareGrid.DataLogic.Models.VendorSupplierDiversityCertificateInfo
+
+@{
+    ViewBag.Title = "VendorSupplierDiversityCertificateInfo";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Supplier Diversity Certificate Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Supplier Diversity Certificate Info</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.Title)
+    <div class="display-field">@Model.Title</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CertificateIssueDate)
+    <div class="display-field">@String.Format("{0:g}", Model.CertificateIssueDate)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CertificationExpireDate)
+    <div class="display-field">@String.Format("{0:g}", Model.CertificationExpireDate)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.IssueCity)
+    <div class="display-field">@Model.IssueCity</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CertificateNumber)
+    <div class="display-field">@Model.CertificateNumber</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Description)
+    <div class="display-field">@Model.Description</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.IsVerified)
+    <div class="display-field">@Model.IsVerified</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Vendor)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VendorSupplierDiversityCertificationCategory)
+    <div class="display-field">@(Model.VendorSupplierDiversityCertificationCategory == null ? "None" : Model.VendorSupplierDiversityCertificationCategory.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Country)
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.State)
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.VendorSupplierDiversityCertificateInfoID, vendorId = ViewBag.VendorId }) |
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+    
+</div>
+	</div>
+</div>
+
+
+

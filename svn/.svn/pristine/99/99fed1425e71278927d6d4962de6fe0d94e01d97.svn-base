@@ -1,0 +1,72 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationPositionSalaryStaffingRate
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationPositionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationPositionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationPosition>)ViewBag.PossibleOrganizationPositions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationPositionID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationPositionID == Model.OrganizationPositionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SalaryRateTypeID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SalaryRateTypeID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SalaryRateType>)ViewBag.PossibleSalaryRateTypes).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SalaryRateTypeID.ToString(),
+			        Selected = (Model != null) && (option.SalaryRateTypeID == Model.SalaryRateTypeID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.MinimumRate)
+            <div>
+								@Html.EditorFor(model => model.MinimumRate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.MaximumRate)
+            <div>
+								@Html.EditorFor(model => model.MaximumRate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AverageRate)
+            <div>
+								@Html.EditorFor(model => model.AverageRate)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CurrencyID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CurrencyID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Currency>)ViewBag.PossibleCurrencies).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CurrencyID.ToString(),
+			        Selected = (Model != null) && (option.CurrencyID == Model.CurrencyID)
+			    }), "Choose...")
+			</div>
+			</div>
+			
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

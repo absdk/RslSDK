@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class OrganizationDocumentRepository : IOrganizationDocumentRepository
+    {
+		private readonly RepositoryContext context;
+
+        public OrganizationDocumentRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<OrganizationDocument> All
+        {
+            get { return context.OrganizationDocument; }
+        }
+
+        public IQueryable<OrganizationDocument> AllIncluding(params Expression<Func<OrganizationDocument, object>>[] includeProperties)
+        {
+            IQueryable<OrganizationDocument> query = context.OrganizationDocument;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+        public OrganizationDocument Find(int id)
+        {
+            return context.OrganizationDocument.Find(id);
+        }
+
+        public void InsertOrUpdate(OrganizationDocument organizationdocument)
+        {
+            if (organizationdocument.OrganizationDocumentID == default(int)) {
+                // New entity
+                context.OrganizationDocument.Add(organizationdocument);
+            } else {
+                // Existing entity
+                context.Entry(organizationdocument).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var organizationdocument = context.OrganizationDocument.Find(id);
+            context.OrganizationDocument.Remove(organizationdocument);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IOrganizationDocumentRepository
+    {
+        IQueryable<OrganizationDocument> All { get; }
+        IQueryable<OrganizationDocument> AllIncluding(params Expression<Func<OrganizationDocument, object>>[] includeProperties);
+        OrganizationDocument Find(int id);
+        void InsertOrUpdate(OrganizationDocument organizationdocument);
+        void Delete(int id);
+        void Save();
+    }
+}

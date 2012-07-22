@@ -1,0 +1,18 @@
+﻿@model SoftwareGrid.DataLogic.Models.State
+<div class="label-container">
+    @Html.Label("State")
+</div>
+<div class="text-container">
+@if (ViewBag.PossibleStates != null)
+{
+    @Html.DropDownList("StateID", ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem
+{
+    Text = (option == null ? "None" : option.Name),
+    Value = option.StateID.ToString(),
+}), "Choose...")
+}
+else
+{
+    @Html.DropDownListFor(model => model.StateID, new List<SelectListItem>(), "Choose...")
+}
+</div>

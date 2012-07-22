@@ -1,0 +1,47 @@
+
+@model SoftwareGrid.DataLogic.Models.CompanyEmailTemplate
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.TemplateCreatedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.TemplateCreatedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleTemplateCreatedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.TemplateCreatedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.TemplateTitle)
+            <div>
+								@Html.EditorFor(model => model.TemplateTitle)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmailSubject)
+            <div>
+								@Html.EditorFor(model => model.EmailSubject)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmailMessage)
+            <div>
+								@Html.EditorFor(model => model.EmailMessage)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

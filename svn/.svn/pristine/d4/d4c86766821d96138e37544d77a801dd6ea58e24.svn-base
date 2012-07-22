@@ -1,0 +1,110 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantAdditionalAddress
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.AddressLine1)
+            <div>
+								@Html.EditorFor(model => model.AddressLine1)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AddressLine2)
+            <div>
+								@Html.EditorFor(model => model.AddressLine2)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PostBoxNumber)
+            <div>
+								@Html.EditorFor(model => model.PostBoxNumber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.City)
+            <div>
+								@Html.EditorFor(model => model.City)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.CountryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.StateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.StateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.StateID.ToString(),
+			        Selected = (Model != null) && (option.StateID == Model.StateID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ZipCode)
+            <div>
+								@Html.EditorFor(model => model.ZipCode)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.HomePhone)
+            <div>
+								@Html.EditorFor(model => model.HomePhone)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.MobilePhone)
+            <div>
+								@Html.EditorFor(model => model.MobilePhone)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PersonalEmail)
+            <div>
+								@Html.EditorFor(model => model.PersonalEmail)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsPrimaryConatact)
+            <div>
+								@Html.EditorFor(model => model.IsPrimaryConatact)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

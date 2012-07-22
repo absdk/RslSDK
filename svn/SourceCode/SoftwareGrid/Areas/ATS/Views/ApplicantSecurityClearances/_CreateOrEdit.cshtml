@@ -1,0 +1,73 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantSecurityClearance
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SecurityClearanceID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SecurityClearanceID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SecurityClearance>)ViewBag.PossibleSecurityClearances).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SecurityClearanceID.ToString(),
+			        Selected = (Model != null) && (option.SecurityClearanceID == Model.SecurityClearanceID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.CertificateNumber)
+            <div>
+								@Html.EditorFor(model => model.CertificateNumber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CertificateIssueDate)
+            <div>
+								@Html.EditorFor(model => model.CertificateIssueDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CertificateFirstTimeDate)
+            <div>
+								@Html.EditorFor(model => model.CertificateFirstTimeDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CertificationExpirationDate)
+            <div>
+								@Html.EditorFor(model => model.CertificationExpirationDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Remarks)
+            <div>
+								@Html.EditorFor(model => model.Remarks)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

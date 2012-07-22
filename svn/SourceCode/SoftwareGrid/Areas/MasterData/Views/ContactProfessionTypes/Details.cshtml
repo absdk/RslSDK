@@ -1,0 +1,28 @@
+@model SoftwareGrid.DataLogic.Models.ContactProfessionType
+
+@{
+    ViewBag.Title = "ContactProfessionType";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Contact Profession Type</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Contact Profession Type</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ContactProfessionTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

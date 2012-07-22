@@ -1,0 +1,134 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.User>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "User";
+}
+<div class="flat_area grid_16">
+    <h2>
+        User List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "User"))
+{
+    <div class="box grid_16">
+        <h2 class="box_head">
+            Search</h2>
+        <a href="#" class="grabber">&nbsp;</a> <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+                <div class="search-item">
+                    <div class="search-item-left">
+                        <div class="label-container">
+                            @Html.Label("First Name")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("FirstName")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("User ID (Email Address)")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("UserLoginName")
+                        </div>
+                    </div>
+                    <div class="search-item-right">
+                        <div class="label-container">
+                            @Html.Label("Email Address")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("EmailAddress")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Role Name")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("UserRoleID", ((IEnumerable<SoftwareGrid.DataLogic.Models.UserRole>)ViewBag.PossibleUserRoles).Select(option => new SelectListItem
+                       {
+                           Text = (option == null ? "None" : option.Name),
+                           Value = option.UserRoleID.ToString(),
+                       }), "Choose...")
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 50%; float: left;">
+                    &nbsp;
+                </div>
+                <div class="button_bar clearfix" style="float: left;">
+                    <button class="green" type="submit">
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div style="clear: both;">
+</div>
+<div class="box grid_16">
+    @(Html.Telerik().Grid(Model)
+        .Name("Grid")
+        .DataKeys(keys => keys.Add(c => c.UserID))
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.FirstName).Title("First Name").Width("20%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.LastName).Title("Last Name").Width("20%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.UserLoginName).Title("User ID (Email Address)").Width("20%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.EmailAddress).Title("Email Address").Width("20%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.UserRole.Name).Title("Role Name").Width("15%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Template(
+            @<text>
+    <center>
+        <a href="@Url.Action("Edit", "User", new { id = @item.UserID })" title="Edit">
+            <img alt="Edit" src="/content/images/edit.png" /></a>
+    </center>
+    </text>
+        ).HeaderTemplate(
+            @<text>
+    <center>
+        <span>Edit</span>
+    </center>
+    </text>
+        ).Width("20px");
+            columns.Template(
+                @<text>
+    <center>
+        <a href="@Url.Action("Delete", "User", new { id = @item.UserID })" title="Delete" onclick="return confirmSubmit()">
+            <img alt="Edit" src="/content/images/delete.png" /></a>
+    </center>
+    </text>
+            ).HeaderTemplate(
+                @<text>
+    <center>
+        <span>Delete</span>
+    </center>
+    </text>
+            ).Width("20px");
+        })
+        .Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters =>
+        {
+            if (ViewData["FirstName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.FirstName).Contains(ViewData["FirstName"].ToString(true));
+            }
+            if (ViewData["UserLoginName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.UserLoginName).Contains(ViewData["UserLoginName"].ToString(true));
+            }
+            if (ViewData["EmailAddress"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.EmailAddress).Contains(ViewData["EmailAddress"].ToString(true));
+            }
+            if (ViewData["UserRoleID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.UserRoleID).IsEqualTo(ViewData["UserRoleID"].ToInteger(true));
+            }
+        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>

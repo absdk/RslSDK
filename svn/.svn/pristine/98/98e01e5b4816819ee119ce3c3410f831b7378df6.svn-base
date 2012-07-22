@@ -1,0 +1,322 @@
+
+@model SoftwareGrid.DataLogic.Models.Applicant
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ApplicantDisplayId)
+            <div>
+								@Html.EditorFor(model => model.ApplicantDisplayId)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.FirstName)
+            <div>
+								@Html.EditorFor(model => model.FirstName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.MiddleName)
+            <div>
+								@Html.EditorFor(model => model.MiddleName)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.LastName)
+            <div>
+								@Html.EditorFor(model => model.LastName)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.FullName)
+            <div>
+								@Html.EditorFor(model => model.FullName)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.JobTitle)
+            <div>
+								@Html.EditorFor(model => model.JobTitle)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.ContactProfessionTypeID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ContactProfessionTypeID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ContactProfessionType>)ViewBag.PossibleContactProfessionTypes).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ContactProfessionTypeID.ToString(),
+			        Selected = (Model != null) && (option.ContactProfessionTypeID == Model.ContactProfessionTypeID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ExperienceLevelCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ExperienceLevelCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ExperienceLevelCategory>)ViewBag.PossibleExperienceLevelCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ExperienceLevelCategoryID.ToString(),
+			        Selected = (Model != null) && (option.ExperienceLevelCategoryID == Model.ExperienceLevelCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ProfessionalSummary)
+            <div>
+								@Html.EditorFor(model => model.ProfessionalSummary)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.YearsOfExperience)
+            <div>
+								@Html.EditorFor(model => model.YearsOfExperience)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Address)
+            <div>
+								@Html.EditorFor(model => model.Address)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.City)
+            <div>
+								@Html.EditorFor(model => model.City)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.CountryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.StateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.StateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.StateID.ToString(),
+			        Selected = (Model != null) && (option.StateID == Model.StateID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ZipCode)
+            <div>
+								@Html.EditorFor(model => model.ZipCode)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Latitude)
+            <div>
+								@Html.EditorFor(model => model.Latitude)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Longitude)
+            <div>
+								@Html.EditorFor(model => model.Longitude)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Phone)
+            <div>
+								@Html.EditorFor(model => model.Phone)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmailAddress)
+            <div>
+								@Html.EditorFor(model => model.EmailAddress)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsEmailSubscriber)
+            <div>
+								@Html.EditorFor(model => model.IsEmailSubscriber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsEmailValidated)
+            <div>
+								@Html.EditorFor(model => model.IsEmailValidated)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.NationalityID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.NationalityID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleNationalities).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.NationalityID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VisaInformation)
+            <div>
+								@Html.EditorFor(model => model.VisaInformation)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.WordResume)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("WordResume")
+                        .Async(async => async
+                            .Save("UploadFile", "Applicant")
+                            .Remove("RemoveFile", "Applicant"))
+                )
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CopyPasteResume)
+            <div>
+								@Html.EditorFor(model => model.CopyPasteResume)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Photo)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("Photo")
+                        .Async(async => async
+                            .Save("UploadFile", "Applicant")
+                            .Remove("RemoveFile", "Applicant"))
+                )
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.RemarksAboutApplicant)
+            <div>
+								@Html.EditorFor(model => model.RemarksAboutApplicant)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsShared)
+            <div>
+								@Html.EditorFor(model => model.IsShared)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantAvailabilityStatusCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantAvailabilityStatusCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantAvailabilityStatusCategory>)ViewBag.PossibleApplicantAvailabilityStatusCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ApplicantAvailabilityStatusCategoryID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantAvailabilityStatusCategoryID == Model.ApplicantAvailabilityStatusCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.AvailableFromDate)
+            <div>
+								@Html.EditorFor(model => model.AvailableFromDate)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantSourceCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantSourceCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantSourceCategory>)ViewBag.PossibleApplicantSourceCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ApplicantSourceCategoryID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantSourceCategoryID == Model.ApplicantSourceCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.CreatedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CreatedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleCreatedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.CreatedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.CreatedDate)
+            <div>
+								@Html.EditorFor(model => model.CreatedDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.LastUpdateDate)
+            <div>
+								@Html.EditorFor(model => model.LastUpdateDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsVerified)
+            <div>
+								@Html.EditorFor(model => model.IsVerified)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.VerifiedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.VerifiedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleVerifiedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.VerifiedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VerificationDate)
+            <div>
+								@Html.EditorFor(model => model.VerificationDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsDeleted)
+            <div>
+								@Html.EditorFor(model => model.IsDeleted)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

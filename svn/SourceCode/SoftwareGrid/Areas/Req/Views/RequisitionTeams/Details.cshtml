@@ -1,0 +1,38 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionTeam
+
+@{
+    ViewBag.Title = "RequisitionTeam";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Team</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Team</h2>
+		<fieldset>
+
+    <label>IsPrimaryRequisitionOwner</label>
+    <div class="display-field">@Model.IsPrimaryRequisitionOwner</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+
+    <label>RequisitionTeamUser</label>
+    <div class="display-field">@(Model.RequisitionTeamUser == null ? "None" : Model.RequisitionTeamUser.LastName)</div>
+
+    <label>RequisitionTeamCategory</label>
+    <div class="display-field">@(Model.RequisitionTeamCategory == null ? "None" : Model.RequisitionTeamCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionTeamID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

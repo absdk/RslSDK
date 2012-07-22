@@ -1,0 +1,4 @@
+C:\svn\SourceCode\SoftwareGrid.Common\bin\Debug\SoftwareGrid.Common.dll
+C:\svn\SourceCode\SoftwareGrid.Common\bin\Debug\SoftwareGrid.Common.pdb
+C:\svn\SourceCode\SoftwareGrid.Common\obj\Debug\SoftwareGrid.Common.dll
+C:\svn\SourceCode\SoftwareGrid.Common\obj\Debug\SoftwareGrid.Common.pdb

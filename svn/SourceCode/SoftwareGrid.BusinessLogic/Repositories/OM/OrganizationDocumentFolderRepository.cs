@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class OrganizationDocumentFolderRepository : IOrganizationDocumentFolderRepository
+    {
+		private readonly RepositoryContext context;
+
+        public OrganizationDocumentFolderRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<OrganizationDocumentFolder> All
+        {
+            get { return context.OrganizationDocumentFolder; }
+        }
+
+		public IQueryable<OrganizationDocumentFolder> AllIncluding(params Expression<Func<OrganizationDocumentFolder, object>>[] includeProperties)
+        {
+            IQueryable<OrganizationDocumentFolder> query = context.OrganizationDocumentFolder;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+		        public IQueryable<OrganizationDocumentFolder> AllIncluding(int organizationId,params Expression<Func<OrganizationDocumentFolder, object>>[] includeProperties)
+        {
+            IQueryable<OrganizationDocumentFolder> query = context.OrganizationDocumentFolder;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query.Where(item=>item.OrganizationID==organizationId);
+        }
+		
+        public OrganizationDocumentFolder Find(int id)
+        {
+            return context.OrganizationDocumentFolder.Find(id);
+        }
+
+        public void InsertOrUpdate(OrganizationDocumentFolder organizationdocumentfolder)
+        {
+            if (organizationdocumentfolder.OrganizationDocumentFolderID == default(int)) {
+                // New entity
+                context.OrganizationDocumentFolder.Add(organizationdocumentfolder);
+            } else {
+                // Existing entity
+                context.Entry(organizationdocumentfolder).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var organizationdocumentfolder = context.OrganizationDocumentFolder.Find(id);
+            context.OrganizationDocumentFolder.Remove(organizationdocumentfolder);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IOrganizationDocumentFolderRepository
+    {
+        IQueryable<OrganizationDocumentFolder> All { get; }
+        IQueryable<OrganizationDocumentFolder> AllIncluding(params Expression<Func<OrganizationDocumentFolder, object>>[] includeProperties);
+		        IQueryable<OrganizationDocumentFolder> AllIncluding(int organizationId,params Expression<Func<OrganizationDocumentFolder, object>>[] includeProperties);
+                OrganizationDocumentFolder Find(int id);
+        void InsertOrUpdate(OrganizationDocumentFolder organizationdocumentfolder);
+        void Delete(int id);
+        void Save();
+    }
+}

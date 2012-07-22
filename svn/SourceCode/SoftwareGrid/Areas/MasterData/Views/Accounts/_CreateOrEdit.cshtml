@@ -1,0 +1,69 @@
+
+@model SoftwareGrid.DataLogic.Models.Account
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.AccountCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.AccountCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.AccountCategory>)ViewBag.PossibleAccountCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.AccountCategoryID.ToString(),
+			        Selected = (Model != null) && (option.AccountCategoryID == Model.AccountCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ParentAccountID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ParentAccountID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Account>)ViewBag.PossibleParentAccounts).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.AccountID.ToString(),
+			        Selected = (Model != null) && (option.AccountID == Model.ParentAccountID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Name)
+            <div>
+								@Html.EditorFor(model => model.Name)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AccountCode)
+            <div>
+								@Html.EditorFor(model => model.AccountCode)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Description)
+            <div>
+								@Html.EditorFor(model => model.Description)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsRemoved)
+            <div>
+								@Html.EditorFor(model => model.IsRemoved)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

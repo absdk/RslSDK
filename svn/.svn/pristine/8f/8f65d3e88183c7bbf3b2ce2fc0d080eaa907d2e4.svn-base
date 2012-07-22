@@ -1,0 +1,123 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationWorkforcePlansController : Controller
+    {
+		private readonly IOrganizationRepository organizationRepository;
+		private readonly IOrganizationWorkforcePlanRepository organizationworkforceplanRepository;
+        public OrganizationWorkforcePlansController(IOrganizationRepository organizationRepository, IOrganizationWorkforcePlanRepository organizationworkforceplanRepository)
+        {
+			this.organizationRepository = organizationRepository;
+			this.organizationworkforceplanRepository = organizationworkforceplanRepository;
+        }
+
+        //
+        // GET: /OrganizationWorkforcePlans/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationworkforceplanRepository.AllIncluding(organizationworkforceplan => organizationworkforceplan.Organization));
+        }
+		
+		public ViewResult Search(OrganizationWorkforcePlan searchOrganizationWorkforcePlan)
+        {
+			if(searchOrganizationWorkforcePlan!=null)
+			{
+							}
+						return View("Index",organizationworkforceplanRepository.AllIncluding(organizationworkforceplan => organizationworkforceplan.Organization));
+		}
+
+        //
+        // GET: /OrganizationWorkforcePlans/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationworkforceplanRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationWorkforcePlans/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationWorkforcePlan organizationworkforceplan = new OrganizationWorkforcePlan();
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+            return View(organizationworkforceplan);
+        } 
+
+        //
+        // POST: /OrganizationWorkforcePlans/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationWorkforcePlan organizationworkforceplan)
+        {
+            if (ModelState.IsValid) {
+                organizationworkforceplanRepository.InsertOrUpdate(organizationworkforceplan);
+                organizationworkforceplanRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				return View(organizationworkforceplan);
+			}
+        }
+        
+        //
+        // GET: /OrganizationWorkforcePlans/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+             return View(organizationworkforceplanRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationWorkforcePlans/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationWorkforcePlan organizationworkforceplan)
+        {
+            if (ModelState.IsValid) {
+                organizationworkforceplanRepository.InsertOrUpdate(organizationworkforceplan);
+                organizationworkforceplanRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				return View(organizationworkforceplan);
+			}
+        }
+
+        //
+        // GET: /OrganizationWorkforcePlans/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationworkforceplanRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationWorkforcePlans/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationworkforceplanRepository.Delete(id);
+            organizationworkforceplanRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

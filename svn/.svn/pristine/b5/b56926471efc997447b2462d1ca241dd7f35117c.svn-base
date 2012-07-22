@@ -1,0 +1,72 @@
+@model SoftwareGrid.DataLogic.Models.VendorReference
+@* This partial view defines form fields that will appear when creating and editing entities *@
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.CompanyName)
+        <div>
+            @Html.EditorFor(model => model.CompanyName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.FirstName)
+        <div>
+            @Html.EditorFor(model => model.FirstName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.LastName)
+        <div>
+            @Html.EditorFor(model => model.LastName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.JobTitle)
+        <div>
+            @Html.EditorFor(model => model.JobTitle)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Phone)
+        <div>
+            @Html.EditorFor(model => model.Phone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Email)
+        <div>
+            @Html.EditorFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ReferenceServiceInfo)
+        <div>
+            @Html.EditorFor(model => model.ReferenceServiceInfo)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsVerified)
+        <div>
+            @Html.EditorFor(model => model.IsVerified)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.VerificationNotes)
+        <div>
+            @Html.EditorFor(model => model.VerificationNotes)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,56 @@
+@model SoftwareGrid.DataLogic.Models.AppMenu
+@using SoftwareGrid.Common;
+@* This partial view defines form fields that will appear when creating and editing entities *@
+<fieldset>
+    @Html.ValidationSummary()
+    @Html.Partial(Constants.PartialViews.DropDownList_MenuCategory)
+    <div id="divAppMenuCategoryID">
+        @Html.Partial(Constants.PartialViews.DropDownList_ParentMenus)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Name)
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.MenuIcon)
+        <div>
+            @(Html.Telerik().Upload()
+                        .Name("MenuIcon")
+                        .ShowFileList(true)
+                        .Async(async => async
+                        .Save("UploadFile", "AppMenu")
+                        .Remove("RemoveFile", "AppMenu"))
+                )
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsBlank)
+        <div>
+            @Html.EditorFor(model => model.IsBlank)
+        </div>
+    </div>
+    @Html.Partial(Constants.PartialViews.DropDownList_Area)
+    <div id="divAreaName">
+        @Html.Partial(Constants.PartialViews.DropDownList_Controller)
+    </div>
+    <div id="divControllerName">
+        @Html.Partial(Constants.PartialViews.DropDownList_Action)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.MenuSequenceNumber)
+        <div>
+            @Html.EditorFor(model => model.MenuSequenceNumber)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,212 @@
+﻿using System.Collections.Generic;
+using SoftwareGrid.DataLogic.Models;
+
+namespace SoftwareGrid.DataLogic.Seed
+{
+   public sealed class VendorStatusCategorySeed
+    {
+        public static List<VendorStatusCategory> VendorStatusCategories
+        {
+            get
+            {
+                List<VendorStatusCategory> items = new List<VendorStatusCategory>();
+
+                items.Add(new VendorStatusCategory { VendorStatusCategoryID = 1, Name = "Never Applied" });
+                items.Add(new VendorStatusCategory { VendorStatusCategoryID = 2, Name = "Under Review" });
+                items.Add(new VendorStatusCategory { VendorStatusCategoryID = 3, Name = "Approved" });
+                items.Add(new VendorStatusCategory { VendorStatusCategoryID = 4, Name = "Rejected" });
+                items.Add(new VendorStatusCategory { VendorStatusCategoryID = 5, Name = "Terminated" });
+                items.Add(new VendorStatusCategory { VendorStatusCategoryID = 6, Name = "Best Vendor" });
+
+                return items;
+            }
+        }
+    }
+   public sealed class VendorAddressCategorySeed
+    {
+        public static List<VendorAddressCategory> VendorAddressCategories
+        {
+            get
+            {
+                List<VendorAddressCategory> items = new List<VendorAddressCategory>();
+
+                items.Add(new VendorAddressCategory { VendorAddressCategoryID = 1, Name = "Billing Address" });
+                items.Add(new VendorAddressCategory { VendorAddressCategoryID = 2, Name = "Corporate Office", });
+                items.Add(new VendorAddressCategory { VendorAddressCategoryID = 3, Name = "Legal Mailing Address", });
+                items.Add(new VendorAddressCategory { VendorAddressCategoryID = 4, Name = "Regional Office", });
+                items.Add(new VendorAddressCategory { VendorAddressCategoryID = 5, Name = "Support Center", });
+                items.Add(new VendorAddressCategory { VendorAddressCategoryID = 6, Name = "Immergency Address", });
+
+                return items;
+            }
+        }
+    }
+   public sealed class VendorDocumentCategorySeed
+    {
+        public static List<VendorDocumentCategory> VendorDocumentCategories
+        {
+            get
+            {
+                List<VendorDocumentCategory> items = new List<VendorDocumentCategory>();
+
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 1, Name = "Agreement" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 2, Name = "Invoice" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 3, Name = "Payment" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 4, Name = "Timesheet" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 5, Name = "Insuarnce" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 6, Name = "Business Certificate" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 7, Name = "Profile" });
+                items.Add(new VendorDocumentCategory { VendorDocumentCategoryID = 8, Name = "Legal Notice" });
+
+                return items;
+            }
+        }
+    }
+   public sealed class VendorDocumentStatusCategorySeed
+    {
+        public static List<VendorDocumentStatusCategory> VendorDocumentStatusCategories
+        {
+            get
+            {
+                List<VendorDocumentStatusCategory> items = new List<VendorDocumentStatusCategory>();
+
+                items.Add(new VendorDocumentStatusCategory { VendorDocumentStatusCategoryID = 1, Name = "Approved"  });
+                items.Add(new VendorDocumentStatusCategory { VendorDocumentStatusCategoryID = 2, Name = "Missing" });
+                items.Add(new VendorDocumentStatusCategory { VendorDocumentStatusCategoryID = 3, Name = "Under Review" });
+              
+                return items;
+            }
+        }
+    }
+   public sealed class VendorInsuranceCategorySeed
+    {
+        public static List<VendorInsuranceCategory> VendorInsuranceCategoies
+        {
+            get
+            {
+                List<VendorInsuranceCategory> items = new List<VendorInsuranceCategory>();
+
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 1, Name = "General Liability", });
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 2, Name = "Automobile liability",});
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 3, Name = "Workers Compensation",});
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 4, Name = "Errors and Omissions",});
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 5, Name = "Fidelity  liability",});
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 6, Name = "Professional liability",});
+                items.Add(new VendorInsuranceCategory { VendorInsuranceCategoryID = 7, Name = "Excess/Umbrella Liability",});
+                return items;
+            }
+        }
+    }
+   public sealed class VendorLegalCompanyStructureCategorySeed
+    {
+        public static List<VendorLegalCompanyStructureCategory> VendorLegalCompanyStructureCategories
+        {
+            get
+            {
+                List<VendorLegalCompanyStructureCategory> items = new List<VendorLegalCompanyStructureCategory>();
+
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 1, Name = "Corporation", });
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 2, Name = "Limited Liability Corp.",});
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 3, Name = "Sole Proprietary",});
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 4, Name = "Partnership",});
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 5, Name = "Non-Profit",});
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 6, Name = "S Corporation",});
+                items.Add(new VendorLegalCompanyStructureCategory { VendorLegalCompanyStructureCategoryID = 7, Name = "Foreign Company",});
+
+                return items;
+            }
+        }
+    }
+   public sealed class VendorNoteCategorySeed
+    {
+        public static List<VendorNoteCategory> ApplicantAddressCategories
+        {
+            get
+            {
+                List<VendorNoteCategory> items = new List<VendorNoteCategory>();
+
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 1, Name = "Vendor Application" });
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 2, Name = "Invoice" });
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 2, Name = "Documents" });
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 2, Name = "Insurance" });
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 2, Name = "Certificate" });
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 2, Name = "System Support" });
+                items.Add(new VendorNoteCategory { VendorNoteCategoryID = 2, Name = "Applicant" });
+                return items;
+            }
+        }
+    }
+   public sealed class VendorSupplierDiversityCertificationCategorySeed
+   {
+       public static List<VendorSupplierDiversityCertificationCategory> VendorSupplierDiversityCertificationCategories
+       {
+           get
+           {
+               List<VendorSupplierDiversityCertificationCategory> items = new List<VendorSupplierDiversityCertificationCategory>();
+
+               items.Add(new VendorSupplierDiversityCertificationCategory { VendorSupplierDiversityCertificationCategoryID = 1, Name = "Minority Business Enterprise (MBE)" });
+               items.Add(new VendorSupplierDiversityCertificationCategory { VendorSupplierDiversityCertificationCategoryID = 2, Name = "Women Business enterprise (WBE)" });
+               items.Add(new VendorSupplierDiversityCertificationCategory { VendorSupplierDiversityCertificationCategoryID = 3, Name = "Service Disabled Veteran-Owned Business concern (DVBE)" });
+               items.Add(new VendorSupplierDiversityCertificationCategory { VendorSupplierDiversityCertificationCategoryID = 4, Name = "Small Disadvantage Business Concern" });
+               items.Add(new VendorSupplierDiversityCertificationCategory { VendorSupplierDiversityCertificationCategoryID = 5, Name = "Physically Challenged Owned Business Concern" });
+
+               return items;
+           }
+       }
+   }
+   public sealed class VendorServiceCategorySeed
+    {
+       public static List<VendorServiceCategory> VendorServiceCategories
+        {
+            get
+            {
+                List<VendorServiceCategory> items = new List<VendorServiceCategory>();
+
+                items.Add(new VendorServiceCategory { VendorServiceCategoryID = 1, Name = "IT Staffing", ExpenseCode ="1", NACISCode ="1",  Description ="1",  OrganizationServiceCode ="None",});
+                items.Add(new VendorServiceCategory { VendorServiceCategoryID = 2, Name = "Light  Industrial", ExpenseCode = "1", NACISCode = "1", Description = "1", OrganizationServiceCode = "None", });
+                items.Add(new VendorServiceCategory { VendorServiceCategoryID = 3, Name = "Administrative/Clerical Staffing", ExpenseCode = "1", NACISCode = "1", Description = "1", OrganizationServiceCode = "None", });
+                items.Add(new VendorServiceCategory { VendorServiceCategoryID = 4, Name = "Business Professional", ExpenseCode = "1", NACISCode = "1", Description = "1", OrganizationServiceCode = "None", });
+                items.Add(new VendorServiceCategory { VendorServiceCategoryID = 5, Name = "Allied Health", ExpenseCode = "1", NACISCode = "1", Description = "1", OrganizationServiceCode = "None", });
+                items.Add(new VendorServiceCategory { VendorServiceCategoryID = 6, Name = "Statement of Work", ExpenseCode = "1", NACISCode = "1", Description = "1", OrganizationServiceCode = "None", });
+
+                
+                return items;
+            }
+        }
+    }
+
+    //email template is missing
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionStatusCategory
+
+@{
+    ViewBag.Title = "RequisitionStatusCategory";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Status Category</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Status Category</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionStatusCategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

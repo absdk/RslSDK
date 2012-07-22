@@ -1,0 +1,7 @@
+C:\svn\SourceCode\SoftwareGrid.DataLogic\bin\Debug\SoftwareGrid.DataLogic.dll
+C:\svn\SourceCode\SoftwareGrid.DataLogic\bin\Debug\SoftwareGrid.DataLogic.pdb
+C:\svn\SourceCode\SoftwareGrid.DataLogic\bin\Debug\EasySoft.Helper.dll
+C:\svn\SourceCode\SoftwareGrid.DataLogic\bin\Debug\EntityFramework.dll
+C:\svn\SourceCode\SoftwareGrid.DataLogic\bin\Debug\EntityFramework.xml
+C:\svn\SourceCode\SoftwareGrid.DataLogic\obj\Debug\SoftwareGrid.DataLogic.dll
+C:\svn\SourceCode\SoftwareGrid.DataLogic\obj\Debug\SoftwareGrid.DataLogic.pdb

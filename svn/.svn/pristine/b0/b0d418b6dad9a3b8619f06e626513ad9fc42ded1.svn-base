@@ -1,0 +1,67 @@
+@model SoftwareGrid.DataLogic.Models.SalesCampaign
+
+@{
+    ViewBag.Title = "SalesCampaign";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Sales Campaign</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Sales Campaign</h2>
+		<fieldset>
+
+    <label>CampaignName</label>
+    <div class="display-field">@Model.CampaignName</div>
+
+    <label>CampaignDescription</label>
+    <div class="display-field">@Model.CampaignDescription</div>
+
+    <label>CampaignLocation</label>
+    <div class="display-field">@Model.CampaignLocation</div>
+
+    <label>PrimarySalesProductServiceID</label>
+    <div class="display-field">@Model.PrimarySalesProductServiceID</div>
+
+    <label>ExpectedNumberOfSale</label>
+    <div class="display-field">@String.Format("{0:F}", Model.ExpectedNumberOfSale)</div>
+
+    <label>ExpectedRevenue</label>
+    <div class="display-field">@String.Format("{0:F}", Model.ExpectedRevenue)</div>
+
+    <label>CreatedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <label>StartDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.StartDate)</div>
+
+    <label>EndDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.EndDate)</div>
+
+    <label>ParentSalesCampaign</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ParentSalesCampaign).ToString()</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>Currency</label>
+    <div class="display-field">@(Model.Currency == null ? "None" : Model.Currency.Name)</div>
+
+    <label>SalesCampaignStatusCategory</label>
+    <div class="display-field">@(Model.SalesCampaignStatusCategory == null ? "None" : Model.SalesCampaignStatusCategory.Name)</div>
+
+    <label>SalesProductServiceCatelog</label>
+    <div class="display-field">@(Model.SalesProductServiceCatelog == null ? "None" : Model.SalesProductServiceCatelog.Title)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SalesCampaignID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

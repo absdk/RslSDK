@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionClientInfo
+
+@{
+    ViewBag.Title = "RequisitionClientInfo";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Client Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Client Info</h2>
+		<fieldset>
+
+    <label>ClientRate</label>
+    <div class="display-field">@String.Format("{0:F}", Model.ClientRate)</div>
+
+    <label>ClientRequisitionNumber</label>
+    <div class="display-field">@Model.ClientRequisitionNumber</div>
+
+    <label>Company</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Company).ToString()</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+
+    <label>SalaryRateType</label>
+    <div class="display-field">@(Model.SalaryRateType == null ? "None" : Model.SalaryRateType.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionClientInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

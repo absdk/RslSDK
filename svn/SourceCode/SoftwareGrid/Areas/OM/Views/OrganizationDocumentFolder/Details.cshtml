@@ -1,0 +1,48 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationDocumentFolder
+
+@{
+    ViewBag.Title = "OrganizationDocumentFolder";
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Document Folder</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Document Folder</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.FolderName)
+    <div class="display-field">@Model.FolderName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Description)
+    <div class="display-field">@Model.Description</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.ParentFolder)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ParentFolder).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CreatedByUser)
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Organization)
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationDocumentFolderID, organizationId = ViewBag.OrganizationId }) |
+	@Html.ActionLink("Back to List", "Index",new { organizationId = ViewBag.OrganizationId })
+    
+</div>
+	</div>
+</div>
+
+
+

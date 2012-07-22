@@ -1,0 +1,80 @@
+@model SoftwareGrid.DataLogic.Models.VendorAddress
+
+@{
+    ViewBag.Title = "VendorAddress";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Address</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Address</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.AddressLine1)
+    <div class="display-field">@Model.AddressLine1</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.AddressLine2)
+    <div class="display-field">@Model.AddressLine2</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.PostBoxNumber)
+    <div class="display-field">@String.Format("{0:F}", Model.PostBoxNumber)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CityName)
+    <div class="display-field">@Model.CityName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.ZipCode)
+    <div class="display-field">@Model.ZipCode</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.HomePhone)
+    <div class="display-field">@Model.HomePhone</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.MobilePhone)
+    <div class="display-field">@Model.MobilePhone</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.PersonalEmail)
+    <div class="display-field">@Model.PersonalEmail</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.IsBulkEmail)
+    <div class="display-field">@Model.IsBulkEmail</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Vendor)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VendorAddressCategory)
+    <div class="display-field">@(Model.VendorAddressCategory == null ? "None" : Model.VendorAddressCategory.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Country)
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.State)
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.VendorAddressID, vendorId = ViewBag.VendorId }) |
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+    
+</div>
+	</div>
+</div>
+
+
+

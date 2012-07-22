@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantDocument
+
+@{
+    ViewBag.Title = "ApplicantDocument";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Document</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Document</h2>
+		<fieldset>
+
+    <label>DocumentTitle</label>
+    <div class="display-field">@Model.DocumentTitle</div>
+
+    <label>DocumentFile</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.DocumentFile).ToString()</div>
+
+    <label>OriginalFileInfo</label>
+    <div class="display-field">@Model.OriginalFileInfo</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ApplicantDocumentCategory</label>
+    <div class="display-field">@(Model.ApplicantDocumentCategory == null ? "None" : Model.ApplicantDocumentCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantDocumentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

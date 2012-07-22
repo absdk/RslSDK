@@ -1,0 +1,65 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationWorkforcePlanDetail
+
+@{
+    ViewBag.Title = "OrganizationWorkforcePlanDetail";
+    Layout = "_LayoutOrganization";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Workforce Plan Detail</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Workforce Plan Detail</h2>
+		<fieldset>
+
+    <label>NumberOfEmployeeTobeHired</label>
+    <div class="display-field">@String.Format("{0:F}", Model.NumberOfEmployeeTobeHired)</div>
+
+    <label>HiredNumberEmployee</label>
+    <div class="display-field">@String.Format("{0:F}", Model.HiredNumberEmployee)</div>
+
+    <label>ContractPeriod</label>
+    <div class="display-field">@Model.ContractPeriod</div>
+
+    <label>PlannedStartDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.PlannedStartDate)</div>
+
+    <label>Notes</label>
+    <div class="display-field">@Model.Notes</div>
+
+    <label>HierarchicalSequence</label>
+    <div class="display-field">@String.Format("{0:F}", Model.HierarchicalSequence)</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+
+    <label>OrganizationProject</label>
+    <div class="display-field">@(Model.OrganizationProject == null ? "None" : Model.OrganizationProject.Name)</div>
+
+    <label>EmploymentType</label>
+    <div class="display-field">@(Model.EmploymentType == null ? "None" : Model.EmploymentType.Name)</div>
+
+    <label>OrganizationWorkforcePlan</label>
+    <div class="display-field">@(Model.OrganizationWorkforcePlan == null ? "None" : Model.OrganizationWorkforcePlan.Title)</div>
+
+    <label>OrganizationBusinessDivision</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationBusinessDivision).ToString()</div>
+
+    <label>OrganizationDepartment</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationDepartment).ToString()</div>
+
+    <label>OrganizationPosition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationPosition).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationWorkforcePlanDetailID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

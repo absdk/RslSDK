@@ -1,0 +1,375 @@
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Web.Security;
+using SoftwareGrid.DataLogic.Seed;
+using SoftwareGrid.DataLogic.Models;
+
+namespace SoftwareGrid.BusinessLogic.Repositories.Context
+{
+    public class RepositoryContextInitializer : DropCreateDatabaseIfModelChanges<RepositoryContext>, IRepositoryContextInitializer
+    {
+        private readonly RepositoryContext _dbContext;
+
+        public RepositoryContextInitializer(RepositoryContext dbContext)
+        {
+            this._dbContext = dbContext;
+        }
+
+        public virtual void InitializeDatabase()
+        {
+            //InitializeMembershipDatabase();
+            InitializeDatabase(_dbContext);
+        }
+
+        protected override void Seed(RepositoryContext context)
+        {
+
+            #region State Country City Region
+
+            foreach (Region region in RegionSeed.Regions)
+            {
+                context.Region.Add(region);
+            }
+
+            foreach (Country country in CountrySeed.Countries)
+            {
+                context.Country.Add(country);
+            }
+            foreach (State state in StateSeed.States)
+            {
+                context.State.Add(state);
+            }
+
+            foreach (City city in CitySeed.Cities)
+            {
+                context.City.Add(city);
+            }
+
+            #endregion
+
+            #region Genereal master data
+
+            foreach (BloodGroup bloodGroup in BloodGroupSeed.BloodGroups)
+            {
+                context.BloodGroup.Add(bloodGroup);
+            }
+
+            foreach (Gender gender in GenderSeed.Genders)
+            {
+                context.Gender.Add(gender);
+            }
+
+            foreach (Disability disability in DisabilitySeed.Disabilities)
+            {
+                context.Disability.Add(disability);
+            }
+
+            foreach (Religion religion in ReligionSeed.Religions)
+            {
+                context.Religion.Add(religion);
+            }
+
+            foreach (Currency currency in CurrencySeed.Currencies)
+            {
+                context.Currency.Add(currency);
+            }
+
+
+            foreach (Salutation salutation in SalutationSeed.Salutations)
+            {
+                context.Salutation.Add(salutation);
+            }
+
+
+            foreach (FamilyRelationship familyRelationship in FamilyRelationshipSeed.FamilyRelationships)
+            {
+                context.FamilyRelationship.Add(familyRelationship);
+            }
+
+
+            foreach (MaritalStatus maritalStatus in MaritalStatusSeed.MaritalStatuses)
+            {
+                context.MaritalStatus.Add(maritalStatus);
+            }
+
+
+
+            foreach (EthnicBackground ethnicBackground in EthnicBackgroundSeed.EthnicBackgrounds)
+            {
+                context.EthnicBackground.Add(ethnicBackground);
+            }
+
+
+
+
+            foreach (ExperienceLevelCategory experienceLevelCategory in ExperienceLevelCategorySeed.ExperienceLevelCategories)
+            {
+                context.ExperienceLevelCategory.Add(experienceLevelCategory);
+            }
+
+            foreach (ContactProfessionType contactProfessionType in ContactProfessionTypeSeed.ContactProfessionTypes)
+            {
+                context.ContactProfessionType.Add(contactProfessionType);
+            }
+
+            foreach (EmploymentType employmentType in EmploymentTypeSeed.EmploymentTypes)
+            {
+                context.EmploymentType.Add(employmentType);
+            }
+
+
+            foreach (EmploymentStatus employmentStatus in EmploymentStatusSeed.EmploymentStatuses)
+            {
+                context.EmploymentStatus.Add(employmentStatus);
+            }
+
+
+            foreach (EmploymentLeaveReasonCategory employmentLeaveReasonCategory in EmploymentLeaveReasonCategorySeed.EmploymentLeaveReasonCategories)
+            {
+                context.EmploymentLeaveReasonCategory.Add(employmentLeaveReasonCategory);
+            }
+
+            foreach (SalaryRateType salaryRateType in SalaryRateTypeSeed.SalaryRateTypes)
+            {
+                context.SalaryRateType.Add(salaryRateType);
+            }
+
+            foreach (SalaryTaxType salaryTaxType in SalaryTaxTypeSeed.SalaryTaxTypes)
+            {
+                context.SalaryTaxType.Add(salaryTaxType);
+            }
+
+
+            foreach (PayCycle payCycle in PayCycleSeed.PayCycles)
+            {
+                context.PayCycle.Add(payCycle);
+            }
+
+
+
+            foreach (SecurityClearance securityClearance in SecurityClearanceSeed.SecurityClearances)
+            {
+                context.SecurityClearance.Add(securityClearance);
+            }
+
+
+
+            foreach (VeteranCategory veteranCategory in VeteranCategorySeed.VeteranCategories)
+            {
+                context.VeteranCategory.Add(veteranCategory);
+            }
+
+
+            foreach (DriverLicense driverLicense in DriverLicenseSeed.DriverLicenses)
+            {
+                context.DriverLicense.Add(driverLicense);
+            }
+
+
+            foreach (Visa visa in VisaSeed.Visas)
+            {
+                context.Visa.Add(visa);
+            }
+
+
+            foreach (VisaStatus visaStatus in VisaStatusSeed.VisaStatuses)
+            {
+                context.VisaStatus.Add(visaStatus);
+            }
+
+
+            foreach (Industry industry in IndustrySeed.Industries)
+            {
+                context.Industry.Add(industry);
+            }
+
+
+            foreach (CompanyOwner companyOwner in CompanyOwnerSeed.CompanyOwners)
+            {
+                context.CompanyOwner.Add(companyOwner);
+            }
+
+
+            foreach (RatingScale ratingScale in RatingScaleSeed.RatingScales)
+            {
+                context.RatingScale.Add(ratingScale);
+            }
+
+            #endregion
+
+            #region Accounting
+
+            //foreach (Account account in AccountSeed.Accounts)
+            //{
+            //    context.Account.Add(account);
+            //}
+
+
+            //foreach (AccountCategory accountCategory in AccountCategorySeed.AccountCategories)
+            //{
+            //    context.AccountCategory.Add(accountCategory);
+            //}
+
+            #endregion
+
+            #region Interview Questions and Answers
+
+
+            
+            //foreach (interviewquestioncategory interviewquestioncategory in interviewquestioncategoryseed.interviewquestioncategories)
+            //{
+            //    context.interviewquestioncategory.add(interviewquestioncategory);
+            //}
+
+            //foreach (interviewquestionanswer interviewquestionanswer in interviewquestionanswerseed.interviewquestionanswers)
+            //{
+            //    context.interviewquestionanswer.add(interviewquestionanswer);
+            //}
+
+            #endregion
+
+            #region Business Division Department Position
+
+            foreach (BusinessDivision businessDivision in BusinessDivisionSeed.BusinessDivisions)
+            {
+                context.BusinessDivision.Add(businessDivision);
+
+            }
+
+            foreach (Department department in DepartmentSeed.Departments)
+            {
+                context.Department.Add(department);
+
+            }
+
+
+            foreach (Position position in PositionSeed.Positions)
+            {
+                context.Position.Add(position);
+
+            }
+
+            #endregion
+
+            #region Skillset and Expertise
+
+            foreach (SkillsExpEdu skillsExpEdu in SkillsExpEduSeed.SkillsExpEdues)
+            {
+                context.SkillsExpEdu.Add(skillsExpEdu);
+            }
+
+
+
+            foreach (SkillsExpEduCategory skillsExpEduCategory in SkillsExpEduCategorySeed.SkillsExpEduCategories)
+            {
+                context.SkillsExpEduCategory.Add(skillsExpEduCategory);
+            }
+
+
+            //foreach (SkillsExpEduSynonym skillsExpEduSynonym in SkillsExpEduSynonymSeed.SkillsExpEdueSynonyms)
+            //{
+            //    context.SkillsExpEduSynonym.Add(skillsExpSynonym);
+            //}
+
+            #endregion
+
+
+
+            #region Applicant Tracking System
+
+            foreach (ApplicantSourceCategory applicantSourceCategory in ApplicantSourceCategorySeed.ApplicantSourceCategories)
+            {
+                context.ApplicantSourceCategory.Add(applicantSourceCategory);
+            }
+
+
+            foreach (ApplicantAvailabilityStatusCategory applicantAvailabilityStatusCategory in ApplicantAvailabilityStatusCategorySeed.ApplicantAvailabilityStatusCategories)
+            {
+                context.ApplicantAvailabilityStatusCategory.Add(applicantAvailabilityStatusCategory);
+            }
+
+            foreach (ApplicantRecruitmentCostCategory applicantRecruitmentCostCategory in ApplicantRecruitmentCostCategorySeed.ApplicantRecruitmentCostCategories)
+            {
+                context.ApplicantRecruitmentCostCategory.Add(applicantRecruitmentCostCategory);
+            }
+
+            foreach (ApplicantDocumentCategory applicantDocumentCategory in ApplicantDocumentCategorySeed.ApplicantDocumentCategories)
+            {
+                context.ApplicantDocumentCategory.Add(applicantDocumentCategory);
+            }
+
+            //foreach (ApplicantDocumentStatusCategory applicantDocumentStatusCategory in ApplicantDocumentStatusCategorySeed.ApplicantDocumentStatusCategories)
+            //{
+            //    context.ApplicantDocumentStatusCategory.Add(aApplicantDocumentStatusCategory);
+            //}
+
+
+
+            foreach (ApplicantSubmissionFeedbackCategory ApplicantSubmissionFeedbackCategory in ApplicantSubmissionFeedbackCategorySeed.ApplicantSubmissionFeedbackCategories)
+            {
+                context.ApplicantSubmissionFeedbackCategory.Add(ApplicantSubmissionFeedbackCategory);
+            }
+
+            foreach (ApplicantInterviewFeedbackCategory applicantInterviewFeedbackCategory in ApplicantInterviewFeedbackCategorySeed.ApplicantInterviewFeedbackCategories)
+            {
+                context.ApplicantInterviewFeedbackCategory.Add(applicantInterviewFeedbackCategory);
+            }
+
+
+
+
+
+
+            #endregion 
+
+
+            context.SaveChanges();
+        }
+
+        //protected virtual void InitializeMembershipDatabase()
+        //{
+        //    foreach (MembershipUser u in Membership.GetAllUsers())
+        //    {
+        //        Membership.DeleteUser(u.UserName, true);
+        //    }
+        //    foreach (string role in Roles.GetAllRoles())
+        //    {
+        //        Roles.DeleteRole(role);
+        //    }
+
+        //    Roles.CreateRole(RoleName.Administrator);
+        //    Roles.CreateRole(RoleName.Recruiter);
+        //    Roles.CreateRole(RoleName.HrManager);
+        //    Roles.CreateRole(RoleName.VendorManager);
+        //    Roles.CreateRole(RoleName.Vendor);
+        //    Roles.CreateRole(RoleName.Client);
+
+        //    MembershipCreateStatus createStatus;
+        //    MembershipUser newUser1 = Membership.CreateUser("admin@softwaregrid.com", "admin@123", "admin@softwaregrid.com", "n/a", "n/a", true, out createStatus);
+        //    MembershipUser newUser2 = Membership.CreateUser("recruiter@softwaregrid.com", "recruiter@123", "recruiter@softwaregrid.com", "n/a", "n/a", true, out createStatus);
+
+        //    Roles.AddUserToRole(newUser1.UserName, RoleName.Administrator);
+        //    Roles.AddUserToRole(newUser2.UserName, RoleName.Recruiter);
+
+        //}
+    }
+
+    //public sealed class RoleName
+    //{
+    //    public const string Administrator = "Administrator";
+    //    public const string Recruiter = "Recruiter";
+    //    public const string HrManager = "HR Manager";
+    //    public const string VendorManager = "Vendor Manager";
+    //    public const string Vendor = "Vendor";
+    //    public const string Client = "Client";
+
+    //    public static IEnumerable<string> RoleNames
+    //    {
+    //        get
+    //        {
+    //            return new[] { Administrator, Recruiter, HrManager, VendorManager, Vendor, Client };
+    //        }
+    //    }
+
+    //}
+}

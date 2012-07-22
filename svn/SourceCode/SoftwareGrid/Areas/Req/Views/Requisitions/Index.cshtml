@@ -1,0 +1,128 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.Requisition>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Requisition";
+}
+<div class="flat_area grid_16">
+    <h2>Requisition List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "Requisition"))
+{
+	<div class="box grid_16">
+        <h2 class="box_head">Search</h2>
+        <a href="#" class="grabber">&nbsp;</a>
+        <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+				<div class="search-item">
+									    <div class="search-item-left">
+										        <div class="label-container">
+				            @Html.Label("Display ID") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("RequisitionDisplayId") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Job Title") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("JobTitle") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Number Of Positions") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("NumberOfOpenings") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Employment Type") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("EmploymentTypeID", ((IEnumerable<SoftwareGrid.DataLogic.Models.EmploymentType>)ViewBag.PossibleEmploymentTypes).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.EmploymentTypeID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Experience Level Category") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("ExperienceLevelCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ExperienceLevelCategory>)ViewBag.PossibleExperienceLevelCategories).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.ExperienceLevelCategoryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Hire By Date") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("HireByDate") 
+											        </div>
+									    </div>
+				    <div class="search-item-right">
+										        <div class="label-container">
+				            @Html.Label("Country") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("CountryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.CountryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("State") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("StateID", ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.StateID.ToString(),
+						    }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("City") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("City") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Zip Code") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("ZipCode") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Requisition Status") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("RequisitionStatusCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.RequisitionStatusCategory>)ViewBag.PossibleRequisitionStatusCategories).Select(option => new SelectListItem {
+						        Text = (option == null ? "None" : option.Name), 
+						        Value = option.RequisitionStatusCategoryID.ToString(),
+						    }), "Choose...")
+										        </div>
+									    </div>
+										</div>
+				<div style="width:50%; float:left;">
+				&nbsp;
+				</div>
+				<div class="button_bar clearfix" style="float:left;">
+					<button class="green" type="submit">
+							<span>Search</span>
+					</button>
+				</div>
+			</div>
+        </div>
+    </div>
+}
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.RequisitionID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.CreatedByUser.Name).Title("		Exception Value cannot be null.
+Parameter name: objectToConvert
+	

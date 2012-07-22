@@ -1,0 +1,83 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantVideo
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VideoTitle)
+            <div>
+								@Html.EditorFor(model => model.VideoTitle)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.BriefDescription)
+            <div>
+								@Html.EditorFor(model => model.BriefDescription)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.YouTubeVideoLink)
+            <div>
+								@Html.EditorFor(model => model.YouTubeVideoLink)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.VideoFile)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("VideoFile")
+                        .Async(async => async
+                            .Save("UploadFile", "ApplicantVideo")
+                            .Remove("RemoveFile", "ApplicantVideo"))
+                )
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.OriginalFileInfo)
+            <div>
+								@Html.EditorFor(model => model.OriginalFileInfo)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsDisplayInPortfolio)
+            <div>
+								@Html.EditorFor(model => model.IsDisplayInPortfolio)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.UploadDate)
+            <div>
+								@Html.EditorFor(model => model.UploadDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

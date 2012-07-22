@@ -1,0 +1,94 @@
+@model SoftwareGrid.DataLogic.Models.User
+@* This partial view defines form fields that will appear when creating and editing entities *@
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.FirstName)
+        <div>
+            @Html.EditorFor(model => model.FirstName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.LastName)
+        <div>
+            @Html.EditorFor(model => model.LastName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.UserLoginName)
+        <div>
+            @Html.EditorFor(model => model.UserLoginName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Password)
+        <div>
+            @Html.EditorFor(model => model.Password)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ConfirmPassword)
+        <div>
+            @Html.EditorFor(model => model.ConfirmPassword)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.EmailAddress)
+        <div>
+            @Html.EditorFor(model => model.EmailAddress)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Phone)
+        <div>
+            @Html.EditorFor(model => model.Phone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Photo)
+        <div>
+            @(Html.Telerik().Upload()
+                        .Name("Photo")
+                        .Async(async => async
+                            .Save("UploadFile", "User")
+                            .Remove("RemoveFile", "User"))
+                )
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.UserRoleID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.UserRoleID, ((IEnumerable<SoftwareGrid.DataLogic.Models.UserRole>)ViewBag.PossibleUserRoles).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.UserRoleID.ToString(),
+           Selected = (Model != null) && (option.UserRoleID == Model.UserRoleID)
+       }), "Choose...")
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsActive)
+        <div>
+            @Html.EditorFor(model => model.IsActive)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

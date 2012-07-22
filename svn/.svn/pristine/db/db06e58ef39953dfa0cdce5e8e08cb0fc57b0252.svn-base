@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfilePublish
+
+@{
+    ViewBag.Title = "Applicant Profile Publish";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+<h2>Applicant Profile Publish</h2>
+</div>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Applicant Profile Publish</h2>
+
+			@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}
+

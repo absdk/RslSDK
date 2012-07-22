@@ -1,0 +1,148 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantEduCertLicense
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SkillsExpEduCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SkillsExpEduCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SkillsExpEduCategory>)ViewBag.PossibleSkillsExpEduCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SkillsExpEduCategoryID.ToString(),
+			        Selected = (Model != null) && (option.SkillsExpEduCategoryID == Model.SkillsExpEduCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SkillsExpEduID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SkillsExpEduID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SkillsExpEdu>)ViewBag.PossibleSkillsExpEdus).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Title), 
+			        Value = option.SkillsExpEduID.ToString(),
+			        Selected = (Model != null) && (option.SkillsExpEduID == Model.SkillsExpEduID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Title)
+            <div>
+								@Html.EditorFor(model => model.Title)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AttendedFromDate)
+            <div>
+								@Html.EditorFor(model => model.AttendedFromDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AttendedToDate)
+            <div>
+								@Html.EditorFor(model => model.AttendedToDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.InstituteName)
+            <div>
+								@Html.EditorFor(model => model.InstituteName)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.CountryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.StateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.StateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.StateID.ToString(),
+			        Selected = (Model != null) && (option.StateID == Model.StateID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.City)
+            <div>
+								@Html.EditorFor(model => model.City)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.BriefDescription)
+            <div>
+								@Html.EditorFor(model => model.BriefDescription)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CertificationIssueDate)
+            <div>
+								@Html.EditorFor(model => model.CertificationIssueDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.LicenseExpirationDate)
+            <div>
+								@Html.EditorFor(model => model.LicenseExpirationDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsVerified)
+            <div>
+								@Html.EditorFor(model => model.IsVerified)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.VerifiedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.VerifiedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleVerifiedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.VerifiedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VerificationDate)
+            <div>
+								@Html.EditorFor(model => model.VerificationDate)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

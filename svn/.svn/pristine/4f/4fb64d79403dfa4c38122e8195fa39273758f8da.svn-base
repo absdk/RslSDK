@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantDataPrivacyTemplate
+
+@{
+    ViewBag.Title = "ApplicantDataPrivacyTemplate";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Data Privacy Template</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Data Privacy Template</h2>
+		<fieldset>
+
+    <label>AgreementTitle</label>
+    <div class="display-field">@Model.AgreementTitle</div>
+
+    <label>DataPrivacyAgreementInfo</label>
+    <div class="display-field">@Model.DataPrivacyAgreementInfo</div>
+
+    <label>IsCurrent</label>
+    <div class="display-field">@Model.IsCurrent</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantDataPrivacyTemplateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

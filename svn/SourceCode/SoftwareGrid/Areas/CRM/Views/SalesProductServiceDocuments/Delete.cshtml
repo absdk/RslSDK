@@ -1,0 +1,42 @@
+@model SoftwareGrid.DataLogic.Models.SalesProductServiceDocument
+
+@{
+    ViewBag.Title = "Sales Product Service Document";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Sales Product Service Document</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>DocumentTitle</label>
+		    <div class="display-field">@Model.DocumentTitle</div>
+		</div>
+				<div class="form-item">
+		    <label>FileContent</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.FileContent).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>SalesProductServiceCatelog</label>
+		    <div class="display-field">@(Model.SalesProductServiceCatelog == null ? "None" : Model.SalesProductServiceCatelog.Title)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

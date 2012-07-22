@@ -1,0 +1,79 @@
+@model SoftwareGrid.DataLogic.ViewModels.ApplicantSearchViewModel
+
+@{
+    ViewBag.Title = "ApplicantSearchViewModel";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Search View Model</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Search View Model</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>ResumeKeyword</label>
+    <div class="display-field">@Model.ResumeKeyword</div>
+
+    <label>ZipCode</label>
+    <div class="display-field">@Model.ZipCode</div>
+
+    <label>ZipCodeDistanceRadius</label>
+    <div class="display-field">@Model.ZipCodeDistanceRadius</div>
+
+    <label>SearchAddressLatitude</label>
+    <div class="display-field">@Model.SearchAddressLatitude</div>
+
+    <label>SearchAddressLongitude</label>
+    <div class="display-field">@Model.SearchAddressLongitude</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>State</label>
+    <div class="display-field">@Model.State</div>
+
+    <label>Country</label>
+    <div class="display-field">@Model.Country</div>
+
+    <label>Region</label>
+    <div class="display-field">@Model.Region</div>
+
+    <label>LastUpdatedAt</label>
+    <div class="display-field">@String.Format("{0:g}", Model.LastUpdatedAt)</div>
+
+    <label>PhoneNumber</label>
+    <div class="display-field">@Model.PhoneNumber</div>
+
+    <label>Email</label>
+    <div class="display-field">@Model.Email</div>
+
+    <label>Nationality</label>
+    <div class="display-field">@Model.Nationality</div>
+
+    <label>Gender</label>
+    <div class="display-field">@Model.Gender</div>
+
+    <label>SkillsExpertis</label>
+    <div class="display-field">@Model.SkillsExpertis</div>
+
+    <label>ExperienceLevelCategory</label>
+    <div class="display-field">@Model.ExperienceLevelCategory</div>
+
+    <label>EmployerName</label>
+    <div class="display-field">@Model.EmployerName</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantSearchID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

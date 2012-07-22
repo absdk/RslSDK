@@ -1,0 +1,77 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantExperience
+
+@{
+    ViewBag.Title = "ApplicantExperience";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Experience</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Experience</h2>
+		<fieldset>
+
+    <label>EmployerName</label>
+    <div class="display-field">@Model.EmployerName</div>
+
+    <label>EmployerWebsite</label>
+    <div class="display-field">@Model.EmployerWebsite</div>
+
+    <label>JobTitle</label>
+    <div class="display-field">@Model.JobTitle</div>
+
+    <label>IsCurrentJob</label>
+    <div class="display-field">@Model.IsCurrentJob</div>
+
+    <label>DateFrom</label>
+    <div class="display-field">@String.Format("{0:g}", Model.DateFrom)</div>
+
+    <label>DateTo</label>
+    <div class="display-field">@String.Format("{0:g}", Model.DateTo)</div>
+
+    <label>ExperienceMonthYear</label>
+    <div class="display-field">@String.Format("{0:F}", Model.ExperienceMonthYear)</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>GrossSalary</label>
+    <div class="display-field">@Model.GrossSalary</div>
+
+    <label>JobDescription</label>
+    <div class="display-field">@Model.JobDescription</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>EmploymentLeaveReasonCategory</label>
+    <div class="display-field">@(Model.EmploymentLeaveReasonCategory == null ? "None" : Model.EmploymentLeaveReasonCategory.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicantExperienceID, applicantId = ViewBag.ApplicantId }) |
+    @Html.ActionLink("Back to List", "Index", new { applicantId = ViewBag.ApplicantId })
+</p>
+
+

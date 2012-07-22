@@ -1,0 +1,58 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantAdditionalAddress
+@{
+    ViewBag.Title = "ApplicantAdditionalAddress";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Additional Address</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Additional Address</h2>
+        <fieldset>
+            <label>
+                AddressLine1</label>
+            <div class="display-field">@Model.AddressLine1</div>
+            <label>
+                AddressLine2</label>
+            <div class="display-field">@Model.AddressLine2</div>
+            <label>
+                PostBoxNumber</label>
+            <div class="display-field">@Model.PostBoxNumber</div>
+            <label>
+                City</label>
+            <div class="display-field">@Model.City</div>
+            <label>
+                ZipCode</label>
+            <div class="display-field">@Model.ZipCode</div>
+            <label>
+                HomePhone</label>
+            <div class="display-field">@Model.HomePhone</div>
+            <label>
+                MobilePhone</label>
+            <div class="display-field">@Model.MobilePhone</div>
+            <label>
+                PersonalEmail</label>
+            <div class="display-field">@Model.PersonalEmail</div>
+            <label>
+                IsPrimaryConatact</label>
+            <div class="display-field">@Model.IsPrimaryConatact</div>
+            <label>
+                Applicant</label>
+            <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+            <label>
+                Country</label>
+            <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+            <label>
+                State</label>
+            <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+        </fieldset>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicantAdditionalAddressID, applicantId = ViewBag.ApplicantId })
+    |
+    @Html.ActionLink("Back to List", "Index", new { applicantId = ViewBag.ApplicantId })
+</p>

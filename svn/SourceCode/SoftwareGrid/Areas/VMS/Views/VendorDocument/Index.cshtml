@@ -1,0 +1,61 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.VendorDocument>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Vendor Document";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>Vendor Document List</h2>
+    <p>
+			@Html.ActionLink("Create New", "Create",new { vendorId = ViewBag.VendorId })
+	    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.VendorDocumentID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.VendorDocumentCategory.Name).Title("Vendor Document Category").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.DocumentTitle).Title("Document Title").Width("40%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.FileName).Title("File Name").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.UploadDate).Title("Upload Date").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Edit", "VendorDocument", new { id = @item.VendorDocumentID,vendorId = ViewBag.VendorId })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Delete", "VendorDocument", new { id = @item.VendorDocumentID,vendorId = ViewBag.VendorId })" title="Delete"><img alt="Delete"  src="/content/images/delete.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

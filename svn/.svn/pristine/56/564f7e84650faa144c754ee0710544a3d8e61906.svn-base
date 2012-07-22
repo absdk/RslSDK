@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class ContactRepository : IContactRepository
+    {
+		private readonly RepositoryContext context;
+
+        public ContactRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<Contact> All
+        {
+            get { return context.Contact; }
+        }
+
+        public IQueryable<Contact> AllIncluding(params Expression<Func<Contact, object>>[] includeProperties)
+        {
+            IQueryable<Contact> query = context.Contact;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+        public Contact Find(int id)
+        {
+            return context.Contact.Find(id);
+        }
+
+        public void InsertOrUpdate(Contact contact)
+        {
+            if (contact.ContactID == default(int)) {
+                // New entity
+                context.Contact.Add(contact);
+            } else {
+                // Existing entity
+                context.Entry(contact).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var contact = context.Contact.Find(id);
+            context.Contact.Remove(contact);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IContactRepository
+    {
+        IQueryable<Contact> All { get; }
+        IQueryable<Contact> AllIncluding(params Expression<Func<Contact, object>>[] includeProperties);
+        Contact Find(int id);
+        void InsertOrUpdate(Contact contact);
+        void Delete(int id);
+        void Save();
+    }
+}

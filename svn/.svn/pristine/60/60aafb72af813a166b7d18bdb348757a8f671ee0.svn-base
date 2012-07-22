@@ -1,0 +1,59 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionSkillsExpertiseEducationMatchingMatrix
+
+@{
+    ViewBag.Title = "Requisition Skills Expertise Education Matching Matrix";
+    Layout = "_LayoutRequisition";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Skills Expertise Education Matching Matrix</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>IsRequiredOrPreferred</label>
+		    <div class="display-field">@Model.IsRequiredOrPreferred</div>
+		</div>
+				<div class="form-item">
+		    <label>DisplaySequence</label>
+		    <div class="display-field">@String.Format("{0:F}", Model.DisplaySequence)</div>
+		</div>
+				<div class="form-item">
+		    <label>HireDecisionWeightPercentage</label>
+		    <div class="display-field">@String.Format("{0:F}", Model.HireDecisionWeightPercentage)</div>
+		</div>
+				<div class="form-item">
+		    <label>Requisition</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>RatingScale</label>
+		    <div class="display-field">@(Model.RatingScale == null ? "None" : Model.RatingScale.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>SkillsExpEdu</label>
+		    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+		</div>
+				<div class="form-item">
+		    <label>SkillsExpEduCategory</label>
+		    <div class="display-field">@(Model.SkillsExpEduCategory == null ? "None" : Model.SkillsExpEduCategory.Name)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

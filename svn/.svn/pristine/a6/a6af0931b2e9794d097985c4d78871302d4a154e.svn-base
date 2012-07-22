@@ -1,0 +1,65 @@
+@model SoftwareGrid.DataLogic.Models.CompanyAddress
+
+@{
+    ViewBag.Title = "CompanyAddress";
+    Layout = "_LayoutCRM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Company Address</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Company Address</h2>
+		<fieldset>
+
+    <label>AddressLine1</label>
+    <div class="display-field">@Model.AddressLine1</div>
+
+    <label>AddressLine2</label>
+    <div class="display-field">@Model.AddressLine2</div>
+
+    <label>PostBoxNumber</label>
+    <div class="display-field">@Model.PostBoxNumber</div>
+
+    <label>CityName</label>
+    <div class="display-field">@Model.CityName</div>
+
+    <label>ZipCode</label>
+    <div class="display-field">@Model.ZipCode</div>
+
+    <label>OfficePhone</label>
+    <div class="display-field">@Model.OfficePhone</div>
+
+    <label>FaxPhone</label>
+    <div class="display-field">@Model.FaxPhone</div>
+
+    <label>PersonalEmail</label>
+    <div class="display-field">@Model.PersonalEmail</div>
+
+    <label>IsBulkEmail</label>
+    <div class="display-field">@Model.IsBulkEmail</div>
+
+    <label>Company</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Company).ToString()</div>
+
+    <label>CompanyAddressCategory</label>
+    <div class="display-field">@(Model.CompanyAddressCategory == null ? "None" : Model.CompanyAddressCategory.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CompanyAddressID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

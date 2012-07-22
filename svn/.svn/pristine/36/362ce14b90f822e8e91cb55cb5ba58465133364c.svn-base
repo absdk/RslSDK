@@ -1,0 +1,51 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationBusinessDivision
+
+@{
+    ViewBag.Title = "Organization Business Division";
+    Layout = "_LayoutOM";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Organization Business Division</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>DivisionName</label>
+		    <div class="display-field">@Model.DivisionName</div>
+		</div>
+				<div class="form-item">
+		    <label>CodeNumber</label>
+		    <div class="display-field">@Model.CodeNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>DepartmentNumber</label>
+		    <div class="display-field">@String.Format("{0:F}", Model.DepartmentNumber)</div>
+		</div>
+				<div class="form-item">
+		    <label>Description</label>
+		    <div class="display-field">@Model.Description</div>
+		</div>
+				<div class="form-item">
+		    <label>Organization</label>
+		    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

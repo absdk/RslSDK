@@ -1,0 +1,235 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>
+@using EasySoft.Helper;
+@using SoftwareGrid.BusinessLogic.Helpers
+@{
+    ViewBag.Title = "Applicant";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "Applicant"))
+{
+    Html.EnableClientValidation(false);
+    <div class="box grid_16">
+        <h2 class="box_head">
+            Search</h2>
+        <a href="#" class="grabber">&nbsp;</a> <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+                <div class="search-item">
+                    <div class="search-item-left">
+                        <div class="label-container">
+                            @Html.Label("Applicant Id")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("PersonlizedApplicantIdentification")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("First Name")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("FirstName")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Last Name")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("LastName")
+                        </div>
+                        @*<div class="label-container">
+                            @Html.Label("Primary Professional Category")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("ContactProfessionTypeID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ContactProfessionType>)ViewBag.PossibleContactProfessionTypes).Select(option => new SelectListItem
+                       {
+                           Text = (option == null ? "None" : option.Name),
+                           Value = option.ContactProfessionTypeID.ToString(),
+                       }), "Choose...")
+                        </div>*@
+                        <div class="label-container">
+                            @Html.Label("Experience Level")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("ExperienceLevelCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ExperienceLevelCategory>)ViewBag.PossibleExperienceLevelCategories).Select(option => new SelectListItem
+                       {
+                           Text = (option == null ? "None" : option.Name),
+                           Value = option.ExperienceLevelCategoryID.ToString(),
+                       }), "Choose...")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Professional Summary")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("ProfessionalSummary")
+                        </div>
+                    </div>
+                    <div class="search-item-right">
+                        <div class="label-container">
+                            @Html.Label("City")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("City")
+                        </div>
+                        @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_CountryForIndex,new SoftwareGrid.DataLogic.Models.Country())
+                        <div id="divCountryID">
+                            @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_StateForIndex,new SoftwareGrid.DataLogic.Models.State())
+                        </div>                        
+                        <div class="label-container">
+                            @Html.Label("Applicant Status")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("ApplicantStatusCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantAvailabilityStatusCategory>)ViewBag.PossibleApplicantAvailabilityStatusCategories).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.ApplicantAvailabilityStatusCategoryID.ToString(),
+            }), "Choose...")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Applicant Source Info")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("ApplicantSourceCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantSourceCategory>)ViewBag.PossibleApplicantSourceCategories).Select(option => new SelectListItem
+                       {
+                           Text = (option == null ? "None" : option.Name),
+                           Value = option.ApplicantSourceCategoryID.ToString(),
+                       }), "Choose...")
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 50%; float: left;">
+                    &nbsp;
+                </div>
+                <div class="button_bar clearfix" style="float: left;">
+                    <button class="green" type="submit">
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div style="clear: both;">
+</div>
+<div class="box grid_16">
+    @(Html.Telerik().Grid(Model)
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Phone).Title("Applicant List");
+        })
+    .Name("Grid")
+    .DataKeys(keys => keys.Add(c => c.ApplicantID))
+    .RowTemplate(grid => @<text> <a href="@Url.Action("Overview", new { id = item.ApplicantID })" class="employee-link" target="_blank">
+        <div class="employee-details">
+            <dl class="t-widget" style="width: 150px;">
+                <img src='@Url.Action("ShowApplicantPhoto", new { id = item.ApplicantID })' width="140px"
+                    alt='@item.FullName' />
+            </dl>
+            <dl class="t-widget" style="width:20%;">
+                <dt>Name:</dt><dd>@item.FullName</dd>
+                <dt>Job Title:</dt><dd>@item.JobTitle</dd>
+                <dt>Current Company:</dt><dd>@MiscUtility.GetApplicantCurrentCompany(item.ApplicantID)</dd>
+            </dl>
+            <dl class="t-widget" style="width:20%;">
+                <dt>Address:</dt><dd>@item.Address</dd>
+                <dt>Location:</dt><dd>@MiscUtility.GetLocation(item.City, item.State, item.Country)</dd>
+            </dl>
+            <dl class="t-widget" style="width:20%;">
+                <dt>Email:</dt><dd>@item.EmailAddress</dd>
+                <dt>Phone:</dt><dd>@item.Phone</dd>
+                <dt>Mobile:</dt><dd>@MiscUtility.GetApplicantMobile(item.ApplicantID)</dd>
+            </dl>
+            <dl class="t-widget" style="width:20%;">
+                <dt>Resume Source:</dt><dd>@MiscUtility.GetApplicantResumeSource(item.ApplicantSourceCategory)</dd>
+                <dt>Status:</dt><dd>@MiscUtility.GetApplicantStatus(item.ApplicantAvailabilityStatusCategory)</dd>
+                <dt>Last Updated:</dt><dd>@item.LastUpdateDate.ToShortDateString()</dd>
+            </dl>
+            <div class="commands" style="width: 70px;">
+                @grid.EditButton(item)
+                @grid.DeleteButton(item)
+            </div>
+        </div>
+    </a>
+    </text>
+        )
+       .DetailView(detailView => detailView.Template(
+        @<text>
+    <div class="employee-details">
+        <div style="clear: both;">
+            <strong>Summary : </strong>@item.ProfessionalSummary
+        </div>
+        <div style="clear: both;">
+            <strong>Skills : </strong>
+        </div>
+    </div>
+    </text>
+        ))
+    .DataBinding(binding => binding.Server()
+                .Update("Edit", "Applicant")
+                .Delete("Delete", "Applicant")
+            )
+    .Sortable(sorting => sorting.Enabled(true))
+    .Pageable(paging => paging.Enabled(true))
+    .Filterable(filtering => filtering.Filters(filters =>
+        {
+            if (ViewData["ApplicantDisplayId"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ApplicantDisplayId).Contains(ViewData["ApplicantDisplayId"].ToString(true));
+            }
+            if (ViewData["FirstName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.FirstName).Contains(ViewData["FirstName"].ToString(true));
+            }
+            if (ViewData["LastName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.LastName).Contains(ViewData["LastName"].ToString(true));
+            }
+            if (ViewData["ContactProfessionTypeID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ContactProfessionTypeID).IsEqualTo(ViewData["ContactProfessionTypeID"].ToInteger(true));
+            }
+            if (ViewData["ExperienceLevelCategoryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ExperienceLevelCategoryID).IsEqualTo(ViewData["ExperienceLevelCategoryID"].ToInteger(true));
+            }
+            if (ViewData["ProfessionalSummary"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ProfessionalSummary).Contains(ViewData["ProfessionalSummary"].ToString(true));
+            }
+            if (ViewData["City"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.City).Contains(ViewData["City"].ToString(true));
+            }
+            if (ViewData["CountryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.CountryID).IsEqualTo(ViewData["CountryID"].ToInteger(true));
+            }
+            if (ViewData["StateID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.StateID).IsEqualTo(ViewData["StateID"].ToInteger(true));
+            }
+            if (ViewData["ApplicantStatusCategoryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ApplicantAvailabilityStatusCategoryID).IsEqualTo(ViewData["ApplicantAvailabilityStatusCategoryID"].ToInteger(true));
+            }
+            if (ViewData["ApplicantSourceCategoryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ApplicantSourceCategoryID).IsEqualTo(ViewData["ApplicantSourceCategoryID"].ToInteger(true));
+            }
+        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+@helper EditTemplate(WebViewPage page, SoftwareGrid.DataLogic.Models.Applicant item)
+    {
+    <text><a href="/Applicant/Edit/@item.ApplicantID" title="Edit"><img alt="Edit" src="/content/images/edit.png" /></a></text>
+}
+@helper DeleteTemplate(WebViewPage page, SoftwareGrid.DataLogic.Models.Applicant item)
+    {
+    <text><a href="/Applicant/Delete/@item.ApplicantID" title="Delete" onclick="return confirmSubmit()"><img
+        alt="Edit" src="/content/images/delete.png" /></a></text>
+}

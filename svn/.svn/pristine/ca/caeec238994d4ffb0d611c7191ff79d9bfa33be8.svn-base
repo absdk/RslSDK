@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.ContactFolderOwner
+
+@{
+    ViewBag.Title = "ContactFolderOwner";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Contact Folder Owner</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Contact Folder Owner</h2>
+		<fieldset>
+
+    <label>AddedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.AddedDate)</div>
+
+    <label>ContactFolder</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ContactFolder).ToString()</div>
+
+    <label>ShareWithUser</label>
+    <div class="display-field">@(Model.ShareWithUser == null ? "None" : Model.ShareWithUser.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ContactFolderOwnerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

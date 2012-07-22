@@ -1,0 +1,38 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationProject
+
+@{
+    ViewBag.Title = "OrganizationProject";
+    Layout = "_LayoutOrganization";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Project</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Project</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>ProjectCodeNumber</label>
+    <div class="display-field">@Model.ProjectCodeNumber</div>
+
+    <label>ProjectDescription</label>
+    <div class="display-field">@Model.ProjectDescription</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationProjectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

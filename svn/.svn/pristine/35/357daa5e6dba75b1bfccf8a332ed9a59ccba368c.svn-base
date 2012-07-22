@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.VendorReference
+
+@{
+    ViewBag.Title = "Vendor Reference";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+<h2>Vendor Reference</h2>
+</div>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Vendor Reference</h2>
+						@Html.HiddenFor(model => model.VendorID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+									@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+						    </div>
+		</div>
+	</div>
+}
+

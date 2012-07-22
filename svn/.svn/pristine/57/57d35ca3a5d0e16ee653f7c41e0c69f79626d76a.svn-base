@@ -1,0 +1,129 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationDepartmentsController : Controller
+    {
+		private readonly IOrganizationRepository organizationRepository;
+		private readonly IOrganizationBusinessDivisionRepository organizationbusinessdivisionRepository;
+		private readonly IOrganizationDepartmentRepository organizationdepartmentRepository;
+        public OrganizationDepartmentsController(IOrganizationRepository organizationRepository, IOrganizationBusinessDivisionRepository organizationbusinessdivisionRepository, IOrganizationDepartmentRepository organizationdepartmentRepository)
+        {
+			this.organizationRepository = organizationRepository;
+			this.organizationbusinessdivisionRepository = organizationbusinessdivisionRepository;
+			this.organizationdepartmentRepository = organizationdepartmentRepository;
+        }
+
+        //
+        // GET: /OrganizationDepartments/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationdepartmentRepository.AllIncluding(organizationdepartment => organizationdepartment.Organization, organizationdepartment => organizationdepartment.OrganizationBusinessDivision));
+        }
+		
+		public ViewResult Search(OrganizationDepartment searchOrganizationDepartment)
+        {
+			if(searchOrganizationDepartment!=null)
+			{
+							}
+						return View("Index",organizationdepartmentRepository.AllIncluding(organizationdepartment => organizationdepartment.Organization, organizationdepartment => organizationdepartment.OrganizationBusinessDivision));
+		}
+
+        //
+        // GET: /OrganizationDepartments/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationdepartmentRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationDepartments/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationDepartment organizationdepartment = new OrganizationDepartment();
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+			ViewBag.PossibleOrganizationBusinessDivisions = organizationbusinessdivisionRepository.All;
+            return View(organizationdepartment);
+        } 
+
+        //
+        // POST: /OrganizationDepartments/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationDepartment organizationdepartment)
+        {
+            if (ModelState.IsValid) {
+                organizationdepartmentRepository.InsertOrUpdate(organizationdepartment);
+                organizationdepartmentRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				ViewBag.PossibleOrganizationBusinessDivisions = organizationbusinessdivisionRepository.All;
+				return View(organizationdepartment);
+			}
+        }
+        
+        //
+        // GET: /OrganizationDepartments/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+			ViewBag.PossibleOrganizationBusinessDivisions = organizationbusinessdivisionRepository.All;
+             return View(organizationdepartmentRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationDepartments/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationDepartment organizationdepartment)
+        {
+            if (ModelState.IsValid) {
+                organizationdepartmentRepository.InsertOrUpdate(organizationdepartment);
+                organizationdepartmentRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				ViewBag.PossibleOrganizationBusinessDivisions = organizationbusinessdivisionRepository.All;
+				return View(organizationdepartment);
+			}
+        }
+
+        //
+        // GET: /OrganizationDepartments/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationdepartmentRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationDepartments/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationdepartmentRepository.Delete(id);
+            organizationdepartmentRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

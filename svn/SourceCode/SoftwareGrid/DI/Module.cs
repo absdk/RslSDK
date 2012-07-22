@@ -1,0 +1,313 @@
+﻿using System.Web.Routing;
+using Autofac;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid
+{
+    public class Module : ModuleBase
+    {
+        public override void RegisterRoutes(RouteCollection routeCollection)
+        {
+        }
+
+        public override void RegisterComponents(ContainerBuilder containerBuilder)
+        {
+            containerBuilder.Register(
+                container => new RepositoryContext(container.Resolve<IConnectionString>()));
+
+            containerBuilder.Register(
+                container => new RepositoryContextInitializer(container.Resolve<RepositoryContext>())).As
+                <IRepositoryContextInitializer>();
+
+            #region Master Data Management
+
+            containerBuilder.Register(container => new BloodGroupRepository(container.Resolve<RepositoryContext>())).As<IBloodGroupRepository>();
+            containerBuilder.Register(container => new SalutationRepository(container.Resolve<RepositoryContext>())).As<ISalutationRepository>();
+            containerBuilder.Register(container => new FamilyRelationshipRepository(container.Resolve<RepositoryContext>())).As<IFamilyRelationshipRepository>();
+            containerBuilder.Register(container => new MaritalStatusRepository(container.Resolve<RepositoryContext>())).As<IMaritalStatusRepository>();
+            containerBuilder.Register(container => new GenderRepository(container.Resolve<RepositoryContext>())).As<IGenderRepository>();
+            containerBuilder.Register(container => new EthnicBackgroundRepository(container.Resolve<RepositoryContext>())).As<IEthnicBackgroundRepository>();
+            containerBuilder.Register(container => new ReligionRepository(container.Resolve<RepositoryContext>())).As<IReligionRepository>();
+            containerBuilder.Register(container => new CurrencyRepository(container.Resolve<RepositoryContext>())).As<ICurrencyRepository>();
+
+            containerBuilder.Register(container => new SecurityClearanceRepository(container.Resolve<RepositoryContext>())).As<ISecurityClearanceRepository>();
+            containerBuilder.Register(container => new DisabilityRepository(container.Resolve<RepositoryContext>())).As<IDisabilityRepository>();
+            containerBuilder.Register(container => new VeteranCategoryRepository(container.Resolve<RepositoryContext>())).As<IVeteranCategoryRepository>();
+            containerBuilder.Register(container => new DriverLicenseRepository(container.Resolve<RepositoryContext>())).As<IDriverLicenseRepository>();
+            containerBuilder.Register(container => new VisaRepository(container.Resolve<RepositoryContext>())).As<IVisaRepository>();
+            containerBuilder.Register(container => new VisaStatusRepository(container.Resolve<RepositoryContext>())).As<IVisaStatusRepository>();
+
+            containerBuilder.Register(container => new CompanyOwnerRepository(container.Resolve<RepositoryContext>())).As<ICompanyOwnerRepository>();
+            containerBuilder.Register(container => new IndustryRepository(container.Resolve<RepositoryContext>())).As<IIndustryRepository>();
+            containerBuilder.Register(container => new RatingScaleRepository(container.Resolve<RepositoryContext>())).As<IRatingScaleRepository>();
+
+            containerBuilder.Register(container => new ExperienceLevelCategoryRepository(container.Resolve<RepositoryContext>())).As<IExperienceLevelCategoryRepository>();
+            containerBuilder.Register(container => new EmploymentTypeRepository(container.Resolve<RepositoryContext>())).As<IEmploymentTypeRepository>();
+            containerBuilder.Register(container => new EmploymentStatusRepository(container.Resolve<RepositoryContext>())).As<IEmploymentStatusRepository>();
+            containerBuilder.Register(container => new EmploymentLeaveReasonCategoryRepository(container.Resolve<RepositoryContext>())).As<IEmploymentLeaveReasonCategoryRepository>();
+            containerBuilder.Register(container => new SalaryRateTypeRepository(container.Resolve<RepositoryContext>())).As<ISalaryRateTypeRepository>();
+            containerBuilder.Register(container => new PayCycleRepository(container.Resolve<RepositoryContext>())).As<IPayCycleRepository>();
+
+            containerBuilder.Register(container => new RegionRepository(container.Resolve<RepositoryContext>())).As<IRegionRepository>();
+            containerBuilder.Register(container => new CountryRepository(container.Resolve<RepositoryContext>())).As<ICountryRepository>();
+            containerBuilder.Register(container => new StateRepository(container.Resolve<RepositoryContext>())).As<IStateRepository>();
+            containerBuilder.Register(container => new CityRepository(container.Resolve<RepositoryContext>())).As<ICityRepository>();
+
+            
+            
+            containerBuilder.Register(container => new ContactProfessionTypeRepository(container.Resolve<RepositoryContext>())).As<IContactProfessionTypeRepository>();
+
+            containerBuilder.Register(container => new BusinessDivisionRepository(container.Resolve<RepositoryContext>())).As<IBusinessDivisionRepository>();
+            containerBuilder.Register(container => new PositionRepository(container.Resolve<RepositoryContext>())).As<IPositionRepository>();
+            containerBuilder.Register(container => new DepartmentRepository(container.Resolve<RepositoryContext>())).As<IDepartmentRepository>();
+
+
+            containerBuilder.Register(container => new InterviewQuestionCategoryRepository(container.Resolve<RepositoryContext>())).As<IInterviewQuestionCategoryRepository>();
+            containerBuilder.Register(container => new InterviewQuestionAnswerRepository(container.Resolve<RepositoryContext>())).As<IInterviewQuestionAnswerRepository>();
+
+
+            containerBuilder.Register(container => new AccountCategoryRepository(container.Resolve<RepositoryContext>())).As<IAccountCategoryRepository>();
+            containerBuilder.Register(container => new AccountRepository(container.Resolve<RepositoryContext>())).As<IAccountRepository>();
+
+            containerBuilder.Register(container => new SkillsExpEduCategoryRepository(container.Resolve<RepositoryContext>())).As<ISkillsExpEduCategoryRepository>();
+            containerBuilder.Register(container => new SkillsExpEduRepository(container.Resolve<RepositoryContext>())).As<ISkillsExpEduRepository>();
+            containerBuilder.Register(container => new SkillsExpEduSynonymRepository(container.Resolve<RepositoryContext>())).As<ISkillsExpEduSynonymRepository>();
+          
+           
+
+            #endregion
+
+            #region Membership and User Management
+
+            //containerBuilder.Register(container => new UserGroupRepository(container.Resolve<RepositoryContext>())).As<IUserGroupRepository>();
+            //containerBuilder.Register(container => new UserRepository(container.Resolve<RepositoryContext>())).As<IUserRepository>();
+            //containerBuilder.Register(container => new UserEmailSignatureRepository(container.Resolve<RepositoryContext>())).As<IUserEmailSignatureRepository>();
+
+            #endregion 
+
+            #region Applicant Tracking System
+            containerBuilder.Register(container => new ApplicantRepository(container.Resolve<RepositoryContext>())).As<IApplicantRepository>();
+            containerBuilder.Register(container => new ApplicantAdditionalInfoRepository(container.Resolve<RepositoryContext>())).As<IApplicantAdditionalInfoRepository>();
+            containerBuilder.Register(container => new ApplicantAdditionalAddressRepository(container.Resolve<RepositoryContext>())).As<IApplicantAdditionalAddressRepository>();
+            containerBuilder.Register(container => new ApplicantSkillsExpertiseRepository(container.Resolve<RepositoryContext>())).As<IApplicantSkillsExpertiseRepository>();
+            containerBuilder.Register(container => new ApplicantEduCertLicenseRepository(container.Resolve<RepositoryContext>())).As<IApplicantEduCertLicenseRepository>();
+            containerBuilder.Register(container => new ApplicantExperienceRepository(container.Resolve<RepositoryContext>())).As<IApplicantExperienceRepository>();
+
+            containerBuilder.Register(container => new ApplicantPhotoPortfolioRepository(container.Resolve<RepositoryContext>())).As<IApplicantPhotoPortfolioRepository>();
+            containerBuilder.Register(container => new ApplicantVideoRepository(container.Resolve<RepositoryContext>())).As<IApplicantVideoRepository>();
+
+            containerBuilder.Register(container => new ApplicantProfileViewerRepository(container.Resolve<RepositoryContext>())).As<IApplicantProfileViewerRepository>();
+            containerBuilder.Register(container => new ApplicantProfileRequestListRepository(container.Resolve<RepositoryContext>())).As<IApplicantProfileRequestListRepository>();
+            containerBuilder.Register(container => new ApplicantProfilePublishRepository(container.Resolve<RepositoryContext>())).As<IApplicantProfilePublishRepository>();
+            containerBuilder.Register(container => new ApplicantProfileThemeLibraryRepository(container.Resolve<RepositoryContext>())).As<IApplicantProfileThemeLibraryRepository>();
+
+
+            containerBuilder.Register(container => new ApplicantWorkReferenceRecommendationRepository(container.Resolve<RepositoryContext>())).As<IApplicantWorkReferenceRecommendationRepository>();
+                          
+            containerBuilder.Register(container => new ApplicantDataPrivacyAcknowledgementRepository(container.Resolve<RepositoryContext>())).As<IApplicantDataPrivacyAcknowledgementRepository>();
+            
+            
+            containerBuilder.Register(container => new ApplicantDocumentRepository(container.Resolve<RepositoryContext>())).As<IApplicantDocumentRepository>();
+            containerBuilder.Register(container => new ApplicantDocumentTrackingRepository(container.Resolve<RepositoryContext>())).As<IApplicantDocumentTrackingRepository>();
+
+            containerBuilder.Register(container => new ApplicantDriverLicenseRepository(container.Resolve<RepositoryContext>())).As<IApplicantDriverLicenseRepository>();
+            containerBuilder.Register(container => new ApplicantPassportInfoRepository(container.Resolve<RepositoryContext>())).As<IApplicantPassportInfoRepository>();
+            containerBuilder.Register(container => new ApplicantVisaInfoRepository(container.Resolve<RepositoryContext>())).As<IApplicantVisaInfoRepository>();
+            containerBuilder.Register(container => new ApplicantDisabilityRepository(container.Resolve<RepositoryContext>())).As<IApplicantDisabilityRepository>();
+            containerBuilder.Register(container => new ApplicantSecurityClearanceRepository(container.Resolve<RepositoryContext>())).As<IApplicantSecurityClearanceRepository>();
+
+            containerBuilder.Register(container => new ApplicantEmailRepository(container.Resolve<RepositoryContext>())).As<IApplicantEmailRepository>();
+            containerBuilder.Register(container => new ApplicantEmailTemplateRepository(container.Resolve<RepositoryContext>())).As<IApplicantEmailTemplateRepository>();
+            containerBuilder.Register(container => new ApplicantNoteRepository(container.Resolve<RepositoryContext>())).As<IApplicantNoteRepository>();
+            //containerBuilder.Register(container => new ApplicantTaskRepository(container.Resolve<RepositoryContext>())).As<IApplicantTaskRepository>();
+
+            containerBuilder.Register(container => new ApplicantRecruitmentTeamRepository(container.Resolve<RepositoryContext>())).As<IApplicantRecruitmentTeamRepository>();
+            containerBuilder.Register(container => new ApplicantProfileWidgetAccessRepository(container.Resolve<RepositoryContext>())).As<IApplicantProfileWidgetAccessRepository>();
+
+            containerBuilder.Register(container => new ApplicantPreferredWorkLocationRepository(container.Resolve<RepositoryContext>())).As<IApplicantPreferredWorkLocationRepository>();
+            containerBuilder.Register(container => new ApplicantDataPrivacyAcknowledgementRepository(container.Resolve<RepositoryContext>())).As<IApplicantDataPrivacyAcknowledgementRepository>();
+         
+           
+            containerBuilder.Register(container => new ApplicantResumeFolderRepository(container.Resolve<RepositoryContext>())).As<IApplicantResumeFolderRepository>();
+            containerBuilder.Register(container => new ApplicantInResumeFolderRepository(container.Resolve<RepositoryContext>())).As<IApplicantInResumeFolderRepository>();
+            
+            containerBuilder.Register(container => new ApplicantSourceCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantSourceCategoryRepository>();
+            containerBuilder.Register(container => new ApplicantAvailabilityStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantAvailabilityStatusCategoryRepository>();
+            containerBuilder.Register(container => new ApplicantDocumentCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantDocumentCategoryRepository>();
+            containerBuilder.Register(container => new ApplicantDocumentStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantDocumentStatusCategoryRepository>();
+            containerBuilder.Register(container => new ApplicantSubmissionFeedbackCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantSubmissionFeedbackCategoryRepository>();
+            containerBuilder.Register(container => new ApplicantInterviewFeedbackCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantInterviewFeedbackCategoryRepository>();
+            containerBuilder.Register(container => new ApplicantRecruitmentCostCategoryRepository(container.Resolve<RepositoryContext>())).As<IApplicantRecruitmentCostCategoryRepository>();
+            
+            containerBuilder.Register(container => new ApplicantDataPrivacyTemplateRepository(container.Resolve<RepositoryContext>())).As<IApplicantDataPrivacyTemplateRepository>();
+
+           
+            #endregion
+
+            #region Contact Management
+
+            
+           
+            containerBuilder.Register(container => new CompanyRepository(container.Resolve<RepositoryContext>())).As<ICompanyRepository>();
+            containerBuilder.Register(container => new ContactRepository(container.Resolve<RepositoryContext>())).As<IContactRepository>();
+            containerBuilder.Register(container => new CompanyAddressRepository(container.Resolve<RepositoryContext>())).As<ICompanyAddressRepository>();
+
+            containerBuilder.Register(container => new ContactFolderRepository(container.Resolve<RepositoryContext>())).As<IContactFolderRepository>();
+            containerBuilder.Register(container => new ContactFolderContactRepository(container.Resolve<RepositoryContext>())).As<IContactFolderContactRepository>();
+            containerBuilder.Register(container => new ContactFolderOwnerRepository(container.Resolve<RepositoryContext>())).As<IContactFolderOwnerRepository>();
+
+          
+            //containerBuilder.Register(container => new SalesLeadStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesLeadStatusCategoryRepository>();
+            //containerBuilder.Register(container => new SalesProductServiceCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesProductServiceCategoryRepository>();
+            
+            
+            
+            containerBuilder.Register(container => new CompanyEmailTemplateRepository(container.Resolve<RepositoryContext>())).As<ICompanyEmailTemplateRepository>();
+            containerBuilder.Register(container => new CompanyEmailRepository(container.Resolve<RepositoryContext>())).As<ICompanyEmailRepository>();
+
+   
+            
+            containerBuilder.Register(container => new SalesCampaignRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignRepository>();
+            //containerBuilder.Register(container => new SalesCampaignContactRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignContactRepository>();
+            //containerBuilder.Register(container => new SalesCampaignDocumentRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignDocumentRepository>();
+            //containerBuilder.Register(container => new SalesCampaignLocationRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignLocationRepository>();
+            //containerBuilder.Register(container => new SalesCampaignNotesRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignNotesRepository>();
+            //containerBuilder.Register(container => new SalesCampaignTeamRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignTeamRepository>();
+            //containerBuilder.Register(container => new SalesCampaignRevenueByProductRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignRevenueByProductRepository>();
+
+            containerBuilder.Register(container => new CompanyStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ICompanyStatusCategoryRepository>();
+            containerBuilder.Register(container => new CompanyAddressCategoryRepository(container.Resolve<RepositoryContext>())).As<ICompanyAddressCategoryRepository>();
+            containerBuilder.Register(container => new SalesProductServiceCatelogRepository(container.Resolve<RepositoryContext>())).As<ISalesProductServiceCatelogRepository>();
+            containerBuilder.Register(container => new SalesProductServiceDocumentRepository(container.Resolve<RepositoryContext>())).As<ISalesProductServiceDocumentRepository>();
+            containerBuilder.Register(container => new SalesProductServiceCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesProductServiceCategoryRepository>();
+            containerBuilder.Register(container => new SalesCampaignStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignStatusCategoryRepository>();
+            
+
+                #endregion 
+
+            #region Requisition Management
+
+
+            containerBuilder.Register(container => new RequisitionRepository(container.Resolve<RepositoryContext>())).As<IRequisitionRepository>();
+            containerBuilder.Register(container => new RequisitionSkillsExpertiseEducationMatchingMatrixRepository(container.Resolve<RepositoryContext>())).As<IRequisitionSkillsExpertiseEducationMatchingMatrixRepository>();
+            containerBuilder.Register(container => new RequisitionApplicantInterviewQuestionAnswerRepository(container.Resolve<RepositoryContext>())).As<IRequisitionApplicantInterviewQuestionAnswerRepository>();
+            
+            //skipped requisition seo, vendorstaffingrate, published to selected vendor contacts groups, interview, interview grid
+            
+            
+            containerBuilder.Register(container => new RequisitionOrganizationRepository(container.Resolve<RepositoryContext>())).As<IRequisitionOrganizationRepository>();
+            containerBuilder.Register(container => new RequisitionClientTeamRepository(container.Resolve<RepositoryContext>())).As<IRequisitionClientTeamRepository>();
+            containerBuilder.Register(container => new RequisitionClientInfoRepository(container.Resolve<RepositoryContext>())).As<IRequisitionClientInfoRepository>();
+            
+            containerBuilder.Register(container => new RequisitionDocumentRepository(container.Resolve<RepositoryContext>())).As<IRequisitionDocumentRepository>();
+            containerBuilder.Register(container => new RequisitionNoteRepository(container.Resolve<RepositoryContext>())).As<IRequisitionNoteRepository>();
+            containerBuilder.Register(container => new RequisitionTeamRepository(container.Resolve<RepositoryContext>())).As<IRequisitionTeamRepository>();
+            
+            
+           
+            
+            containerBuilder.Register(container => new RequisitionStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<IRequisitionStatusCategoryRepository>();
+            containerBuilder.Register(container => new RequisitionInterviewTypeRepository(container.Resolve<RepositoryContext>())).As<IRequisitionInterviewTypeRepository>();
+            containerBuilder.Register(container => new RequisitionApprovalStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<IRequisitionApprovalStatusCategoryRepository>();
+            containerBuilder.Register(container => new RequisitionTeamCategoryRepository(container.Resolve<RepositoryContext>())).As<IRequisitionTeamCategoryRepository>();
+            containerBuilder.Register(container => new RequisitionStatusForVendorCategoryRepository(container.Resolve<RepositoryContext>())).As<IRequisitionStatusForVendorCategoryRepository>();
+            containerBuilder.Register(container => new RequisitionJDLibraryCategoryRepository(container.Resolve<RepositoryContext>())).As<IRequisitionJDLibraryCategoryRepository>();
+
+                #endregion 
+
+
+            #region Organization Management
+
+            containerBuilder.Register(container => new OrganizationRepository(container.Resolve<RepositoryContext>())).As<IOrganizationRepository>();
+            containerBuilder.Register(container => new OrganizationBusinessDivisionRepository(container.Resolve<RepositoryContext>())).As<IOrganizationBusinessDivisionRepository>();
+            containerBuilder.Register(container => new OrganizationDepartmentRepository(container.Resolve<RepositoryContext>())).As<IOrganizationDepartmentRepository>();
+            containerBuilder.Register(container => new OrganizationPositionRepository(container.Resolve<RepositoryContext>())).As<IOrganizationPositionRepository>();
+            containerBuilder.Register(container => new OrganizationPositionCompetencyRepository(container.Resolve<RepositoryContext>())).As<IOrganizationPositionCompetencyRepository>();
+            containerBuilder.Register(container => new OrganizationPositionSalaryStaffingRateRepository(container.Resolve<RepositoryContext>())).As<IOrganizationPositionSalaryStaffingRateRepository>();
+
+            containerBuilder.Register(container => new OrganizationDocumentRepository(container.Resolve<RepositoryContext>())).As<IOrganizationDocumentRepository>();
+            containerBuilder.Register(container => new OrganizationDocumentFolderRepository(container.Resolve<RepositoryContext>())).As<IOrganizationDocumentFolderRepository>();
+           
+            //containerBuilder.Register(container => new OrganizationalChartTeamCategoryRepository(container.Resolve<RepositoryContext>())).As<IOrganizationalChartTeamCategoryRepository>();
+
+           
+            containerBuilder.Register(container => new OrganizationAddressCategoryRepository(container.Resolve<RepositoryContext>())).As<IOrganizationAddressCategoryRepository>();
+            containerBuilder.Register(container => new OrganizationCategoryRepository(container.Resolve<RepositoryContext>())).As<IOrganizationCategoryRepository>();
+            containerBuilder.Register(container => new OrganizationNoteCategoryRepository(container.Resolve<RepositoryContext>())).As<IOrganizationNoteCategoryRepository>();
+            containerBuilder.Register(container => new OrganizationDocumentCategoryRepository(container.Resolve<RepositoryContext>())).As<IOrganizationDocumentCategoryRepository>();
+            
+
+           
+            
+            containerBuilder.Register(container => new OrganizationNoteRepository(container.Resolve<RepositoryContext>())).As<IOrganizationNoteRepository>();
+          
+            containerBuilder.Register(container => new OrganizationWorkforcePlanRepository(container.Resolve<RepositoryContext>())).As<IOrganizationWorkforcePlanRepository>();
+            containerBuilder.Register(container => new OrganizationWorkforcePlanDetailRepository(container.Resolve<RepositoryContext>())).As<IOrganizationWorkforcePlanDetailRepository>();
+            
+
+                #endregion 
+
+            #region Task and Schedule Management
+
+            //containerBuilder.Register(container => new TaskLibraryCategoryRepository(container.Resolve<RepositoryContext>())).As<ITaskLibraryCategoryRepository>();
+            //containerBuilder.Register(container => new TaskPriorityCategoryRepository(container.Resolve<RepositoryContext>())).As<ITaskPriorityCategoryRepository>();
+            //containerBuilder.Register(container => new TaskStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ITaskStatusCategoryRepository>();
+            //containerBuilder.Register(container => new ScheduleCategoryRepository(container.Resolve<RepositoryContext>())).As<IScheduleCategoryRepository>();
+            
+            #endregion
+
+            #region App Builder
+
+            containerBuilder.Register(container => new AppMenuCategoryRepository(container.Resolve<RepositoryContext>())).As<IAppMenuCategoryRepository>();
+            containerBuilder.Register(container => new AppMenuRepository(container.Resolve<RepositoryContext>())).As<IAppMenuRepository>();
+
+            #endregion
+
+            #region User Management
+
+            containerBuilder.Register(container => new UserRepository(container.Resolve<RepositoryContext>())).As<IUserRepository>();
+            containerBuilder.Register(container => new UserRoleRepository(container.Resolve<RepositoryContext>())).As<IUserRoleRepository>();
+            containerBuilder.Register(container => new UserRolePermissionRepository(container.Resolve<RepositoryContext>())).As<IUserRolePermissionRepository>();
+
+            #endregion
+
+            ////containerBuilder.Register(container => new SalesCampaignStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignStatusCategoryRepository>();
+            ////containerBuilder.Register(container => new SalesCampaignStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignStatusCategoryRepository>();
+            
+            containerBuilder.Register(container => new VendorRepository(container.Resolve<RepositoryContext>())).As<IVendorRepository>();
+            containerBuilder.Register(container => new VendorContactRepository(container.Resolve<RepositoryContext>())).As<IVendorContactRepository>();
+
+            containerBuilder.Register(container => new VendorAddressRepository(container.Resolve<RepositoryContext>())).As<IVendorAddressRepository>();
+            containerBuilder.Register(container => new VendorFinancialDataRepository(container.Resolve<RepositoryContext>())).As<IVendorFinancialDataRepository>();
+            containerBuilder.Register(container => new VendorInsuranceRepository(container.Resolve<RepositoryContext>())).As<IVendorInsuranceRepository>();
+            containerBuilder.Register(container => new VendorServiceCapabilityRatingRepository(container.Resolve<RepositoryContext>())).As<IVendorServiceCapabilityRatingRepository>();
+            containerBuilder.Register(container => new VendorReferenceRepository(container.Resolve<RepositoryContext>())).As<IVendorReferenceRepository>();
+            containerBuilder.Register(container => new VendorSupplierDiversityCertificateInfoRepository(container.Resolve<RepositoryContext>())).As<IVendorSupplierDiversityCertificateInfoRepository>();
+            containerBuilder.Register(container => new VendorAccountManagerRepository(container.Resolve<RepositoryContext>())).As<IVendorAccountManagerRepository>();
+            containerBuilder.Register(container => new VendorNoteRepository(container.Resolve<RepositoryContext>())).As<IVendorNoteRepository>();
+            containerBuilder.Register(container => new VendorRatingRepository(container.Resolve<RepositoryContext>())).As<IVendorRatingRepository>();
+            containerBuilder.Register(container => new VendorDocumentRepository(container.Resolve<RepositoryContext>())).As<IVendorDocumentRepository>();
+
+
+            containerBuilder.Register(container => new VendorStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorStatusCategoryRepository>();
+            containerBuilder.Register(container => new VendorLegalCompanyStructureCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorLegalCompanyStructureCategoryRepository>();
+            containerBuilder.Register(container => new VendorServiceCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorServiceCategoryRepository>();
+            containerBuilder.Register(container => new VendorAddressCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorAddressCategoryRepository>();
+            containerBuilder.Register(container => new VendorNoteCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorNoteCategoryRepository>();
+            containerBuilder.Register(container => new VendorInsuranceCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorInsuranceCategoryRepository>();
+            containerBuilder.Register(container => new VendorDocumentCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorDocumentCategoryRepository>();
+            containerBuilder.Register(container => new VendorDocumentStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorDocumentStatusCategoryRepository>();
+            containerBuilder.Register(container => new VendorSupplierDiversityCertificationCategoryRepository(container.Resolve<RepositoryContext>())).As<IVendorSupplierDiversityCertificationCategoryRepository>();
+            
+
+
+            ////containerBuilder.Register(container => new SalesCampaignStatusCategoryRepository(container.Resolve<RepositoryContext>())).As<ISalesCampaignStatusCategoryRepository>();
+
+            //containerBuilder.Register(container => new PermissionRepository(container.Resolve<RepositoryContext>())).As<IPermissionRepository>();
+            //containerBuilder.Register(container => new MenuCategoryRepository(container.Resolve<RepositoryContext>())).As<IMenuCategoryRepository>();
+
+        }
+    }
+}
+

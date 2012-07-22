@@ -1,0 +1,143 @@
+@model SoftwareGrid.DataLogic.Models.Vendor
+
+@{
+    ViewBag.Title = "Vendor";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Vendor</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>VendorDisplayId</label>
+		    <div class="display-field">@Model.VendorDisplayId</div>
+		</div>
+				<div class="form-item">
+		    <label>VendorName</label>
+		    <div class="display-field">@Model.VendorName</div>
+		</div>
+				<div class="form-item">
+		    <label>EmployeeSize</label>
+		    <div class="display-field">@Model.EmployeeSize</div>
+		</div>
+				<div class="form-item">
+		    <label>TaxNumber</label>
+		    <div class="display-field">@Model.TaxNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>DunsNumber</label>
+		    <div class="display-field">@Model.DunsNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>Address1</label>
+		    <div class="display-field">@Model.Address1</div>
+		</div>
+				<div class="form-item">
+		    <label>Address2</label>
+		    <div class="display-field">@Model.Address2</div>
+		</div>
+				<div class="form-item">
+		    <label>City</label>
+		    <div class="display-field">@Model.City</div>
+		</div>
+				<div class="form-item">
+		    <label>PostBoxNumber</label>
+		    <div class="display-field">@Model.PostBoxNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>ZipCode</label>
+		    <div class="display-field">@Model.ZipCode</div>
+		</div>
+				<div class="form-item">
+		    <label>MainOfficePhone</label>
+		    <div class="display-field">@Model.MainOfficePhone</div>
+		</div>
+				<div class="form-item">
+		    <label>FaxNumber</label>
+		    <div class="display-field">@Model.FaxNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>VendorEmailAddress</label>
+		    <div class="display-field">@Model.VendorEmailAddress</div>
+		</div>
+				<div class="form-item">
+		    <label>WebAddress</label>
+		    <div class="display-field">@Model.WebAddress</div>
+		</div>
+				<div class="form-item">
+		    <label>AboutTheVendor</label>
+		    <div class="display-field">@Model.AboutTheVendor</div>
+		</div>
+				<div class="form-item">
+		    <label>Logo</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.Logo).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>InternalRemarks</label>
+		    <div class="display-field">@Model.InternalRemarks</div>
+		</div>
+				<div class="form-item">
+		    <label>CreatedDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>IsVerified</label>
+		    <div class="display-field">@Model.IsVerified</div>
+		</div>
+				<div class="form-item">
+		    <label>VerificationDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>CreatedByUser</label>
+		    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>VerifiedByUser</label>
+		    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>Industry</label>
+		    <div class="display-field">@(Model.Industry == null ? "None" : Model.Industry.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>VendorOwner</label>
+		    <div class="display-field">@(Model.VendorOwner == null ? "None" : Model.VendorOwner.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>VendorLegalCompanyStructureCategory</label>
+		    <div class="display-field">@(Model.VendorLegalCompanyStructureCategory == null ? "None" : Model.VendorLegalCompanyStructureCategory.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>State</label>
+		    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>Country</label>
+		    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>VendorStatusCategory</label>
+		    <div class="display-field">@(Model.VendorStatusCategory == null ? "None" : Model.VendorStatusCategory.Name)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+</p>
+	

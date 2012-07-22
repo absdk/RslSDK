@@ -1,0 +1,799 @@
+
+
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using SoftwareGrid.DataLogic.Attributes;
+
+namespace SoftwareGrid.DataLogic.Models
+{
+    
+    public class Requisition
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionID { get; set; }
+
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("CreatedByUser")]
+        [IncludeInList(AllowSearch = false, IncludeInGrid = true, Sequence = 1, Width = 5, AllowWidthInPercentage = true)]
+        public Int32 CreatedByUserID { get; set; }
+        //by default created by
+
+        [Display(Name = "Create Date")]
+        [DataType(DataType.DateTime)]
+        [IncludeInList(AllowSearch = false, IncludeInGrid = true, Sequence = 2, Width = 5, AllowWidthInPercentage = true)]
+        public DateTime CreateDate { get; set; }
+        //auto current date
+
+        [Display(Name = "Display ID")]
+        [StringLength(64)]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 3, Width = 5, AllowWidthInPercentage = true)]
+        public String RequisitionDisplayId { get; set; }
+
+        [Display(Name = "Is JD Library Template")]
+        public Boolean IsJdLibraryTemplate { get; set; }
+
+        [Display(Name = "JD Library Category")]
+        [ForeignKey("RequisitionJDLibraryCategory")]
+        public Int32? RequisitionJDLibraryCategoryID { get; set; }
+
+        [Display(Name = "Is Organization Position Template")]
+        public Boolean IsOrganizationPositionTemplate { get; set; }
+
+        
+        [Required(ErrorMessage = "Job Title is required")]
+        [Display(Name = "Job Title")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 4, Width = 5, AllowWidthInPercentage = true)]
+        [StringLength(256)]
+        public String JobTitle { get; set; }
+
+        [Display(Name = "Number Of Positions")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 5, Width = 5, AllowWidthInPercentage = true)]
+        public Double NumberOfOpenings { get; set; }
+
+        [Display(Name = "Employment Type")]
+        [ForeignKey("EmploymentType")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 7, Width = 5, AllowWidthInPercentage = true)]
+        public Int32? EmploymentTypeID { get; set; }
+
+        [Display(Name = "Employment Contract Duration")]
+        [StringLength(128)]
+        public String EmploymentContractDuration { get; set; }
+
+        [Display(Name = "Experience Level Category")]
+        [ForeignKey("ExperienceLevelCategory")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 6, Width = 5, AllowWidthInPercentage = true)]
+        public Int32? ExperienceLevelCategoryID { get; set; }
+
+       
+        [Display(Name = "Hire By Date")]
+        [DataType(DataType.DateTime)]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = false, Sequence = 9, Width = 5, AllowWidthInPercentage = true)]
+        public DateTime HireByDate { get; set; }
+        //default 45 days later
+
+       
+        [Display(Name = "Salary Range")]
+        [StringLength(256)]
+        public String SalaryRange { get; set; }
+
+        [ForeignKey("Currency")]
+        public Int32? CurrencyID { get; set; }
+
+        [Display(Name = "Salary Rate Category")]
+        [ForeignKey("SalaryRateType")]
+        public Int32? SalaryRateTypeID { get; set; }
+        
+      
+        [Display(Name = "Work Address")]
+        [StringLength(256)]
+        public String WorkAddress { get; set; }
+
+        [ForeignKey("Country")]
+        [Display(Name = "Country")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = false, Sequence = 10, Width = 5, AllowWidthInPercentage = true)]
+        public Int32? CountryID { get; set; }
+
+        [ForeignKey("State")]
+        [Display(Name = "State")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 9, Width = 5, AllowWidthInPercentage = true)]
+        public Int32? StateID { get; set; }
+
+
+        [Display(Name = "City")]
+        [StringLength(256)]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 8, Width = 5, AllowWidthInPercentage = true)]
+        public String City { get; set; }
+                    
+
+        [Display(Name = "Zip Code")]
+        [StringLength(16)]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = false, Sequence = 9, Width = 5, AllowWidthInPercentage = true)]
+        public String ZipCode { get; set; }
+
+       
+        [Required]
+        [Display(Name = "Job Description")]
+        [MaxLength]
+        [DataType(DataType.Html)]
+        public String JobDescription { get; set; }
+
+        [Display(Name = "Requisition Status")]
+        [ForeignKey("RequisitionStatusCategory")]
+        [IncludeInList(AllowSearch = true, IncludeInGrid = true, Sequence = 11, Width = 5, AllowWidthInPercentage = true)]
+        public Int32 RequisitionStatusCategoryID { get; set; }
+        //default draft or open
+
+        public virtual RequisitionJDLibraryCategory RequisitionJDLibraryCategory { get; set; }
+        public virtual RequisitionStatusCategory RequisitionStatusCategory { get; set; }
+        public virtual State State { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual SalaryRateType SalaryRateType { get; set; }
+        public virtual Currency Currency { get; set; }
+        public virtual EmploymentType EmploymentType { get; set; }
+        public virtual User CreatedByUser { get; set; }
+        public virtual ExperienceLevelCategory ExperienceLevelCategory { get; set; }
+
+
+    }
+    public class RequisitionSkillsExpertiseEducationMatchingMatrix
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionSkillsExpertiseEducationMatchingMatrixID { get; set; }
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [ForeignKey("SkillsExpEduCategory")]
+        public Int32? SkillsExpEduCategoryID { get; set; }
+        //show in a treeview
+
+        [Required]
+        [Display(Name = "Skills Expertise Education")]
+        [IncludeInList(Sequence = 1, AllowSorting = false, Width = 100)]
+        [ForeignKey("SkillsExpEdu")]
+        public Int32 SkillsExpEduID { get; set; }
+           
+        [Required(ErrorMessage = "Is Required is required")]
+        [Display(Name = "Is Required or Preferred")]
+        public Boolean IsRequiredOrPreferred { get; set; }
+        //Is required or preferred, preferred will be auto
+
+        [Display(Name = "Display Sequence")]
+        public Double DisplaySequence { get; set; }
+        //Can move the skillset up or down, required in one group and preferred in anothe group
+
+        [Display(Name = "Expected Proficiency Level")]
+        [ForeignKey("RatingScale")]
+        [DataType("Rating")]
+        public Int32? RatingScaleID { get; set; }
+       
+        [Display(Name = "Weight")]
+        [DataType("Percent")]
+        public Double HireDecisionWeightPercentage { get; set; }
+        //this will be shown in the hiring matrix only
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual RatingScale RatingScale { get; set; }
+        public virtual SkillsExpEdu SkillsExpEdu { get; set; }
+        public virtual SkillsExpEduCategory SkillsExpEduCategory { get; set; }
+
+    }
+
+    public class RequisitionApplicantInterviewQuestionAnswer
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionApplicantInterviewQuestionAnswerID { get; set; }
+
+        [Required]
+        [ForeignKey("Requisition")]
+        [Display(AutoGenerateField = false)]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Interview Question is required")]
+        [Display(Name = "Interview Question Category")]
+        [ForeignKey("InterviewQuestionCategory")]
+        public Int32 InterviewQuestionCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Interview Question is required")]
+        [Display(Name = "Interview Question")]
+        [ForeignKey("InterviewQuestion")]
+        public Int32 InterviewQuestionID { get; set; }
+
+        [Display(Name = "Applicant Name")]
+        [ForeignKey("Applicant")]
+        public Int32? ApplicantID { get; set; }
+
+        [Display(Name = "Applicant Answer")]
+        [MaxLength]
+        public String ApplicantAnswer { get; set; }
+
+        [Display(Name = "Answer Date Time")]
+        [DataType(DataType.DateTime)]
+        public DateTime AnswerDateTime { get; set; }
+
+        [Display(Name = "Is Answer Right Or Wrong")]
+        public Boolean IsRight { get; set; }
+        //image green and red
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual InterviewQuestionCategory InterviewQuestionCategory { get; set; }
+        public virtual InterviewQuestionAnswer InterviewQuestion { get; set; }
+        public virtual Applicant Applicant { get; set; }
+    }
+    public class RequisitionInterviewTypeConfiguration
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionInterviewTypeConfigurationID { get; set; }
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Requisition Interview Type is required")]
+        [Display(Name = "Interview Type")]
+        [ForeignKey("RequisitionInterviewType")]
+        public Int32 RequisitionInterviewTypeID { get; set; }
+
+        [Required(ErrorMessage = "Sequence is required")]
+        [Display(Name = "Interview Sequence")]
+        public Double InterviewSequenceNumber { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual RequisitionInterviewType RequisitionInterviewType { get; set; }
+    }
+
+    public class RequisitionTeam
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionTeamID { get; set; }
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Requisition Team Category is Required")]
+        [Display(Name = "Requisition Team Category")]
+        [ForeignKey("RequisitionTeamCategory")]
+        public Int32 RequisitionTeamCategoryID { get; set; }
+
+        [Required(ErrorMessage = "User is Required")]
+        [Display(Name = "Name and Title")]
+        [ForeignKey("RequisitionTeamUser")]
+        public Int32 RequisitionTeamUserID { get; set; }
+        //from the organization tree - select emlpoyee or from my team select  // also select from client
+            
+
+        [Required(ErrorMessage = "Primary Requisition Owner is required")]
+        [Display(Name = "Is Primary Requisition Owner?")]
+        public Boolean IsPrimaryRequisitionOwner { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual User RequisitionTeamUser { get; set; }
+        public virtual RequisitionTeamCategory RequisitionTeamCategory { get; set; }
+        
+    }
+
+    
+    public class RequisitionApplicantInterviewGrid
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionApplicantInterviewGridID { get; set; }
+
+        [Required(ErrorMessage = "Requisition is required")]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Requisition Interview Category is required")]
+        [Display(Name = "Interview Type")]
+        [ForeignKey("RequisitionInterview")]
+        public Int32 RequisitionInterviewID { get; set; }
+
+        [Required]
+        [ForeignKey("Applicant")]
+        public Int32 ApplicantID { get; set; }
+
+        //recruitment status
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual Applicant Applicant { get; set; }
+        public virtual RequisitionInterviewTypeConfiguration RequisitionInterview { get; set; }
+
+        // Jobcart, Interview 1, Interview 2, Requisition | Applicant | Matching Score | Interview 
+    }
+    public class RequisitionApplicantInterviewSchedule
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionApplicantInterviewScheduleID { get; set; }
+
+        [Required(ErrorMessage = "Requisition is required")]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+
+        [Display(Name = "Requisition Interview Category")]
+        [ForeignKey("RequisitionInterviewCategory")]
+        public Int32 RequisitionInterviewCategoryID { get; set; }
+
+        [Display(Name = "Primary Interviewer")]
+        [ForeignKey("PrimaryInterviewerUser")]
+        public Int32 PrimaryInterviewerUserID { get; set; }
+        //applicant can be drag and drop
+
+        [ForeignKey("Applicant")]
+        public Int32? ApplicantID { get; set; }
+        //applicant can be drag and drop
+
+        [Required(ErrorMessage = "Interview Date Time is required")]
+        [Display(Name = "Interview Date Time")]
+        [DataType(DataType.DateTime)]
+        public DateTime InterviewDateTime { get; set; }
+
+        [Required(ErrorMessage = "Interview Location is required")]
+        [Display(Name = "Interview Location")]
+        [StringLength(512)]
+        public String InterviewLocation { get; set; }
+
+        [Required(ErrorMessage = "Is Send Reminder is required")]
+        [Display(Name = "Is Send Reminder")]
+        public Boolean IsSendReminder { get; set; }
+
+        [Display(Name = "Interview Slot Status")]
+        public Boolean IsInterviewSlotOpenClosed { get; set; }
+
+        [Display(Name = "Add to My Schedule")]
+        public Boolean IsAddedMySchedule { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual Applicant Applicant { get; set; }
+        //public virtual RequisitionInterviewCategory RequisitionInterviewCategory { get; set; }
+        public virtual User PrimaryInterviewerUser { get; set; }
+
+        //without applicant can make interview slots, applicant cab be drag drop or see the schedule to apply
+
+    }
+
+    public class RequisitionDocument
+    {
+
+        [Required(ErrorMessage = "Requisition Document is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionDocumentID { get; set; }
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Display(Name = "Title")]
+        [StringLength(128)]
+        public String Title { get; set; }
+
+
+        [Required(ErrorMessage = "Image File is required")]
+        [Display(Name = "Image File")]
+        public Byte[] ImageFile { get; set; }
+
+        [Required(ErrorMessage = "Original File Name is required")]
+        [Display(Name = "Original File Name and Size")]
+        [StringLength(256)]
+        public String OriginalFileNameSize { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+
+    }
+    public class RequisitionNote
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 ID { get; set; }
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required]
+        [ForeignKey("User")]
+        public Int32 UserID { get; set; }
+
+        [Display(Name = "Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Notes is required")]
+        [Display(Name = "Notes")]
+        [StringLength(512)]
+        [DataType(DataType.Html)]
+        public String Notes { get; set; }
+
+        public virtual User User { get; set; }
+        public virtual Requisition Requisition { get; set; }
+
+    }
+    
+    public class RequisitionOrganization
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionOrganizationID { get; set; }
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Organization is required")]
+        [Display(Name = "Organization")]
+        [ForeignKey("Organization")]
+        public Int32 OrganizationID { get; set; }
+
+
+        [Display(Name = "Select Project Info")]
+        [ForeignKey("OrganizationProject")]
+        public Int32? OrganizationProjectID { get; set; }
+
+
+        [Display(Name = "Department")]
+        [ForeignKey("OrganizationDepartment")]
+        public Int32? OrganizationDepartmentID { get; set; }
+
+        [Display(Name = "Position")]
+        [ForeignKey("OrganizationPosition")]
+        public Int32? OrganizationPositionID { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual Organization Organization { get; set; }
+        public virtual OrganizationProject OrganizationProject { get; set; }
+        public virtual OrganizationDepartment OrganizationDepartment { get; set; }
+        public virtual OrganizationPosition OrganizationPosition { get; set; }
+
+
+    }
+    public class RequisitionClientInfo
+    {
+
+        [Required(ErrorMessage = "Requisition Client Info is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionClientInfoID { get; set; }
+
+        [Required(ErrorMessage = "Requisition is required")]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Company is required")]
+        [Display(Name = "Company")]
+        [ForeignKey("Company")]
+        public Int32 CompanyID { get; set; }
+
+        [Display(Name = "Client Rate")]
+        public Double ClientRate { get; set; }
+
+        [ForeignKey("SalaryRateType")]
+        [Display(Name = "SalaryRateDuration ")]
+        public Int32 SalaryRateTypeID { get; set; }
+
+        [Display(Name = "Client Requisition Number")]
+        [StringLength(64)]
+        public String ClientRequisitionNumber { get; set; }
+
+        public virtual Company Company { get; set; }
+        public virtual Requisition Requisition { get; set; }
+        public virtual SalaryRateType SalaryRateType { get; set; }
+
+    }
+    public class RequisitionClientTeam
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionClientTeamID { get; set; }
+
+        [Required(ErrorMessage = "Requisition Client Info is required")]
+        [Display(Name = "Requisition Client Info")]
+        [ForeignKey("RequisitionClientInfo")]
+        public Int32 RequisitionClientInfoID { get; set; }
+
+        [Required(ErrorMessage = "Contact Info is required")]
+        [Display(Name = "Contact Info")]
+        [ForeignKey("Contact")]
+        public Int32 ContactID { get; set; }
+
+        [Display(Name = "Hire Decision Influence Sequence")]
+        public Double HireDecisionSequence { get; set; }
+
+        [Display(Name = "Contact Notes")]
+        public Int32 ContactType { get; set; }
+
+        public virtual Contact Contact { get; set; }
+        public virtual RequisitionClientInfo RequisitionClientInfo { get; set; }
+
+    }
+
+    public class RequisitionPublishInfo
+    {
+
+        [Required(ErrorMessage = "Requisition Publish Info is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionPublishInfoID { get; set; }
+
+        [Required(ErrorMessage = "Requisition is required")]
+        [Display(AutoGenerateField = false)]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Required(ErrorMessage = "Publish Date is required")]
+        [Display(Name = "Publish Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime PublishDate { get; set; }
+
+        [Required(ErrorMessage = "Expire Date is required")]
+        [Display(Name = "Expire Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime ExpireDate { get; set; }
+
+        [Required(ErrorMessage = "Is Published To Career Portal is required")]
+        [Display(Name = "Is Published To Career Portal")]
+        public Boolean IsPublishedToCareerPortal { get; set; }
+        //careerportaljobslist
+
+        [Required(ErrorMessage = "Is Published To Vendor Portal is required")]
+        [Display(Name = "Is Published To Vendor Portal")]
+        public Boolean IsPublishedToVendorPortal { get; set; }
+        //vendorportaljobslist
+
+        public virtual Requisition Requisition { get; set; }
+
+    }
+    //public class RequisitionSeoTag
+    //{
+
+    //    [Required]
+    //    [Display(AutoGenerateField = false)]
+    //    [Key]
+    //    public Int32 RequisitionDocumentID { get; set; }
+
+    //    [Required]
+    //    [Display(AutoGenerateField = false)]
+    //    [ForeignKey("Requisition")]
+    //    public Int32 RequisitionID { get; set; }
+
+    //    //[Required(ErrorMessage = "Image File is required")]
+    //    //[Display(Name = "Image File")]
+    //    //public Byte[] ImageFile { get; set; }
+
+    //    //[Required(ErrorMessage = "Original File Name is required")]
+    //    //[Display(Name = "Original File Name")]
+    //    //[StringLength(256)]
+    //    //public String OriginalFileName { get; set; }
+
+    //    public virtual Requisition Requisition { get; set; }
+
+    //}
+
+    public class RequisitionPublishedToSelectedVendorContact
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionPublishedToSelectedVendorContactID { get; set; }
+
+        [Required(ErrorMessage = "Requisition is required")]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Display(Name = "Vendor Group")]
+        [ForeignKey("VendorGroupSelectedVendor")]
+        public Int32 VendorGroupSelectedVendorID { get; set; }
+
+        [Display(Name = "Vendor Contact")]
+        [ForeignKey("VendorContact")]
+        public Int32 VendorContactID { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual VendorGroupSelectedVendor VendorGroupSelectedVendor { get; set; }
+        public virtual VendorContact VendorContact { get; set; }
+    }
+    public class RequisitionVendorStaffingRateInfo
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionVendorRateInfoID { get; set; }
+
+        [Required(ErrorMessage = "Requisition is required")]
+        [ForeignKey("Requisition")]
+        public Int32 RequisitionID { get; set; }
+
+        [Display(Name = "Staffing Rate")]
+        public Double StaffingRate { get; set; }
+
+        [ForeignKey("Currency")]
+        public Int32 CurrencyID { get; set; }
+
+        [Display(Name = "Salary Rate Category")]
+        [ForeignKey("SalaryRateType")]
+        public Int32 SalaryRateTypeID { get; set; }
+
+
+        [Display(Name = "OverTime Rate Info")]
+        [StringLength(64)]
+        public String OverTimeRateInfo { get; set; }
+
+        [Display(Name = "Fulltime Hire Agency Fee")]
+        public Double FulltimeHireAgencyFee { get; set; }
+
+        [Display(Name = "Instruction For Vendor Or Agency")]
+        [StringLength(512)]
+        public String InstructionForVendor { get; set; }
+
+        [Required(ErrorMessage = "Submission Date is required")]
+        [Display(Name = "Applicant Submission By Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime ApplicantSubmissionByDate { get; set; }
+
+        [Required(ErrorMessage = "Requisition Vendor Status is required")]
+        [Display(Name = "Requisition Status for Vendor")]
+        [ForeignKey("RequisitionStatusForVendorCategory")]
+        public Int32 RequisitionStatusForVendorCategoryID { get; set; }
+
+        public virtual Requisition Requisition { get; set; }
+        public virtual SalaryRateType SalaryRateType { get; set; }
+        public virtual RequisitionStatusForVendorCategory RequisitionStatusForVendorCategory { get; set; }
+        public virtual Currency Currency { get; set; }
+    }
+
+
+    #region Requisition Master Data Management
+
+    public class RequisitionStatusCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionStatusCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class RequisitionInterviewType
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionInterviewTypeID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+        [Required(ErrorMessage = "Description is required")]
+        [Display(Name = "Description")]
+        [StringLength(128)]
+        public String Description { get; set; }
+
+    }
+    public class RequisitionApprovalStatusCategory
+    {
+
+        [Required(ErrorMessage = "Requisition Approval Status Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionApprovalStatusCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+
+    }
+    public class RequisitionTeamCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionTeamCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+        [Required(ErrorMessage = "Description is required")]
+        [Display(Name = "Description")]
+        [StringLength(512)]
+        public String Description { get; set; }
+
+    }
+    public class RequisitionStatusForVendorCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionStatusForVendorCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class RequisitionJDLibraryCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RequisitionJDLibraryCategoryID { get; set; }
+
+        [Required(ErrorMessage = "JD Library Category Name is required")]
+        [Display(Name = "JD Library Category Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [ForeignKey("ParentRequisitionJDLibraryCategory")]
+        [Display(Name = "Parent JD Category")]
+        public Int32? ParentRequisitionJDLibraryCategoryID { get; set; }
+
+        public virtual RequisitionJDLibraryCategory ParentRequisitionJDLibraryCategory { get; set; }
+
+
+    }
+
+    #endregion
+
+
+
+}
+ 

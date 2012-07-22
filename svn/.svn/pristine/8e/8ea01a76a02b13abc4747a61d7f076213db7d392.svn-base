@@ -1,0 +1,35 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantDisability
+
+@{
+    ViewBag.Title = "ApplicantDisability";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Disability</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Disability</h2>
+		<fieldset>
+
+    <label>Notes</label>
+    <div class="display-field">@Model.Notes</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>Disability</label>
+    <div class="display-field">@(Model.Disability == null ? "None" : Model.Disability.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantDisabilityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

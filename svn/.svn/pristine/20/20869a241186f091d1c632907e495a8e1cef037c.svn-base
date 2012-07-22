@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantExperience
+
+@{
+    ViewBag.Title = "Applicant Experience";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+<h2>Applicant Experience</h2>
+</div>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Applicant Experience</h2>
+            @Html.HiddenFor(model => model.ApplicantID)
+			@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index", new { applicantId = ViewBag.ApplicantId })
+		    </div>
+		</div>
+	</div>
+}
+

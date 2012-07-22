@@ -1,0 +1,244 @@
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using SoftwareGrid.DataLogic.Models;
+
+namespace SoftwareGrid.BusinessLogic.Repositories.Context
+{
+    public class RepositoryContext : DbContext
+    {
+
+        public RepositoryContext(IConnectionString connectionString)
+            : base(connectionString.DefaultConnectionString)
+        {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
+        #region Master Data General
+
+        public DbSet<BloodGroup> BloodGroup { get; set; }
+        public DbSet<Gender> Gender { get; set; }
+        public DbSet<Disability> Disability { get; set; }
+        public DbSet<Religion> Religion { get; set; }
+        public DbSet<EthnicBackground> EthnicBackground { get; set; }
+        public DbSet<Currency> Currency { get; set; }
+        public DbSet<Salutation> Salutation { get; set; }
+        public DbSet<MaritalStatus> MaritalStatus { get; set; }
+        public DbSet<FamilyRelationship> FamilyRelationship { get; set; }
+        public DbSet<DriverLicense> DriverLicense { get; set; }
+        public DbSet<Visa> Visa { get; set; }
+        public DbSet<VisaStatus> VisaStatus { get; set; }
+
+        public DbSet<ExperienceLevelCategory> ExperienceLevelCategory { get; set; }
+        public DbSet<ContactProfessionType> ContactProfessionType { get; set; }
+
+        public DbSet<EmploymentLeaveReasonCategory> EmploymentLeaveReasonCategory { get; set; }
+        public DbSet<EmploymentType> EmploymentType { get; set; }
+        public DbSet<EmploymentStatus> EmploymentStatus { get; set; }
+        public DbSet<SalaryRateType> SalaryRateType { get; set; }
+        public DbSet<SalaryTaxType> SalaryTaxType { get; set; }
+        public DbSet<PayCycle> PayCycle { get; set; }
+        public DbSet<VeteranCategory> VeteranCategory { get; set; }
+        public DbSet<SecurityClearance> SecurityClearance { get; set; }
+
+        public DbSet<Industry> Industry { get; set; }
+        public DbSet<CompanyOwner> CompanyOwner { get; set; }
+
+        public DbSet<BusinessDivision> BusinessDivision { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Position> Position { get; set; }
+
+        public DbSet<RatingScale> RatingScale { get; set; }
+
+        public DbSet<AccountCategory> AccountCategory { get; set; }
+        public DbSet<Account> Account { get; set; }
+
+        public DbSet<InterviewQuestionCategory> InterviewQuestionCategory { get; set; }
+        public DbSet<InterviewQuestionAnswer> InterviewQuestionAnswer { get; set; }
+    
+
+        public DbSet<Region> Region { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<State> State { get; set; }
+        public DbSet<City> City { get; set; }
+
+        public DbSet<SkillsExpEduCategory> SkillsExpEduCategory { get; set; }
+        public DbSet<SkillsExpEdu> SkillsExpEdu { get; set; }
+        public DbSet<SkillsExpEduSynonym> SkillsExpEduSynonym { get; set; }
+
+
+        #endregion
+
+        #region Applicant Tracking System ATS
+
+        public DbSet<Applicant> Applicant { get; set; }
+        public DbSet<ApplicantAdditionalInfo> ApplicantAdditionalInfo { get; set; }
+        public DbSet<ApplicantAdditionalAddress> ApplicantAdditionalAddress { get; set; }
+        public DbSet<ApplicantSkillsExpertise> ApplicantSkillsExpertise { get; set; }
+        public DbSet<ApplicantEduCertLicense> ApplicantEduCertLicense { get; set; }
+        public DbSet<ApplicantExperience> ApplicantExperience { get; set; }
+        public DbSet<ApplicantPhotoPortfolio> ApplicantPhotoPortfolio { get; set; }
+        public DbSet<ApplicantVideo> ApplicantVideo { get; set; }
+        public DbSet<ApplicantWorkReferenceRecommendation> ApplicantWorkReferenceRecommendation { get; set; }
+        public DbSet<ApplicantDocument> ApplicantDocument { get; set; }
+        public DbSet<ApplicantDocumentTracking> ApplicantDocumentTracking { get; set; }
+        public DbSet<ApplicantProfileViewer> ApplicantProfileViewer { get; set; }
+        public DbSet<ApplicantProfileRequestList> ApplicantProfileRequestList { get; set; }
+        public DbSet<ApplicantProfilePublish> ApplicantProfilePublish { get; set; }
+        public DbSet<ApplicantProfileThemeLibrary> ApplicantProfileThemeLibrary { get; set; }
+        public DbSet<ApplicantDriverLicense> ApplicantDriverLicense { get; set; }
+        public DbSet<ApplicantPassportInfo> ApplicantPassportInfo { get; set; }
+        public DbSet<ApplicantVisaInfo> ApplicantVisaInfo { get; set; }
+        public DbSet<ApplicantSecurityClearance> ApplicantSecurityClearance { get; set; }
+        public DbSet<ApplicantDisability> ApplicantDisability { get; set; }
+        public DbSet<ApplicantPreferredWorkLocation> ApplicantPreferredWorkLocation { get; set; }
+        public DbSet<ApplicantDataPrivacyAcknowledgement> ApplicantDataPrivacyAcknowledgement { get; set; }
+        public DbSet<ApplicantEmail> ApplicantEmail { get; set; }
+        public DbSet<ApplicantEmailTemplate> ApplicantEmailTemplate { get; set; }
+        public DbSet<ApplicantNote> ApplicantNote { get; set; }
+        public DbSet<ApplicantResumeFolder> ApplicantResumeFolder { get; set; }
+        public DbSet<ApplicantInResumeFolder> ApplicantInResumeFolder { get; set; }
+        public DbSet<ApplicantSubmissionInfo> ApplicantSubmissionInfo { get; set; }
+        public DbSet<ApplicantProfileWidgetAccess> ApplicantProfileWidgetAccess { get; set; }
+        public DbSet<ApplicantSourceCategory> ApplicantSourceCategory { get; set; }
+        public DbSet<ApplicantAvailabilityStatusCategory> ApplicantAvailabilityStatusCategory { get; set; }
+        public DbSet<ApplicantSubmissionFeedbackCategory> ApplicantSubmissionFeedbackCategory { get; set; }
+        public DbSet<ApplicantInterviewFeedbackCategory> ApplicantInterviewFeedbackCategory { get; set; }
+        public DbSet<ApplicantRecruitmentCostCategory> ApplicantRecruitmentCostCategory { get; set; }
+        public DbSet<ApplicantDocumentCategory> ApplicantDocumentCategory { get; set; }
+        public DbSet<ApplicantDocumentStatusCategory> ApplicantDocumentStatusCategory { get; set; }
+        public DbSet<ApplicantDataPrivacyTemplate> ApplicantDataPrivacyTemplate { get; set; }
+        public DbSet<ApplicantRecruitmentTeam> ApplicantRecruitmentTeam { get; set; }
+
+        #endregion
+
+        #region Application Builder
+
+        public DbSet<AppMenuCategory> AppMenuCategory { get; set; }
+        public DbSet<AppMenu> AppMenu { get; set; }
+
+        #endregion Application Builder
+
+        #region User Management
+
+        public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<UserRolePermission> UserRolePermission { get; set; }
+        public DbSet<User> User { get; set; }
+
+        #endregion User Management
+
+        #region Requisition
+
+        public DbSet<Requisition> Requisition { get; set; }
+        public DbSet<RequisitionSkillsExpertiseEducationMatchingMatrix> RequisitionSkillsExpertiseEducationMatchingMatrix { get; set; }
+        public DbSet<RequisitionApplicantInterviewQuestionAnswer> RequisitionApplicantInterviewQuestionAnswer { get; set; }
+
+        public DbSet<RequisitionPublishInfo> RequisitionPublishInfo { get; set; }
+
+        public DbSet<RequisitionNote> RequisitionNote { get; set; }
+        public DbSet<RequisitionDocument> RequisitionDocument { get; set; }
+
+        public DbSet<RequisitionTeam> RequisitionTeam { get; set; }
+
+        public DbSet<RequisitionOrganization> RequisitionOrganization { get; set; }
+        public DbSet<RequisitionClientTeam> RequisitionClientTeam { get; set; }
+        public DbSet<RequisitionClientInfo> RequisitionClientInfo { get; set; }
+
+
+
+        public DbSet<RequisitionStatusCategory> RequisitionStatusCategory { get; set; }
+        public DbSet<RequisitionInterviewType> RequisitionInterviewType { get; set; }
+        public DbSet<RequisitionApprovalStatusCategory> RequisitionApprovalStatusCategory { get; set; }
+        public DbSet<RequisitionTeamCategory> RequisitionTeamCategory { get; set; }
+        public DbSet<RequisitionStatusForVendorCategory> RequisitionStatusForVendorCategory { get; set; }
+        public DbSet<RequisitionJDLibraryCategory> RequisitionJDLibraryCategory { get; set; }
+
+
+
+        #endregion
+
+        #region Contact Management
+
+
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Contact> Contact { get; set; }
+        public DbSet<CompanyAddress> CompanyAddress { get; set; }
+
+        public DbSet<ContactFolder> ContactFolder { get; set; }
+        public DbSet<ContactFolderContact> ContactFolderContact { get; set; }
+        public DbSet<ContactFolderOwner> ContactFolderOwner { get; set; }
+
+        public DbSet<CompanyEmail> CompanyEmail { get; set; }
+        public DbSet<CompanyEmailTemplate> CompanyEmailTemplate { get; set; }
+
+        public DbSet<SalesCampaign> SalesCampaign { get; set; }
+
+        public DbSet<CompanyStatusCategory> CompanyStatusCategory { get; set; }
+        public DbSet<SalesProductServiceCategory> SalesProductServiceCategory { get; set; }
+        public DbSet<SalesProductServiceCatelog> SalesProductServiceCatelog { get; set; }
+        public DbSet<CompanyAddressCategory> CompanyAddressCategory { get; set; }
+        public DbSet<SalesProductServiceDocument> SalesProductServiceDocument { get; set; }
+        public DbSet<SalesCampaignStatusCategory> SalesCampaignStatusCategory { get; set; }       
+        
+
+        #endregion
+
+        #region Organization Master data
+
+        public DbSet<Organization> Organization { get; set; }
+        public DbSet<OrganizationBusinessDivision> OrganizationBusinessDivision { get; set; }
+        public DbSet<OrganizationDepartment> OrganizationDepartment { get; set; }
+        public DbSet<OrganizationPosition> OrganizationPosition { get; set; }
+        public DbSet<OrganizationPositionCompetency> OrganizationPositionCompetency { get; set; }
+        public DbSet<OrganizationPositionSalaryStaffingRate> OrganizationPositionSalaryStaffingRate { get; set; }
+        public DbSet<OrganizationDocument> OrganizationDocument { get; set; }
+        public DbSet<OrganizationDocumentFolder> OrganizationDocumentFolder { get; set; }
+        public DbSet<OrganizationProject> OrganizationProject { get; set; }
+        public DbSet<OrganizationAddressCategory> OrganizationAddressCategory { get; set; }
+        public DbSet<OrganizationCategory> OrganizationCategory { get; set; }
+        public DbSet<OrganizationDocumentCategory> OrganizationDocumentCategory { get; set; }
+        public DbSet<OrganizationNoteCategory> OrganizationNoteCategory { get; set; }
+        public DbSet<OrganizationAddress> OrganizationAddress { get; set; }
+        public DbSet<OrganizationBankInfo> OrganizationBankInfo { get; set; }
+        public DbSet<OrganizationHolidayCalendar> OrganizationHolidayCalendar { get; set; }
+        public DbSet<OrganizationWorkforcePlan> OrganizationWorkforcePlan { get; set; }
+        public DbSet<OrganizationWorkforcePlanDetail> OrganizationWorkforcePlanDetail { get; set; }
+        public DbSet<OrganizationNote> OrganizationNote { get; set; }
+
+        #endregion
+
+        #region VMS
+
+        public DbSet<Vendor> Vendor { get; set; }
+        public DbSet<VendorContact> VendorContact { get; set; }
+        public DbSet<VendorStatusCategory> VendorStatusCategory { get; set; }
+        public DbSet<VendorServiceCategory> VendorServiceCategory { get; set; }
+        public DbSet<VendorNoteCategory> VendorNoteCategory { get; set; }
+        public DbSet<VendorDocumentCategory> VendorDocumentCategory { get; set; }
+        public DbSet<VendorDocumentStatusCategory> VendorDocumentStatusCategory { get; set; }
+        public DbSet<VendorLegalCompanyStructureCategory> VendorLegalCompanyStructureCategory { get; set; }
+        public DbSet<VendorSupplierDiversityCertificationCategory> VendorSupplierDiversityCertificationCategory { get; set; }
+        public DbSet<VendorInsuranceCategory> VendorInsuranceCategory { get; set; }
+        public DbSet<VendorAddressCategory> VendorAddressCategory { get; set; }
+        public DbSet<VendorAddress> VendorAddress { get; set; }
+        public DbSet<VendorFinancialData> VendorFinancialData { get; set; }
+        public DbSet<VendorInsurance> VendorInsurance { get; set; }
+        public DbSet<VendorServiceCapabilityRating> VendorServiceCapabilityRating { get; set; }
+        public DbSet<VendorAccountManager> VendorAccountManager { get; set; }
+        public DbSet<VendorNote> VendorNote { get; set; }
+        public DbSet<VendorRating> VendorRating { get; set; }
+        public DbSet<VendorDocument> VendorDocument { get; set; }
+        public DbSet<VendorReference> VendorReference { get; set; }
+        public DbSet<VendorSupplierDiversityCertificateInfo> VendorSupplierDiversityCertificateInfo { get; set; }
+
+        #endregion VMS
+
+        public DbSet<HolidayCalendar> HolidayCalendar { get; set; }
+
+    }
+}

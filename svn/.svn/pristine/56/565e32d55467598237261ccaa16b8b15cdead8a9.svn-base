@@ -1,0 +1,44 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationPositionCompetency
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationPositionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationPositionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationPosition>)ViewBag.PossibleOrganizationPositions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationPositionID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationPositionID == Model.OrganizationPositionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SkillsExpEduID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SkillsExpEduID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SkillsExpEdu>)ViewBag.PossibleSkillsExpEdus).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Title), 
+			        Value = option.SkillsExpEduID.ToString(),
+			        Selected = (Model != null) && (option.SkillsExpEduID == Model.SkillsExpEduID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.HierarchicalNumber)
+            <div>
+								@Html.EditorFor(model => model.HierarchicalNumber)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

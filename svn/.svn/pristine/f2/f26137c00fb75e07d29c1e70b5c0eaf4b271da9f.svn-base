@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32E3E3C6-4730-4882-A613-354FD1E2EF32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SoftwareGrid.BusinessLogic</RootNamespace>
+    <AssemblyName>SoftwareGrid.BusinessLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EasySoft.Helper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\EasySoft.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\ImageResult.cs" />
+    <Compile Include="Helpers\MiscUtility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AppBuilder\AppMenuCategoryRepository.cs" />
+    <Compile Include="Repositories\AppBuilder\AppMenuRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantAdditionalAddressRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantAdditionalInfoRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantAvailabilityStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDataPrivacyAcknowledgementRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDisabilityRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDocumentRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDocumentTrackingRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDriverLicenseRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantEduCertLicenseRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantEmailRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantEmailTemplateRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantExperienceRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantInResumeFolderRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantInterviewFeedbackCategoryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantNoteRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantPassportInfoRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantPhotoPortfolioRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantPreferredWorkLocationRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantProfilePublishRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantProfileRequestListRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantProfileThemeLibraryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantProfileViewerRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantProfileWidgetAccessRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantRecruitmentCostCategoryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantRecruitmentTeamRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantResumeFolderRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantSecurityClearanceRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantSkillsExpertiseRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantSubmissionFeedbackCategoryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantSubmissionInfoRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantVideoRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantVisaInfoRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantWorkReferenceRecommendationRepository.cs" />
+    <Compile Include="Repositories\CRM\CompanyAddressCategoryRepository.cs" />
+    <Compile Include="Repositories\CRM\CompanyAddressRepository.cs" />
+    <Compile Include="Repositories\CRM\CompanyEmailRepository.cs" />
+    <Compile Include="Repositories\CRM\CompanyEmailTemplateRepository.cs" />
+    <Compile Include="Repositories\CRM\CompanyStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\CRM\ContactFolderContactRepository.cs" />
+    <Compile Include="Repositories\CRM\ContactFolderOwnerRepository.cs" />
+    <Compile Include="Repositories\CRM\ContactFolderRepository.cs" />
+    <Compile Include="Repositories\CRM\ContactRepository.cs" />
+    <Compile Include="Repositories\CRM\SalesCampaignRepository.cs" />
+    <Compile Include="Repositories\CRM\SalesCampaignStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\CRM\SalesProductServiceCatelogRepository.cs" />
+    <Compile Include="Repositories\CRM\SalesProductServiceDocumentRepository.cs" />
+    <Compile Include="Repositories\MasterData\AccountCategoryRepository.cs" />
+    <Compile Include="Repositories\MasterData\AccountRepository.cs" />
+    <Compile Include="Repositories\MasterData\BloodGroupRepository.cs" />
+    <Compile Include="Repositories\MasterData\BusinessDivisionRepository.cs" />
+    <Compile Include="Repositories\MasterData\ContactProfessionTypeRepository.cs" />
+    <Compile Include="Repositories\MasterData\DepartmentRepository.cs" />
+    <Compile Include="Repositories\MasterData\EmploymentLeaveReasonCategoryRepository.cs" />
+    <Compile Include="Repositories\MasterData\InterviewQuestionAnswerRepository.cs" />
+    <Compile Include="Repositories\MasterData\InterviewQuestionCategoryRepository.cs" />
+    <Compile Include="Repositories\MasterData\PositionRepository.cs" />
+    <Compile Include="Repositories\MasterData\SkillsExpEduCategoryRepository.cs" />
+    <Compile Include="Repositories\MasterData\SkillsExpEduRepository.cs" />
+    <Compile Include="Repositories\MasterData\SkillsExpEduSynonymRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationBusinessDivisionRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationDepartmentRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationDocumentFolderRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationDocumentRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationNoteRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationPositionCompetencyRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationPositionRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationPositionSalaryStaffingRateRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationProjectRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationWorkforcePlanDetailRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationWorkforcePlanRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionApplicantInterviewQuestionAnswerRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionApprovalStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionClientInfoRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionClientTeamRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionDocumentRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionInterviewTypeRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionJDLibraryCategoryRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionNoteRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionOrganizationRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionPublishInfoRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionSkillsExpertiseEducationMatchingMatrixRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionStatusForVendorCategoryRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionTeamCategoryRepository.cs" />
+    <Compile Include="Repositories\Req\RequisitionTeamRepository.cs" />
+    <Compile Include="Repositories\CRM\SalesProductServiceCategoryRepository.cs" />
+    <Compile Include="Repositories\UM\UserRolePermissionRepository.cs" />
+    <Compile Include="Repositories\UM\UserRoleRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDataPrivacyTemplateRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDocumentCategoryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantDocumentStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\ATS\ApplicantSourceCategoryRepository.cs" />
+    <Compile Include="Repositories\Context\ConnectionString.cs" />
+    <Compile Include="Repositories\Context\IConnectionString.cs" />
+    <Compile Include="Repositories\Context\IRepositoryContextInitializer.cs" />
+    <Compile Include="Repositories\Context\RepositoryContext.cs" />
+    <Compile Include="Repositories\Context\RepositoryContextInitializer.cs" />
+    <Compile Include="Repositories\CRM\CompanyRepository.cs" />
+    <Compile Include="Repositories\MasterData\CityRepository.cs" />
+    <Compile Include="Repositories\MasterData\CompanyOwnerRepository.cs" />
+    <Compile Include="Repositories\MasterData\CountryRepository.cs" />
+    <Compile Include="Repositories\MasterData\CurrencyRepository.cs" />
+    <Compile Include="Repositories\MasterData\DisabilityRepository.cs" />
+    <Compile Include="Repositories\MasterData\DriverLicenseRepository.cs" />
+    <Compile Include="Repositories\MasterData\EmploymentStatusRepository.cs" />
+    <Compile Include="Repositories\MasterData\EmploymentTypeRepository.cs" />
+    <Compile Include="Repositories\MasterData\EthnicBackgroundRepository.cs" />
+    <Compile Include="Repositories\MasterData\ExperienceLevelCategoryRepository.cs" />
+    <Compile Include="Repositories\MasterData\FamilyRelationshipRepository.cs" />
+    <Compile Include="Repositories\MasterData\GenderRepository.cs" />
+    <Compile Include="Repositories\MasterData\IndustryRepository.cs" />
+    <Compile Include="Repositories\MasterData\MaritalStatusRepository.cs" />
+    <Compile Include="Repositories\MasterData\PayCycleRepository.cs" />
+    <Compile Include="Repositories\MasterData\RatingScaleRepository.cs" />
+    <Compile Include="Repositories\MasterData\RegionRepository.cs" />
+    <Compile Include="Repositories\MasterData\ReligionRepository.cs" />
+    <Compile Include="Repositories\MasterData\SalaryRateTypeRepository.cs" />
+    <Compile Include="Repositories\MasterData\SalaryTaxTypeRepository.cs" />
+    <Compile Include="Repositories\MasterData\SalutationRepository.cs" />
+    <Compile Include="Repositories\MasterData\SecurityClearanceRepository.cs" />
+    <Compile Include="Repositories\MasterData\StateRepository.cs" />
+    <Compile Include="Repositories\MasterData\VeteranCategoryRepository.cs" />
+    <Compile Include="Repositories\MasterData\VisaRepository.cs" />
+    <Compile Include="Repositories\MasterData\VisaStatusRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationAddressCategoryRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationCategoryRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationDocumentCategoryRepository.cs" />
+    <Compile Include="Repositories\OM\OrganizationNoteCategoryRepository.cs" />
+    <Compile Include="Repositories\UM\UserRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorAddressCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorDocumentCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorDocumentStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorInsuranceCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorLegalCompanyStructureCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorNoteCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorServiceCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorStatusCategoryRepository.cs" />
+    <Compile Include="Repositories\VMS\VendorSupplierDiversityCertificationCategoryRepository.cs" />
+    <Compile Include="UserAuth\UserAuthentication.cs" />
+    <Compile Include="UserAuth\UserAuthorize.cs" />
+    <Compile Include="Wrappers\ApplicationHelper.cs" />
+    <Compile Include="Wrappers\CookieHelper.cs" />
+    <Compile Include="Wrappers\SessionHelper.cs" />
+    <Compile Include="Wrappers\WebHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareGrid.Common\SoftwareGrid.Common.csproj">
+      <Project>{33D11CBC-E4DD-498A-9BE5-53586AC098C3}</Project>
+      <Name>SoftwareGrid.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareGrid.DataLogic\SoftwareGrid.DataLogic.csproj">
+      <Project>{B79CA1C7-E153-4C77-BB9F-60A9365A730B}</Project>
+      <Name>SoftwareGrid.DataLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareGrid.ExceptionLogging\SoftwareGrid.ExceptionLogging.csproj">
+      <Project>{05399834-9C14-4F24-844C-838047371325}</Project>
+      <Name>SoftwareGrid.ExceptionLogging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

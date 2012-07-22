@@ -1,0 +1,135 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationPositionSalaryStaffingRatesController : Controller
+    {
+		private readonly IOrganizationPositionRepository organizationpositionRepository;
+		private readonly ISalaryRateTypeRepository salaryratetypeRepository;
+		private readonly ICurrencyRepository currencyRepository;
+		private readonly IOrganizationPositionSalaryStaffingRateRepository organizationpositionsalarystaffingrateRepository;
+        public OrganizationPositionSalaryStaffingRatesController(IOrganizationPositionRepository organizationpositionRepository, ISalaryRateTypeRepository salaryratetypeRepository, ICurrencyRepository currencyRepository, IOrganizationPositionSalaryStaffingRateRepository organizationpositionsalarystaffingrateRepository)
+        {
+			this.organizationpositionRepository = organizationpositionRepository;
+			this.salaryratetypeRepository = salaryratetypeRepository;
+			this.currencyRepository = currencyRepository;
+			this.organizationpositionsalarystaffingrateRepository = organizationpositionsalarystaffingrateRepository;
+        }
+
+        //
+        // GET: /OrganizationPositionSalaryStaffingRates/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationpositionsalarystaffingrateRepository.AllIncluding(organizationpositionsalarystaffingrate => organizationpositionsalarystaffingrate.OrganizationPosition, organizationpositionsalarystaffingrate => organizationpositionsalarystaffingrate.SalaryRateType, organizationpositionsalarystaffingrate => organizationpositionsalarystaffingrate.Currency));
+        }
+		
+		public ViewResult Search(OrganizationPositionSalaryStaffingRate searchOrganizationPositionSalaryStaffingRate)
+        {
+			if(searchOrganizationPositionSalaryStaffingRate!=null)
+			{
+							}
+						return View("Index",organizationpositionsalarystaffingrateRepository.AllIncluding(organizationpositionsalarystaffingrate => organizationpositionsalarystaffingrate.OrganizationPosition, organizationpositionsalarystaffingrate => organizationpositionsalarystaffingrate.SalaryRateType, organizationpositionsalarystaffingrate => organizationpositionsalarystaffingrate.Currency));
+		}
+
+        //
+        // GET: /OrganizationPositionSalaryStaffingRates/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationpositionsalarystaffingrateRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationPositionSalaryStaffingRates/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationPositionSalaryStaffingRate organizationpositionsalarystaffingrate = new OrganizationPositionSalaryStaffingRate();
+			ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+			ViewBag.PossibleSalaryRateTypes = salaryratetypeRepository.All;
+			ViewBag.PossibleCurrencies = currencyRepository.All;
+            return View(organizationpositionsalarystaffingrate);
+        } 
+
+        //
+        // POST: /OrganizationPositionSalaryStaffingRates/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationPositionSalaryStaffingRate organizationpositionsalarystaffingrate)
+        {
+            if (ModelState.IsValid) {
+                organizationpositionsalarystaffingrateRepository.InsertOrUpdate(organizationpositionsalarystaffingrate);
+                organizationpositionsalarystaffingrateRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+				ViewBag.PossibleSalaryRateTypes = salaryratetypeRepository.All;
+				ViewBag.PossibleCurrencies = currencyRepository.All;
+				return View(organizationpositionsalarystaffingrate);
+			}
+        }
+        
+        //
+        // GET: /OrganizationPositionSalaryStaffingRates/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+			ViewBag.PossibleSalaryRateTypes = salaryratetypeRepository.All;
+			ViewBag.PossibleCurrencies = currencyRepository.All;
+             return View(organizationpositionsalarystaffingrateRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationPositionSalaryStaffingRates/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationPositionSalaryStaffingRate organizationpositionsalarystaffingrate)
+        {
+            if (ModelState.IsValid) {
+                organizationpositionsalarystaffingrateRepository.InsertOrUpdate(organizationpositionsalarystaffingrate);
+                organizationpositionsalarystaffingrateRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+				ViewBag.PossibleSalaryRateTypes = salaryratetypeRepository.All;
+				ViewBag.PossibleCurrencies = currencyRepository.All;
+				return View(organizationpositionsalarystaffingrate);
+			}
+        }
+
+        //
+        // GET: /OrganizationPositionSalaryStaffingRates/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationpositionsalarystaffingrateRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationPositionSalaryStaffingRates/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationpositionsalarystaffingrateRepository.Delete(id);
+            organizationpositionsalarystaffingrateRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

@@ -1,0 +1,111 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantDriverLicense
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.DriverLicenseID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.DriverLicenseID, ((IEnumerable<SoftwareGrid.DataLogic.Models.DriverLicense>)ViewBag.PossibleDriverLicenses).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.DriverLicenseID.ToString(),
+			        Selected = (Model != null) && (option.DriverLicenseID == Model.DriverLicenseID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.LicenseNumber)
+            <div>
+								@Html.EditorFor(model => model.LicenseNumber)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.CountryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.StateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.StateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.StateID.ToString(),
+			        Selected = (Model != null) && (option.StateID == Model.StateID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.City)
+            <div>
+								@Html.EditorFor(model => model.City)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IssueDate)
+            <div>
+								@Html.EditorFor(model => model.IssueDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ExpireDate)
+            <div>
+								@Html.EditorFor(model => model.ExpireDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsVerified)
+            <div>
+								@Html.EditorFor(model => model.IsVerified)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.VerifiedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.VerifiedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleVerifiedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.VerifiedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VerificationDate)
+            <div>
+								@Html.EditorFor(model => model.VerificationDate)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

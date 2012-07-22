@@ -1,0 +1,740 @@
+
+
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace SoftwareGrid.DataLogic.Models
+{
+    public class BloodGroup
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 BloodGroupID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+    }
+    public class Gender
+    {
+
+        [Required(ErrorMessage = "Gender Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 GenderID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class Disability
+    {
+
+        [Required(ErrorMessage = "Disability Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 DisabilityID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class Religion
+    {
+
+        [Required(ErrorMessage = "Religion Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 ReligionID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class EthnicBackground
+    {
+
+        [Required(ErrorMessage = "Ethnic Background Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 EthnicBackgroundID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class Currency
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 CurrencyID { get; set; }
+
+        [Required(ErrorMessage = "Currency Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Currency Ticker")]
+        [StringLength(16)]
+        public String CurrencyTicker { get; set; }
+
+
+
+    }
+    public class Salutation
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SalutationID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+    }
+    public class MaritalStatus
+    {
+
+        [Required(ErrorMessage = "Marital Status is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 MaritalStatusID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class FamilyRelationship
+    {
+
+        [Required(ErrorMessage = "Gender Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 FamilyRelationshipID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class DriverLicense
+    {
+
+        [Required(ErrorMessage = "Driver License Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 DriverLicenseID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class Visa
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 VisaID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class VisaStatus
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 VisaStatusID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+
+    }
+
+    public class EmploymentType
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 EmploymentTypeID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+    }
+    public class EmploymentStatus
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 EmploymentStatusID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+    }
+    public class EmploymentLeaveReasonCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 EmploymentLeaveReasonCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    
+    public class SalaryRateType
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SalaryRateTypeID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class SalaryTaxType
+    {
+
+        [Required(ErrorMessage = "Salary Tax Type is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SalaryTaxTypeID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class PayCycle
+    {
+
+        [Required(ErrorMessage = "Pay Cycle is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 PayCycleID { get; set; }
+
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+
+    }
+
+    public class VeteranCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 VeteranCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class SecurityClearance
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SecurityClearanceID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Description")]
+        [StringLength(512)]
+        public String Description { get; set; }
+
+    }
+    
+    public class Industry
+    {
+
+        [Required(ErrorMessage = "Industry Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 IndustryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+    }
+    public class CompanyOwner
+    {
+
+        [Required(ErrorMessage = "Company Owner Category is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 CompanyOwnerID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+   
+    public class AccountCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 AccountCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+        
+    }
+    public class Account
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 AccountID { get; set; }
+
+        [Required(ErrorMessage = "Account Category is required")]
+        [Display(Name = "Account Category")]
+        [ForeignKey("AccountCategory")]
+        public Int32 AccountCategoryID { get; set; }
+
+        [Display(Name = "Parent Account Name")]
+        [ForeignKey("ParentAccount")]
+        public Int32? ParentAccountID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Account Code")]
+        [StringLength(64)]
+        public String AccountCode { get; set; }   
+
+        [Display(Name = "Description")]
+        [StringLength(512)]
+        public String Description { get; set; }
+
+        [Required(ErrorMessage = "Is Removed is required")]
+        [Display(Name = "Is Removed")]
+        public Boolean IsRemoved { get; set; }
+
+        virtual public AccountCategory AccountCategory { get; set; }
+        virtual public Account  ParentAccount { get; set; }
+    }
+
+    public class RatingScale
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RatingScaleID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Score")]
+        public Double Score { get; set; }
+
+
+    }
+          
+    public class InterviewQuestionAnswer
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 InterviewQuestionAnswerID { get; set; }
+
+
+        [Display(Name = "QuestionCategory")]
+        [ForeignKey ("InterviewQuestionCategory")]
+        public Int32? InterviewQuestionCategoryID { get; set; }
+        
+        
+
+        [Required(ErrorMessage = "Question is required")]
+        [Display(Name = "Question")]
+        [MaxLength]
+        [DataType(DataType.Html)]
+        public String Question { get; set; }
+
+        [Display(Name = "Answer")]
+        [MaxLength]
+        [DataType(DataType.Html)]
+        public String Answer { get; set; }
+
+        [Display(Name = "SkillsExpEdu")]
+        [ForeignKey("SkillsExpEdu")]
+        public Int32? SkillsExpEduID { get; set; }
+
+
+        public virtual SkillsExpEdu SkillsExpEdu { get; set; }  //for multiple so list
+        public virtual InterviewQuestionCategory InterviewQuestionCategory { get; set; }
+       
+
+    }
+    public class InterviewQuestionCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 InterviewQuestionCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Description")]
+        [StringLength(256)]
+        public String Description { get; set; }
+
+
+    }
+    
+
+    public class BusinessDivision
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 BusinessDivisionID { get; set; }
+
+        [Display(Name = "Industry Category")]
+        [ForeignKey("Industry")]
+        public Int32? IndustryID { get; set; }
+        
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Description")]
+        [StringLength(512)]
+        public String Description { get; set; }
+
+        public virtual Industry Industry { get; set; }
+    }
+    public class Department
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 DepartmentID { get; set; }
+
+        [Display(Name = "Business Division")]
+        [ForeignKey("BusinessDivision")]
+        public Int32? BusinessDivisionID { get; set; }
+        
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Description")]
+        [StringLength(512)]
+        public String Description { get; set; }
+
+        public virtual BusinessDivision BusinessDivision { get; set; }
+    }
+    public class Position
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 PositionID { get; set; }
+
+        [Display(Name = "Department")]
+        [ForeignKey("Department")]
+        public Int32? DepartmentID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Job Title or Position")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Job Description")]
+        [MaxLength]
+        [DataType(DataType.Html)]
+        public String JobDescription { get; set; }
+
+        public virtual Department Department { get; set; }
+    }
+
+    public class SkillsExpEdu
+    {
+
+        [Required(ErrorMessage = "SkillsExpEdu is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SkillsExpEduID { get; set; }
+
+        [Required(ErrorMessage = "SkillsExpEdu Catagory is required")]
+        [Display(Name = "SkillsExpEdu Category")]
+        [ForeignKey("SkillsExpEduCategory")]
+        public Int32 SkillsExpEduCategoryID { get; set; }
+
+        [Required(ErrorMessage = "SkillsExpEdu Title is required")]
+        [Display(Name = "Title")]
+        [StringLength(128)]
+        public String Title { get; set; }
+
+        [Display(Name = "Description")]
+        [MaxLength]
+        [DataType(DataType.Html)]
+        public String Description { get; set; }
+
+        public virtual SkillsExpEduCategory SkillsExpEduCategory { get; set; }
+
+
+    }
+    public class SkillsExpEduCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SkillsExpEduCategoryID { get; set; }
+
+        [Display(Name = "Parent Category")]
+        [ForeignKey("ParentSkillsExpEduCategory")]
+        public Int32? ParentSkillsExpEduCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+
+        public virtual SkillsExpEduCategory ParentSkillsExpEduCategory { get; set; }
+
+
+    }
+    public class SkillsExpEduSynonym
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 SkillsExpEduSynonymID { get; set; }
+
+        [Required(ErrorMessage = "SkillsExpEdu is required")]
+        [Display(Name = "SkillsExpEdu Category")]
+        [ForeignKey("SkillsExpEdu")]
+        public Int32 SkillsExpEduID { get; set; }
+
+        [Required(ErrorMessage = "Synonym is required")]
+        [Display(Name = "Synonym")]
+        [StringLength(128)]
+        public String SkillsExpEduTitle { get; set; }
+
+        public virtual SkillsExpEdu SkillsExpEdu { get; set; }
+
+
+
+    }
+      
+    public class ExperienceLevelCategory
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 ExperienceLevelCategoryID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+
+    }
+    public class ContactProfessionType
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 ContactProfessionTypeID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(64)]
+        public String Name { get; set; }
+
+
+    }
+
+    public class Region
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 RegionID { get; set; }
+
+        [Required(ErrorMessage = "Region Name is required")]
+        [Display(Name = "Region Name")]
+        [StringLength(256)]
+        public String Name { get; set; }
+
+    }
+    public class Country
+    {
+
+        [Required(ErrorMessage = "Country is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 CountryID { get; set; }
+
+        [Required(ErrorMessage = "Country Name is required")]
+        [Display(Name = "Country Name")]
+        [StringLength(256)]
+        public String Name { get; set; }
+
+        [Display(Name = "Country Ticker")]
+        [StringLength(16)]
+        public String CountryTicker { get; set; }
+
+    }
+    public class State
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 StateID { get; set; }
+
+        [ForeignKey("Country")]
+        [Display(Name = "Country Name")]
+        public Int32 CountryID { get; set; }
+
+        [Required(ErrorMessage = "State Name is required")]
+        [Display(Name = "State Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "State Ticker")]
+        [StringLength(16)]
+        public String StateTicker { get; set; }
+
+        public virtual Country Country { get; set; }
+
+    }
+    public class City
+    {
+
+        [Required(ErrorMessage = "City is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 CityID { get; set; }
+
+        [Required(ErrorMessage = "City Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(128)]
+        public String Name { get; set; }
+
+        [Display(Name = "Country")]
+        [ForeignKey("Country")]
+        public Int32 CountryID { get; set; }
+
+        [Display(Name = "State")]
+        [ForeignKey("State")]
+        public Int32 StateID { get; set; }
+
+        public virtual State State { get; set; }
+        public virtual Country Country { get; set; }
+
+    }
+    
+
+
+               
+}
+
+

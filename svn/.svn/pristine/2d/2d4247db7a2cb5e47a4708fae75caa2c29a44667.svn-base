@@ -1,0 +1,35 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfileViewer
+
+@{
+    ViewBag.Title = "ApplicantProfileViewer";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Profile Viewer</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Profile Viewer</h2>
+		<fieldset>
+
+    <label>ViewDateTime</label>
+    <div class="display-field">@String.Format("{0:g}", Model.ViewDateTime)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ViewedByUser</label>
+    <div class="display-field">@(Model.ViewedByUser == null ? "None" : Model.ViewedByUser.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantProfileViewerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

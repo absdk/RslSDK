@@ -1,0 +1,175 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.Company>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Company";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Company List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "Company"))
+{
+    <div class="box grid_16">
+        <h2 class="box_head">
+            Search</h2>
+        <a href="#" class="grabber">&nbsp;</a> <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+                <div class="search-item">
+                    <div class="search-item-left">
+                        <div class="label-container">
+                            @Html.Label("Company Name")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("CompanyName")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Display ID")
+                        </div>
+                        <div class="text-container">
+                            @Html.TextBox("CompanyDisplayId")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Industry Category")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("IndustryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.Industry>)ViewBag.PossibleIndustries).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.IndustryID.ToString(),
+            }), "Choose...")
+                        </div>
+                    </div>
+                    <div class="search-item-right">
+                        <div class="label-container">
+                            @Html.Label("Country")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("CountryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.CountryID.ToString(),
+            }), "Choose...")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("State")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("StateID", ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.StateID.ToString(),
+            }), "Choose...")
+                        </div>
+                        <div class="label-container">
+                            @Html.Label("Company Status")
+                        </div>
+                        <div class="text-container">
+                            @Html.DropDownList("CompanyStatusCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.CompanyStatusCategory>)ViewBag.PossibleCompanyStatusCategories).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.CompanyStatusCategoryID.ToString(),
+            }), "Choose...")
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 50%; float: left;">
+                    &nbsp;
+                </div>
+                <div class="button_bar clearfix" style="float: left;">
+                    <button class="green" type="submit">
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div style="clear: both;">
+</div>
+<div class="box grid_16">
+    @(Html.Telerik().Grid(Model)
+        .Name("Grid")
+        .DataKeys(keys => keys.Add(c => c.CompanyID))
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.CompanyDisplayId).Title("Display ID").Width("5%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Template(
+                @<text> <a href="@Url.Action("Overview", "Company", new { companyId = @item.CompanyID })" target="_blank" title="+@item.CompanyName+">@item.CompanyName</a>
+    </text>
+            ).HeaderTemplate(
+                @<text> <span>Company Name</span>
+    </text>
+            ).Width("20%");
+            columns.Bound(c => c.Industry.Name).Title("Industry Category").Width("15%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.City).Title("City").Width("10%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.State.Name).Title("State").Width("10%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.Country.Name).Title("Country").Width("10%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.CompanyEmailAddress).Title("Company Email Address").Width("15%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.CompanyStatusCategory.Name).Title("Company Status").Width("10%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Template(
+            @<text>
+    <center>
+        <a href="@Url.Action("Edit", "Company", new { id = @item.CompanyID })" title="Edit">
+            <img alt="Edit" src="/content/images/edit.png" /></a>
+    </center>
+    </text>
+        ).HeaderTemplate(
+            @<text>
+    <center>
+        <span>Edit</span>
+    </center>
+    </text>
+        ).Width("20px");
+            columns.Template(
+                @<text>
+    <center>
+        <a href="@Url.Action("Delete", "Company", new { id = @item.CompanyID })" title="Delete" onclick="return confirmSubmit()">
+            <img alt="Edit" src="/content/images/delete.png" /></a>
+    </center>
+    </text>
+            ).HeaderTemplate(
+                @<text>
+    <center>
+        <span>Delete</span>
+    </center>
+    </text>
+            ).Width("20px");
+        })
+        .Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters =>
+        {
+            if (ViewData["CompanyName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.CompanyName).Contains(ViewData["CompanyName"].ToString(true));
+            }
+            if (ViewData["CompanyDisplayId"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.CompanyDisplayId).Contains(ViewData["CompanyDisplayId"].ToString(true));
+            }
+            if (ViewData["IndustryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.IndustryID).IsEqualTo(ViewData["IndustryID"].ToInteger(true));
+            }
+            if (ViewData["CountryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.CountryID).IsEqualTo(ViewData["CountryID"].ToInteger(true));
+            }
+            if (ViewData["StateID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.StateID).IsEqualTo(ViewData["StateID"].ToInteger(true));
+            }
+            if (ViewData["CompanyStatusCategoryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.CompanyStatusCategoryID).IsEqualTo(ViewData["CompanyStatusCategoryID"].ToInteger(true));
+            }
+        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>

@@ -1,0 +1,65 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantDocument
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantDocumentCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantDocumentCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantDocumentCategory>)ViewBag.PossibleApplicantDocumentCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ApplicantDocumentCategoryID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantDocumentCategoryID == Model.ApplicantDocumentCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.DocumentTitle)
+            <div>
+								@Html.EditorFor(model => model.DocumentTitle)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DocumentFile)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("DocumentFile")
+                        .Async(async => async
+                            .Save("UploadFile", "ApplicantDocument")
+                            .Remove("RemoveFile", "ApplicantDocument"))
+                )
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.OriginalFileInfo)
+            <div>
+								@Html.EditorFor(model => model.OriginalFileInfo)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

@@ -1,0 +1,67 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfilePublish
+
+@{
+    ViewBag.Title = "Applicant Profile Publish";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Profile Publish</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>WebUrl</label>
+		    <div class="display-field">@Model.WebUrl</div>
+		</div>
+				<div class="form-item">
+		    <label>SeoTag</label>
+		    <div class="display-field">@Model.SeoTag</div>
+		</div>
+				<div class="form-item">
+		    <label>StartPublishDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.StartPublishDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>EndPublishDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.EndPublishDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>IsCurrentlyPublish</label>
+		    <div class="display-field">@Model.IsCurrentlyPublish</div>
+		</div>
+				<div class="form-item">
+		    <label>IsPremiumProfile</label>
+		    <div class="display-field">@Model.IsPremiumProfile</div>
+		</div>
+				<div class="form-item">
+		    <label>Applicant</label>
+		    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>ApplicantProfileThemeLibrary</label>
+		    <div class="display-field">@(Model.ApplicantProfileThemeLibrary == null ? "None" : Model.ApplicantProfileThemeLibrary.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>PublishedByUser</label>
+		    <div class="display-field">@(Model.PublishedByUser == null ? "None" : Model.PublishedByUser.LastName)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

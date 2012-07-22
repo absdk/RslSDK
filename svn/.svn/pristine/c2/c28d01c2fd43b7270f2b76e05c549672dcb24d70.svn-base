@@ -1,0 +1,105 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationBankInfo
+@* This partial view defines form fields that will appear when creating and editing entities *@
+@using SoftwareGrid.DataLogic.Models
+@{
+    Country selectedCountry = new Country();
+    if(Model.CountryID.HasValue)
+    {
+        selectedCountry.CountryID = Model.CountryID.Value;
+    }
+    State selectedState = new State();
+    if (Model.StateID.HasValue)
+    {
+        selectedState.StateID = Model.StateID.Value;
+    }
+}
+	<fieldset>
+		@Html.ValidationSummary()
+			<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.OrganizationID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+					
+		<div class="form-item">
+            @Html.LabelFor(model => model.BankName)
+            <div>
+								@Html.EditorFor(model => model.BankName)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.BankAddress)
+            <div>
+								@Html.EditorFor(model => model.BankAddress)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.POBox)
+            <div>
+								@Html.EditorFor(model => model.POBox)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.BankCity)
+            <div>
+								@Html.EditorFor(model => model.BankCity)
+				            </div>
+					</div>
+				<div id="divCountryID">
+					@Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_State, selectedState)
+				</div>
+						
+		<div class="form-item">
+            @Html.LabelFor(model => model.ZipCode)
+            <div>
+								@Html.EditorFor(model => model.ZipCode)
+				            </div>
+					</div>
+				@Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_Country, selectedCountry)
+						
+		<div class="form-item">
+            @Html.LabelFor(model => model.ComanyBankAccountNumber)
+            <div>
+								@Html.EditorFor(model => model.ComanyBankAccountNumber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.BankAccountType)
+            <div>
+								@Html.EditorFor(model => model.BankAccountType)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SwipeCode)
+            <div>
+								@Html.EditorFor(model => model.SwipeCode)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.RoutingNo)
+            <div>
+								@Html.EditorFor(model => model.RoutingNo)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

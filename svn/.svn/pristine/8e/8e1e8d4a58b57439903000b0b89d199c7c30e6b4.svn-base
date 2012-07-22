@@ -1,0 +1,155 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantExperience
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmployerName)
+            <div>
+								@Html.EditorFor(model => model.EmployerName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmployerWebsite)
+            <div>
+								@Html.EditorFor(model => model.EmployerWebsite)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.JobTitle)
+            <div>
+								@Html.EditorFor(model => model.JobTitle)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsCurrentJob)
+            <div>
+								@Html.EditorFor(model => model.IsCurrentJob)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DateFrom)
+            <div>
+								@Html.EditorFor(model => model.DateFrom)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DateTo)
+            <div>
+								@Html.EditorFor(model => model.DateTo)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ExperienceMonthYear)
+            <div>
+								@Html.EditorFor(model => model.ExperienceMonthYear)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CountryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CountryID.ToString(),
+			        Selected = (Model != null) && (option.CountryID == Model.CountryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.StateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.StateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.StateID.ToString(),
+			        Selected = (Model != null) && (option.StateID == Model.StateID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.City)
+            <div>
+								@Html.EditorFor(model => model.City)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.GrossSalary)
+            <div>
+								@Html.EditorFor(model => model.GrossSalary)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.JobDescription)
+            <div>
+								@Html.EditorFor(model => model.JobDescription)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.EmploymentLeaveReasonCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.EmploymentLeaveReasonCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.EmploymentLeaveReasonCategory>)ViewBag.PossibleEmploymentLeaveReasonCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.EmploymentLeaveReasonCategoryID.ToString(),
+			        Selected = (Model != null) && (option.EmploymentLeaveReasonCategoryID == Model.EmploymentLeaveReasonCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsVerified)
+            <div>
+								@Html.EditorFor(model => model.IsVerified)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.VerifiedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.VerifiedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleVerifiedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.VerifiedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VerificationDate)
+            <div>
+								@Html.EditorFor(model => model.VerificationDate)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

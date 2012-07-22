@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class ApplicantEduCertLicenseRepository : IApplicantEduCertLicenseRepository
+    {
+		private readonly RepositoryContext context;
+
+        public ApplicantEduCertLicenseRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<ApplicantEduCertLicense> All
+        {
+            get { return context.ApplicantEduCertLicense; }
+        }
+
+        public IQueryable<ApplicantEduCertLicense> AllIncluding(params Expression<Func<ApplicantEduCertLicense, object>>[] includeProperties)
+        {
+            IQueryable<ApplicantEduCertLicense> query = context.ApplicantEduCertLicense;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+        public ApplicantEduCertLicense Find(int id)
+        {
+            return context.ApplicantEduCertLicense.Find(id);
+        }
+
+        public void InsertOrUpdate(ApplicantEduCertLicense applicanteducertlicense)
+        {
+            if (applicanteducertlicense.ApplicantEduCertLicenseID == default(int)) {
+                // New entity
+                context.ApplicantEduCertLicense.Add(applicanteducertlicense);
+            } else {
+                // Existing entity
+                context.Entry(applicanteducertlicense).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var applicanteducertlicense = context.ApplicantEduCertLicense.Find(id);
+            context.ApplicantEduCertLicense.Remove(applicanteducertlicense);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IApplicantEduCertLicenseRepository
+    {
+        IQueryable<ApplicantEduCertLicense> All { get; }
+        IQueryable<ApplicantEduCertLicense> AllIncluding(params Expression<Func<ApplicantEduCertLicense, object>>[] includeProperties);
+        ApplicantEduCertLicense Find(int id);
+        void InsertOrUpdate(ApplicantEduCertLicense applicanteducertlicense);
+        void Delete(int id);
+        void Save();
+    }
+}

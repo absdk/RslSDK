@@ -1,0 +1,133 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationDocumentFoldersController : Controller
+    {
+		private readonly IOrganizationRepository organizationRepository;
+		private readonly IOrganizationDocumentFolderRepository organizationdocumentfolderRepository;
+		private readonly IUserRepository userRepository;
+        public OrganizationDocumentFoldersController(IOrganizationRepository organizationRepository, IOrganizationDocumentFolderRepository organizationdocumentfolderRepository, IUserRepository userRepository)
+        {
+			this.organizationRepository = organizationRepository;
+			this.organizationdocumentfolderRepository = organizationdocumentfolderRepository;
+			this.userRepository = userRepository;
+        }
+
+        //
+        // GET: /OrganizationDocumentFolders/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationdocumentfolderRepository.AllIncluding(organizationdocumentfolder => organizationdocumentfolder.Organization, organizationdocumentfolder => organizationdocumentfolder.ParentFolder, organizationdocumentfolder => organizationdocumentfolder.CreatedByUser));
+        }
+		
+		public ViewResult Search(OrganizationDocumentFolder searchOrganizationDocumentFolder)
+        {
+			if(searchOrganizationDocumentFolder!=null)
+			{
+							}
+						return View("Index",organizationdocumentfolderRepository.AllIncluding(organizationdocumentfolder => organizationdocumentfolder.Organization, organizationdocumentfolder => organizationdocumentfolder.ParentFolder, organizationdocumentfolder => organizationdocumentfolder.CreatedByUser));
+		}
+
+        //
+        // GET: /OrganizationDocumentFolders/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationdocumentfolderRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationDocumentFolders/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationDocumentFolder organizationdocumentfolder = new OrganizationDocumentFolder();
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+			ViewBag.PossibleParentFolders = organizationdocumentfolderRepository.All;
+			ViewBag.PossibleCreatedByUsers = userRepository.All;
+            return View(organizationdocumentfolder);
+        } 
+
+        //
+        // POST: /OrganizationDocumentFolders/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationDocumentFolder organizationdocumentfolder)
+        {
+            if (ModelState.IsValid) {
+                organizationdocumentfolderRepository.InsertOrUpdate(organizationdocumentfolder);
+                organizationdocumentfolderRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				ViewBag.PossibleParentFolders = organizationdocumentfolderRepository.All;
+				ViewBag.PossibleCreatedByUsers = userRepository.All;
+				return View(organizationdocumentfolder);
+			}
+        }
+        
+        //
+        // GET: /OrganizationDocumentFolders/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+			ViewBag.PossibleParentFolders = organizationdocumentfolderRepository.All;
+			ViewBag.PossibleCreatedByUsers = userRepository.All;
+             return View(organizationdocumentfolderRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationDocumentFolders/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationDocumentFolder organizationdocumentfolder)
+        {
+            if (ModelState.IsValid) {
+                organizationdocumentfolderRepository.InsertOrUpdate(organizationdocumentfolder);
+                organizationdocumentfolderRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				ViewBag.PossibleParentFolders = organizationdocumentfolderRepository.All;
+				ViewBag.PossibleCreatedByUsers = userRepository.All;
+				return View(organizationdocumentfolder);
+			}
+        }
+
+        //
+        // GET: /OrganizationDocumentFolders/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationdocumentfolderRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationDocumentFolders/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationdocumentfolderRepository.Delete(id);
+            organizationdocumentfolderRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

@@ -1,0 +1,10 @@
+@using EasySoft.Helper
+@model decimal
+
+@(Html.Telerik().NumericTextBox()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+        .InputHtmlAttributes(new { style = "width:100%; color:Black; padding-left:5px;" })
+        .HtmlAttributes(new { style = "width:150px;" })
+        .Value(Model.ToDouble())
+)
+

@@ -1,0 +1,25 @@
+
+@model SoftwareGrid.DataLogic.Models.DriverLicense
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Name)
+            <div>
+				@Html.EditorFor(model => model.Name)
+            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

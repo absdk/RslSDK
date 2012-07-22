@@ -1,0 +1,65 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationNote
+@* This partial view defines form fields that will appear when creating and editing entities *@
+	<fieldset>
+		@Html.ValidationSummary()
+			<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.OrganizationID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+						<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationNoteCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationNoteCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationNoteCategory>)ViewBag.PossibleOrganizationNoteCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationNoteCategoryID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationNoteCategoryID == Model.OrganizationNoteCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+						<div class="form-item">
+			@Html.LabelFor(model => model.WrittenByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.WrittenByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleWrittenByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.WrittenByUserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+					
+		<div class="form-item">
+            @Html.LabelFor(model => model.CreateDateTime)
+            <div>
+								@Html.EditorFor(model => model.CreateDateTime)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Note)
+            <div>
+								@Html.EditorFor(model => model.Note)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

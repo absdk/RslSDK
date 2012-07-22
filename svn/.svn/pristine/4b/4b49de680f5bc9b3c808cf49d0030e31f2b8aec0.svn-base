@@ -1,0 +1,28 @@
+@model SoftwareGrid.DataLogic.Models.EthnicBackground
+
+@{
+    ViewBag.Title = "EthnicBackground";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Ethnic Background</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Ethnic Background</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.EthnicBackgroundID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

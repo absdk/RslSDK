@@ -1,0 +1,47 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionSkillsExpertiseEducationMatchingMatrix
+
+@{
+    ViewBag.Title = "RequisitionSkillsExpertiseEducationMatchingMatrix";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Skills Expertise Education Matching Matrix</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Skills Expertise Education Matching Matrix</h2>
+		<fieldset>
+
+    <label>IsRequiredOrPreferred</label>
+    <div class="display-field">@Model.IsRequiredOrPreferred</div>
+
+    <label>DisplaySequence</label>
+    <div class="display-field">@String.Format("{0:F}", Model.DisplaySequence)</div>
+
+    <label>HireDecisionWeightPercentage</label>
+    <div class="display-field">@String.Format("{0:F}", Model.HireDecisionWeightPercentage)</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+
+    <label>RatingScale</label>
+    <div class="display-field">@(Model.RatingScale == null ? "None" : Model.RatingScale.Name)</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+
+    <label>SkillsExpEduCategory</label>
+    <div class="display-field">@(Model.SkillsExpEduCategory == null ? "None" : Model.SkillsExpEduCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionSkillsExpertiseEducationMatchingMatrixID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,83 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationWorkforcePlanDetail
+
+@{
+    ViewBag.Title = "Organization Workforce Plan Detail";
+    Layout = "_LayoutOrganization";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Organization Workforce Plan Detail</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>NumberOfEmployeeTobeHired</label>
+		    <div class="display-field">@String.Format("{0:F}", Model.NumberOfEmployeeTobeHired)</div>
+		</div>
+				<div class="form-item">
+		    <label>HiredNumberEmployee</label>
+		    <div class="display-field">@String.Format("{0:F}", Model.HiredNumberEmployee)</div>
+		</div>
+				<div class="form-item">
+		    <label>ContractPeriod</label>
+		    <div class="display-field">@Model.ContractPeriod</div>
+		</div>
+				<div class="form-item">
+		    <label>PlannedStartDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.PlannedStartDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>Notes</label>
+		    <div class="display-field">@Model.Notes</div>
+		</div>
+				<div class="form-item">
+		    <label>HierarchicalSequence</label>
+		    <div class="display-field">@String.Format("{0:F}", Model.HierarchicalSequence)</div>
+		</div>
+				<div class="form-item">
+		    <label>Organization</label>
+		    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>OrganizationProject</label>
+		    <div class="display-field">@(Model.OrganizationProject == null ? "None" : Model.OrganizationProject.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>EmploymentType</label>
+		    <div class="display-field">@(Model.EmploymentType == null ? "None" : Model.EmploymentType.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>OrganizationWorkforcePlan</label>
+		    <div class="display-field">@(Model.OrganizationWorkforcePlan == null ? "None" : Model.OrganizationWorkforcePlan.Title)</div>
+		</div>
+				<div class="form-item">
+		    <label>OrganizationBusinessDivision</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationBusinessDivision).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>OrganizationDepartment</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationDepartment).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>OrganizationPosition</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationPosition).ToString()</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

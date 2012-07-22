@@ -1,0 +1,44 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantRecruiterTeam
+
+@{
+    ViewBag.Title = "ApplicantRecruiterTeam";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Recruiter Team</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Recruiter Team</h2>
+		<fieldset>
+
+    <label>AssignedRecruiterUserID</label>
+    <div class="display-field">@Model.AssignedRecruiterUserID</div>
+
+    <label>IsPrimaryRecruiter</label>
+    <div class="display-field">@Model.IsPrimaryRecruiter</div>
+
+    <label>AssignDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.AssignDate)</div>
+
+    <label>IsRemoved</label>
+    <div class="display-field">@Model.IsRemoved</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ApplicantOwnerUser</label>
+    <div class="display-field">@(Model.ApplicantOwnerUser == null ? "None" : Model.ApplicantOwnerUser.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantRecruiterTeamID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

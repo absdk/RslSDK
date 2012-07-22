@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionClientInfo
+
+@{
+    ViewBag.Title = "Requisition Client Info";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+	<h2>Requisition Client Info</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Requisition Client Info</h2>
+						        @Html.HiddenFor(model => model.RequisitionClientInfoID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

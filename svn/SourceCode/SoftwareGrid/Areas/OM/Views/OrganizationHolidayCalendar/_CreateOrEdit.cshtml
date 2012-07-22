@@ -1,0 +1,45 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationHolidayCalendar
+@* This partial view defines form fields that will appear when creating and editing entities *@
+	<fieldset>
+		@Html.ValidationSummary()
+			<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.OrganizationID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+						<div class="form-item">
+			@Html.LabelFor(model => model.HolidayCalendarID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.HolidayCalendarID, ((IEnumerable<SoftwareGrid.DataLogic.Models.HolidayCalendar>)ViewBag.PossibleHolidayCalendars).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.HolidayCalendarID.ToString(),
+			        Selected = (Model != null) && (option.HolidayCalendarID == Model.HolidayCalendarID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+					
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsActive)
+            <div>
+								@Html.EditorFor(model => model.IsActive)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

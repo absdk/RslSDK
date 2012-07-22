@@ -1,0 +1,147 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.ATS.Controllers
+{
+    public class ApplicantDriverLicensesController : ATSBaseController
+    {
+		private readonly IApplicantRepository applicantRepository;
+		private readonly IDriverLicenseRepository driverlicenseRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly IUserRepository userRepository;
+		private readonly IApplicantDriverLicenseRepository applicantdriverlicenseRepository;
+        public ApplicantDriverLicensesController(IApplicantRepository applicantRepository, IDriverLicenseRepository driverlicenseRepository, ICountryRepository countryRepository, IStateRepository stateRepository, IUserRepository userRepository, IApplicantDriverLicenseRepository applicantdriverlicenseRepository)
+        {
+			this.applicantRepository = applicantRepository;
+			this.driverlicenseRepository = driverlicenseRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.userRepository = userRepository;
+			this.applicantdriverlicenseRepository = applicantdriverlicenseRepository;
+        }
+
+        //
+        // GET: /ApplicantDriverLicenses/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(applicantdriverlicenseRepository.AllIncluding(applicantdriverlicense => applicantdriverlicense.Applicant, applicantdriverlicense => applicantdriverlicense.DriverLicense, applicantdriverlicense => applicantdriverlicense.Country, applicantdriverlicense => applicantdriverlicense.State, applicantdriverlicense => applicantdriverlicense.VerifiedByUser));
+        }
+		
+		public ViewResult Search(ApplicantDriverLicense searchApplicantDriverLicense)
+        {
+			if(searchApplicantDriverLicense!=null)
+			{
+							}
+						return View("Index",applicantdriverlicenseRepository.AllIncluding(applicantdriverlicense => applicantdriverlicense.Applicant, applicantdriverlicense => applicantdriverlicense.DriverLicense, applicantdriverlicense => applicantdriverlicense.Country, applicantdriverlicense => applicantdriverlicense.State, applicantdriverlicense => applicantdriverlicense.VerifiedByUser));
+		}
+
+        //
+        // GET: /ApplicantDriverLicenses/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(applicantdriverlicenseRepository.Find(id));
+        }
+
+        //
+        // GET: /ApplicantDriverLicenses/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			ApplicantDriverLicense applicantdriverlicense = new ApplicantDriverLicense();
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleDriverLicenses = driverlicenseRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+            return View(applicantdriverlicense);
+        } 
+
+        //
+        // POST: /ApplicantDriverLicenses/Create
+        [HttpPost]
+        public ActionResult Create(ApplicantDriverLicense applicantdriverlicense)
+        {
+            if (ModelState.IsValid) {
+                applicantdriverlicenseRepository.InsertOrUpdate(applicantdriverlicense);
+                applicantdriverlicenseRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleDriverLicenses = driverlicenseRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(applicantdriverlicense);
+			}
+        }
+        
+        //
+        // GET: /ApplicantDriverLicenses/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleDriverLicenses = driverlicenseRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+             return View(applicantdriverlicenseRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantDriverLicenses/Edit/5
+        [HttpPost]
+        public ActionResult Edit(ApplicantDriverLicense applicantdriverlicense)
+        {
+            if (ModelState.IsValid) {
+                applicantdriverlicenseRepository.InsertOrUpdate(applicantdriverlicense);
+                applicantdriverlicenseRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleDriverLicenses = driverlicenseRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(applicantdriverlicense);
+			}
+        }
+
+        //
+        // GET: /ApplicantDriverLicenses/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(applicantdriverlicenseRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantDriverLicenses/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            applicantdriverlicenseRepository.Delete(id);
+            applicantdriverlicenseRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

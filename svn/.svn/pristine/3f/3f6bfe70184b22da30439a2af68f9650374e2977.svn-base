@@ -1,0 +1,539 @@
+
+
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using SoftwareGrid.DataLogic.Attributes;
+
+namespace SoftwareGrid.DataLogic.Models
+{
+    public partial class User
+    {
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserID { get; set; }
+
+        [Required(ErrorMessage = "First Name is required")]
+        [Display(Name = "First Name")]
+        [StringLength(250)]
+        [IncludeInList(AllowWidthInPercentage = true, IncludeInGrid = true, Sequence = 1, Width = 20, AllowSearch = true)]
+        public String FirstName { get; set; }
+
+        [Required(ErrorMessage = "Last Name is required")]
+        [Display(Name = "Last Name")]
+        [StringLength(250)]
+        [IncludeInList(AllowWidthInPercentage = true, IncludeInGrid = true, Sequence = 2, Width = 20, AllowSearch = false)]
+        public String LastName { get; set; }
+
+        [Required(ErrorMessage = "User ID is required")]
+        [Display(Name = "User ID (Email Address)")]
+        [IncludeInList(AllowWidthInPercentage = true, IncludeInGrid = true, Sequence = 3, Width = 20, AllowSearch = true)]
+        public String UserLoginName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public String Password { get; set; }
+
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public String ConfirmPassword { get; set; }
+
+        [Display(Name = "Email Address")]
+        [StringLength(150)]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Email address is not valid")]
+        [IncludeInList(AllowWidthInPercentage = true, IncludeInGrid = true, Sequence = 4, Width = 20, AllowSearch = true)]
+        public String EmailAddress { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [StringLength(100)]
+        [DataType(DataType.PhoneNumber)]
+        public String Phone { get; set; }
+
+        [Display(Name = "Photo or Logo")]       
+        public Byte[] Photo { get; set; }
+        //client can upload photo or company logo
+        
+        [Required(ErrorMessage = "Role Name is required")]
+        [Display(Name = "Role Name")]
+        [ForeignKey("UserRole")]
+        [IncludeInList(AllowWidthInPercentage = true, IncludeInGrid = true, Sequence = 5, Width = 15, AllowSearch = true)]
+        public Int32 UserRoleID { get; set; }
+        //AddUserDefaultRole, one role at a time, no multiple role
+        
+        [Display(Name = "Created Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedDate { get; set; }
+        //current date, first time registration date, wont overwrite
+
+        [Required(ErrorMessage = "Is Active is required")]
+        [Display(Name = "Is Active")]
+        public Boolean IsActive { get; set; }
+        //soft delete, create a deleted user list, by default false,click delete will make it a soft delelete 
+
+        [Display(AutoGenerateField = false)]
+        public Int32? CreatedByUserD { get; set; }
+
+        [ForeignKey("CreatedByUserD")]
+        public virtual User CreatedByUser { get; set; }
+        public virtual UserRole UserRole { get; set; }
+
+    }
+    public partial class UserRole
+    {
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserRoleID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(100)]
+        public String Name { get; set; }
+    }
+    public class UserRolePermission
+    {
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserRolePermissionId { get; set; }
+
+        [Required(ErrorMessage = "User Role is required")]
+        [ForeignKey("UserRole")]
+        [Display(Name = "Role Name")]
+        public Int32 UserRoleID { get; set; }
+
+        [Required]
+        [Display(Name = "Area Name")]
+        public string AreaName { get; set; }
+
+        [Required]
+        [Display(Name = "Controller Name")]
+        public string ControllerName { get; set; }
+
+        [Required]
+        [Display(Name = "Action or Method Name")]
+        public string ActionName { get; set; }
+
+        public virtual UserRole UserRole { get; set; }
+    }
+    //public class AppSiteMapCategory
+    //{
+    //    [Required]
+    //    [Display(AutoGenerateField = false)]
+    //    [Key]
+    //    public Int32 AppSiteMapCategoryID { get; set; }
+
+    //    [Required(ErrorMessage = "Category Name is required")]
+    //    [Display(Name = "Name")]
+    //    [StringLength(100)]
+    //    public String Name { get; set; }
+    //    //Master Nagivation, Applicant, Vendor, Client, Contact, Sales Campaign, Organization, Project 
+
+
+    //}
+    //public partial class AppCustomSitemap
+    //{
+
+    //    [Required]
+    //    [Display(AutoGenerateField = false)]
+    //    [Key]
+    //    public Int32 AppCustomSitemapID { get; set; }
+
+    //    [Required(ErrorMessage = "Sitemap Catagory is required")]
+    //    [Display(Name = "Select Sitemap")]
+    //    [ForeignKey("AppSiteMapCategory")]
+    //    public Int32? AppSiteMapCategoryID { get; set; }
+    //    //default master navigation
+
+    //    [Required(ErrorMessage = "Name is required")]
+    //    [Display(Name = "Menu Name")]
+    //    [StringLength(100)]
+    //    public String Name { get; set; }
+    //    //menu name is not mandatory, icon can represent a menu
+
+    //    [Display(Name = "Parent  Site Map Node")]
+    //    [ForeignKey("ParentAppCustomSitemap")]
+    //    public Int32 ParentAppCustomSitemapID { get; set; }
+
+    //    [Display(Name = "Is Blank or Parent Nod")]
+    //    public Boolean IsBlank { get; set; }
+    //    //Blank Menu for nagivation, it would create like a folder and then link or controller can be dropped into that
+
+    //    [Display(AutoGenerateField = false)]
+    //    public Double SitemapSequenceNumber { get; set; }
+    //    //this dont have to be shown, drag and drop should create this nummber automatically 
+       
+    //    [Display(Name = "MenuIcon")]
+    //    public Byte[] MenuIcon { get; set; }
+    //    //can be selected from existing icon library, drag and drop the icon option is easy
+
+    //    [Display(Name = "Tool Tip")]
+    //    [StringLength(300)]
+    //    public String ToolTip { get; set; }
+
+    //    [Display(Name = "Place in Slide Menu")]
+    //    public Boolean IsSlideMenu { get; set; }
+    //    //by default top menu, if selected it will be on the left side menu
+
+    //    [Required(ErrorMessage = "Name is required")]
+    //    [Display(Name = "ControllerName")]
+    //    [StringLength(100)]
+    //    public String ControllerName { get; set; }
+    //    //this menu will be in a tree, so from the rightside grid list the item can be dropped into the menu, for the detail permission like button/action visiblity lets discuss
+
+   
+    //    [Display(Name = "Action or Method Name")]
+    //    public string Action { get; set; }
+    //    //action details can be shown in a different detail link?
+
+
+    //    [Required(ErrorMessage = "Sequence Number is required")]
+    //    [Display(Name = "Sequence Number")]
+    //    public Int32 SequenceNumber { get; set; }
+
+    //    virtual public AppSiteMapCategory AppSiteMapCategory { get; set; }
+    //    virtual public AppCustomSitemap ParentAppCustomSitemap { get; set; }
+    //    //public IEnumerable<> ParentAppCustomSitemap { get; set; }
+                   
+    // }
+    public partial class AppPhysicalSiteMapFolder
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 AppPhysicalSiteMapFolderID { get; set; }
+
+        [Display(Name = "Physical Folder Name")]
+        public string FolderName { get; set; }
+
+        //[Display(Name = "Physical Folder Name")]
+        ////[ForeignKey(ChildAppPhysicalSiteMapFolder)]
+        //public Int32 ChildAppPhysicalSiteMapFolderID { get; set; }
+
+        [Required]
+        [Display(Name = "Controller Name")]
+        public string ControllerName { get; set; }
+
+        [Required]
+        [Display(Name = "Action or Method Name")]
+        public string Action { get; set; }
+
+       // virtual public AppPhysicalSiteMapFolder ChildAppPhysicalSiteMapFolder { get; set; }
+                
+    }
+    public partial class AppPhysicalSiteMapControllerAction
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 AppPhysicalSiteMapControllerID { get; set; }
+
+        [Required(ErrorMessage = "Sitemap Folder is required")]
+        [Display(Name = "Select Sitemap Folder")]
+        [ForeignKey("AppPhysicalSiteMapFolder")]
+        public Int32 AppPhysicalSiteMapFolderID { get; set; }
+   
+
+        [Required]
+        [Display(Name = "Controller Name")]
+        public string ControllerName { get; set; }
+
+        [Required]
+        [Display(Name = "Action or Method Name")]
+        public string Action { get; set; }
+
+    }
+
+    public partial class DashBoardWidget
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 DashBoardWidgetID { get; set; }
+
+        [Required(ErrorMessage = "Title is required")]
+        [Display(Name = "Title")]
+        [StringLength(200)]
+        public String Title { get; set; }
+
+        //List of DashBoard Wiget
+
+        //Schedule Widget
+        //To List Widget
+        //My Applicant List Widget
+        //
+
+
+    }
+    public partial class DashBoardRolePermission
+   
+    {
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 DashBoardRolePermissionID { get; set; }
+        
+        [Required(ErrorMessage = "Role Name is required")]
+        [Display(Name = "Role Name")]
+        [ForeignKey ("UserRole")]
+        public Int32 UserRoleID { get; set; }
+
+        [Required(ErrorMessage = "Role Name is required")]
+        [Display(Name = "Dash Board Widget")]
+        [ForeignKey("DashBoardWidget")]
+        public Int32 DashBoardWidgetID { get; set; }
+
+        virtual public DashBoardWidget DashBoardWidget { get; set; }
+        virtual public UserRole UserRole { get; set; }
+        
+    }
+
+    public class UserSelfPasswordChangeViewModel
+    {
+
+        //[Required]
+        //[Display(AutoGenerateField = false)]
+        //[Key]
+        //public Int32 UserSelfPasswordChangeID { get; set; }
+
+        //[Required(ErrorMessage = "User is required")]
+        //[ForeignKey("User")]
+        //public Int32 UserID { get; set; }
+        ////no display, pass loggedin user only
+
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Current password")]
+        //public string OldPassword { get; set; }
+
+        //[Required]
+        //[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "New password")]
+        //public string NewPassword { get; set; }
+
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Confirm new password")]
+        //[Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        //public string ConfirmPassword { get; set; }
+        ////send email as confiramation, also generate another UI for forget password
+
+        //[Required(ErrorMessage = "User Role is required")]
+        //[ForeignKey("UserRole")]
+        //[Display(Name = "User Name")]
+        //public Int32 UserRole { get; set; }
+
+        //public virtual User User { get; set; }
+
+    }
+    public class UserPasswordChangeByAdminViewModel
+    {
+        //[Required]
+        //[Display(AutoGenerateField = false)]
+        //[Key]
+        //public Int32 UserPasswordChangeByAdminID { get; set; }
+
+        //[Required(ErrorMessage = "User is required")]
+        //[ForeignKey("User")]
+        //[Display(Name = "Select User Name")]
+        //public Int32 UserID { get; set; }
+        ////user will be selected by user name or employee name
+
+        //[Required]
+        //[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "New password")]
+        //public string NewPassword { get; set; }
+        ////no need of old password
+
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Confirm new password")]
+        //[Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        //public string ConfirmPassword { get; set; }
+        ////send email to user
+
+        //public virtual User User { get; set; }
+
+    }
+    public class UserLogOnViewModel
+    {
+        //[Required]
+        //[Display(Name = "User name")]
+        //public string UserName { get; set; }
+
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Password")]
+        //public string Password { get; set; }
+
+        //[Display(Name = "Remember me?")]
+        //public bool RememberMe { get; set; }
+
+        //[Display(Name = "Forget Password?")]
+        //public bool ForgetPassword { get; set; }
+
+    }
+    public partial class UserAccessBlockViewModel
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserBlockID { get; set; }
+
+        //AddUserDefaultRole
+
+        [Required(ErrorMessage = "User is required")]
+        [ForeignKey("User")]
+        [Display(Name = "User Name")]
+        public Int32 UserID { get; set; }
+
+        [Required(ErrorMessage = "Blocked User is required")]
+        [Display(Name = "Blocked User")]
+        [ForeignKey("BlockedUser")]
+        public Int32 BlockedUserID { get; set; }
+
+        [Required(ErrorMessage = "Blocked By User is required")]
+        [Display(Name = "Blocked By User")]
+        [ForeignKey("BlockedByUser")]
+        public Int32 BlockedByUserID { get; set; }
+
+        [Required(ErrorMessage = "Block Date is required")]
+        [Display(Name = "Block Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime BlockDate { get; set; }
+
+        [Display(Name = "Notes")]
+        [StringLength(500)]
+        public String Notes { get; set; }
+
+        public virtual User User { get; set; }
+        public virtual User BlockedByUser { get; set; }
+
+    }
+    public partial class UserLoginHistoryViewModel
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserLoginHistoryID { get; set; }
+
+        [Required(ErrorMessage = "User is required")]
+        [Display(Name = "User")]
+        [ForeignKey("User")]
+        public Int32 UserID { get; set; }
+
+        [Display(Name = "Login Time")]
+        public Int32 LoginTime { get; set; }
+
+        [Display(Name = "Logout Time")]
+        public Int32 LogoutTime { get; set; }
+
+        //Login time duration
+
+        public virtual User User { get; set; }
+
+    }
+
+    public partial class UserAppSetting
+    {
+
+        [Required(ErrorMessage = "Site Default Setting is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserAppSettingID { get; set; }
+
+        [Display(Name = "Default Country")]
+        [ForeignKey("Country")]
+        public Int32 CountryID { get; set; }
+
+        [ForeignKey("Default State")]
+        [Display(Name = "Default State")]
+        public Int32 StateID { get; set; }
+
+        [ForeignKey("Currency")]
+        [Display(Name = " Default Currency")]
+        public Int32 CurrencyID { get; set; }
+
+        public virtual Country Country { get; set; }
+        public virtual Currency Currency { get; set; }
+        public virtual State State { get; set; }
+
+    }
+    public partial class UserDashBoardWidgetSetting
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserUserDashBoardWidgetSettingID { get; set; }
+
+    }
+    public partial class UserEmailSignature
+    {
+
+        [Required]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 UserEmailSignatureID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Email Signature")]
+        [StringLength(2000)]
+        [DataType(DataType.Html)]
+        public String Name { get; set; }
+
+    }
+    
+    //public partial class AppCodeLibrary
+    //{
+
+    //    [Required]
+    //    [Display(AutoGenerateField = false)]
+    //    [Key]
+    //    public Int32 AppCodeLibraryID { get; set; }
+
+    //    [Required]
+    //    [Display(Name = "Parent Folder Name")]
+    //    [StringLength(200)]
+    //    public String ParentFolderID { get; set; }
+
+    //    //is parent folder, it should be unlimited child folder level
+    //    [Display(Name = "Child Folder Name")]
+    //    [StringLength(200)]
+    //    public String ChildFolderID { get; set; }
+
+    //    [Required(ErrorMessage = "File Name is required")]
+    //    [Display(Name = "File Name")]
+    //    [StringLength(400)]
+    //    public String AppMenuCategoryID { get; set; }
+
+    //    [Display(Name = "File Content")]
+    //    [MaxLength]
+    //    [DataType(DataType.Html)]
+    //    public String FileContent { get; set; }
+
+    //    //public parent child folder map { get; set; }
+
+    //}
+
+
+   }
+	

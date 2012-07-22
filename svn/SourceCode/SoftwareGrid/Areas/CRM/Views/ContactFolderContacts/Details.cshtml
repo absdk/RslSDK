@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.ContactFolderContact
+
+@{
+    ViewBag.Title = "ContactFolderContact";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Contact Folder Contact</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Contact Folder Contact</h2>
+		<fieldset>
+
+    <label>ContactFolder</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ContactFolder).ToString()</div>
+
+    <label>Company</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Company).ToString()</div>
+
+    <label>Contact</label>
+    <div class="display-field">@(Model.Contact == null ? "None" : Model.Contact.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ContactFolderContactID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

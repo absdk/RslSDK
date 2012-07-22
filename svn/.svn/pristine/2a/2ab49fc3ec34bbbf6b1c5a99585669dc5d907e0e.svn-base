@@ -1,0 +1,187 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.DataLogic.ViewModels;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class AppMenuRepository : IAppMenuRepository
+    {
+		private readonly RepositoryContext context;
+
+        public AppMenuRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public List<MenuViewModel> GetTopMenu(int userRoleId)
+        {
+            return BuildMenu(1, userRoleId);
+        }
+
+        public List<MenuViewModel> GetApplicantLandingMenu(int userRoleId)
+        {
+            return BuildMenu(2, userRoleId);
+        }
+
+        public List<MenuViewModel> GetCompanyLandingMenu(int userRoleId)
+        {
+            return BuildMenu(3, userRoleId);
+        }
+
+        public List<MenuViewModel> GetVendorLandingMenu(int userRoleId)
+        {
+            return BuildMenu(4, userRoleId);
+        }
+
+        private List<MenuViewModel> BuildMenu(int menuCategory,int userRoleId)
+        {
+            int adminRoleId = 1;
+            List<MenuViewModel> topMenu = new List<MenuViewModel>();
+            List<AppMenu> topMenuList = context.AppMenu.Where(menu => menu.AppMenuCategoryID == menuCategory && menu.IsBlank == true && menu.AppParentMenuID == null).OrderBy(menu => menu.MenuSequenceNumber).ToList();
+            if (topMenuList != null)
+            {
+                foreach (AppMenu currentTopMenu in topMenuList)
+                {
+                    MenuViewModel newMenu = new MenuViewModel()
+                    {
+                        AppMenuID = currentTopMenu.AppMenuID,
+                        Name = currentTopMenu.Name,
+                        AreaName = currentTopMenu.AreaName,
+                        ControllerName = currentTopMenu.ControllerName,
+                        ActionName = currentTopMenu.ActionName,
+                        Sequence = currentTopMenu.MenuSequenceNumber,
+                        MenuIconName = currentTopMenu.MenuIconName,
+                    };
+                    newMenu.SubMenuList = new List<MenuViewModel>();
+                    //List<AppMenu> subMenuList = context.AppMenu.Where(menu => menu.AppParentMenuID == currentTopMenu.AppMenuID).OrderBy(menu => menu.MenuSequenceNumber).ToList();
+                    List<AppMenu> subMenuList = (from menu in context.AppMenu
+                                                 join roleAccess in context.UserRolePermission
+                                                 on new { areaName = menu.AreaName, controllerName = menu.ControllerName, actionName = menu.ActionName } equals new { areaName = roleAccess.AreaName, controllerName = roleAccess.ControllerName, actionName = roleAccess.ActionName }
+                                                 into g
+                                                 from a in g.DefaultIfEmpty()
+                                                 where (menu.AppParentMenuID == currentTopMenu.AppMenuID) && (a.UserRoleID == userRoleId || a.UserRoleID == null || userRoleId==adminRoleId)
+                                                 select menu).ToList();
+                    if (subMenuList != null)
+                    {
+                        foreach (AppMenu currentSubMenu in subMenuList)
+                        {
+                            MenuViewModel newSubMenu = new MenuViewModel()
+                            {
+                                AppMenuID = currentSubMenu.AppMenuID,
+                                Name = currentSubMenu.Name,
+                                AreaName = currentSubMenu.AreaName,
+                                ControllerName = currentSubMenu.ControllerName,
+                                ActionName = currentSubMenu.ActionName,
+                                Sequence = currentSubMenu.MenuSequenceNumber,
+                                MenuIconName = currentSubMenu.MenuIconName,
+                            };
+                            newSubMenu.SubMenuList = new List<MenuViewModel>();
+                            //List<AppMenu> subSubMenuList = context.AppMenu.Where(menu => menu.AppParentMenuID == currentSubMenu.AppMenuID).OrderBy(menu => menu.MenuSequenceNumber).ToList();
+                            List<AppMenu> subSubMenuList = (from menu in context.AppMenu
+                                                            join roleAccess in context.UserRolePermission
+                                                            on new { areaName = menu.AreaName, controllerName = menu.ControllerName, actionName = menu.ActionName } equals new { areaName = roleAccess.AreaName, controllerName = roleAccess.ControllerName, actionName = roleAccess.ActionName }
+                                                            into g
+                                                            from a in g.DefaultIfEmpty()
+                                                            where (menu.AppParentMenuID == currentSubMenu.AppMenuID) && (a.UserRoleID == userRoleId || a.UserRoleID == null || userRoleId == adminRoleId)
+                                                            select menu).ToList();
+                            if (subSubMenuList != null)
+                            {
+                                foreach (AppMenu currentSubSubMenu in subSubMenuList)
+                                {
+                                    MenuViewModel newSubSubMenu = new MenuViewModel()
+                                    {
+                                        AppMenuID = currentSubSubMenu.AppMenuID,
+                                        Name = currentSubSubMenu.Name,
+                                        AreaName = currentSubSubMenu.AreaName,
+                                        ControllerName = currentSubSubMenu.ControllerName,
+                                        ActionName = currentSubSubMenu.ActionName,
+                                        Sequence = currentSubSubMenu.MenuSequenceNumber,
+                                        MenuIconName = currentSubSubMenu.MenuIconName,
+                                    };
+                                    newSubMenu.SubMenuList.Add(newSubSubMenu);
+                                }
+                            }
+
+                            newMenu.SubMenuList.Add(newSubMenu);
+                        }
+                    }
+                    topMenu.Add(newMenu);
+                }
+            }
+            return topMenu;
+        }
+
+        public IQueryable<AppMenu> All
+        {
+            get { return context.AppMenu; }
+        }
+
+        public IQueryable<AppMenu> AllParent
+        {
+            get { return context.AppMenu.Where(menu=>menu.IsBlank==true); }
+        }
+
+        public IQueryable<AppMenu> AllIncluding(params Expression<Func<AppMenu, object>>[] includeProperties)
+        {
+            IQueryable<AppMenu> query = context.AppMenu;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+        public IQueryable<AppMenu> GetAllParentByAppMenuCategoryID(int appMenuCategoryID)
+        {
+            return context.AppMenu.Where(menu => menu.AppMenuCategoryID == appMenuCategoryID);
+        }
+
+        public AppMenu Find(int id)
+        {
+            return context.AppMenu.Find(id);
+        }
+
+        public void InsertOrUpdate(AppMenu appmenu)
+        {
+            if (appmenu.AppMenuID == default(int)) {
+                // New entity
+                context.AppMenu.Add(appmenu);
+            } else {
+                // Existing entity
+                context.Entry(appmenu).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var appmenu = context.AppMenu.Find(id);
+            context.AppMenu.Remove(appmenu);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IAppMenuRepository
+    {
+        List<MenuViewModel> GetTopMenu(int userRoleId);
+        List<MenuViewModel> GetApplicantLandingMenu(int userRoleId);
+        List<MenuViewModel> GetCompanyLandingMenu(int userRoleId);
+        List<MenuViewModel> GetVendorLandingMenu(int userRoleId);
+        IQueryable<AppMenu> GetAllParentByAppMenuCategoryID(int appMenuCategoryID);
+        IQueryable<AppMenu> All { get; }
+        IQueryable<AppMenu> AllParent { get; }
+        IQueryable<AppMenu> AllIncluding(params Expression<Func<AppMenu, object>>[] includeProperties);
+        AppMenu Find(int id);
+        void InsertOrUpdate(AppMenu appmenu);
+        void Delete(int id);
+        void Save();
+    }
+}

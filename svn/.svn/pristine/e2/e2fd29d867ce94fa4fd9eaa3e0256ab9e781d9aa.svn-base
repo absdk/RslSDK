@@ -1,0 +1,153 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.ATS.Controllers
+{   
+    public class ApplicantEduCertLicensesController : Controller
+    {
+		private readonly IApplicantRepository applicantRepository;
+		private readonly ISkillsExpEduCategoryRepository skillsexpeducategoryRepository;
+		private readonly ISkillsExpEduRepository skillsexpeduRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly IUserRepository userRepository;
+		private readonly IApplicantEduCertLicenseRepository applicanteducertlicenseRepository;
+        public ApplicantEduCertLicensesController(IApplicantRepository applicantRepository, ISkillsExpEduCategoryRepository skillsexpeducategoryRepository, ISkillsExpEduRepository skillsexpeduRepository, ICountryRepository countryRepository, IStateRepository stateRepository, IUserRepository userRepository, IApplicantEduCertLicenseRepository applicanteducertlicenseRepository)
+        {
+			this.applicantRepository = applicantRepository;
+			this.skillsexpeducategoryRepository = skillsexpeducategoryRepository;
+			this.skillsexpeduRepository = skillsexpeduRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.userRepository = userRepository;
+			this.applicanteducertlicenseRepository = applicanteducertlicenseRepository;
+        }
+
+        //
+        // GET: /ApplicantEduCertLicenses/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(applicanteducertlicenseRepository.AllIncluding(applicanteducertlicense => applicanteducertlicense.Applicant, applicanteducertlicense => applicanteducertlicense.SkillsExpEduCategory, applicanteducertlicense => applicanteducertlicense.SkillsExpEdu, applicanteducertlicense => applicanteducertlicense.Country, applicanteducertlicense => applicanteducertlicense.State, applicanteducertlicense => applicanteducertlicense.VerifiedByUser));
+        }
+		
+		public ViewResult Search(ApplicantEduCertLicense searchApplicantEduCertLicense)
+        {
+			if(searchApplicantEduCertLicense!=null)
+			{
+							}
+						return View("Index",applicanteducertlicenseRepository.AllIncluding(applicanteducertlicense => applicanteducertlicense.Applicant, applicanteducertlicense => applicanteducertlicense.SkillsExpEduCategory, applicanteducertlicense => applicanteducertlicense.SkillsExpEdu, applicanteducertlicense => applicanteducertlicense.Country, applicanteducertlicense => applicanteducertlicense.State, applicanteducertlicense => applicanteducertlicense.VerifiedByUser));
+		}
+
+        //
+        // GET: /ApplicantEduCertLicenses/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(applicanteducertlicenseRepository.Find(id));
+        }
+
+        //
+        // GET: /ApplicantEduCertLicenses/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			ApplicantEduCertLicense applicanteducertlicense = new ApplicantEduCertLicense();
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleSkillsExpEduCategories = skillsexpeducategoryRepository.All;
+			ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+            return View(applicanteducertlicense);
+        } 
+
+        //
+        // POST: /ApplicantEduCertLicenses/Create
+        [HttpPost]
+        public ActionResult Create(ApplicantEduCertLicense applicanteducertlicense)
+        {
+            if (ModelState.IsValid) {
+                applicanteducertlicenseRepository.InsertOrUpdate(applicanteducertlicense);
+                applicanteducertlicenseRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleSkillsExpEduCategories = skillsexpeducategoryRepository.All;
+				ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(applicanteducertlicense);
+			}
+        }
+        
+        //
+        // GET: /ApplicantEduCertLicenses/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleSkillsExpEduCategories = skillsexpeducategoryRepository.All;
+			ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+             return View(applicanteducertlicenseRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantEduCertLicenses/Edit/5
+        [HttpPost]
+        public ActionResult Edit(ApplicantEduCertLicense applicanteducertlicense)
+        {
+            if (ModelState.IsValid) {
+                applicanteducertlicenseRepository.InsertOrUpdate(applicanteducertlicense);
+                applicanteducertlicenseRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleSkillsExpEduCategories = skillsexpeducategoryRepository.All;
+				ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(applicanteducertlicense);
+			}
+        }
+
+        //
+        // GET: /ApplicantEduCertLicenses/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(applicanteducertlicenseRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantEduCertLicenses/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            applicanteducertlicenseRepository.Delete(id);
+            applicanteducertlicenseRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

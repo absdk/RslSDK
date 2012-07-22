@@ -1,0 +1,56 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.RequisitionApplicantInterviewQuestionAnswer>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Requisition Applicant Interview Question Answer";
+    Layout = "_LayoutRequisition";
+}
+<div class="flat_area grid_16">
+    <h2>Requisition Applicant Interview Question Answer List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+    .Name("Grid")
+    .DataKeys(keys => keys.Add(c => c.RequisitionApplicantInterviewQuestionAnswerID))
+    .Columns(columns =>
+                    {   
+                        columns.AutoGenerate(column =>
+                                                {
+                                                    if (column.Member == "RequisitionApplicantInterviewQuestionAnswerID")
+                                                        column.Visible = false;
+                                                });
+						columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="@Url.Action("Edit", "RequisitionApplicantInterviewQuestionAnswer", new { id = @item.RequisitionApplicantInterviewQuestionAnswerID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Edit</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+							            columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="/RequisitionApplicantInterviewQuestionAnswer/Delete/@item.RequisitionApplicantInterviewQuestionAnswerID" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Delete</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+                    })
+    .Sortable()
+    .Pageable()
+) 
+</div>
+

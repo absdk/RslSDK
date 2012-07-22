@@ -1,0 +1,68 @@
+@model SoftwareGrid.DataLogic.Models.VendorReference
+
+@{
+    ViewBag.Title = "VendorReference";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Reference</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Reference</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.CompanyName)
+    <div class="display-field">@Model.CompanyName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.FirstName)
+    <div class="display-field">@Model.FirstName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.LastName)
+    <div class="display-field">@Model.LastName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.JobTitle)
+    <div class="display-field">@Model.JobTitle</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Phone)
+    <div class="display-field">@Model.Phone</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Email)
+    <div class="display-field">@Model.Email</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.ReferenceServiceInfo)
+    <div class="display-field">@Model.ReferenceServiceInfo</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.IsVerified)
+    <div class="display-field">@Model.IsVerified</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VerificationNotes)
+    <div class="display-field">@Model.VerificationNotes</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Vendor)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.VendorReferenceID, vendorId = ViewBag.VendorId }) |
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+    
+</div>
+	</div>
+</div>
+
+
+

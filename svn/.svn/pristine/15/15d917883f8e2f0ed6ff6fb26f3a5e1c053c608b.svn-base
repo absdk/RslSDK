@@ -1,0 +1,63 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.VendorInsurance>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Vendor Insurance";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>Vendor Insurance List</h2>
+    <p>
+			@Html.ActionLink("Create New", "Create",new { vendorId = ViewBag.VendorId })
+	    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.VendorInsuranceID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.VendorInsuranceCategory.Name).Title("Insurance Category").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.InsuranceProviderCompanyName).Title("Provider Company Name").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.InsuranceProviderPhoneName).Title("Provider Phone Number").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.InsuranceNumber).Title("Insurance Number").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.CertificateIssueDate).Title("Certificate Issue Date").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.CertificationExpireDate).Title("Certification Expire Date").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Edit", "VendorInsurance", new { id = @item.VendorInsuranceID,vendorId = ViewBag.VendorId })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Delete", "VendorInsurance", new { id = @item.VendorInsuranceID,vendorId = ViewBag.VendorId })" title="Delete"><img alt="Delete"  src="/content/images/delete.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

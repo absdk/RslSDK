@@ -1,0 +1,47 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionApplicantInterviewQuestionAnswer
+
+@{
+    ViewBag.Title = "RequisitionApplicantInterviewQuestionAnswer";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Applicant Interview Question Answer</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Applicant Interview Question Answer</h2>
+		<fieldset>
+
+    <label>ApplicantAnswer</label>
+    <div class="display-field">@Model.ApplicantAnswer</div>
+
+    <label>AnswerDateTime</label>
+    <div class="display-field">@String.Format("{0:g}", Model.AnswerDateTime)</div>
+
+    <label>IsRight</label>
+    <div class="display-field">@Model.IsRight</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+
+    <label>InterviewQuestionCategory</label>
+    <div class="display-field">@(Model.InterviewQuestionCategory == null ? "None" : Model.InterviewQuestionCategory.Name)</div>
+
+    <label>InterviewQuestion</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.InterviewQuestion).ToString()</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionApplicantInterviewQuestionAnswerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

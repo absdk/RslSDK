@@ -1,0 +1,100 @@
+@model SoftwareGrid.DataLogic.Models.VendorAddress
+@* This partial view defines form fields that will appear when creating and editing entities *@
+@using SoftwareGrid.DataLogic.Models
+@{
+    Country selectedCountry = new Country();
+    if(Model.CountryID.HasValue)
+    {
+        selectedCountry.CountryID = Model.CountryID.Value;
+    }
+    State selectedState = new State();
+    if (Model.StateID.HasValue)
+    {
+        selectedState.StateID = Model.StateID.Value;
+    }
+}
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.VendorAddressCategoryID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.VendorAddressCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.VendorAddressCategory>)ViewBag.PossibleVendorAddressCategories).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.VendorAddressCategoryID.ToString(),
+           Selected = (Model != null) && (option.VendorAddressCategoryID == Model.VendorAddressCategoryID)
+       }), "Choose...")
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.AddressLine1)
+        <div>
+            @Html.EditorFor(model => model.AddressLine1)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.AddressLine2)
+        <div>
+            @Html.EditorFor(model => model.AddressLine2)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.PostBoxNumber)
+        <div>
+            @Html.EditorFor(model => model.PostBoxNumber)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CityName)
+        <div>
+            @Html.EditorFor(model => model.CityName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_Country, selectedCountry)
+    <div id="divCountryID">
+        @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_State, selectedState)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ZipCode)
+        <div>
+            @Html.EditorFor(model => model.ZipCode)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.HomePhone)
+        <div>
+            @Html.EditorFor(model => model.HomePhone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.MobilePhone)
+        <div>
+            @Html.EditorFor(model => model.MobilePhone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.PersonalEmail)
+        <div>
+            @Html.EditorFor(model => model.PersonalEmail)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsBulkEmail)
+        <div>
+            @Html.EditorFor(model => model.IsBulkEmail)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

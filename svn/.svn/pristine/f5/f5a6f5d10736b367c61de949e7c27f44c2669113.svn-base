@@ -1,0 +1,95 @@
+
+@model SoftwareGrid.DataLogic.Models.Organization
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ParentOrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ParentOrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleParentOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.ParentOrganizationID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Name)
+            <div>
+								@Html.EditorFor(model => model.Name)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.LegalBusinessName)
+            <div>
+								@Html.EditorFor(model => model.LegalBusinessName)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.OrganizationCodeNumber)
+            <div>
+								@Html.EditorFor(model => model.OrganizationCodeNumber)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationCategory>)ViewBag.PossibleOrganizationCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationCategoryID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationCategoryID == Model.OrganizationCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.AboutTheOrganization)
+            <div>
+								@Html.EditorFor(model => model.AboutTheOrganization)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.WebAddress)
+            <div>
+								@Html.EditorFor(model => model.WebAddress)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Logo)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("Logo")
+                        .Async(async => async
+                            .Save("UploadFile", "Organization")
+                            .Remove("RemoveFile", "Organization"))
+                )
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.OrgChartSequenceNumber)
+            <div>
+								@Html.EditorFor(model => model.OrgChartSequenceNumber)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class CompanyRepository : ICompanyRepository
+    {
+		private readonly RepositoryContext context;
+
+        public CompanyRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<Company> All
+        {
+            get { return context.Company; }
+        }
+
+        public IQueryable<Company> AllIncluding(params Expression<Func<Company, object>>[] includeProperties)
+        {
+            IQueryable<Company> query = context.Company;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+        public Company Find(int id)
+        {
+            return context.Company.Find(id);
+        }
+
+        public void InsertOrUpdate(Company company)
+        {
+            if (company.CompanyID == default(int)) {
+                // New entity
+                context.Company.Add(company);
+            } else {
+                // Existing entity
+                context.Entry(company).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var company = context.Company.Find(id);
+            context.Company.Remove(company);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface ICompanyRepository
+    {
+        IQueryable<Company> All { get; }
+        IQueryable<Company> AllIncluding(params Expression<Func<Company, object>>[] includeProperties);
+        Company Find(int id);
+        void InsertOrUpdate(Company company);
+        void Delete(int id);
+        void Save();
+    }
+}

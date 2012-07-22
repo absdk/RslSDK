@@ -1,0 +1,61 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationDocument>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Organization Document";
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>Organization Document List</h2>
+    <p>
+			@Html.ActionLink("Create New", "Create",new { organizationId = ViewBag.OrganizationId })
+	    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.OrganizationDocumentID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.DocumentTitle).Title("Title").Width("30%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.OrganizationDocumentCategory.Name).Title("Document Category").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.OriginalFileInfo).Title("Original File Name, Extension and Size").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.OrganizationDocumentFolder.Name).Title("OrganizationDocumentFolder.Name").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Edit", "OrganizationDocument", new { id = @item.OrganizationDocumentID,organizationId = ViewBag.OrganizationId })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Delete", "OrganizationDocument", new { id = @item.OrganizationDocumentID,organizationId = ViewBag.OrganizationId })" title="Delete"><img alt="Delete"  src="/content/images/delete.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

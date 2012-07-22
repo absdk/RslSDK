@@ -1,0 +1,5 @@
+﻿<?xml version="1.0"?>
+<connectionStrings>
+  <add name="sqlConnection" connectionString="Data Source=FAZLUR-HP\SQLEXPRESS;Initial Catalog=SoftwareGrid;Integrated Security=True" providerName="System.Data.SqlClient" />
+</connectionStrings>
+

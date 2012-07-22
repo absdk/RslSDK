@@ -1,0 +1,104 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantSubmissionInfo
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SubmittedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SubmittedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleSubmittedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.SubmittedByUserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.SubmissionDate)
+            <div>
+								@Html.EditorFor(model => model.SubmissionDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.RequisitionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.RequisitionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Requisition>)ViewBag.PossibleRequisitions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.RequisitionID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionID == Model.RequisitionID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SubmitToCompanyID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SubmitToCompanyID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Company>)ViewBag.PossibleSubmitToCompanies).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.CompanyID.ToString(),
+			        Selected = (Model != null) && (option.CompanyID == Model.SubmitToCompanyID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SubmitToContactID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SubmitToContactID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Contact>)ViewBag.PossibleSubmitToContacts).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ContactID.ToString(),
+			        Selected = (Model != null) && (option.ContactID == Model.SubmitToContactID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SubmitToHiringManagerUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SubmitToHiringManagerUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleSubmitToHiringManagerUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.SubmitToHiringManagerUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.SubmissionNotes)
+            <div>
+								@Html.EditorFor(model => model.SubmissionNotes)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantSubmissionFeedbackCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantSubmissionFeedbackCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantSubmissionFeedbackCategory>)ViewBag.PossibleApplicantSubmissionFeedbackCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.ApplicantSubmissionFeedbackCategoryID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantSubmissionFeedbackCategoryID == Model.ApplicantSubmissionFeedbackCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+			
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

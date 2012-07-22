@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.InterviewQuestionAnswer
+
+@{
+    ViewBag.Title = "InterviewQuestionAnswer";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Interview Question Answer</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Interview Question Answer</h2>
+		<fieldset>
+
+    <label>Question</label>
+    <div class="display-field">@Model.Question</div>
+
+    <label>Answer</label>
+    <div class="display-field">@Model.Answer</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.InterviewQuestionAnswerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

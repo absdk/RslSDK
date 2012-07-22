@@ -1,0 +1,90 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantAdditionalAddress
+@{
+    ViewBag.Title = "Applicant Additional Address";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Additional Address</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <div class="form-item">
+                    <label>
+                        AddressLine1</label>
+                    <div class="display-field">@Model.AddressLine1</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        AddressLine2</label>
+                    <div class="display-field">@Model.AddressLine2</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        PostBoxNumber</label>
+                    <div class="display-field">@Model.PostBoxNumber</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        City</label>
+                    <div class="display-field">@Model.City</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        ZipCode</label>
+                    <div class="display-field">@Model.ZipCode</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        HomePhone</label>
+                    <div class="display-field">@Model.HomePhone</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        MobilePhone</label>
+                    <div class="display-field">@Model.MobilePhone</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        PersonalEmail</label>
+                    <div class="display-field">@Model.PersonalEmail</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        IsPrimaryConatact</label>
+                    <div class="display-field">@Model.IsPrimaryConatact</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        Applicant</label>
+                    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        Country</label>
+                    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+                </div>
+                <div class="form-item">
+                    <label>
+                        State</label>
+                    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+                </div>
+                <div class="form-item">
+                    <div class="button_bar clearfix">
+                        <button class="green" type="submit">
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", new { applicantId = ViewBag.ApplicantId })
+</p>

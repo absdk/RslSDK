@@ -1,0 +1,78 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.UserRolePermission>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "User Role Permission";
+}
+<div class="flat_area grid_16">
+    <h2>User Role Permission List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@using (Html.BeginForm("Create","UserRolePermission"))
+{
+var index=0;
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+        .ClientEvents(events => events
+            .OnLoad("Grid_onLoad")
+            )
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.ActionName).Width(200);
+            if(ViewBag.RoleList!=null)
+            {
+                foreach (SoftwareGrid.DataLogic.Models.UserRole userRole in ViewBag.RoleList)
+                {
+                    columns.Bound(o => o.UserRoleID).Title(userRole.Name).Template(
+                    @<text>
+                        <input name="chkUserRolePermission" type="checkbox" value="@index+@item.AreaName+@item.ControllerName+@item.ActionName" title="chkUserRolePermission"
+                            @if (SoftwareGrid.BusinessLogic.Helpers.MiscUtility.UserRolePermissionToAction(index,item.AreaName,item.ControllerName,item.ActionName,ViewBag.RoleList))
+                            {
+                                <text>checked="checked"</text>
+                            }
+                        />                        
+                        @{
+                            index = index + 1;
+                            if(index>=ViewBag.RoleList.Count)
+                            {
+                                index = 0;
+                            }
+                        }
+                    </text>);
+                }
+            }
+        })
+        .Groupable(settings => settings.Groups(groups =>
+        {
+            groups.Add(o => o.AreaName);
+            groups.Add(o => o.ControllerName);
+        }).Visible(false)).HtmlAttributes(new { style = "font-weight:bold;" })
+        .Sortable()
+        .Filterable()
+    )
+    
+    <div class="form-item">
+		<div class="button_bar clearfix">
+			<button class="green" type="submit">
+					<span>Submit</span>
+			</button>
+		</div>
+	</div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        Grid_onLoad = function (e) {
+            var grid = $("#Grid").data("tGrid");
+            $("#Grid tbody > .t-grouping-row").each(function () {
+                grid.collapseGroup(this);
+            }
+            );
+        }
+    });
+
+</script>  
+</div>
+

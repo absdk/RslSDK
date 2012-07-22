@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.City
+
+@{
+    ViewBag.Title = "City";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        City</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            City</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

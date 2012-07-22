@@ -1,0 +1,37 @@
+﻿@model SoftwareGrid.DataLogic.ViewModels.CompanyOverviewHeadViewModel
+@using SoftwareGrid.DataLogic.Models;
+@using SoftwareGrid.DataLogic.ViewModels;
+@using SoftwareGrid.BusinessLogic.Helpers;
+@if (ViewBag.CompanyOverviewHead != null)
+{
+<div class="box grid_16">
+<div class="block">
+<div class="section">
+    <div class="overview-img-td">
+        <img src='@Url.Action("ShowCompanyLogo", new { companyId = Model.CompanyID })' width="140px"
+                    alt='@Model.CompanyName' />
+    </div>
+	<div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Id:</span> <span>@Model.CompanyDisplayId</span></div>    
+        <div class="overview-tr"><span class="overview-td-title">Name:</span> <span>@Model.CompanyName</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Industry:</span> <span>@Model.IndustryName</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Web Address:</span> <span>@Model.WebAddress</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Address:</span> <span>@Model.Address</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Location:</span> <span>@Model.Location</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Email:</span> <span>@Model.CompanyEmailAddress</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Phone:</span> <span>@Model.MainOfficePhone</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Fax:</span> <span>@Model.FaxNumber</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Rating:</span> <span style="float:right;">@Html.EditorFor(model => model.CompanyRatingScaleIDForHeader)</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Status:</span> <span>@Model.CompanyStatusCategoryName</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Employee Size:</span> <span>@Model.EmployeeSize</span></div>
+    </div>
+	</div>
+</div>
+</div>
+}

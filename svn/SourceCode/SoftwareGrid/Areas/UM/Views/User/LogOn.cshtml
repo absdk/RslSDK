@@ -1,0 +1,60 @@
+﻿@model SoftwareGrid.DataLogic.Models.User
+@{
+    ViewBag.Title = "User Login";
+    Layout = "~/Views/Shared/_LayoutExternal.cshtml";
+}
+<div id="login_box" class="center">
+    <div class="main_container clearfix">
+        <div class="box">
+            <div class="block">
+                <div class="section">
+                    <div class="alert dismissible alert_light">
+                        <img width="24" height="24" src="../../../../Content/images/locked.png">
+                        <strong>Welcome to Software Grid.</strong> Please enter your details to login.
+                    </div>
+                </div>
+                @using (Html.BeginForm("Logon","User"))
+                {
+                <fieldset class="label_side">
+                    @Html.LabelFor(model => model.UserLoginName)
+                    <div>
+                        @Html.EditorFor(model => model.UserLoginName)
+                    </div>
+                </fieldset>
+                <fieldset class="label_side">
+                    @Html.LabelFor(model => model.Password)
+                    <div>
+                        @Html.EditorFor(model => model.Password)
+                    </div>
+                </fieldset>
+                <fieldset class="no_label">
+                    <div style="">
+                        <div class="slider_unlock" title="Slide to Login">
+                        </div>
+                        <button type="submit" style="display: none">
+                        </button>
+                    </div>
+                </fieldset>
+                }
+            </div>
+        </div>
+        <a href="#" id="login_logo"><span>Software Grid</span></a>
+        <button data-dialog="dialog_register" class="on_dark dark dialog_button" style="float: right;
+            margin: -30px 0 0 0;">
+            <img src="images/icons/small/white/user.png">
+            <span>Not Registered ?</span>
+        </button>
+    </div>
+    <div class="main_container clearfix" style="display: none;">
+        <div class="box">
+            <div class="block">
+                <div class="section">
+                    <div class="alert dismissible alert_light">
+                        <img width="24" height="24" src="images/icons/small/grey/locked.png">
+                        <strong>Welcome to Adminica.</strong> Please enter your details to login.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

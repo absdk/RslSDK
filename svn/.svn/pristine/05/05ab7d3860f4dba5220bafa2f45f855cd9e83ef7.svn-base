@@ -1,0 +1,50 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationDepartment
+
+@{
+    ViewBag.Title = "OrganizationDepartment";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Department</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Department</h2>
+		<fieldset>
+
+    <label>ParentDepartmentID</label>
+    <div class="display-field">@Model.ParentDepartmentID</div>
+
+    <label>DepartmentName</label>
+    <div class="display-field">@Model.DepartmentName</div>
+
+    <label>DepartmentCodeNumber</label>
+    <div class="display-field">@Model.DepartmentCodeNumber</div>
+
+    <label>DepartmentNumber</label>
+    <div class="display-field">@String.Format("{0:F}", Model.DepartmentNumber)</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+
+    <label>OrganizationBusinessDivision</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationBusinessDivision).ToString()</div>
+
+    <label>ParentOrganizationDepartment</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ParentOrganizationDepartment).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationDepartmentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,32 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantRecruitmentCostCategory
+
+@{
+    ViewBag.Title = "ApplicantRecruitmentCostCategory";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Recruitment Cost Category</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Recruitment Cost Category</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>CostCode</label>
+    <div class="display-field">@Model.CostCode</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantRecruitmentCostCategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

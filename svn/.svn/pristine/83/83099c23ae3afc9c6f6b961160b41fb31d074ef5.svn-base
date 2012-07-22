@@ -1,0 +1,71 @@
+@model SoftwareGrid.DataLogic.Models.VendorReference
+
+@{
+    ViewBag.Title = "Vendor Reference";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Reference</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>CompanyName</label>
+		    <div class="display-field">@Model.CompanyName</div>
+		</div>
+				<div class="form-item">
+		    <label>FirstName</label>
+		    <div class="display-field">@Model.FirstName</div>
+		</div>
+				<div class="form-item">
+		    <label>LastName</label>
+		    <div class="display-field">@Model.LastName</div>
+		</div>
+				<div class="form-item">
+		    <label>JobTitle</label>
+		    <div class="display-field">@Model.JobTitle</div>
+		</div>
+				<div class="form-item">
+		    <label>Phone</label>
+		    <div class="display-field">@Model.Phone</div>
+		</div>
+				<div class="form-item">
+		    <label>Email</label>
+		    <div class="display-field">@Model.Email</div>
+		</div>
+				<div class="form-item">
+		    <label>ReferenceServiceInfo</label>
+		    <div class="display-field">@Model.ReferenceServiceInfo</div>
+		</div>
+				<div class="form-item">
+		    <label>IsVerified</label>
+		    <div class="display-field">@Model.IsVerified</div>
+		</div>
+				<div class="form-item">
+		    <label>VerificationNotes</label>
+		    <div class="display-field">@Model.VerificationNotes</div>
+		</div>
+				<div class="form-item">
+		    <label>Vendor</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+</p>
+	

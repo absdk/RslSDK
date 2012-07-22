@@ -1,0 +1,38 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionNote
+
+@{
+    ViewBag.Title = "RequisitionNote";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Note</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Note</h2>
+		<fieldset>
+
+    <label>Date</label>
+    <div class="display-field">@String.Format("{0:g}", Model.Date)</div>
+
+    <label>Notes</label>
+    <div class="display-field">@Model.Notes</div>
+
+    <label>User</label>
+    <div class="display-field">@(Model.User == null ? "None" : Model.User.LastName)</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

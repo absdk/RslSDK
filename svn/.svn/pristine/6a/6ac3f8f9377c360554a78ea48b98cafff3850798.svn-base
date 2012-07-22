@@ -1,0 +1,48 @@
+@model SoftwareGrid.DataLogic.Models.VendorServiceCapabilityRating
+
+@{
+    ViewBag.Title = "VendorServiceCapabilityRating";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Service Capability Rating</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Service Capability Rating</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.Description)
+    <div class="display-field">@Model.Description</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.RatingRemarks)
+    <div class="display-field">@Model.RatingRemarks</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Vendor)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VendorServiceCategory)
+    <div class="display-field">@(Model.VendorServiceCategory == null ? "None" : Model.VendorServiceCategory.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VendorServiceRatingScale)
+    <div class="display-field">@(Model.VendorServiceRatingScale == null ? "None" : Model.VendorServiceRatingScale.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.VendorServiceCapabilityRatingID, vendorId = ViewBag.VendorId }) |
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+    
+</div>
+	</div>
+</div>
+
+
+

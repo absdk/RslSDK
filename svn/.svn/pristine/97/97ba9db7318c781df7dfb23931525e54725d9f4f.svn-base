@@ -1,0 +1,241 @@
+@model SoftwareGrid.DataLogic.Models.VendorContact
+@* This partial view defines form fields that will appear when creating and editing entities *@
+@using SoftwareGrid.DataLogic.Models
+@{
+    Country selectedCountry = new Country();
+    if(Model.CountryID.HasValue)
+    {
+        selectedCountry.CountryID = Model.CountryID.Value;
+    }
+    State selectedState = new State();
+    if (Model.StateID.HasValue)
+    {
+        selectedState.StateID = Model.StateID.Value;
+    }
+}
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.FirstName)
+        <div>
+            @Html.EditorFor(model => model.FirstName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.MiddleName)
+        <div>
+            @Html.EditorFor(model => model.MiddleName)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.LastName)
+        <div>
+            @Html.EditorFor(model => model.LastName)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.JobTitle)
+        <div>
+            @Html.EditorFor(model => model.JobTitle)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Department)
+        <div>
+            @Html.EditorFor(model => model.Department)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Address1)
+        <div>
+            @Html.EditorFor(model => model.Address1)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Address2)
+        <div>
+            @Html.EditorFor(model => model.Address2)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.City)
+        <div>
+            @Html.EditorFor(model => model.City)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.PostBoxNumber)
+        <div>
+            @Html.EditorFor(model => model.PostBoxNumber)
+        </div>
+    </div>
+    @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_Country, selectedCountry)
+    <div id="divCountryID">
+        @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_State, selectedState)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ZipCode)
+        <div>
+            @Html.EditorFor(model => model.ZipCode)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.OfficePhone)
+        <div>
+            @Html.EditorFor(model => model.OfficePhone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Mobile)
+        <div>
+            @Html.EditorFor(model => model.Mobile)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.FaxNumber)
+        <div>
+            @Html.EditorFor(model => model.FaxNumber)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.EmailAddress)
+        <div>
+            @Html.EditorFor(model => model.EmailAddress)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsReceiveRequisition)
+        <div>
+            @Html.EditorFor(model => model.IsReceiveRequisition)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.AlternativeEmail)
+        <div>
+            @Html.EditorFor(model => model.AlternativeEmail)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.LinkedInProfileAddress)
+        <div>
+            @Html.EditorFor(model => model.LinkedInProfileAddress)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.TwitterAccountAddress)
+        <div>
+            @Html.EditorFor(model => model.TwitterAccountAddress)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ContactProfessionTypeID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ContactProfessionTypeID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ContactProfessionType>)ViewBag.PossibleContactProfessionTypes).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.ContactProfessionTypeID.ToString(),
+           Selected = (Model != null) && (option.ContactProfessionTypeID == Model.ContactProfessionTypeID)
+       }), "Choose...")
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Photo)
+        <div>
+            @(Html.Telerik().Upload()
+                        .Name("Photo")
+                        .Async(async => async
+                            .Save("UploadFile", "VendorContact")
+                            .Remove("RemoveFile", "VendorContact"))
+                )
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.InternalRemarks)
+        <div>
+            @Html.EditorFor(model => model.InternalRemarks)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Resume)
+        <div>
+            @Html.EditorFor(model => model.Resume)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.SequenceInVendorOrganizationalChart)
+        <div>
+            @Html.EditorFor(model => model.SequenceInVendorOrganizationalChart)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.EthnicBackgroundID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.EthnicBackgroundID, ((IEnumerable<SoftwareGrid.DataLogic.Models.EthnicBackground>)ViewBag.PossibleEthnicBackgrounds).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.EthnicBackgroundID.ToString(),
+           Selected = (Model != null) && (option.EthnicBackgroundID == Model.EthnicBackgroundID)
+       }), "Choose...")
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.GenderID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.GenderID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Gender>)ViewBag.PossibleGenders).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.GenderID.ToString(),
+           Selected = (Model != null) && (option.GenderID == Model.GenderID)
+       }), "Choose...")
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.VeteranCategoryID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.VeteranCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.VeteranCategory>)ViewBag.PossibleVeteranCategories).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.VeteranCategoryID.ToString(),
+           Selected = (Model != null) && (option.VeteranCategoryID == Model.VeteranCategoryID)
+       }), "Choose...")
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.BirthCountryID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.BirthCountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleBirthCountries).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.CountryID.ToString(),
+           Selected = (Model != null) && (option.CountryID == Model.BirthCountryID)
+       }), "Choose...")
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.NationlityCountryID)
+        <div>
+            @Html.EditorFor(model => model.NationlityCountryID)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsCompanyOwner)
+        <div>
+            @Html.EditorFor(model => model.IsCompanyOwner)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CompanyOwnershipPercentage)
+        <div>
+            @Html.EditorFor(model => model.CompanyOwnershipPercentage)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

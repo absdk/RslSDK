@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.HolidayCalendar
+
+@{
+    ViewBag.Title = "Holiday Calendar";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="flat_area grid_16">
+	<h2>Holiday Calendar</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Holiday Calendar</h2>
+						        @Html.HiddenFor(model => model.HolidayCalendarID)
+									@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+									@Html.ActionLink("Back to List", "Index")
+						    </div>
+		</div>
+	</div>
+}

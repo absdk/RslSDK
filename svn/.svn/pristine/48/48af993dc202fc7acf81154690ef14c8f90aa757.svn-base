@@ -1,0 +1,31 @@
+@model SoftwareGrid.DataLogic.Models.Country
+
+@{
+    ViewBag.Title = "Country";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Country</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Country</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>CountryTicker</label>
+    <div class="display-field">@Model.CountryTicker</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CountryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,12 @@
+﻿@model SoftwareGrid.DataLogic.Models.Country
+<div class="form-item">
+    @Html.LabelFor(model => model.CountryID)
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.CountryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Country>)ViewBag.PossibleCountries).Select(option => new SelectListItem
+    {
+        Text = (option == null ? "None" : option.Name),
+        Value = option.CountryID.ToString(),
+        Selected = (Model != null) && (option.CountryID == Model.CountryID)
+    }), "Choose...", new { data_action = "SelectStates" })
+    </div>
+</div>

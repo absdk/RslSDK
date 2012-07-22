@@ -1,0 +1,56 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantNote>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant Note";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant Note List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+    .Name("Grid")
+    .DataKeys(keys => keys.Add(c => c.ApplicantNoteID))
+    .Columns(columns =>
+                    {   
+                        columns.AutoGenerate(column =>
+                                                {
+                                                    if (column.Member == "ApplicantNoteID")
+                                                        column.Visible = false;
+                                                });
+						columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="@Url.Action("Edit", "ApplicantNote", new { id = @item.ApplicantNoteID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Edit</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+							            columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="/ApplicantNote/Delete/@item.ApplicantNoteID" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Delete</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+                    })
+    .Sortable()
+    .Pageable()
+) 
+</div>
+

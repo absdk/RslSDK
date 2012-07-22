@@ -1,0 +1,39 @@
+﻿using System.Web.Mvc;
+using EasySoft.Helper;
+using SoftwareGrid.BusinessLogic.Helpers;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.DataLogic.Models;
+namespace SoftwareGrid
+{
+    public class UserBaseController : BaseController
+    {
+
+        private void BuildMenu()
+        {
+
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            IAppMenuRepository repository = DependencyResolver.Current.GetService(typeof(IAppMenuRepository)) as IAppMenuRepository;
+            if (repository != null)
+            {
+                ViewBag.TopMenu = repository.GetTopMenu(CurrentLoggedInUser.UserRoleID);
+                ViewBag.ApplicantLandingMenu = repository.GetApplicantLandingMenu(CurrentLoggedInUser.UserRoleID);
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult ShowMenuIcon(int id)
+        {
+            IAppMenuRepository repository = DependencyResolver.Current.GetService(typeof(IAppMenuRepository)) as IAppMenuRepository;
+            AppMenu menu = repository.Find(id);
+            if (menu.MenuIconName.IsNotNullOrEmpty())
+            {
+                ImageResult result = new ImageResult(menu.MenuIcon, "image/jpeg");
+                return result;
+            }
+            return null;
+        }
+    }
+}

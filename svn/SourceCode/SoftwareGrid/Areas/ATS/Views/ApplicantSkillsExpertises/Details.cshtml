@@ -1,0 +1,59 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantSkillsExpertise
+
+@{
+    ViewBag.Title = "ApplicantSkillsExpertise";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Skills Expertise</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Skills Expertise</h2>
+		<fieldset>
+
+    <label>YearsOfExperience</label>
+    <div class="display-field">@String.Format("{0:F}", Model.YearsOfExperience)</div>
+
+    <label>LastUsedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.LastUsedDate)</div>
+
+    <label>DisplaySequence</label>
+    <div class="display-field">@String.Format("{0:F}", Model.DisplaySequence)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+
+    <label>SkillsExpEduCategory</label>
+    <div class="display-field">@(Model.SkillsExpEduCategory == null ? "None" : Model.SkillsExpEduCategory.Name)</div>
+
+    <label>ManagerRatingScale</label>
+    <div class="display-field">@(Model.ManagerRatingScale == null ? "None" : Model.ManagerRatingScale.Name)</div>
+
+    <label>User</label>
+    <div class="display-field">@(Model.User == null ? "None" : Model.User.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicantSkillsExpertiseID, applicantId = ViewBag.ApplicantId }) |
+    @Html.ActionLink("Back to List", "Index", new { applicantId = ViewBag.ApplicantId })
+</p>
+
+

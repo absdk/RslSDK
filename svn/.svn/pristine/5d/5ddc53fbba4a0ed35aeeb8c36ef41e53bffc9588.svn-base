@@ -1,0 +1,53 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfilePublish
+
+@{
+    ViewBag.Title = "ApplicantProfilePublish";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Profile Publish</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Profile Publish</h2>
+		<fieldset>
+
+    <label>WebUrl</label>
+    <div class="display-field">@Model.WebUrl</div>
+
+    <label>SeoTag</label>
+    <div class="display-field">@Model.SeoTag</div>
+
+    <label>StartPublishDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.StartPublishDate)</div>
+
+    <label>EndPublishDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.EndPublishDate)</div>
+
+    <label>IsCurrentlyPublish</label>
+    <div class="display-field">@Model.IsCurrentlyPublish</div>
+
+    <label>IsPremiumProfile</label>
+    <div class="display-field">@Model.IsPremiumProfile</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ApplicantProfileThemeLibrary</label>
+    <div class="display-field">@(Model.ApplicantProfileThemeLibrary == null ? "None" : Model.ApplicantProfileThemeLibrary.Name)</div>
+
+    <label>PublishedByUser</label>
+    <div class="display-field">@(Model.PublishedByUser == null ? "None" : Model.PublishedByUser.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantProfilePublishID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

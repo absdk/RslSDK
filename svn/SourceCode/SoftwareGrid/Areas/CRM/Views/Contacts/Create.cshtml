@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.Contact
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutCRM.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Contact</h2>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="box grid_16">
+        <div class="block">
+            <h2 class="box_head">
+                Contact</h2>
+            @Html.HiddenFor(model => model.CompanyID)
+            @Html.Partial("_CreateOrEdit", Model)
+            <div class="form-item">
+                @Html.ActionLink("Back to List", "Index", new { companyId = ViewBag.CompanyId })
+            </div>
+        </div>
+    </div>
+}

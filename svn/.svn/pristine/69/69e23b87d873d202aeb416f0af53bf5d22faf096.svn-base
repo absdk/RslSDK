@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class ApplicantExperienceRepository : IApplicantExperienceRepository
+    {
+		private readonly RepositoryContext context;
+
+        public ApplicantExperienceRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<ApplicantExperience> All
+        {
+            get { return context.ApplicantExperience; }
+        }
+
+        public IQueryable<ApplicantExperience> AllIncluding(int applicantId, params Expression<Func<ApplicantExperience, object>>[] includeProperties)
+        {
+            IQueryable<ApplicantExperience> query = context.ApplicantExperience;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query.Where(exp=>exp.ApplicantID==applicantId);
+        }
+
+        public ApplicantExperience Find(int id)
+        {
+            return context.ApplicantExperience.Find(id);
+        }
+
+        public void InsertOrUpdate(ApplicantExperience applicantexperience)
+        {
+            if (applicantexperience.ApplicantExperienceID == default(int)) {
+                // New entity
+                context.ApplicantExperience.Add(applicantexperience);
+            } else {
+                // Existing entity
+                context.Entry(applicantexperience).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var applicantexperience = context.ApplicantExperience.Find(id);
+            context.ApplicantExperience.Remove(applicantexperience);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IApplicantExperienceRepository
+    {
+        IQueryable<ApplicantExperience> All { get; }
+        IQueryable<ApplicantExperience> AllIncluding(int applicantId,params Expression<Func<ApplicantExperience, object>>[] includeProperties);
+        ApplicantExperience Find(int id);
+        void InsertOrUpdate(ApplicantExperience applicantexperience);
+        void Delete(int id);
+        void Save();
+    }
+}

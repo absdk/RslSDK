@@ -1,0 +1,44 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationDocument
+
+@{
+    ViewBag.Title = "OrganizationDocument";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Document</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Document</h2>
+		<fieldset>
+
+    <label>DocumentTitle</label>
+    <div class="display-field">@Model.DocumentTitle</div>
+
+    <label>DocumentFile</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.DocumentFile).ToString()</div>
+
+    <label>OriginalFileInfo</label>
+    <div class="display-field">@Model.OriginalFileInfo</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+
+    <label>OrganizationDocumentCategory</label>
+    <div class="display-field">@(Model.OrganizationDocumentCategory == null ? "None" : Model.OrganizationDocumentCategory.Name)</div>
+
+    <label>OrganizationDocumentFolder</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationDocumentFolder).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationDocumentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,62 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationDocumentFolder
+@* This partial view defines form fields that will appear when creating and editing entities *@
+	<fieldset>
+		@Html.ValidationSummary()
+			<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.OrganizationID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+						<div class="form-item">
+			@Html.LabelFor(model => model.ParentFolderID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ParentFolderID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationDocumentFolder>)ViewBag.PossibleParentFolders).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationDocumentFolderID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationDocumentFolderID == Model.ParentFolderID)
+			    }), "Choose...")
+			</div>
+						</div>
+					
+		<div class="form-item">
+            @Html.LabelFor(model => model.FolderName)
+            <div>
+								@Html.EditorFor(model => model.FolderName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Description)
+            <div>
+								@Html.EditorFor(model => model.Description)
+				            </div>
+					</div>
+			<div class="form-item">
+			@Html.LabelFor(model => model.CreatedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CreatedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleCreatedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.CreatedByUserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+				
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

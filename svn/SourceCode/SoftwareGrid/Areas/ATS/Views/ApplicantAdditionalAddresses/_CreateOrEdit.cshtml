@@ -1,0 +1,84 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantAdditionalAddress
+@using SoftwareGrid.DataLogic.Models
+@{
+    Country selectedCountry = new Country();
+    if(Model.CountryID.HasValue)
+    {
+        selectedCountry.CountryID = Model.CountryID.Value;
+    }
+    State selectedState = new State();
+    if (Model.StateID.HasValue)
+    {
+        selectedState.StateID = Model.StateID.Value;
+    }
+}
+@* This partial view defines form fields that will appear when creating and editing entities *@
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.AddressLine1)
+        <div>
+            @Html.EditorFor(model => model.AddressLine1)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.AddressLine2)
+        <div>
+            @Html.EditorFor(model => model.AddressLine2)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.PostBoxNumber)
+        <div>
+            @Html.EditorFor(model => model.PostBoxNumber)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.City)
+        <div>
+            @Html.EditorFor(model => model.City)
+        </div>
+    </div>
+    @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_Country, selectedCountry)
+    <div id="divCountryID">
+        @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_State, selectedState)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ZipCode)
+        <div>
+            @Html.EditorFor(model => model.ZipCode)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.HomePhone)
+        <div>
+            @Html.EditorFor(model => model.HomePhone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.MobilePhone)
+        <div>
+            @Html.EditorFor(model => model.MobilePhone)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.PersonalEmail)
+        <div>
+            @Html.EditorFor(model => model.PersonalEmail)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsPrimaryConatact)
+        <div>
+            @Html.EditorFor(model => model.IsPrimaryConatact)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            @Html.HiddenFor(model => model.ApplicantID)
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

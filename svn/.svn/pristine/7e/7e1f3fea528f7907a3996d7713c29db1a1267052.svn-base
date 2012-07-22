@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantPreferredWorkLocation
+
+@{
+    ViewBag.Title = "Applicant Preferred Work Location";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+	<h2>Applicant Preferred Work Location</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Applicant Preferred Work Location</h2>
+						        @Html.HiddenFor(model => model.ApplicantPreferredWorkLocationID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

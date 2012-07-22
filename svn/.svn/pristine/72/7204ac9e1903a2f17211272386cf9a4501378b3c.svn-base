@@ -1,0 +1,47 @@
+@model SoftwareGrid.DataLogic.Models.VendorNote
+@* This partial view defines form fields that will appear when creating and editing entities *@
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.VendorNoteCategoryID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.VendorNoteCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.VendorNoteCategory>)ViewBag.PossibleVendorNoteCategories).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.VendorNoteCategoryID.ToString(),
+           Selected = (Model != null) && (option.VendorNoteCategoryID == Model.VendorNoteCategoryID)
+       }), "Choose...")
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.WrittenByUserID)
+        <div>
+            @Html.EditorFor(model => model.WrittenByUserID)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.DateTime)
+        <div>
+            @Html.EditorFor(model => model.DateTime)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Notes)
+        <div>
+            @Html.EditorFor(model => model.Notes)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

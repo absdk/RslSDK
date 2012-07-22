@@ -1,0 +1,129 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.ATS.Controllers
+{   
+    public class ApplicantDocumentsController : Controller
+    {
+		private readonly IApplicantRepository applicantRepository;
+		private readonly IApplicantDocumentCategoryRepository applicantdocumentcategoryRepository;
+		private readonly IApplicantDocumentRepository applicantdocumentRepository;
+        public ApplicantDocumentsController(IApplicantRepository applicantRepository, IApplicantDocumentCategoryRepository applicantdocumentcategoryRepository, IApplicantDocumentRepository applicantdocumentRepository)
+        {
+			this.applicantRepository = applicantRepository;
+			this.applicantdocumentcategoryRepository = applicantdocumentcategoryRepository;
+			this.applicantdocumentRepository = applicantdocumentRepository;
+        }
+
+        //
+        // GET: /ApplicantDocuments/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(applicantdocumentRepository.AllIncluding(applicantdocument => applicantdocument.Applicant, applicantdocument => applicantdocument.ApplicantDocumentCategory));
+        }
+		
+		public ViewResult Search(ApplicantDocument searchApplicantDocument)
+        {
+			if(searchApplicantDocument!=null)
+			{
+							}
+						return View("Index",applicantdocumentRepository.AllIncluding(applicantdocument => applicantdocument.Applicant, applicantdocument => applicantdocument.ApplicantDocumentCategory));
+		}
+
+        //
+        // GET: /ApplicantDocuments/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(applicantdocumentRepository.Find(id));
+        }
+
+        //
+        // GET: /ApplicantDocuments/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			ApplicantDocument applicantdocument = new ApplicantDocument();
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleApplicantDocumentCategories = applicantdocumentcategoryRepository.All;
+            return View(applicantdocument);
+        } 
+
+        //
+        // POST: /ApplicantDocuments/Create
+        [HttpPost]
+        public ActionResult Create(ApplicantDocument applicantdocument)
+        {
+            if (ModelState.IsValid) {
+                applicantdocumentRepository.InsertOrUpdate(applicantdocument);
+                applicantdocumentRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleApplicantDocumentCategories = applicantdocumentcategoryRepository.All;
+				return View(applicantdocument);
+			}
+        }
+        
+        //
+        // GET: /ApplicantDocuments/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleApplicantDocumentCategories = applicantdocumentcategoryRepository.All;
+             return View(applicantdocumentRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantDocuments/Edit/5
+        [HttpPost]
+        public ActionResult Edit(ApplicantDocument applicantdocument)
+        {
+            if (ModelState.IsValid) {
+                applicantdocumentRepository.InsertOrUpdate(applicantdocument);
+                applicantdocumentRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleApplicantDocumentCategories = applicantdocumentcategoryRepository.All;
+				return View(applicantdocument);
+			}
+        }
+
+        //
+        // GET: /ApplicantDocuments/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(applicantdocumentRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantDocuments/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            applicantdocumentRepository.Delete(id);
+            applicantdocumentRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

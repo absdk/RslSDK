@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantPassportInfo
+
+@{
+    ViewBag.Title = "Applicant Passport Info";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+<h2>Applicant Passport Info</h2>
+</div>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Applicant Passport Info</h2>
+
+			@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}
+

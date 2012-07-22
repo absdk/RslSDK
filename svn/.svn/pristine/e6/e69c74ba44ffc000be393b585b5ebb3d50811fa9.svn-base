@@ -1,0 +1,103 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantSkillsExpertise
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SkillsExpEduCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SkillsExpEduCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SkillsExpEduCategory>)ViewBag.PossibleSkillsExpEduCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SkillsExpEduCategoryID.ToString(),
+			        Selected = (Model != null) && (option.SkillsExpEduCategoryID == Model.SkillsExpEduCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.SkillsExpEduID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SkillsExpEduID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SkillsExpEdu>)ViewBag.PossibleSkillsExpEdus).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Title), 
+			        Value = option.SkillsExpEduID.ToString(),
+			        Selected = (Model != null) && (option.SkillsExpEduID == Model.SkillsExpEduID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.YearsOfExperience)
+            <div>
+								@Html.EditorFor(model => model.YearsOfExperience)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.LastUsedDate)
+            <div>
+								@Html.EditorFor(model => model.LastUsedDate)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DisplaySequence)
+            <div>
+								@Html.EditorFor(model => model.DisplaySequence)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.ManagerRatingScaleID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ManagerRatingScaleID, ((IEnumerable<SoftwareGrid.DataLogic.Models.RatingScale>)ViewBag.PossibleManagerRatingScales).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.RatingScaleID.ToString(),
+			        Selected = (Model != null) && (option.RatingScaleID == Model.ManagerRatingScaleID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsVerified)
+            <div>
+								@Html.EditorFor(model => model.IsVerified)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.VerifiedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.VerifiedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleVerifiedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.VerifiedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.VerificationDate)
+            <div>
+								@Html.EditorFor(model => model.VerificationDate)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

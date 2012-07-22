@@ -1,0 +1,147 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.ATS.Controllers
+{   
+    public class ApplicantVisaInfoesController : Controller
+    {
+		private readonly IApplicantRepository applicantRepository;
+		private readonly IVisaRepository visaRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly IVisaStatusRepository visastatusRepository;
+		private readonly IApplicantVisaInfoRepository applicantvisainfoRepository;
+        public ApplicantVisaInfoesController(IApplicantRepository applicantRepository, IVisaRepository visaRepository, ICountryRepository countryRepository, IStateRepository stateRepository, IVisaStatusRepository visastatusRepository, IApplicantVisaInfoRepository applicantvisainfoRepository)
+        {
+			this.applicantRepository = applicantRepository;
+			this.visaRepository = visaRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.visastatusRepository = visastatusRepository;
+			this.applicantvisainfoRepository = applicantvisainfoRepository;
+        }
+
+        //
+        // GET: /ApplicantVisaInfoes/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(applicantvisainfoRepository.AllIncluding(applicantvisainfo => applicantvisainfo.Applicant, applicantvisainfo => applicantvisainfo.VisaType, applicantvisainfo => applicantvisainfo.IssuanceCountry, applicantvisainfo => applicantvisainfo.State, applicantvisainfo => applicantvisainfo.VisaStatus));
+        }
+		
+		public ViewResult Search(ApplicantVisaInfo searchApplicantVisaInfo)
+        {
+			if(searchApplicantVisaInfo!=null)
+			{
+							}
+						return View("Index",applicantvisainfoRepository.AllIncluding(applicantvisainfo => applicantvisainfo.Applicant, applicantvisainfo => applicantvisainfo.VisaType, applicantvisainfo => applicantvisainfo.IssuanceCountry, applicantvisainfo => applicantvisainfo.State, applicantvisainfo => applicantvisainfo.VisaStatus));
+		}
+
+        //
+        // GET: /ApplicantVisaInfoes/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(applicantvisainfoRepository.Find(id));
+        }
+
+        //
+        // GET: /ApplicantVisaInfoes/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			ApplicantVisaInfo applicantvisainfo = new ApplicantVisaInfo();
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleVisaTypes = visaRepository.All;
+			ViewBag.PossibleIssuanceCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVisaStatus = visastatusRepository.All;
+            return View(applicantvisainfo);
+        } 
+
+        //
+        // POST: /ApplicantVisaInfoes/Create
+        [HttpPost]
+        public ActionResult Create(ApplicantVisaInfo applicantvisainfo)
+        {
+            if (ModelState.IsValid) {
+                applicantvisainfoRepository.InsertOrUpdate(applicantvisainfo);
+                applicantvisainfoRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleVisaTypes = visaRepository.All;
+				ViewBag.PossibleIssuanceCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVisaStatus = visastatusRepository.All;
+				return View(applicantvisainfo);
+			}
+        }
+        
+        //
+        // GET: /ApplicantVisaInfoes/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleVisaTypes = visaRepository.All;
+			ViewBag.PossibleIssuanceCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVisaStatus = visastatusRepository.All;
+             return View(applicantvisainfoRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantVisaInfoes/Edit/5
+        [HttpPost]
+        public ActionResult Edit(ApplicantVisaInfo applicantvisainfo)
+        {
+            if (ModelState.IsValid) {
+                applicantvisainfoRepository.InsertOrUpdate(applicantvisainfo);
+                applicantvisainfoRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleVisaTypes = visaRepository.All;
+				ViewBag.PossibleIssuanceCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVisaStatus = visastatusRepository.All;
+				return View(applicantvisainfo);
+			}
+        }
+
+        //
+        // GET: /ApplicantVisaInfoes/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(applicantvisainfoRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantVisaInfoes/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            applicantvisainfoRepository.Delete(id);
+            applicantvisainfoRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

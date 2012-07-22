@@ -1,0 +1,508 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="EntityFramework" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="System.Data.Linq.Mapping" #>
+<#@ import namespace="System.Data.Objects.DataClasses" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ assembly name="E:\Development\R&D\SoftwareGrid\trunk\SourceCode\SoftwareGrid.DataLogic\bin\Debug\SoftwareGrid.DataLogic.dll" #>
+<# 
+string assemblyPath=Host.TemplateFile; 
+assemblyPath=assemblyPath.Substring(0,assemblyPath.IndexOf("packages"));
+assemblyPath=assemblyPath+@"SoftwareGrid.DataLogic\bin\Debug\SoftwareGrid.DataLogic.dll";
+#>
+<# var viewDataType = (EnvDTE.CodeType) Model.ViewDataType; #>
+<# if(viewDataType != null) { #>
+@model IEnumerable<<#= viewDataType.FullName #>>
+@using EasySoft.Helper;
+<# } #>
+@{
+    ViewBag.Title = "<#= FixName(viewDataType.FullName.Split('.').Last()) #>";
+<# if (!String.IsNullOrEmpty(Model.Layout)) { #>
+    Layout = "<#= Model.Layout #>";
+<# } #>
+}
+<div class="flat_area grid_16">
+    <h2><#= FixName(viewDataType.FullName.Split('.').Last()) #> List</h2>
+    <p>
+	<# if(Model.ParentModelName!=null && Model.ParentModelName!="") { #>
+		@Html.ActionLink("Create New", "Create",new { <#= Model.ParentModelName.ToLower() #>Id = ViewBag.<#= Model.ParentModelName #>Id })
+	<# } else { #>
+		@Html.ActionLink("Create New", "Create")
+	<# } #>
+    </p>
+</div>
+<#
+List<ModelProperty> properties = GetModelProperties(Model.ViewDataType, true);
+string keyName =string.Empty;
+foreach (ModelProperty property in properties) {
+    if (property.IsPrimaryKey) {
+		keyName=property.Name;
+		break;
+	}
+}
+try
+{
+List<SoftwareGrid.DataLogic.Attributes.IncludeInList> columnList=new List<SoftwareGrid.DataLogic.Attributes.IncludeInList>();
+List<SoftwareGrid.DataLogic.Attributes.IncludeInList> searchColumnList=new List<SoftwareGrid.DataLogic.Attributes.IncludeInList>();
+Assembly asm = Assembly.LoadFile(assemblyPath);
+string typeName=viewDataType.FullName;
+Type type = asm.GetType(typeName);
+PropertyInfo[] propertyList = type.GetProperties();
+int sequence=0;
+foreach (PropertyInfo currentProperty in propertyList)
+{
+	object[] attributes = currentProperty.GetCustomAttributes(typeof(SoftwareGrid.DataLogic.Attributes.IncludeInList), false);
+    if (attributes != null)
+    {
+		string columnName=currentProperty.Name;
+		string searchColumnName=currentProperty.Name;
+		string displayName=string.Empty;
+		bool isForeignKey=false;
+		foreach (ModelProperty property in properties) 
+		{
+			if(property.Name==currentProperty.Name)
+			{
+				object[] displayAttributes = currentProperty.GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false);
+				if(displayAttributes!=null)
+				{
+					foreach (object objDisplayAttribute in displayAttributes)
+					{
+						System.ComponentModel.DataAnnotations.DisplayAttribute currentDisplayAttribute=(System.ComponentModel.DataAnnotations.DisplayAttribute)objDisplayAttribute;
+						displayName=currentDisplayAttribute.Name;
+					}
+				}
+				if(property.IsForeignKey)
+				{
+					columnName=property.Name.Replace("ID",string.Empty)+".Name";
+					isForeignKey=true;
+				}
+				break;
+			}
+		}
+        foreach (object currentAttribute in attributes)
+        {
+            SoftwareGrid.DataLogic.Attributes.IncludeInList includeListAttribute=(SoftwareGrid.DataLogic.Attributes.IncludeInList)currentAttribute;
+			if(includeListAttribute.Sequence==0)
+			{
+				includeListAttribute.Sequence=sequence;
+			}
+			includeListAttribute.ColumnName=columnName;
+			if(displayName!=string.Empty)
+			{
+				includeListAttribute.DisplayName=displayName;
+			}
+			else
+			{
+				includeListAttribute.DisplayName=columnName;
+			}
+			if(includeListAttribute.IncludeInGrid)
+			{
+				columnList.Add(includeListAttribute);
+			}
+			if(includeListAttribute.AllowSearch)
+			{
+				SoftwareGrid.DataLogic.Attributes.IncludeInList searchAttribute=new SoftwareGrid.DataLogic.Attributes.IncludeInList();
+				searchAttribute.IsForeignKey=isForeignKey;
+				searchAttribute.DisplayName=includeListAttribute.DisplayName;
+				searchAttribute.ColumnName=searchColumnName;
+				searchColumnList.Add(searchAttribute);
+			}
+			sequence++;
+        }
+    }
+}
+if(searchColumnList!=null && searchColumnList.Count>0)
+{
+	int i=0;
+	int halfColumnCount=searchColumnList.Count/2;
+	if(searchColumnList.Count%2!=0)
+	{
+		halfColumnCount++;
+	}
+#>
+@using (Html.BeginForm("Search", "<#= viewDataType.Name #>"))
+{
+	<div class="box grid_16">
+        <h2 class="box_head">Search</h2>
+        <a href="#" class="grabber">&nbsp;</a>
+        <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+				<div class="search-item">
+					<#
+					for(i=0;i<searchColumnList.Count;i++)
+					{
+						if(i==0)
+						{
+						#>
+				    <div class="search-item-left">
+						<#
+						}
+						if(i<halfColumnCount)
+						{
+					#>
+				        <div class="label-container">
+				            @Html.Label("<#= searchColumnList[i].DisplayName #>") 
+				        </div>
+				        <div class="text-container">
+							<#
+							if(!searchColumnList[i].IsForeignKey)
+							{
+							#>
+				            @Html.TextBox("<#= searchColumnList[i].ColumnName #>") 
+							<#
+							}
+							else
+							{
+								foreach (RelatedEntityInfo relation in ParentRelations) 
+								{
+									if(searchColumnList[i].ColumnName==relation.RelationProperty.Name)
+									{
+						#>
+						    @Html.DropDownList("<#= searchColumnList[i].ColumnName #>", ((IEnumerable<<#= relation.RelatedEntityType.FullName #>>)ViewBag.Possible<#= relation.RelationNamePlural #>).Select(option => new SelectListItem {
+						        Text = <#= GetValueExpression("option", relation.RelatedEntityType) #>, 
+						        Value = option.<#= relation.RelatedEntityPrimaryKeyName #>.ToString(),
+						    }), "Choose...")
+						<#
+									break;
+									}
+								}
+							}
+							#>
+				        </div>
+					<#
+						}
+						if(i==halfColumnCount)
+						{
+						#>
+				    </div>
+				    <div class="search-item-right">
+						<#
+						}
+						if(i>=halfColumnCount)
+						{
+					#>
+				        <div class="label-container">
+				            @Html.Label("<#= searchColumnList[i].DisplayName #>") 
+				        </div>
+				        <div class="text-container">
+							<#
+							if(!searchColumnList[i].IsForeignKey)
+							{
+							#>
+				            @Html.TextBox("<#= searchColumnList[i].ColumnName #>") 
+							<#
+							}
+							else
+							{
+								foreach (RelatedEntityInfo relation in ParentRelations) 
+								{
+									if(searchColumnList[i].ColumnName==relation.RelationProperty.Name)
+									{
+						#>
+						    @Html.DropDownList("<#= searchColumnList[i].ColumnName #>", ((IEnumerable<<#= relation.RelatedEntityType.FullName #>>)ViewBag.Possible<#= relation.RelationNamePlural #>).Select(option => new SelectListItem {
+						        Text = <#= GetValueExpression("option", relation.RelatedEntityType) #>, 
+						        Value = option.<#= relation.RelatedEntityPrimaryKeyName #>.ToString(),
+						    }), "Choose...")
+						<#
+									break;
+									}
+								}
+							}
+							#>
+				        </div>
+					<#
+						}
+						if(i==searchColumnList.Count-1)
+						{
+						#>
+				    </div>
+						<#
+						}
+					}
+					#>
+				</div>
+				<div style="width:50%; float:left;">
+				&nbsp;
+				</div>
+				<div class="button_bar clearfix" style="float:left;">
+					<button class="green" type="submit">
+							<span>Search</span>
+					</button>
+				</div>
+			</div>
+        </div>
+    </div>
+}
+<#
+}
+if(columnList!=null && columnList.Count>0)
+{
+#>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.<#= keyName #>))
+		.Columns(columns =>
+        {
+<#
+	columnList = columnList.OrderBy(x => x.Sequence).ToList();
+	string widthUnit=string.Empty;
+	foreach(SoftwareGrid.DataLogic.Attributes.IncludeInList currentColumn in columnList)
+	{
+		if(currentColumn.AllowWidthInPercentage)
+		{
+			widthUnit="%";
+		}
+		else
+		{
+			widthUnit="px";
+		}
+		if(currentColumn.DisplayName==string.Empty)
+		{
+		#>
+		columns.Bound(c => c.<#= currentColumn.ColumnName #>).Width("<#= currentColumn.Width+widthUnit #>").Sortable(<#= currentColumn.AllowSorting.ToString().ToLower() #>).Groupable(<#= currentColumn.AllowGrouping.ToString().ToLower() #>).Filterable(<#= currentColumn.AllowFiltering.ToString().ToLower() #>); 
+		<#
+		}
+		else
+		{
+		#>
+		columns.Bound(c => c.<#= currentColumn.ColumnName #>).Title("<#= currentColumn.DisplayName #>").Width("<#= currentColumn.Width+widthUnit #>").Sortable(<#= currentColumn.AllowSorting.ToString().ToLower() #>).Groupable(<#= currentColumn.AllowGrouping.ToString().ToLower() #>).Filterable(<#= currentColumn.AllowFiltering.ToString().ToLower() #>); 
+		<#
+		}
+	}
+#>
+		columns.Template(
+                @<text>
+                    <center>
+						<# if(Model.ParentModelName!=null && Model.ParentModelName!="") { #>
+							<a href="@Url.Action("Edit", "<#= viewDataType.FullName.Split('.').Last() #>", new { id = @item.<#= keyName #>,<#= Model.ParentModelName.ToLower() #>Id = ViewBag.<#= Model.ParentModelName #>Id })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+						<# } else { #>
+							<a href="@Url.Action("Edit", "<#= viewDataType.FullName.Split('.').Last() #>", new { id = @item.<#= keyName #> })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+						<# } #>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+						<# if(Model.ParentModelName!=null && Model.ParentModelName!="") { #>
+							<a href="@Url.Action("Delete", "<#= viewDataType.FullName.Split('.').Last() #>", new { id = @item.<#= keyName #>,<#= Model.ParentModelName.ToLower() #>Id = ViewBag.<#= Model.ParentModelName #>Id })" title="Delete"><img alt="Delete"  src="/content/images/delete.png" /></a>
+						<# } else { #>
+							<a href="@Url.Action("Delete", "<#= viewDataType.FullName.Split('.').Last() #>", new { id = @item.<#= keyName #> })" title="Delete"><img alt="Delete"  src="/content/images/delete.png" /></a>
+						<# } #>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			<#
+			for(int i=0;i<searchColumnList.Count;i++)
+			{
+			#>
+            if (ViewData["<#= searchColumnList[i].ColumnName #>"].ToString(true) != string.Empty)
+            {
+				<#
+				if(searchColumnList[i].IsForeignKey)
+				{
+				#>
+                filters.Add(o => o.<#= searchColumnList[i].ColumnName #>).IsEqualTo(ViewData["<#= searchColumnList[i].ColumnName #>"].ToInteger(true));
+				<#
+				}
+				else
+				{
+				#>
+                filters.Add(o => o.<#= searchColumnList[i].ColumnName #>).Contains(ViewData["<#= searchColumnList[i].ColumnName #>"].ToString(true));
+				<#
+				}
+				#>
+            }
+			<#
+			}
+			#>
+        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+<#
+}
+else
+{
+#>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+    .Name("Grid")
+    .DataKeys(keys => keys.Add(c => c.<#= keyName #>))
+    .Columns(columns =>
+                    {   
+                        columns.AutoGenerate(column =>
+                                                {
+                                                    if (column.Member == "<#= keyName #>")
+                                                        column.Visible = false;
+                                                });
+						columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="@Url.Action("Edit", "<#= viewDataType.FullName.Split('.').Last() #>", new { id = @item.<#= keyName #> })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Edit</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+							            columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="/<#= viewDataType.FullName.Split('.').Last() #>/Delete/@item.<#= keyName #>" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Delete</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+                    })
+    .Sortable()
+    .Pageable()
+) 
+</div>
+<#
+}
+
+}
+catch(Exception ex)
+{
+	#>
+		Exception <#= ex.Message #>
+	<#
+}
+#>
+
+<#+
+// Describes the information about a property on the model
+class ModelProperty {
+    public string Name { get; set; }
+    public string ValueExpression { get; set; }
+	public EnvDTE.CodeTypeRef Type { get; set; }
+    public bool IsPrimaryKey { get; set; }
+	public bool IsForeignKey { get; set; }
+	public bool IsReadOnly { get; set; }
+}
+
+// Change this list to include any non-primitive types you think should be eligible to be edited using a textbox
+static Type[] bindableNonPrimitiveTypes = new[] {
+    typeof(string),
+    typeof(decimal),
+    typeof(Guid),
+    typeof(DateTime),
+    typeof(DateTimeOffset),
+    typeof(TimeSpan),
+};
+
+// Call this to get the list of properties in the model. Change this to modify or add your
+// own default formatting for display values.
+List<ModelProperty> GetModelProperties(EnvDTE.CodeType typeInfo, bool includeUnbindableProperties) {
+    List<ModelProperty> results = GetEligibleProperties(typeInfo, includeUnbindableProperties);
+    
+    foreach (ModelProperty prop in results) {
+        if (prop.Type.UnderlyingTypeIs<double>() || prop.Type.UnderlyingTypeIs<decimal>()) {
+            prop.ValueExpression = "String.Format(\"{0:F}\", " + prop.ValueExpression + ")";
+        }
+        else if (prop.Type.UnderlyingTypeIs<DateTime>()) {
+            prop.ValueExpression = "String.Format(\"{0:g}\", " + prop.ValueExpression + ")";
+        }
+		else if (!IsBindableType(prop.Type)) {
+			prop.ValueExpression = GetValueExpression("Model." + prop.Name, (EnvDTE.CodeType)prop.Type.CodeType);
+		}
+    }
+
+    return results;
+}
+
+// Change this list to include the names of properties that should be selected to represent an entity as a single string
+static string[] displayPropertyNames = new[] { "Name", "Title", "LastName", "Surname", "Subject", "Count" };
+
+string GetValueExpression(string propertyExpression, EnvDTE.CodeType propertyType) {
+	if (propertyType != null) {
+		var chosenSubproperty = propertyType.DisplayColumnProperty() ?? propertyType.FindProperty(displayPropertyNames);
+		if (chosenSubproperty != null) {
+			var toStringSuffix = chosenSubproperty.Type.AsFullName == "System.String" ? "" : ".ToString()";
+			return String.Format("({0} == null ? \"None\" : {0}.{1}{2})", propertyExpression, chosenSubproperty.Name, toStringSuffix);
+		}
+	}
+	return "Html.DisplayTextFor(_ => " + propertyExpression + ").ToString()";
+}
+
+// Helper
+List<ModelProperty> GetEligibleProperties(EnvDTE.CodeType typeInfo, bool includeUnbindableProperties) {
+    List<ModelProperty> results = new List<ModelProperty>();
+	if (typeInfo != null) {
+		foreach (var prop in typeInfo.VisibleMembers().OfType<EnvDTE.CodeProperty>()) {
+			if (prop.IsReadable() && !prop.HasIndexParameters() && (includeUnbindableProperties || IsBindableType(prop.Type))) {
+				results.Add(new ModelProperty {
+					Name = prop.Name,
+					ValueExpression = "Model." + prop.Name,
+					Type = prop.Type,
+					IsPrimaryKey = Model.PrimaryKeyName == prop.Name,
+					IsForeignKey = ParentRelations.Any(x => x.RelationProperty == prop),
+					IsReadOnly = !prop.IsWriteable()
+				});
+			}
+		}
+	}
+
+    return results;
+}
+
+IEnumerable<RelatedEntityInfo> ParentRelations {
+	get { return ((IEnumerable)Model.RelatedEntities).OfType<RelatedEntityInfo>().Where(x => x.RelationType == RelationType.Parent); }
+}
+
+// Helper
+bool IsBindableType(EnvDTE.CodeTypeRef type) {
+    return type.UnderlyingIsPrimitive() || bindableNonPrimitiveTypes.Any(x => type.UnderlyingTypeIs(x));
+}
+
+public string FixName(string propName)
+{
+	if (propName.ToLower() != "id" && propName.ToLower().EndsWith("id"))
+	{
+		propName = propName.Replace("Id","").Replace("ID","");
+	}
+	return Regex.Replace(propName,"([A-Z])"," $1",RegexOptions.Compiled).Trim();
+}
+#>

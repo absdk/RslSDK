@@ -1,0 +1,43 @@
+
+@model SoftwareGrid.DataLogic.Models.SkillsExpEdu
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.SkillsExpEduCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SkillsExpEduCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SkillsExpEduCategory>)ViewBag.PossibleSkillsExpEduCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SkillsExpEduCategoryID.ToString(),
+			        Selected = (Model != null) && (option.SkillsExpEduCategoryID == Model.SkillsExpEduCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Title)
+            <div>
+								@Html.EditorFor(model => model.Title)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Description)
+            <div>
+								@Html.EditorFor(model => model.Description)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

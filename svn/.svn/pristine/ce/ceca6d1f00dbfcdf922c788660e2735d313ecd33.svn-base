@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationBusinessDivision
+
+@{
+    ViewBag.Title = "Organization Business Division";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+	<h2>Organization Business Division</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Organization Business Division</h2>
+						        @Html.HiddenFor(model => model.OrganizationBusinessDivisionID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

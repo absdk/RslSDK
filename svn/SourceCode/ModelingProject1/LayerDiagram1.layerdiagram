@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="59174a1b-81c8-4323-812f-f16210e6be89" name="ContactView" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="a9046269-481b-4644-be2e-69f5d0575357" name="Comment1">
+      <description>Repository Layer will request to Model to Return Result and it will map it to properties which are accessible in Views</description>
+      <body>Repository Layer will request to Model to Return Result and it will map it to properties which are accessible in Views</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="ba9d847b-c646-4a90-848f-80f0cb66e89d" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="e877e168-f8f2-4a2c-91c8-1ee269d5a927" name="Comment2">
+      <body>Web Layer Contains View, Controller and we will inject dependency of Repository Interface in it</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="54379c28-6808-49a1-8000-563848451da7" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="6014e491-0052-4bdb-bf53-3f75003b6ac0" name="Comment3">
+      <body>Model Layer will query to the databse and map against all the properties</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="fa19b8e6-f39a-4d79-a53b-16f2671e7533" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="54379c28-6808-49a1-8000-563848451da7" name="Web Layer">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="23c71d3a-f2db-4849-af43-3cbebcd2efaf" direction="Bidirectional">
+          <layerMoniker Id="ba9d847b-c646-4a90-848f-80f0cb66e89d" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="b6a15aa8-defd-4d80-895a-1a245a2962a7" name="Layer1" />
+      </childLayers>
+    </layer>
+    <layer Id="ba9d847b-c646-4a90-848f-80f0cb66e89d" name="Repository Layer">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="3ffda4ab-24ca-475e-9654-9b35d87babca" direction="Bidirectional">
+          <layerMoniker Id="fa19b8e6-f39a-4d79-a53b-16f2671e7533" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="fa19b8e6-f39a-4d79-a53b-16f2671e7533" name="Model Layer" />
+  </layers>
+</layerModel>

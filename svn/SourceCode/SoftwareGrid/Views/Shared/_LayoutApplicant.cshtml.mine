@@ -1,0 +1,509 @@
+﻿@using EasySoft.Helper;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Html.Partial("_AppStyles")
+    @Html.Partial("_AppScripts")
+    <link rel="stylesheet" type="text/css" href="/styles/theme/@Html.RenderColour()"/>
+    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.black.css").Combined(true).Compress(true)))
+    @*<link rel="stylesheet" type="text/css" href="@Url.Content("~/content/main.css")">
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/myscript.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/adminica_ui.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/adminica_forms.js")" type="text/javascript"></script>*@
+</head>
+<body>
+    @RenderBody()
+    <div id="wrapper">
+        <div id="topbar" class="clearfix">
+            <a href="/adminica/index.html" class="logo"><span>Adminica</span></a>
+            <div class="user_box clearfix">
+                <img src="@Url.Content("~/content/images/profile.jpg")" width="55" alt="Profile Pic" />
+                <h2>
+                    @Roles.GetRolesForUser(User.Identity.Name).FirstOrDefault()</h2>
+                <h3>
+                    <a class="text_shadow" href="#">@User.Identity.Name</a></h3>
+                <ul>
+                    <li><a href="#">profile</a><span class="divider">|</span></li>
+                    <li><a href="#">settings</a><span class="divider">|</span></li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Log Out", "LogOut", "Account")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Log On", "LogOn", "Account")
+                        }
+                    </li>
+                </ul>
+            </div>
+            <!-- #user_box -->
+        </div>
+        <!-- #topbar -->
+        <div id="sidebar">
+            <div class="cog">
+                +</div>
+            <a href="#" class="logo"><span>Adminica</span></a>
+            <div class="user_box clearfix">
+                <img src="/images/profile.jpg" width="55" alt="Profile Pic" />
+                <h2>
+                    Administrator</h2>
+                <h3>
+                    <a href="#">John Smith</a></h3>
+                <ul>
+                    <li><a href="#">settings</a><span class="divider">|</span></li>
+                    <li><a href="#">logout</a></li>
+                </ul>
+            </div>
+            <!-- #user_box -->
+            <ul class="side_accordion">
+                <!-- add class 'open_multiple' to change to from accordion to toggles -->
+                <li><a href="#">
+                    <img src="/images/icons/small/grey/home.png" />Home</a>
+                    <ul class="drawer">
+                        <li><a href="#">Activity</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Tasks</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">
+                    <img src="/images/icons/small/grey/mail.png" />Mailbox<span class="alert badge alert_red">5</span></a>
+                    <ul class="drawer">
+                        <li><a href="#">Inbox</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Drafts<span class="alert badge alert_grey">2</span></a></li>
+                        <li><a href="#">Trash<span class="alert badge alert_grey">3</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#">
+                    <img src="/images/icons/small/grey/documents.png" />Documents<span class="alert badge alert_black">2</span></a>
+                    <ul class="drawer">
+                        <li><a href="#">Create New</a></li>
+                        <li><a href="#">View All</a></li>
+                        <li><a href="#">Upload/Download<span class="alert badge alert_grey">2</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#">
+                    <img src="/images/icons/small/grey/users.png" />Members</a>
+                    <ul class="drawer">
+                        <li><a href="#">Add New</a></li>
+                        <li><a href="#">Edit/Delete</a></li>
+                        <li><a href="#">Search Profiles</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://www.tricycle.ie">
+                    <img src="/images/icons/small/grey/graph.png" />Statistics</a></li>
+                <li><a href="#">
+                    <img src="/images/icons/small/grey/cog_2.png" />Settings</a>
+                    <ul class="drawer">
+                        <li><a href="#">Account</a></li>
+                        <li><a href="#">System</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form>
+            <div id="search_side">
+                <input class="" type="text" value="Search Adminica..." onclick="value=''"></div>
+            </form>
+            <ul id="side_links" class="side_links" style="margin-bottom: 0;">
+                <li><a href="#">Online Documentation</a>
+                <li><a href="#">Expert Forum</a></li>
+                <li><a href="#">Product Wiki</a></li>
+                <li><a href="#">Latest Company News</a></li>
+            </ul>
+        </div>
+        <!-- #sidebar -->
+        <div id="main_container" class="main_container container_16 clearfix">
+            <div id="nav_top" class="clearfix round_top">
+                <ul class="clearfix">
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/laptop.png" /></a></li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/frames.png" /><span>Layout</span></a>
+                        <ul>
+                            <li><a href="#"><span>16 Grid - 960.gs</span></a></li>
+                            <li><a href="#"><span>Text & Typography</span></a></li>
+                            <li><a class="hide_mobile" href="#"><span>Layout Width</span></a>
+                                <ul class="drawer">
+                                    <li><a href="/Layout/Fixed"><span>Fixed</span></a></li>
+                                    <li><a href="/Layout/Fluid"><span>Fluid</span></a></li>
+                                </ul>
+                            </li>
+                            <li><a class="hide_mobile" href="#"><span>Layout Position</span></a>
+                                <ul class="drawer">
+                                    <li><a href="/Header/Side"><span>Side</span></a></li>
+                                    <li><a href="/Header/Top"><span>Top</span></a></li>
+                                    <li><a href="/Header/Slide"><span>Slide</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/coverflow.png" /><span>Boxes</span></a>
+                        <ul>
+                            <li><a href="#"><span>Tab Boxes</span></a></li>
+                            <li><a href="#"><span>Accordions Boxes</span></a></li>
+                            <li><a href="#"><span>Step by Step Wizard</span></a></li>
+                            <li><a href="#"><span>Code View</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/create_write.png" /><span>Forms</span></a>
+                        <ul>
+                            <li><a href="#"><span>Input Fields</span></a></li>
+                            <li><a href="#"><span>Buttons</span></a></li>
+                            <li><a href="#"><span>More components</span></a>
+                                <ul class="drawer">
+                                    <li><a href="#"><span>Validation</span></a></li>
+                                    <li><a href="#"><span>WYSIWYG Editor</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/images.png" /><span>Gallery</span></a></li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/blocks_images.png" /><span>Tables</span></a>
+                        <ul class="">
+                            <li><a href="#"><span>DataTables</span></a></li>
+                            <li><a href="#"><span>Regular Tables</span><span class="alert badge alert_black">new</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/file_cabinet.png" /><span>Org</span></a>
+                        <ul class="">
+                            <li><a href="#">
+                                <img src="/images/icons/small/grey/folder.png" /><span>Files</span></a></li>
+                            <li><a href="#">
+                                <img src="/images/icons/small/grey/users.png" /><span>Contacts</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/month_calendar.png" /><span>Cal</span><span class="alert badge alert_blue">new</span></a></li>
+                    <li><a href="#">
+                        <img src="/images/icons/small/grey/graph.png" /><span>Charts</span><span class="alert badge alert_green">new</span></a></li>
+                    <li><a href="#" class="dialog_button" data-dialog="logout">
+                        <img src="/images/icons/small/grey/locked_2.png" /></a></li>
+                </ul>
+                <div class="display_none">
+                    <div id="logout" class="dialog_content narrow" title="Logout">
+                        <div class="block">
+                            <div class="section">
+                                <h1>
+                                    Thank you</h1>
+                                <div class="dashed_line">
+                                </div>
+                                <p>
+                                    We will now log you out of Adminica in a 10 seconds...</p>
+                                <p>
+                                </p>
+                            </div>
+                            <div class="button_bar clearfix">
+                                <button class="dark blue no_margin_bottom link_button" data-link="/adminica/login.html">
+                                    <div class="ui-icon ui-icon-check">
+                                    </div>
+                                    <span>Ok</span>
+                                </button>
+                                <button class="light send_right close_dialog">
+                                    <div class="ui-icon ui-icon-closethick">
+                                    </div>
+                                    <span>Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+
+                    var currentPage = 1 - 1; // This is only used in php to tell the nav what the current page is
+                    $('#nav_top > ul > li').eq(currentPage).addClass("current");
+                    $('#nav_top > ul > li').addClass("icon_only").children("a").children("span").parent().parent().removeClass("icon_only");
+                </script>
+                <div id="mobile_nav">
+                    <div class="main">
+                    </div>
+                    <div class="side">
+                    </div>
+                </div>
+            </div>
+            <!-- #nav_top -->
+            <div class="box grid_6 tabs">
+                <ul class="tab_header clearfix">
+                    <li><a href="#tabs-1">Layout</a> </li>
+                    <li><a href="#tabs-2" class="round_top">Tricycle</a> </li>
+                </ul>
+                <a href="#" class="grabber">&nbsp;</a> <a href="#" class="toggle">&nbsp;</a>
+                <div class="toggle_container">
+                    <div id="tabs-1" class="block">
+                        <ul class="flat_large">
+                            <li>Toggle <a href="/Layout/Fixed">Fixed</a> and <a href="/Layout/Fluid">Fluid</a> width
+                                layout</li>
+                            <li><a href="/Header/Sidebar">Sidebar</a> or <a href="/Layout/FullWidth">Full Width</a></li>
+                            <li class="theme_colour"><a class="black" href="/Theme/Black"><span>Black</span></a>
+                                <a class="blue" href="/Theme/Blue"><span>Blue</span></a> <a class="navy" href="/Theme/Navy">
+                                    <span>Navy</span></a> <a class="red" href="/Theme/Red"><span>Red</span></a>
+                                <a class="green" href="/Theme/Green"><span>Green</span></a> <a class="magenta" href="/Theme/Magenta">
+                                    <span>Magenta</span></a> <a class="orange" href="/Theme/Brown"><span>Brown</span></a>
+                            </li>
+                            <li><a href="/Header/Slide">New Slide Menu!</a> Check it out.</li>
+                        </ul>
+                    </div>
+                    <div id="tabs-2" class="block">
+                        <div class="section">
+                            <p>
+                                <strong>Adminica</strong> was created by <a href="http://www.tricycle.ie" target="_blank">
+                                    Tricycle Interactive</a>. Please visit our site and have a look around - <a href="http://www.tricycle.ie"
+                                        target="_blank">www.tricycle.ie</a></p>
+                            <p>
+                                If you need special customization to the theme, please email <strong>themeforest@tricycle.ie</strong>
+                            .
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flat_area grid_10">
+                <h2>
+                    Welcome to <strong>Adminica</strong></h2>
+                <p>
+                    <strong>Adminica</strong> is a <strong>cleanly coded</strong>, <strong>beautifully styled</strong>,
+                    easily <strong>customisable</strong>, <strong>cross-browser</strong> compatible
+                    <strong>Web Application Interface</strong>.</p>
+                <p>
+                    <strong>Adminica</strong> is packed full of features, allowing you<strong> unlimited
+                        combinations</strong> of layouts, controls and styles to ensure you have a <strong>trully
+                            unique app</strong>.
+                </p>
+                <p>
+                    <strong>Adminica</strong> can <strong>scale itself automatically</strong> to fit
+                    whatever screen resolution the user has. The interface<strong> works perfectly all the
+                        way down to iPhone size</strong></p>
+            </div>
+        </div>
+        <div class="main_container container_16 clearfix">
+            <div class="box grid_8">
+                <div class="block">
+                    <fieldset class="label_side label_small">
+                        <label>
+                            Filter by:</label>
+                        <div>
+                            <div class="jqui_radios">
+                                <input type="radio" name="filter" class="isotope_filter" id="filter_all" checked="true" /><label
+                                    for="filter_all">All</label>
+                                <input type="radio" name="filter" class="isotope_filter" id="filter_new" /><label
+                                    for="filter_new">New</label>
+                                <input type="radio" name="filter" class="isotope_filter" id="filter_cool" /><label
+                                    for="filter_cool">Cool</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="box grid_8">
+                <div class="block">
+                    <fieldset class="label_side label_small">
+                        <label>
+                            Sort by:<span>Order</span></label>
+                        <div>
+                            <div class="jqui_radios">
+                                <input type="radio" name="sort" class="isotope_sort" id="sort_name" checked="true" /><label
+                                    for="sort_name">Name</label>
+                                <input type="radio" name="sort" class="isotope_sort" id="sort_update" /><label for="sort_update">Update</label>
+                                <input type="radio" name="sort" class="isotope_sort" id="sort_random" /><label for="sort_random">Random</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="grid_16">
+                <div class="indent gallery">
+                    <ul class="clearfix feature_tiles">
+                        <li class="cool"><a href="/Header/Side" class="features">
+                            <img src="/images/icons/large/grey/frames.png">
+                            <span class="name">Side Nav</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="new"><a href="/Header/Slider" class="features">
+                            <img src="/images/icons/large/grey/go_back_from_screen_top.png">
+                            <span class="name">Slide Nav</span> <span class="update">1</span>
+                            <div class="starred blue">
+                            </div>
+                        </a></li>
+                        <li class="all"><a href="/Header/Top" class="features">
+                            <img src="/images/icons/large/grey/go_back_from_screen.png">
+                            <span class="name">Full Width</span> <span class="update">0</span> </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/expose.png">
+                            <span class="name">Drag, Sort & Toggle</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="new"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/chart_8.png">
+                            <span class="name">Graphs & Charts</span> <span class="update">2</span>
+                            <div class="starred green">
+                            </div>
+                        </a></li>
+                        <li class="new"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/alarm_bell.png">
+                            <span class="name">Events Calendar</span> <span class="update">2</span>
+                            <div class="starred green">
+                            </div>
+                        </a></li>
+                        <li class="new"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/power.png">
+                            <span class="name">Step by Step Wizard</span> <span class="update">2</span>
+                            <div class="starred green">
+                            </div>
+                        </a></li>
+                        <li class="new"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/table.png">
+                            <span class="name">Table Styles</span> <span class="update">2</span>
+                            <div class="starred green">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/list.png">
+                            <span class="name">Sortable Accordions</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="/Layout/Fluid" class="features">
+                            <img src="/images/icons/large/grey/monitor.png">
+                            <span class="name">Fluid Width</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="/Layout/Fixed" class="features">
+                            <img src="/images/icons/large/grey/go_full_screen.png">
+                            <span class="name">Fixed Width</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/map.png">
+                            <span class="name">Unique Navigation</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="cool"><a href="styles/theme/switcher1.php?style=switcher.css" class="features">
+                            <img src="/images/icons/large/grey/iphone_4.png">
+                            <span class="name">iOS/Android Ready</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/paint_brush.png">
+                            <span class="name">14 Themes</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="new"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/repeat.png">
+                            <span class="name">Theme Switcher</span> <span class="update">1</span>
+                            <div class="starred blue">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/coverflow.png">
+                            <span class="name">Unique Slider Lists</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/chemical.png">
+                            <span class="name">400+ Icons</span> <span class="update">0</span> </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/pencil.png">
+                            <span class="name">Syntax Highlighting</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/record.png">
+                            <span class="name">290+ CSS3 Buttons</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/create_write.png">
+                            <span class="name">Fully Styled Forms</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="all"><a href="forms#date_picker_anchor" class="features">
+                            <img src="/images/icons/large/grey/day_calendar.png">
+                            <span class="name">Date Picker</span> <span class="update">0</span> </a></li>
+                        <li class="new"><a href="forms#alerts_anchor" class="features">
+                            <img src="/images/icons/large/grey/alert.png">
+                            <span class="name">Alert Boxes</span> <span class="update">1</span>
+                            <div class="starred blue">
+                            </div>
+                        </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/blocks_images.png">
+                            <span class="name">960.gs Framework</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/fountain_pen.png">
+                            <span class="name">Typography & Text</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/word_document.png">
+                            <span class="name">Rich Text Editor</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/images.png">
+                            <span class="name">Sortable Gallery</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/image_2.png">
+                            <span class="name">Fancybox Viewer</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/table.png">
+                            <span class="name">Dynamic Tables</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="cool"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/file_cabinet.png">
+                            <span class="name">File Browser</span> <span class="update">0</span>
+                            <div class="starred">
+                            </div>
+                        </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/locked_2.png">
+                            <span class="name">Login Box</span> <span class="update">0</span> </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/shuffle.png">
+                            <span class="name">CSS3 enhanced</span> <span class="update">0</span> </a></li>
+                        <li class="all"><a href="#" class="features">
+                            <img src="/images/icons/large/grey/chrome.png">
+                            <span class="name">Cross Browser (IE7+)</span> <span class="update">0</span> </a>
+                        </li>
+                        <li class="new"><a href="#" class="features" onclick="$('#toTop').trigger('click');">
+                            <img src="/images/icons/large/grey/bended_arrow_up.png">
+                            <span class="name">Scroll Top</span> <span class="update">1</span>
+                            <div class="starred blue">
+                            </div>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main_container container_16 clearfix">
+            <div class="flat_area grid_16">
+                <p>
+                    <strong>Adminica</strong> comes bundled with <strong>7 beautiful themes</strong>
+                    and backgrounds (…my favorite are <a href="css/theme/switcher1.php?style=multiple&switcher3.php=theme_navy.css&switcher4.php=bg_wood.css">
+                        navy</a> and <a href="css/theme/switcher1.php?style=multiple&switcher3.php=theme_blue.css&switcher4.php=bg_honeycomb.css">
+                            blue</a>). You can easily create your own themes by specifying your own
+                    colour values. All gradients and buttons have been created using <strong>CSS3 so no
+                        need to save out new images!</strong></p>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_AppThemeSwitchers")
+    </div>
+</body>
+</html>

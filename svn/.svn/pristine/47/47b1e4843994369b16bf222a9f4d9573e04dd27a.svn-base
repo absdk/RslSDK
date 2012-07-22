@@ -1,0 +1,59 @@
+@model SoftwareGrid.DataLogic.Models.CompanyEmail
+
+@{
+    ViewBag.Title = "Company Email";
+    Layout = "~/Views/Shared/_LayoutCRM.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Company Email</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>SendDateTime</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.SendDateTime)</div>
+		</div>
+				<div class="form-item">
+		    <label>EmailSubject</label>
+		    <div class="display-field">@Model.EmailSubject</div>
+		</div>
+				<div class="form-item">
+		    <label>EmailMessage</label>
+		    <div class="display-field">@Model.EmailMessage</div>
+		</div>
+				<div class="form-item">
+		    <label>IsEmailViewedByApplicant</label>
+		    <div class="display-field">@Model.IsEmailViewedByApplicant</div>
+		</div>
+				<div class="form-item">
+		    <label>EmailSendToCompany</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.EmailSendToCompany).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>EmailSendToContact</label>
+		    <div class="display-field">@(Model.EmailSendToContact == null ? "None" : Model.EmailSendToContact.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>EmailSendByUser</label>
+		    <div class="display-field">@(Model.EmailSendByUser == null ? "None" : Model.EmailSendByUser.LastName)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

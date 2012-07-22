@@ -1,0 +1,58 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantDocumentTracking>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant Document Tracking";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant Document Tracking List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.ApplicantDocumentTrackingID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.IsVerified).Title("Is  Verified ").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "ApplicantDocumentTracking", new { id = @item.ApplicantDocumentTrackingID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "ApplicantDocumentTracking", new { id = @item.ApplicantDocumentTrackingID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

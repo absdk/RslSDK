@@ -1,0 +1,75 @@
+@model SoftwareGrid.DataLogic.Models.VendorInsurance
+@* This partial view defines form fields that will appear when creating and editing entities *@
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.VendorInsuranceCategoryID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.VendorInsuranceCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.VendorInsuranceCategory>)ViewBag.PossibleVendorInsuranceCategories).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.VendorInsuranceCategoryID.ToString(),
+           Selected = (Model != null) && (option.VendorInsuranceCategoryID == Model.VendorInsuranceCategoryID)
+       }), "Choose...")
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.InsuranceProviderCompanyName)
+        <div>
+            @Html.EditorFor(model => model.InsuranceProviderCompanyName)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.InsuranceProviderPhoneName)
+        <div>
+            @Html.EditorFor(model => model.InsuranceProviderPhoneName)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.InsuranceNumber)
+        <div>
+            @Html.EditorFor(model => model.InsuranceNumber)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CertificateIssueDate)
+        <div>
+            @Html.EditorFor(model => model.CertificateIssueDate)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CertificationExpireDate)
+        <div>
+            @Html.EditorFor(model => model.CertificationExpireDate)
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.InsuranceCoverageInformation)
+        <div>
+            @Html.EditorFor(model => model.InsuranceCoverageInformation)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsVerified)
+        <div>
+            @Html.EditorFor(model => model.IsVerified)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

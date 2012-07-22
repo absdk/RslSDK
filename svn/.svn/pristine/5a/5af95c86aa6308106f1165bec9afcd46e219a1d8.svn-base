@@ -1,0 +1,53 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantSubmissionInfo
+
+@{
+    ViewBag.Title = "ApplicantSubmissionInfo";
+    Layout = "_LayoutATS";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Submission Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Submission Info</h2>
+		<fieldset>
+
+    <label>SubmissionDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.SubmissionDate)</div>
+
+    <label>SubmissionNotes</label>
+    <div class="display-field">@Model.SubmissionNotes</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>SubmittedByUser</label>
+    <div class="display-field">@(Model.SubmittedByUser == null ? "None" : Model.SubmittedByUser.LastName)</div>
+
+    <label>SubmitToHiringManagerUser</label>
+    <div class="display-field">@(Model.SubmitToHiringManagerUser == null ? "None" : Model.SubmitToHiringManagerUser.LastName)</div>
+
+    <label>SubmitToCompany</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.SubmitToCompany).ToString()</div>
+
+    <label>SubmitToContact</label>
+    <div class="display-field">@(Model.SubmitToContact == null ? "None" : Model.SubmitToContact.LastName)</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+
+    <label>ApplicantSubmissionFeedbackCategory</label>
+    <div class="display-field">@(Model.ApplicantSubmissionFeedbackCategory == null ? "None" : Model.ApplicantSubmissionFeedbackCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantSubmissionWithoutRequisitionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

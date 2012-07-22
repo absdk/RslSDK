@@ -1,0 +1,158 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.CRM.Controllers
+{   
+    public class CompaniesController : Controller
+    {
+		private readonly IIndustryRepository industryRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly ICompanyOwnerRepository companyownerRepository;
+		private readonly ICompanyStatusCategoryRepository companystatuscategoryRepository;
+		private readonly IUserRepository userRepository;
+		private readonly ICompanyRepository companyRepository;
+        public CompaniesController(IIndustryRepository industryRepository, ICountryRepository countryRepository, IStateRepository stateRepository, ICompanyOwnerRepository companyownerRepository, ICompanyStatusCategoryRepository companystatuscategoryRepository, IUserRepository userRepository, ICompanyRepository companyRepository)
+        {
+			this.industryRepository = industryRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.companyownerRepository = companyownerRepository;
+			this.companystatuscategoryRepository = companystatuscategoryRepository;
+			this.userRepository = userRepository;
+			this.companyRepository = companyRepository;
+        }
+
+        //
+        // GET: /Companies/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(companyRepository.AllIncluding(company => company.Industry, company => company.Country, company => company.State, company => company.CompanyOwner, company => company.CompanyStatusCategory, company => company.CreatedByUser, company => company.VerifiedByUser));
+        }
+		
+		public ViewResult Search(Company searchCompany)
+        {
+			if(searchCompany!=null)
+			{
+							ViewData["CompanyDisplayId"]=searchCompany.CompanyDisplayId;
+							}
+						return View("Index",companyRepository.AllIncluding(company => company.Industry, company => company.Country, company => company.State, company => company.CompanyOwner, company => company.CompanyStatusCategory, company => company.CreatedByUser, company => company.VerifiedByUser));
+		}
+
+        //
+        // GET: /Companies/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(companyRepository.Find(id));
+        }
+
+        //
+        // GET: /Companies/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			Company company = new Company();
+			ViewBag.PossibleIndustries = industryRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleCompanyOwners = companyownerRepository.All;
+			ViewBag.PossibleCompanyStatusCategories = companystatuscategoryRepository.All;
+			ViewBag.PossibleCreatedByUsers = userRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+            return View(company);
+        } 
+
+        //
+        // POST: /Companies/Create
+        [HttpPost]
+        public ActionResult Create(Company company)
+        {
+            if (ModelState.IsValid) {
+                companyRepository.InsertOrUpdate(company);
+                companyRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleIndustries = industryRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleCompanyOwners = companyownerRepository.All;
+				ViewBag.PossibleCompanyStatusCategories = companystatuscategoryRepository.All;
+				ViewBag.PossibleCreatedByUsers = userRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(company);
+			}
+        }
+        
+        //
+        // GET: /Companies/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleIndustries = industryRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleCompanyOwners = companyownerRepository.All;
+			ViewBag.PossibleCompanyStatusCategories = companystatuscategoryRepository.All;
+			ViewBag.PossibleCreatedByUsers = userRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+             return View(companyRepository.Find(id));
+        }
+
+        //
+        // POST: /Companies/Edit/5
+        [HttpPost]
+        public ActionResult Edit(Company company)
+        {
+            if (ModelState.IsValid) {
+                companyRepository.InsertOrUpdate(company);
+                companyRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleIndustries = industryRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleCompanyOwners = companyownerRepository.All;
+				ViewBag.PossibleCompanyStatusCategories = companystatuscategoryRepository.All;
+				ViewBag.PossibleCreatedByUsers = userRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(company);
+			}
+        }
+
+        //
+        // GET: /Companies/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(companyRepository.Find(id));
+        }
+
+        //
+        // POST: /Companies/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            companyRepository.Delete(id);
+            companyRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

@@ -1,0 +1,47 @@
+
+@model SoftwareGrid.DataLogic.Models.SalesProductServiceDocument
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.SalesProductServiceCatelogID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SalesProductServiceCatelogID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SalesProductServiceCatelog>)ViewBag.PossibleSalesProductServiceCatelogs).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Title), 
+			        Value = option.SalesProductServiceCatelogID.ToString(),
+			        Selected = (Model != null) && (option.SalesProductServiceCatelogID == Model.SalesProductServiceCatelogID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.DocumentTitle)
+            <div>
+								@Html.EditorFor(model => model.DocumentTitle)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.FileContent)
+            <div>
+								@(Html.Telerik().Upload()
+                        .Name("FileContent")
+                        .Async(async => async
+                            .Save("UploadFile", "SalesProductServiceDocument")
+                            .Remove("RemoveFile", "SalesProductServiceDocument"))
+                )
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

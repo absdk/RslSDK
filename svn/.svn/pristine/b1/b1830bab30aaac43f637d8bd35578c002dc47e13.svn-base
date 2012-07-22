@@ -1,0 +1,47 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationPositionSalaryStaffingRate
+
+@{
+    ViewBag.Title = "OrganizationPositionSalaryStaffingRate";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Position Salary Staffing Rate</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Position Salary Staffing Rate</h2>
+		<fieldset>
+
+    <label>MinimumRate</label>
+    <div class="display-field">@String.Format("{0:F}", Model.MinimumRate)</div>
+
+    <label>MaximumRate</label>
+    <div class="display-field">@String.Format("{0:F}", Model.MaximumRate)</div>
+
+    <label>AverageRate</label>
+    <div class="display-field">@String.Format("{0:F}", Model.AverageRate)</div>
+
+    <label>OrganizationPosition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationPosition).ToString()</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+
+    <label>Currency</label>
+    <div class="display-field">@(Model.Currency == null ? "None" : Model.Currency.Name)</div>
+
+    <label>SalaryRateType</label>
+    <div class="display-field">@(Model.SalaryRateType == null ? "None" : Model.SalaryRateType.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationPositionSalaryStaffingRateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

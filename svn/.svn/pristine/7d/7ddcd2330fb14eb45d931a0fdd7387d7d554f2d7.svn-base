@@ -1,0 +1,59 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantDriverLicense
+
+@{
+    ViewBag.Title = "ApplicantDriverLicense";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Driver License</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Driver License</h2>
+		<fieldset>
+
+    <label>LicenseNumber</label>
+    <div class="display-field">@Model.LicenseNumber</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>IssueDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.IssueDate)</div>
+
+    <label>ExpireDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.ExpireDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>DriverLicense</label>
+    <div class="display-field">@(Model.DriverLicense == null ? "None" : Model.DriverLicense.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantDriverLicenseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,55 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.CompanyAddressCategory>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Company Address Category";
+}
+<div class="flat_area grid_16">
+    <h2>Company Address Category List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+    .Name("Grid")
+    .DataKeys(keys => keys.Add(c => c.CompanyAddressCategoryID))
+    .Columns(columns =>
+                    {   
+                        columns.AutoGenerate(column =>
+                                                {
+                                                    if (column.Member == "CompanyAddressCategoryID")
+                                                        column.Visible = false;
+                                                });
+						columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="@Url.Action("Edit", "CompanyAddressCategory", new { id = @item.CompanyAddressCategoryID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Edit</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+							            columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="/CompanyAddressCategory/Delete/@item.CompanyAddressCategoryID" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Delete</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+                    })
+    .Sortable()
+    .Pageable()
+) 
+</div>
+

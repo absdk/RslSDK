@@ -1,0 +1,31 @@
+@model SoftwareGrid.DataLogic.Models.Currency
+
+@{
+    ViewBag.Title = "Currency";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Currency</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Currency</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>CurrencyTicker</label>
+    <div class="display-field">@Model.CurrencyTicker</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CurrencyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

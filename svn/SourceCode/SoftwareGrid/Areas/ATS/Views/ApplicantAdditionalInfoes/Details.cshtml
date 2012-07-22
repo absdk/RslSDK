@@ -1,0 +1,107 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantAdditionalInfo
+
+@{
+    ViewBag.Title = "ApplicantAdditionalInfo";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Additional Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Additional Info</h2>
+		<fieldset>
+
+    <label>DateOfBirth</label>
+    <div class="display-field">@String.Format("{0:g}", Model.DateOfBirth)</div>
+
+    <label>EthnicBackgroundCategoryID</label>
+    <div class="display-field">@Model.EthnicBackgroundCategoryID</div>
+
+    <label>BloodID</label>
+    <div class="display-field">@Model.BloodID</div>
+
+    <label>Height</label>
+    <div class="display-field">@Model.Height</div>
+
+    <label>Weight</label>
+    <div class="display-field">@Model.Weight</div>
+
+    <label>SocialSecurityOrTaxNumber</label>
+    <div class="display-field">@Model.SocialSecurityOrTaxNumber</div>
+
+    <label>NationalIdentificationNumber</label>
+    <div class="display-field">@Model.NationalIdentificationNumber</div>
+
+    <label>CurrentSalary</label>
+    <div class="display-field">@Model.CurrentSalary</div>
+
+    <label>ExpectedSalary</label>
+    <div class="display-field">@Model.ExpectedSalary</div>
+
+    <label>LinkedInProfileAddress</label>
+    <div class="display-field">@Model.LinkedInProfileAddress</div>
+
+    <label>PersonalBlogAddress</label>
+    <div class="display-field">@Model.PersonalBlogAddress</div>
+
+    <label>FacebookProfileAddress</label>
+    <div class="display-field">@Model.FacebookProfileAddress</div>
+
+    <label>TwitterAddress</label>
+    <div class="display-field">@Model.TwitterAddress</div>
+
+    <label>GooglePlusAddress</label>
+    <div class="display-field">@Model.GooglePlusAddress</div>
+
+    <label>WillingToTravelPercentage</label>
+    <div class="display-field">@String.Format("{0:F}", Model.WillingToTravelPercentage)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>BloodGroup</label>
+    <div class="display-field">@(Model.BloodGroup == null ? "None" : Model.BloodGroup.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>EthnicBackground</label>
+    <div class="display-field">@(Model.EthnicBackground == null ? "None" : Model.EthnicBackground.Name)</div>
+
+    <label>Gender</label>
+    <div class="display-field">@(Model.Gender == null ? "None" : Model.Gender.Name)</div>
+
+    <label>MaritalStatus</label>
+    <div class="display-field">@(Model.MaritalStatus == null ? "None" : Model.MaritalStatus.Name)</div>
+
+    <label>Religion</label>
+    <div class="display-field">@(Model.Religion == null ? "None" : Model.Religion.Name)</div>
+
+    <label>EmploymentType</label>
+    <div class="display-field">@(Model.EmploymentType == null ? "None" : Model.EmploymentType.Name)</div>
+
+    <label>Currency</label>
+    <div class="display-field">@(Model.Currency == null ? "None" : Model.Currency.Name)</div>
+
+    <label>VeteranCategory</label>
+    <div class="display-field">@(Model.VeteranCategory == null ? "None" : Model.VeteranCategory.Name)</div>
+
+    <label>SalaryRateType</label>
+    <div class="display-field">@(Model.SalaryRateType == null ? "None" : Model.SalaryRateType.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantAdditionalInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

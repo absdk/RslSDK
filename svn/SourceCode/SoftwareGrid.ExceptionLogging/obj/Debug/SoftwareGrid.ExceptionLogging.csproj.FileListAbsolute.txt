@@ -1,0 +1,9 @@
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\bin\Debug\SoftwareGrid.ExceptionLogging.dll
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\bin\Debug\SoftwareGrid.ExceptionLogging.pdb
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\bin\Debug\EasySoft.Helper.dll
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\bin\Debug\SoftwareGrid.Common.dll
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\bin\Debug\SoftwareGrid.Common.pdb
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\obj\Debug\SoftwareGrid.ExceptionLogging.csprojResolveAssemblyReference.cache
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\obj\Debug\SoftwareGrid.ExceptionLogging.dll
+C:\svn\SourceCode\SoftwareGrid.ExceptionLogging\obj\Debug\SoftwareGrid.ExceptionLogging.pdb

@@ -1,0 +1,63 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.VendorReference>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Vendor Reference";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>Vendor Reference List</h2>
+    <p>
+			@Html.ActionLink("Create New", "Create",new { vendorId = ViewBag.VendorId })
+	    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.VendorReferenceID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.CompanyName).Title("Reference Company Name").Width("20%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.FirstName).Title("Contact First Name").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.LastName).Title("Conatct Last Name").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.JobTitle).Title("Job Title").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Phone).Title("Phone").Width("10%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Email).Title("Email").Width("15%").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Edit", "VendorReference", new { id = @item.VendorReferenceID,vendorId = ViewBag.VendorId })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+													<a href="@Url.Action("Delete", "VendorReference", new { id = @item.VendorReferenceID,vendorId = ViewBag.VendorId })" title="Delete"><img alt="Delete"  src="/content/images/delete.png" /></a>
+						                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

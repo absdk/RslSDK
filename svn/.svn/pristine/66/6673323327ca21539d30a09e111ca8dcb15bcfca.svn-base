@@ -1,0 +1,140 @@
+@model SoftwareGrid.DataLogic.Models.Applicant
+
+@{
+    ViewBag.Title = "Applicant";
+    Layout = "_LayoutATS";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant</h2>
+		<fieldset>
+
+    <label>ApplicantDisplayId</label>
+    <div class="display-field">@Model.ApplicantDisplayId</div>
+
+    <label>FirstName</label>
+    <div class="display-field">@Model.FirstName</div>
+
+    <label>MiddleName</label>
+    <div class="display-field">@Model.MiddleName</div>
+
+    <label>LastName</label>
+    <div class="display-field">@Model.LastName</div>
+
+    <label>FullName</label>
+    <div class="display-field">@Model.FullName</div>
+
+    <label>JobTitle</label>
+    <div class="display-field">@Model.JobTitle</div>
+
+    <label>ProfessionalSummary</label>
+    <div class="display-field">@Model.ProfessionalSummary</div>
+
+    <label>YearsOfExperience</label>
+    <div class="display-field">@String.Format("{0:F}", Model.YearsOfExperience)</div>
+
+    <label>Address</label>
+    <div class="display-field">@Model.Address</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>ZipCode</label>
+    <div class="display-field">@Model.ZipCode</div>
+
+    <label>Latitude</label>
+    <div class="display-field">@Model.Latitude</div>
+
+    <label>Longitude</label>
+    <div class="display-field">@Model.Longitude</div>
+
+    <label>Phone</label>
+    <div class="display-field">@Model.Phone</div>
+
+    <label>EmailAddress</label>
+    <div class="display-field">@Model.EmailAddress</div>
+
+    <label>IsEmailSubscriber</label>
+    <div class="display-field">@Model.IsEmailSubscriber</div>
+
+    <label>IsEmailValidated</label>
+    <div class="display-field">@Model.IsEmailValidated</div>
+
+    <label>VisaInformation</label>
+    <div class="display-field">@Model.VisaInformation</div>
+
+    <label>WordResume</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.WordResume).ToString()</div>
+
+    <label>CopyPasteResume</label>
+    <div class="display-field">@Model.CopyPasteResume</div>
+
+    <label>Photo</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Photo).ToString()</div>
+
+    <label>RemarksAboutApplicant</label>
+    <div class="display-field">@Model.RemarksAboutApplicant</div>
+
+    <label>IsShared</label>
+    <div class="display-field">@Model.IsShared</div>
+
+    <label>AvailableFromDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.AvailableFromDate)</div>
+
+    <label>CreatedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <label>LastUpdateDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.LastUpdateDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>IsDeleted</label>
+    <div class="display-field">@Model.IsDeleted</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>ApplicantSourceCategory</label>
+    <div class="display-field">@(Model.ApplicantSourceCategory == null ? "None" : Model.ApplicantSourceCategory.Name)</div>
+
+    <label>ApplicantAvailabilityStatusCategory</label>
+    <div class="display-field">@(Model.ApplicantAvailabilityStatusCategory == null ? "None" : Model.ApplicantAvailabilityStatusCategory.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>Nationality</label>
+    <div class="display-field">@(Model.Nationality == null ? "None" : Model.Nationality.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>ExperienceLevelCategory</label>
+    <div class="display-field">@(Model.ExperienceLevelCategory == null ? "None" : Model.ExperienceLevelCategory.Name)</div>
+
+    <label>ContactProfessionType</label>
+    <div class="display-field">@(Model.ContactProfessionType == null ? "None" : Model.ContactProfessionType.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

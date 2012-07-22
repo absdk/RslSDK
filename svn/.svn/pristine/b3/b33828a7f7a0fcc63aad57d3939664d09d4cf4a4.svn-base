@@ -1,0 +1,26 @@
+@model SoftwareGrid.DataLogic.Models.ExperienceLevelCategory
+
+@{
+    ViewBag.Title = "Experience Level Category";
+}
+
+<div class="flat_area grid_16">
+	<h2>Experience Level Category</h2>
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Experience Level Category</h2>
+						        @Html.HiddenFor(model => model.ExperienceLevelCategoryID)
+						@Html.Partial("_CreateOrEdit", Model)			
+		</div>
+	</div>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

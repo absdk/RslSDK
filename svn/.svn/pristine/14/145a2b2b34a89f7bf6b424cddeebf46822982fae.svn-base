@@ -1,0 +1,47 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantSecurityClearance
+
+@{
+    ViewBag.Title = "ApplicantSecurityClearance";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Security Clearance</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Security Clearance</h2>
+		<fieldset>
+
+    <label>CertificateNumber</label>
+    <div class="display-field">@Model.CertificateNumber</div>
+
+    <label>CertificateIssueDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CertificateIssueDate)</div>
+
+    <label>CertificateFirstTimeDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CertificateFirstTimeDate)</div>
+
+    <label>CertificationExpirationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CertificationExpirationDate)</div>
+
+    <label>Remarks</label>
+    <div class="display-field">@Model.Remarks</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>SecurityClearance</label>
+    <div class="display-field">@(Model.SecurityClearance == null ? "None" : Model.SecurityClearance.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantSecurityClearanceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

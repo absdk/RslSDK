@@ -1,0 +1,135 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationNotesController : Controller
+    {
+		private readonly IOrganizationRepository organizationRepository;
+		private readonly IOrganizationNoteCategoryRepository organizationnotecategoryRepository;
+		private readonly IUserRepository userRepository;
+		private readonly IOrganizationNoteRepository organizationnoteRepository;
+        public OrganizationNotesController(IOrganizationRepository organizationRepository, IOrganizationNoteCategoryRepository organizationnotecategoryRepository, IUserRepository userRepository, IOrganizationNoteRepository organizationnoteRepository)
+        {
+			this.organizationRepository = organizationRepository;
+			this.organizationnotecategoryRepository = organizationnotecategoryRepository;
+			this.userRepository = userRepository;
+			this.organizationnoteRepository = organizationnoteRepository;
+        }
+
+        //
+        // GET: /OrganizationNotes/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationnoteRepository.AllIncluding(organizationnote => organizationnote.Organization, organizationnote => organizationnote.OrganizationNoteCategory, organizationnote => organizationnote.WrittenByUser));
+        }
+		
+		public ViewResult Search(OrganizationNote searchOrganizationNote)
+        {
+			if(searchOrganizationNote!=null)
+			{
+							}
+						return View("Index",organizationnoteRepository.AllIncluding(organizationnote => organizationnote.Organization, organizationnote => organizationnote.OrganizationNoteCategory, organizationnote => organizationnote.WrittenByUser));
+		}
+
+        //
+        // GET: /OrganizationNotes/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationnoteRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationNotes/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationNote organizationnote = new OrganizationNote();
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+			ViewBag.PossibleOrganizationNoteCategories = organizationnotecategoryRepository.All;
+			ViewBag.PossibleWrittenByUsers = userRepository.All;
+            return View(organizationnote);
+        } 
+
+        //
+        // POST: /OrganizationNotes/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationNote organizationnote)
+        {
+            if (ModelState.IsValid) {
+                organizationnoteRepository.InsertOrUpdate(organizationnote);
+                organizationnoteRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				ViewBag.PossibleOrganizationNoteCategories = organizationnotecategoryRepository.All;
+				ViewBag.PossibleWrittenByUsers = userRepository.All;
+				return View(organizationnote);
+			}
+        }
+        
+        //
+        // GET: /OrganizationNotes/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizations = organizationRepository.All;
+			ViewBag.PossibleOrganizationNoteCategories = organizationnotecategoryRepository.All;
+			ViewBag.PossibleWrittenByUsers = userRepository.All;
+             return View(organizationnoteRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationNotes/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationNote organizationnote)
+        {
+            if (ModelState.IsValid) {
+                organizationnoteRepository.InsertOrUpdate(organizationnote);
+                organizationnoteRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizations = organizationRepository.All;
+				ViewBag.PossibleOrganizationNoteCategories = organizationnotecategoryRepository.All;
+				ViewBag.PossibleWrittenByUsers = userRepository.All;
+				return View(organizationnote);
+			}
+        }
+
+        //
+        // GET: /OrganizationNotes/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationnoteRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationNotes/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationnoteRepository.Delete(id);
+            organizationnoteRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

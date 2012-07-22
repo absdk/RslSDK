@@ -1,0 +1,2 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+containerBuilder.Register(container => new <#= ((EnvDTE.CodeType)Model.EntityType).Name #>Repository(container.Resolve<RepositoryContext>())).As<I<#= ((EnvDTE.CodeType)Model.EntityType).Name #>Repository>();

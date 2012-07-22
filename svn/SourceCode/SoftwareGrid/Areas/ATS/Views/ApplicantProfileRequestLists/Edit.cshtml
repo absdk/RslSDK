@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfileRequestList
+
+@{
+    ViewBag.Title = "Applicant Profile Request List";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+	<h2>Applicant Profile Request List</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Applicant Profile Request List</h2>
+						        @Html.HiddenFor(model => model.ApplicantProfileRequestListID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

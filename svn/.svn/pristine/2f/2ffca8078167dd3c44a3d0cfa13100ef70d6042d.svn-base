@@ -1,0 +1,26 @@
+@model SoftwareGrid.DataLogic.Models.Vendor
+@{
+    ViewBag.Title = "Vendor";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Vendor</h2>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="box grid_16">
+        <div class="block">
+            <h2 class="box_head">
+                Vendor</h2>
+            @Html.HiddenFor(model => model.VendorID)
+            @Html.HiddenFor(model => model.VendorDisplayId)
+            @Html.HiddenFor(model => model.CreatedDate)
+            @Html.HiddenFor(model => model.CreatedByUserID)
+            @Html.HiddenFor(model => model.IsVerified)
+            @Html.HiddenFor(model => model.VerifiedByUserID)
+            @Html.HiddenFor(model => model.VerificationDate)
+            @Html.Partial("_CreateOrEdit", Model)
+        </div>
+    </div>
+}

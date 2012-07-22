@@ -1,0 +1,129 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationPositionCompetenciesController : Controller
+    {
+		private readonly IOrganizationPositionRepository organizationpositionRepository;
+		private readonly ISkillsExpEduRepository skillsexpeduRepository;
+		private readonly IOrganizationPositionCompetencyRepository organizationpositioncompetencyRepository;
+        public OrganizationPositionCompetenciesController(IOrganizationPositionRepository organizationpositionRepository, ISkillsExpEduRepository skillsexpeduRepository, IOrganizationPositionCompetencyRepository organizationpositioncompetencyRepository)
+        {
+			this.organizationpositionRepository = organizationpositionRepository;
+			this.skillsexpeduRepository = skillsexpeduRepository;
+			this.organizationpositioncompetencyRepository = organizationpositioncompetencyRepository;
+        }
+
+        //
+        // GET: /OrganizationPositionCompetencies/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationpositioncompetencyRepository.AllIncluding(organizationpositioncompetency => organizationpositioncompetency.OrganizationPosition, organizationpositioncompetency => organizationpositioncompetency.SkillsExpEdu));
+        }
+		
+		public ViewResult Search(OrganizationPositionCompetency searchOrganizationPositionCompetency)
+        {
+			if(searchOrganizationPositionCompetency!=null)
+			{
+							}
+						return View("Index",organizationpositioncompetencyRepository.AllIncluding(organizationpositioncompetency => organizationpositioncompetency.OrganizationPosition, organizationpositioncompetency => organizationpositioncompetency.SkillsExpEdu));
+		}
+
+        //
+        // GET: /OrganizationPositionCompetencies/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationpositioncompetencyRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationPositionCompetencies/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationPositionCompetency organizationpositioncompetency = new OrganizationPositionCompetency();
+			ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+			ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+            return View(organizationpositioncompetency);
+        } 
+
+        //
+        // POST: /OrganizationPositionCompetencies/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationPositionCompetency organizationpositioncompetency)
+        {
+            if (ModelState.IsValid) {
+                organizationpositioncompetencyRepository.InsertOrUpdate(organizationpositioncompetency);
+                organizationpositioncompetencyRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+				ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+				return View(organizationpositioncompetency);
+			}
+        }
+        
+        //
+        // GET: /OrganizationPositionCompetencies/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+			ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+             return View(organizationpositioncompetencyRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationPositionCompetencies/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationPositionCompetency organizationpositioncompetency)
+        {
+            if (ModelState.IsValid) {
+                organizationpositioncompetencyRepository.InsertOrUpdate(organizationpositioncompetency);
+                organizationpositioncompetencyRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleOrganizationPositions = organizationpositionRepository.All;
+				ViewBag.PossibleSkillsExpEdus = skillsexpeduRepository.All;
+				return View(organizationpositioncompetency);
+			}
+        }
+
+        //
+        // GET: /OrganizationPositionCompetencies/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationpositioncompetencyRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationPositionCompetencies/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationpositioncompetencyRepository.Delete(id);
+            organizationpositioncompetencyRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

@@ -1,0 +1,295 @@
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using SoftwareGrid.DataLogic.Models;
+
+namespace SoftwareGrid.BusinessLogic.Repositories.Context
+{
+    public class RepositoryContext : DbContext
+    {
+
+        public RepositoryContext(IConnectionString connectionString)
+            : base(connectionString.DefaultConnectionString)
+        {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
+
+        #region Master Data General
+
+        public DbSet<SoftwareGrid.DataLogic.Models.BloodGroup> BloodGroup { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Gender> Gender { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Disability> Disability { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Religion> Religion { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.EthnicBackground> EthnicBackground { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Currency> Currency { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Salutation> Salutation { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.MaritalStatus> MaritalStatus { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.FamilyRelationship> FamilyRelationship { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.DriverLicense> DriverLicense { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Visa> Visa { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.VisaStatus> VisaStatus { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ExperienceLevelCategory> ExperienceLevelCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ContactProfessionType> ContactProfessionType { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.EmploymentLeaveReasonCategory> EmploymentLeaveReasonCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.EmploymentType> EmploymentType { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.EmploymentStatus> EmploymentStatus { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SalaryRateType> SalaryRateType { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SalaryTaxType> SalaryTaxType { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.PayCycle> PayCycle { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.VeteranCategory> VeteranCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SecurityClearance> SecurityClearance { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.Industry> Industry { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.CompanyOwner> CompanyOwner { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.BusinessDivision> BusinessDivision { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Department> Department { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Position> Position { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.RatingScale> RatingScale { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.AccountCategory> AccountCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Account> Account { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.InterviewQuestionCategory> InterviewQuestionCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.InterviewQuestionAnswer> InterviewQuestionAnswer { get; set; }
+    
+
+        public DbSet<SoftwareGrid.DataLogic.Models.Region> Region { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Country> Country { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.State> State { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.City> City { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.SkillsExpEduCategory> SkillsExpEduCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SkillsExpEdu> SkillsExpEdu { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SkillsExpEduSynonym> SkillsExpEduSynonym { get; set; }
+
+
+        #endregion
+
+
+        #region Applicant Tracking System ATS
+
+        public DbSet<SoftwareGrid.DataLogic.Models.Applicant> Applicant { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantAdditionalInfo> ApplicantAdditionalInfo { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantAdditionalAddress> ApplicantAdditionalAddress { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantSkillsExpertise> ApplicantSkillsExpertise { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantEduCertLicense> ApplicantEduCertLicense { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantExperience> ApplicantExperience { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantPhotoPortfolio> ApplicantPhotoPortfolio { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantVideo> ApplicantVideo { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantWorkReferenceRecommendation> ApplicantWorkReferenceRecommendation { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDocument> ApplicantDocument { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDocumentTracking> ApplicantDocumentTracking { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantProfileViewer> ApplicantProfileViewer { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantProfileRequestList> ApplicantProfileRequestList { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantProfilePublish> ApplicantProfilePublish { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantProfileThemeLibrary> ApplicantProfileThemeLibrary { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDriverLicense> ApplicantDriverLicense { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantPassportInfo> ApplicantPassportInfo { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantVisaInfo> ApplicantVisaInfo { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantSecurityClearance> ApplicantSecurityClearance { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDisability> ApplicantDisability { get; set; }
+
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantPreferredWorkLocation> ApplicantPreferredWorkLocation { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDataPrivacyAcknowledgement> ApplicantDataPrivacyAcknowledgement { get; set; }
+
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantEmail> ApplicantEmail { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantEmailTemplate> ApplicantEmailTemplate { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantNote> ApplicantNote { get; set; }
+        //public DbSet<SoftwareGrid.DataLogic.Models.ApplicantTask> ApplicantTask { get; set; }
+        //need add task
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantResumeFolder> ApplicantResumeFolder { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantInResumeFolder> ApplicantInResumeFolder { get; set; }
+
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantSubmissionInfo> ApplicantSubmissionInfo { get; set; }
+
+        //public DbSet<SoftwareGrid.DataLogic.Models.ApplicantRecruiterTeam> ApplicantRecruiterTeam { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantProfileWidgetAccess> ApplicantProfileWidgetAccess { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantSourceCategory> ApplicantSourceCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantAvailabilityStatusCategory> ApplicantAvailabilityStatusCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantSubmissionFeedbackCategory> ApplicantSubmissionFeedbackCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantInterviewFeedbackCategory> ApplicantInterviewFeedbackCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantRecruitmentCostCategory> ApplicantRecruitmentCostCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDocumentCategory> ApplicantDocumentCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDocumentStatusCategory> ApplicantDocumentStatusCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ApplicantDataPrivacyTemplate> ApplicantDataPrivacyTemplate { get; set; }
+
+
+        #endregion
+
+
+        
+
+
+
+        public DbSet<AppMenuCategory> AppMenuCategory { get; set; }
+
+        public DbSet<AppMenu> AppMenu { get; set; }
+
+        public DbSet<UserRole> UserRole { get; set; }
+
+        public DbSet<UserRolePermission> UserRolePermission { get; set; }
+
+        public DbSet<User> User { get; set; }
+
+
+        public DbSet<Vendor> Vendor { get; set; }
+
+        public DbSet<VendorContact> VendorContact { get; set; }
+
+
+
+
+
+        #region Requisition
+        public DbSet<SoftwareGrid.DataLogic.Models.Requisition> Requisition { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionSkillsExpertiseEducationMatchingMatrix> RequisitionSkillsExpertiseEducationMatchingMatrix { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionApplicantInterviewQuestionAnswer> RequisitionApplicantInterviewQuestionAnswer { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionPublishInfo> RequisitionPublishInfo { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionNote> RequisitionNote { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionDocument> RequisitionDocument { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionTeam> RequisitionTeam { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionOrganization> RequisitionOrganization { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionClientTeam> RequisitionClientTeam { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionClientInfo> RequisitionClientInfo { get; set; }
+
+
+
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionStatusCategory> RequisitionStatusCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionInterviewType> RequisitionInterviewType { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionApprovalStatusCategory> RequisitionApprovalStatusCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionTeamCategory> RequisitionTeamCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionStatusForVendorCategory> RequisitionStatusForVendorCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.RequisitionJDLibraryCategory> RequisitionJDLibraryCategory { get; set; }
+
+
+
+        #endregion
+
+
+        #region Contact Management
+
+
+        public DbSet<SoftwareGrid.DataLogic.Models.Company> Company { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.Contact> Contact { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.CompanyAddress> CompanyAddress { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.ContactFolder> ContactFolder { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ContactFolderContact> ContactFolderContact { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.ContactFolderOwner> ContactFolderOwner { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.CompanyEmail> CompanyEmail { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.CompanyEmailTemplate> CompanyEmailTemplate { get; set; }
+
+        public DbSet<SalesCampaign> SalesCampaign { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.CompanyStatusCategory> CompanyStatusCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SalesProductServiceCategory> SalesProductServiceCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SalesProductServiceCatelog> SalesProductServiceCatelog { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.CompanyAddressCategory> CompanyAddressCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SalesProductServiceDocument> SalesProductServiceDocument { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.SalesCampaignStatusCategory> SalesCampaignStatusCategory { get; set; }
+     
+
+        
+        
+
+        #endregion
+
+        #region Organization Master data
+
+        public DbSet<SoftwareGrid.DataLogic.Models.Organization> Organization { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationBusinessDivision> OrganizationBusinessDivision { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationDepartment> OrganizationDepartment { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationPosition> OrganizationPosition { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationPositionCompetency> OrganizationPositionCompetency { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationPositionSalaryStaffingRate> OrganizationPositionSalaryStaffingRate { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationDocument> OrganizationDocument { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationDocumentFolder> OrganizationDocumentFolder { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationProject> OrganizationProject { get; set; }
+
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationAddressCategory> OrganizationAddressCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationCategory> OrganizationCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationDocumentCategory> OrganizationDocumentCategory { get; set; }
+        public DbSet<SoftwareGrid.DataLogic.Models.OrganizationNoteCategory> OrganizationNoteCategory { get; set; }
+
+
+        #endregion
+
+        public DbSet<VendorStatusCategory> VendorStatusCategory { get; set; }
+
+        public DbSet<VendorServiceCategory> VendorServiceCategory { get; set; }
+
+        public DbSet<VendorNoteCategory> VendorNoteCategory { get; set; }
+
+        public DbSet<VendorDocumentCategory> VendorDocumentCategory { get; set; }
+
+        public DbSet<VendorDocumentStatusCategory> VendorDocumentStatusCategory { get; set; }
+
+        public DbSet<VendorLegalCompanyStructureCategory> VendorLegalCompanyStructureCategory { get; set; }
+
+        public DbSet<VendorSupplierDiversityCertificationCategory> VendorSupplierDiversityCertificationCategory { get; set; }
+
+        public DbSet<VendorInsuranceCategory> VendorInsuranceCategory { get; set; }
+
+        public DbSet<VendorAddressCategory> VendorAddressCategory { get; set; }
+
+        public DbSet<ApplicantRecruitmentTeam> ApplicantRecruitmentTeam { get; set; }
+
+
+        public DbSet<OrganizationWorkforcePlan> OrganizationWorkforcePlan { get; set; }
+
+        
+
+        public DbSet<OrganizationWorkforcePlanDetail> OrganizationWorkforcePlanDetail { get; set; }
+
+        public DbSet<OrganizationNote> OrganizationNote { get; set; }
+
+       
+
+        
+
+        
+
+        
+
+        
+
+       
+     
+       
+
+       
+
+        
+
+        
+        
+
+    }
+}

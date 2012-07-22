@@ -1,0 +1,64 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantAdditionalAddress>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant Additional Address";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant Additional Address List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.ApplicantAdditionalAddressID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.AddressLine1).Title("Address Line1").Width("20px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.City).Title("City").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.State.Name).Title("State").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Country.Name).Title("Country").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.HomePhone).Title("Home Phone").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.PersonalEmail).Title("Personal Email").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.IsPrimaryConatact).Title("Is Primary Contact").Width("10px").Sortable(true).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "ApplicantAdditionalAddress", new { id = @item.ApplicantAdditionalAddressID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "ApplicantAdditionalAddress", new { id = @item.ApplicantAdditionalAddressID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

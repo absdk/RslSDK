@@ -1,0 +1,37 @@
+@model SoftwareGrid.DataLogic.Models.UserRolePermission
+
+@{
+    ViewBag.Title = "UserRolePermission";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        User Role Permission</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            User Role Permission</h2>
+		<fieldset>
+
+    <label>AreaName</label>
+    <div class="display-field">@Model.AreaName</div>
+
+    <label>ControllerName</label>
+    <div class="display-field">@Model.ControllerName</div>
+
+    <label>ActionName</label>
+    <div class="display-field">@Model.ActionName</div>
+
+    <label>UserRole</label>
+    <div class="display-field">@(Model.UserRole == null ? "None" : Model.UserRole.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UserRolePermissionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,140 @@
+@model SoftwareGrid.DataLogic.Models.Contact
+
+@{
+    ViewBag.Title = "Contact";
+    Layout = "_LayoutCRM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Contact</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Contact</h2>
+		<fieldset>
+
+    <label>CompanyName</label>
+    <div class="display-field">@Model.CompanyName</div>
+
+    <label>FirstName</label>
+    <div class="display-field">@Model.FirstName</div>
+
+    <label>MiddleName</label>
+    <div class="display-field">@Model.MiddleName</div>
+
+    <label>LastName</label>
+    <div class="display-field">@Model.LastName</div>
+
+    <label>FullName</label>
+    <div class="display-field">@Model.FullName</div>
+
+    <label>JobTitle</label>
+    <div class="display-field">@Model.JobTitle</div>
+
+    <label>Department</label>
+    <div class="display-field">@Model.Department</div>
+
+    <label>Address1</label>
+    <div class="display-field">@Model.Address1</div>
+
+    <label>Address2</label>
+    <div class="display-field">@Model.Address2</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>PostBoxNumber</label>
+    <div class="display-field">@Model.PostBoxNumber</div>
+
+    <label>ZipCode</label>
+    <div class="display-field">@Model.ZipCode</div>
+
+    <label>OfficePhone</label>
+    <div class="display-field">@Model.OfficePhone</div>
+
+    <label>Mobile</label>
+    <div class="display-field">@Model.Mobile</div>
+
+    <label>FaxNumber</label>
+    <div class="display-field">@Model.FaxNumber</div>
+
+    <label>EmailAddress</label>
+    <div class="display-field">@Model.EmailAddress</div>
+
+    <label>IsEmailSubscriber</label>
+    <div class="display-field">@Model.IsEmailSubscriber</div>
+
+    <label>IsEmailValidated</label>
+    <div class="display-field">@Model.IsEmailValidated</div>
+
+    <label>AlternativeEmail</label>
+    <div class="display-field">@Model.AlternativeEmail</div>
+
+    <label>LinkedInProfileAddress</label>
+    <div class="display-field">@Model.LinkedInProfileAddress</div>
+
+    <label>FacebokProfileAddress</label>
+    <div class="display-field">@Model.FacebokProfileAddress</div>
+
+    <label>TwitterAccount</label>
+    <div class="display-field">@Model.TwitterAccount</div>
+
+    <label>GooglePlusAccountAddress</label>
+    <div class="display-field">@Model.GooglePlusAccountAddress</div>
+
+    <label>PersonalBlogAddress</label>
+    <div class="display-field">@Model.PersonalBlogAddress</div>
+
+    <label>Photo</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Photo).ToString()</div>
+
+    <label>InternalRemarks</label>
+    <div class="display-field">@Model.InternalRemarks</div>
+
+    <label>ContactProfile</label>
+    <div class="display-field">@Model.ContactProfile</div>
+
+    <label>SequenceInCompanyOrganizationalChart</label>
+    <div class="display-field">@String.Format("{0:F}", Model.SequenceInCompanyOrganizationalChart)</div>
+
+    <label>CreatedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>Company</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Company).ToString()</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>ContactRatingScale</label>
+    <div class="display-field">@(Model.ContactRatingScale == null ? "None" : Model.ContactRatingScale.Name)</div>
+
+    <label>ContactProfessionType</label>
+    <div class="display-field">@(Model.ContactProfessionType == null ? "None" : Model.ContactProfessionType.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ContactID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,28 @@
+@model SoftwareGrid.DataLogic.Models.DriverLicense
+
+@{
+    ViewBag.Title = "DriverLicense";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Driver License</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Driver License</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DriverLicenseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

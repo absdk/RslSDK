@@ -1,0 +1,12 @@
+@using EasySoft.Helper
+@model Double?
+
+@(Html.Telerik().PercentTextBox()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+            .InputHtmlAttributes(new { style = "width:100px;color:black;padding-left:5px; padding-top:5px; float:none;" })
+        .DecimalDigits(2)
+        .MinValue(0)
+        .HtmlAttributes(new { style = "width:200px;" })
+            .Value(Model)
+)
+

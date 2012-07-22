@@ -1,0 +1,15 @@
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\obj\Debug\SoftwareGrid.BusinessLogic.csprojResolveAssemblyReference.cache
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.BusinessLogic.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.BusinessLogic.pdb
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\EasySoft.Helper.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\EntityFramework.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.Common.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.DataLogic.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.ExceptionLogging.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.Common.pdb
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.DataLogic.pdb
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\SoftwareGrid.ExceptionLogging.pdb
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\bin\Debug\EntityFramework.xml
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\obj\Debug\SoftwareGrid.BusinessLogic.dll
+C:\svn\SourceCode\SoftwareGrid.BusinessLogic\obj\Debug\SoftwareGrid.BusinessLogic.pdb

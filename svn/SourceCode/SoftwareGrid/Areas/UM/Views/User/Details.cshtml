@@ -1,0 +1,64 @@
+@model SoftwareGrid.DataLogic.Models.User
+
+@{
+    ViewBag.Title = "User";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        User</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            User</h2>
+		<fieldset>
+
+    <label>FirstName</label>
+    <div class="display-field">@Model.FirstName</div>
+
+    <label>LastName</label>
+    <div class="display-field">@Model.LastName</div>
+
+    <label>UserLoginName</label>
+    <div class="display-field">@Model.UserLoginName</div>
+
+    <label>Password</label>
+    <div class="display-field">@Model.Password</div>
+
+    <label>ConfirmPassword</label>
+    <div class="display-field">@Model.ConfirmPassword</div>
+
+    <label>EmailAddress</label>
+    <div class="display-field">@Model.EmailAddress</div>
+
+    <label>Phone</label>
+    <div class="display-field">@Model.Phone</div>
+
+    <label>Photo</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Photo).ToString()</div>
+
+    <label>CreatedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <label>IsActive</label>
+    <div class="display-field">@Model.IsActive</div>
+
+    <label>CreatedByUserD</label>
+    <div class="display-field">@Model.CreatedByUserD</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>UserRole</label>
+    <div class="display-field">@(Model.UserRole == null ? "None" : Model.UserRole.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UserID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

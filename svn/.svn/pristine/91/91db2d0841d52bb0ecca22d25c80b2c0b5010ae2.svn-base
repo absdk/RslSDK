@@ -1,0 +1,11 @@
+@model Int32
+
+@(Html.Telerik().IntegerTextBox()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+        .InputHtmlAttributes(new { style = "width:100%; color:Black; padding-left:5px;" })
+        .HtmlAttributes(new { style = "width:150px;" })
+        .MaxValue(int.MinValue)
+        .MaxValue(int.MaxValue)
+        .Value(Model) 
+)
+

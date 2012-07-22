@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionPublishInfo
+
+@{
+    ViewBag.Title = "RequisitionPublishInfo";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Publish Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Publish Info</h2>
+		<fieldset>
+
+    <label>PublishDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.PublishDate)</div>
+
+    <label>ExpireDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.ExpireDate)</div>
+
+    <label>IsPublishedToCareerPortal</label>
+    <div class="display-field">@Model.IsPublishedToCareerPortal</div>
+
+    <label>IsPublishedToVendorPortal</label>
+    <div class="display-field">@Model.IsPublishedToVendorPortal</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionPublishInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

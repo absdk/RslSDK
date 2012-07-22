@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationDocumentFolder
+
+@{
+    ViewBag.Title = "OrganizationDocumentFolder";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Document Folder</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Document Folder</h2>
+		<fieldset>
+
+    <label>FolderName</label>
+    <div class="display-field">@Model.FolderName</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>ParentFolder</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ParentFolder).ToString()</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationDocumentFolderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

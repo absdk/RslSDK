@@ -1,0 +1,11 @@
+@using EasySoft.Helper
+@model Int32?
+<div class="ratingscale">
+@(Html.Telerik().Slider<double>()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+        .Min(0)
+        .Max(5)
+        .Value(Convert.ToDouble(Model))
+)
+</div>
+

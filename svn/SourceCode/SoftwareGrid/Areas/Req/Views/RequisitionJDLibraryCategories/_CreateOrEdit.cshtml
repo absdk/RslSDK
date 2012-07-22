@@ -1,0 +1,35 @@
+
+@model SoftwareGrid.DataLogic.Models.RequisitionJDLibraryCategory
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Name)
+            <div>
+								@Html.EditorFor(model => model.Name)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.ParentRequisitionJDLibraryCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ParentRequisitionJDLibraryCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.RequisitionJDLibraryCategory>)ViewBag.PossibleParentRequisitionJDLibraryCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.RequisitionJDLibraryCategoryID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionJDLibraryCategoryID == Model.ParentRequisitionJDLibraryCategoryID)
+			    }), "Choose...")
+			</div>
+			</div>
+			
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

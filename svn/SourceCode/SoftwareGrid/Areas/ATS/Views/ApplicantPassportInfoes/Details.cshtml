@@ -1,0 +1,65 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantPassportInfo
+
+@{
+    ViewBag.Title = "ApplicantPassportInfo";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Passport Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Passport Info</h2>
+		<fieldset>
+
+    <label>PassportNumber</label>
+    <div class="display-field">@Model.PassportNumber</div>
+
+    <label>PassportType</label>
+    <div class="display-field">@Model.PassportType</div>
+
+    <label>PassportProfession</label>
+    <div class="display-field">@Model.PassportProfession</div>
+
+    <label>IssuanceCity</label>
+    <div class="display-field">@Model.IssuanceCity</div>
+
+    <label>IssueDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.IssueDate)</div>
+
+    <label>ExpireDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.ExpireDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>IssuanceCountry</label>
+    <div class="display-field">@(Model.IssuanceCountry == null ? "None" : Model.IssuanceCountry.Name)</div>
+
+    <label>NationalityCountry</label>
+    <div class="display-field">@(Model.NationalityCountry == null ? "None" : Model.NationalityCountry.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantPassportInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

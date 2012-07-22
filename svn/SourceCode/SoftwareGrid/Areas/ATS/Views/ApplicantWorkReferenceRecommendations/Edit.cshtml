@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantWorkReferenceRecommendation
+
+@{
+    ViewBag.Title = "Applicant Work Reference Recommendation";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+	<h2>Applicant Work Reference Recommendation</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Applicant Work Reference Recommendation</h2>
+						        @Html.HiddenFor(model => model.ApplicantWorkReferenceRecommendationID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

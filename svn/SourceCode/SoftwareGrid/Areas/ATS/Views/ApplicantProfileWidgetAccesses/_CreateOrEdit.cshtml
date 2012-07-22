@@ -1,0 +1,150 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantProfileWidgetAccess
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ProfileAccessUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ProfileAccessUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleProfileAccessUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.ProfileAccessUserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ContactInfoWidget)
+            <div>
+								@Html.EditorFor(model => model.ContactInfoWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.NoteWidget)
+            <div>
+								@Html.EditorFor(model => model.NoteWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DocumentWidget)
+            <div>
+								@Html.EditorFor(model => model.DocumentWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ProfileWidget)
+            <div>
+								@Html.EditorFor(model => model.ProfileWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PassportInfoWidget)
+            <div>
+								@Html.EditorFor(model => model.PassportInfoWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DriverLicenseWidget)
+            <div>
+								@Html.EditorFor(model => model.DriverLicenseWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.VisaInfoWidget)
+            <div>
+								@Html.EditorFor(model => model.VisaInfoWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AdditionalPersonalDataWidget)
+            <div>
+								@Html.EditorFor(model => model.AdditionalPersonalDataWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.JobCartWidget)
+            <div>
+								@Html.EditorFor(model => model.JobCartWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ReferenceInfoWidget)
+            <div>
+								@Html.EditorFor(model => model.ReferenceInfoWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PhotoProfileWidget)
+            <div>
+								@Html.EditorFor(model => model.PhotoProfileWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.VideoProfileWidget)
+            <div>
+								@Html.EditorFor(model => model.VideoProfileWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SecurityClearanceInfoWidget)
+            <div>
+								@Html.EditorFor(model => model.SecurityClearanceInfoWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SubmissionReportWidget)
+            <div>
+								@Html.EditorFor(model => model.SubmissionReportWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SocialNetworkWidget)
+            <div>
+								@Html.EditorFor(model => model.SocialNetworkWidget)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ViewerListWidget)
+            <div>
+								@Html.EditorFor(model => model.ViewerListWidget)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

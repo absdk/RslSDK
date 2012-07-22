@@ -1,0 +1,31 @@
+@model SoftwareGrid.DataLogic.Models.SkillsExpEduSynonym
+
+@{
+    ViewBag.Title = "SkillsExpEduSynonym";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Skills Exp Edu Synonym</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Skills Exp Edu Synonym</h2>
+		<fieldset>
+
+    <label>SkillsExpEduTitle</label>
+    <div class="display-field">@Model.SkillsExpEduTitle</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SkillsExpEduSynonymID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

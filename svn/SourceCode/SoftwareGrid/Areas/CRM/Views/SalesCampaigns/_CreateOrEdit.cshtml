@@ -1,0 +1,130 @@
+
+@model SoftwareGrid.DataLogic.Models.SalesCampaign
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ParentSalesCampaignID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ParentSalesCampaignID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SalesCampaign>)ViewBag.PossibleParentSalesCampaigns).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.SalesCampaignID.ToString(),
+			        Selected = (Model != null) && (option.SalesCampaignID == Model.ParentSalesCampaignID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.CampaignName)
+            <div>
+								@Html.EditorFor(model => model.CampaignName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CampaignDescription)
+            <div>
+								@Html.EditorFor(model => model.CampaignDescription)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.CampaignLocation)
+            <div>
+								@Html.EditorFor(model => model.CampaignLocation)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PrimarySalesProductServiceID)
+            <div>
+								@Html.EditorFor(model => model.PrimarySalesProductServiceID)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ExpectedNumberOfSale)
+            <div>
+								@Html.EditorFor(model => model.ExpectedNumberOfSale)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ExpectedRevenue)
+            <div>
+								@Html.EditorFor(model => model.ExpectedRevenue)
+				            </div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.CurrencyID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CurrencyID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Currency>)ViewBag.PossibleCurrencies).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.CurrencyID.ToString(),
+			        Selected = (Model != null) && (option.CurrencyID == Model.CurrencyID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.CreatedByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.CreatedByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleCreatedByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.CreatedByUserID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.CreatedDate)
+            <div>
+								@Html.EditorFor(model => model.CreatedDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.StartDate)
+            <div>
+								@Html.EditorFor(model => model.StartDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EndDate)
+            <div>
+								@Html.EditorFor(model => model.EndDate)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		<div class="form-item">
+			@Html.LabelFor(model => model.SalesCampaignStatusCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.SalesCampaignStatusCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.SalesCampaignStatusCategory>)ViewBag.PossibleSalesCampaignStatusCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.SalesCampaignStatusCategoryID.ToString(),
+			        Selected = (Model != null) && (option.SalesCampaignStatusCategoryID == Model.SalesCampaignStatusCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+			
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

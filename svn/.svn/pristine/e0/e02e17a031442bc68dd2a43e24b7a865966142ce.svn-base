@@ -1,0 +1,11 @@
+@model String
+
+@{ Html.Telerik().Editor()
+           .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+           .HtmlAttributes(new { style = "height:400px", id = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) + "_wrapper" })
+           .Encode(false)
+           .Value(@<text> 
+                @Model
+             </text>)
+               .Render();
+    }

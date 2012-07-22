@@ -1,0 +1,37 @@
+﻿@model SoftwareGrid.DataLogic.ViewModels.OrganizationOverviewHeadViewModel
+@using SoftwareGrid.DataLogic.Models;
+@using SoftwareGrid.DataLogic.ViewModels;
+@using SoftwareGrid.BusinessLogic.Helpers;
+@if (ViewBag.OrganizationOverviewHead != null)
+{
+<div class="box grid_16">
+<div class="block">
+<div class="section">
+    <div class="overview-img-td">
+        <img src='@Url.Action("ShowOrganizationLogo", new { vendorId = Model.OrganizationID })' width="140px"
+                    alt='@Model.Name' />
+    </div>
+	<div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Code:</span> <span>@Model.OrganizationCodeNumber</span></div>    
+        <div class="overview-tr"><span class="overview-td-title">Name:</span> <span>@Model.Name</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Category:</span> <span>@Model.OrganizationCategoryName</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Business Name:</span> <span>@Model.LegalBusinessName</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Parent Organization Name:</span> <span>@Model.ParentOrganizationName</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Location:</span> <span></span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">#Business Divisions:</span> <span>@Model.NumberOfBusinessDivisions</span></div>
+        <div class="overview-tr"><span class="overview-td-title">#Departments:</span> <span>@Model.NumberOfDepartments</span></div>
+        <div class="overview-tr"><span class="overview-td-title">#Positions:</span> <span>@Model.NumberOfPositions</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">#Projects:</span> <span>@Model.NumberOfProjects</span></div>
+        <div class="overview-tr"><span class="overview-td-title">#Employees:</span> <span>@Model.NumberOfEmployees</span></div>
+        <div class="overview-tr"><span class="overview-td-title">#Branches:</span> <span></span></div>
+    </div>
+	</div>
+</div>
+</div>
+}

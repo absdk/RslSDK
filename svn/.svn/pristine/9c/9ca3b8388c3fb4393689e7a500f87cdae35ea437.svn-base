@@ -1,0 +1,51 @@
+﻿
+namespace SoftwareGrid.Common
+{
+    public static class Constants
+    {
+        public static class CommonConstants
+        {
+            public const string DefaultControllerName = "Home";
+            public const string DefaultActionName = "Index";
+            public const string UserDefaultControllerName = "Home";
+            public const string UserDefaultActionName = "Index";
+        }
+
+        public static class Paths
+        {
+            public const string TemporaryFileUploadPath = "~/UploadedFiles/Temporary";
+        }
+
+        public static class PartialViews
+        {
+            public const string DropDownList_Area = "AreaDropDownListPartial";
+            public const string DropDownList_Controller = "ControllerDropDownListPartial";
+            public const string DropDownList_Action = "ActionDropDownListPartial";
+            public const string DropDownList_MenuCategory = "MenuCategoryDropDownListPartial";
+            public const string DropDownList_ParentMenus = "ParentMenusDropDownListPartial";
+            public const string DropDownList_Country = "CountryDropDownListPartial";
+            public const string DropDownList_State = "StateDropDownListPartial";
+            public const string DropDownList_CountryForIndex = "CountryDropDownListForSearchPartial";
+            public const string DropDownList_StateForIndex = "StateDropDownListForSearchPartial";
+        }
+
+        public static class Params
+        {
+            public const string ApplicantId = "applicantId";
+            public const string CompanyId = "companyId";
+            public const string VendorId = "vendorId";
+        }
+
+        public static class Actions
+        {
+            public const string AppMenuController_SelectControllers = "SelectControllers";
+            public const string AppMenuController_SelectActions = "SelectActions";
+        }
+
+        public static class Messages
+        {
+            public const string UnhandelledError = "We are facing some problem while processing the current request. Please try again later.";
+            public const string UserLogin_UnknownError = "We are facing some problem while processing the current request. Please try again later.";
+        }
+    }
+}

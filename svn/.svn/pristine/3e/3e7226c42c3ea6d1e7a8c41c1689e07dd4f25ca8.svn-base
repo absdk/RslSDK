@@ -1,0 +1,64 @@
+@model SoftwareGrid.DataLogic.Models.Organization
+
+@{
+    ViewBag.Title = "Organization";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.Name)
+    <div class="display-field">@Model.Name</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.LegalBusinessName)
+    <div class="display-field">@Model.LegalBusinessName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OrganizationCodeNumber)
+    <div class="display-field">@Model.OrganizationCodeNumber</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.AboutTheOrganization)
+    <div class="display-field">@Model.AboutTheOrganization</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.WebAddress)
+    <div class="display-field">@Model.WebAddress</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Logo)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Logo).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OrgChartSequenceNumber)
+    <div class="display-field">@String.Format("{0:F}", Model.OrgChartSequenceNumber)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OrganizationCategory)
+    <div class="display-field">@(Model.OrganizationCategory == null ? "None" : Model.OrganizationCategory.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.ParentOrganization)
+    <div class="display-field">@(Model.ParentOrganization == null ? "None" : Model.ParentOrganization.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationID }) |
+    @Html.ActionLink("Back to List", "Index")
+    
+</div>
+	</div>
+</div>
+
+
+

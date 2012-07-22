@@ -1,0 +1,142 @@
+
+@model SoftwareGrid.DataLogic.ViewModels.ApplicantSearchViewModel
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Name)
+            <div>
+								@Html.EditorFor(model => model.Name)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ResumeKeyword)
+            <div>
+								@Html.EditorFor(model => model.ResumeKeyword)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ZipCode)
+            <div>
+								@Html.EditorFor(model => model.ZipCode)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ZipCodeDistanceRadius)
+            <div>
+								@Html.EditorFor(model => model.ZipCodeDistanceRadius)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SearchAddressLatitude)
+            <div>
+								@Html.EditorFor(model => model.SearchAddressLatitude)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SearchAddressLongitude)
+            <div>
+								@Html.EditorFor(model => model.SearchAddressLongitude)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.City)
+            <div>
+								@Html.EditorFor(model => model.City)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.State)
+            <div>
+								@Html.EditorFor(model => model.State)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Country)
+            <div>
+								@Html.EditorFor(model => model.Country)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Region)
+            <div>
+								@Html.EditorFor(model => model.Region)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.LastUpdatedAt)
+            <div>
+								@Html.EditorFor(model => model.LastUpdatedAt)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.PhoneNumber)
+            <div>
+								@Html.EditorFor(model => model.PhoneNumber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Email)
+            <div>
+								@Html.EditorFor(model => model.Email)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Nationality)
+            <div>
+								@Html.EditorFor(model => model.Nationality)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Gender)
+            <div>
+								@Html.EditorFor(model => model.Gender)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.SkillsExpertis)
+            <div>
+								@Html.EditorFor(model => model.SkillsExpertis)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ExperienceLevelCategory)
+            <div>
+								@Html.EditorFor(model => model.ExperienceLevelCategory)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmployerName)
+            <div>
+								@Html.EditorFor(model => model.EmployerName)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

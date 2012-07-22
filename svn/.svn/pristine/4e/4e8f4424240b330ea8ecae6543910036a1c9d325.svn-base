@@ -1,0 +1,74 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantEduCertLicense
+
+@{
+    ViewBag.Title = "ApplicantEduCertLicense";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Edu Cert License</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Edu Cert License</h2>
+		<fieldset>
+
+    <label>Title</label>
+    <div class="display-field">@Model.Title</div>
+
+    <label>AttendedFromDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.AttendedFromDate)</div>
+
+    <label>AttendedToDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.AttendedToDate)</div>
+
+    <label>InstituteName</label>
+    <div class="display-field">@Model.InstituteName</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>BriefDescription</label>
+    <div class="display-field">@Model.BriefDescription</div>
+
+    <label>CertificationIssueDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CertificationIssueDate)</div>
+
+    <label>LicenseExpirationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.LicenseExpirationDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+
+    <label>SkillsExpEduCategory</label>
+    <div class="display-field">@(Model.SkillsExpEduCategory == null ? "None" : Model.SkillsExpEduCategory.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantEduCertLicenseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

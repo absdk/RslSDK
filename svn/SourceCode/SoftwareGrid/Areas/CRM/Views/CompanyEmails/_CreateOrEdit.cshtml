@@ -1,0 +1,75 @@
+
+@model SoftwareGrid.DataLogic.Models.CompanyEmail
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.EmailSendToCompanyID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.EmailSendToCompanyID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Company>)ViewBag.PossibleEmailSendToCompanies).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.CompanyID.ToString(),
+			        Selected = (Model != null) && (option.CompanyID == Model.EmailSendToCompanyID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.EmailSendToContactID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.EmailSendToContactID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Contact>)ViewBag.PossibleEmailSendToContacts).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ContactID.ToString(),
+			        Selected = (Model != null) && (option.ContactID == Model.EmailSendToContactID)
+			    }), "Choose...")
+			</div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.EmailSendByUserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.EmailSendByUserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleEmailSendByUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.EmailSendByUserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.SendDateTime)
+            <div>
+								@Html.EditorFor(model => model.SendDateTime)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmailSubject)
+            <div>
+								@Html.EditorFor(model => model.EmailSubject)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.EmailMessage)
+            <div>
+								@Html.EditorFor(model => model.EmailMessage)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsEmailViewedByApplicant)
+            <div>
+								@Html.EditorFor(model => model.IsEmailViewedByApplicant)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

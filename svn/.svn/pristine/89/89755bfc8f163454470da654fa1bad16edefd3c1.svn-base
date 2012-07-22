@@ -1,0 +1,117 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.OM.Controllers
+{   
+    public class OrganizationDocumentCategoriesController : Controller
+    {
+		private readonly IOrganizationDocumentCategoryRepository organizationdocumentcategoryRepository;
+        public OrganizationDocumentCategoriesController(IOrganizationDocumentCategoryRepository organizationdocumentcategoryRepository)
+        {
+			this.organizationdocumentcategoryRepository = organizationdocumentcategoryRepository;
+        }
+
+        //
+        // GET: /OrganizationDocumentCategories/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(organizationdocumentcategoryRepository.All);
+        }
+		
+		public ViewResult Search(OrganizationDocumentCategory searchOrganizationDocumentCategory)
+        {
+			if(searchOrganizationDocumentCategory!=null)
+			{
+							}
+						return View("Index",organizationdocumentcategoryRepository.All);
+		}
+
+        //
+        // GET: /OrganizationDocumentCategories/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(organizationdocumentcategoryRepository.Find(id));
+        }
+
+        //
+        // GET: /OrganizationDocumentCategories/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			OrganizationDocumentCategory organizationdocumentcategory = new OrganizationDocumentCategory();
+            return View(organizationdocumentcategory);
+        } 
+
+        //
+        // POST: /OrganizationDocumentCategories/Create
+        [HttpPost]
+        public ActionResult Create(OrganizationDocumentCategory organizationdocumentcategory)
+        {
+            if (ModelState.IsValid) {
+                organizationdocumentcategoryRepository.InsertOrUpdate(organizationdocumentcategory);
+                organizationdocumentcategoryRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				return View(organizationdocumentcategory);
+			}
+        }
+        
+        //
+        // GET: /OrganizationDocumentCategories/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+             return View(organizationdocumentcategoryRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationDocumentCategories/Edit/5
+        [HttpPost]
+        public ActionResult Edit(OrganizationDocumentCategory organizationdocumentcategory)
+        {
+            if (ModelState.IsValid) {
+                organizationdocumentcategoryRepository.InsertOrUpdate(organizationdocumentcategory);
+                organizationdocumentcategoryRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				return View(organizationdocumentcategory);
+			}
+        }
+
+        //
+        // GET: /OrganizationDocumentCategories/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(organizationdocumentcategoryRepository.Find(id));
+        }
+
+        //
+        // POST: /OrganizationDocumentCategories/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            organizationdocumentcategoryRepository.Delete(id);
+            organizationdocumentcategoryRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

@@ -1,0 +1,52 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationDocument
+
+@{
+    ViewBag.Title = "OrganizationDocument";
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Document</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Document</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.DocumentTitle)
+    <div class="display-field">@Model.DocumentTitle</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.DocumentFile)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.DocumentFile).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OriginalFileInfo)
+    <div class="display-field">@Model.OriginalFileInfo</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Organization)
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OrganizationDocumentCategory)
+    <div class="display-field">@(Model.OrganizationDocumentCategory == null ? "None" : Model.OrganizationDocumentCategory.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OrganizationDocumentFolder)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationDocumentFolder).ToString()</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationDocumentID, organizationId = ViewBag.OrganizationId }) |
+	@Html.ActionLink("Back to List", "Index",new { organizationId = ViewBag.OrganizationId })
+    
+</div>
+	</div>
+</div>
+
+
+

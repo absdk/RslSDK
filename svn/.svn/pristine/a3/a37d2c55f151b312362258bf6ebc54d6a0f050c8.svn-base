@@ -1,0 +1,26 @@
+@model SoftwareGrid.DataLogic.Models.Salutation
+
+@{
+    ViewBag.Title = "Salutation";
+}
+
+<div class="flat_area grid_16">
+	<h2>Salutation</h2>
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Salutation</h2>
+						        @Html.HiddenFor(model => model.SalutationID)
+						@Html.Partial("_CreateOrEdit", Model)			
+		</div>
+	</div>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

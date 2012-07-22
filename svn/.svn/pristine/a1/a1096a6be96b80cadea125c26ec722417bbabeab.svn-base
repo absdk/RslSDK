@@ -1,0 +1,11 @@
+@model decimal?
+
+@(Html.Telerik().CurrencyTextBox()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+            .InputHtmlAttributes(new { style = "width:100px;color:black;padding-left:5px; float:none;" })
+        .MinValue(0)
+        .CurrencySymbol(ViewBag.Currency!=null?ViewBag.Currency:"$")
+        .HtmlAttributes(new { style = "width:200px;" })
+        .Value(Model)
+)
+

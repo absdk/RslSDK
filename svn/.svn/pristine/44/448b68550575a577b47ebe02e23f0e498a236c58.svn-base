@@ -1,0 +1,119 @@
+@model SoftwareGrid.DataLogic.Models.Company
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "_LayoutCRM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Company</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Company</h2>
+		<fieldset>
+
+    <label>CompanyName</label>
+    <div class="display-field">@Model.CompanyName</div>
+
+    <label>CompanyDisplayId</label>
+    <div class="display-field">@Model.CompanyDisplayId</div>
+
+    <label>Address1</label>
+    <div class="display-field">@Model.Address1</div>
+
+    <label>Address2</label>
+    <div class="display-field">@Model.Address2</div>
+
+    <label>City</label>
+    <div class="display-field">@Model.City</div>
+
+    <label>PostBoxNumber</label>
+    <div class="display-field">@Model.PostBoxNumber</div>
+
+    <label>ZipCode</label>
+    <div class="display-field">@Model.ZipCode</div>
+
+    <label>MainOfficePhone</label>
+    <div class="display-field">@Model.MainOfficePhone</div>
+
+    <label>FaxNumber</label>
+    <div class="display-field">@Model.FaxNumber</div>
+
+    <label>CompanyEmailAddress</label>
+    <div class="display-field">@Model.CompanyEmailAddress</div>
+
+    <label>IsEmailSubscriber</label>
+    <div class="display-field">@Model.IsEmailSubscriber</div>
+
+    <label>IsEmailValidated</label>
+    <div class="display-field">@Model.IsEmailValidated</div>
+
+    <label>WebAddress</label>
+    <div class="display-field">@Model.WebAddress</div>
+
+    <label>EmployeeSize</label>
+    <div class="display-field">@Model.EmployeeSize</div>
+
+    <label>TaxNumber</label>
+    <div class="display-field">@Model.TaxNumber</div>
+
+    <label>DunsNumber</label>
+    <div class="display-field">@Model.DunsNumber</div>
+
+    <label>AboutTheCompany</label>
+    <div class="display-field">@Model.AboutTheCompany</div>
+
+    <label>Logo</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Logo).ToString()</div>
+
+    <label>InternalRemarks</label>
+    <div class="display-field">@Model.InternalRemarks</div>
+
+    <label>CompanyRatingScaleID</label>
+    <div class="display-field">@Model.CompanyRatingScaleID</div>
+
+    <label>CreatedDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>CreatedByUser</label>
+    <div class="display-field">@(Model.CreatedByUser == null ? "None" : Model.CreatedByUser.LastName)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>CompanyStatusCategory</label>
+    <div class="display-field">@(Model.CompanyStatusCategory == null ? "None" : Model.CompanyStatusCategory.Name)</div>
+
+    <label>CompanyRatingCategory</label>
+    <div class="display-field">@(Model.CompanyRatingCategory == null ? "None" : Model.CompanyRatingCategory.Name)</div>
+
+    <label>Industry</label>
+    <div class="display-field">@(Model.Industry == null ? "None" : Model.Industry.Name)</div>
+
+    <label>CompanyOwner</label>
+    <div class="display-field">@(Model.CompanyOwner == null ? "None" : Model.CompanyOwner.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CompanyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class OrganizationBusinessDivisionRepository : IOrganizationBusinessDivisionRepository
+    {
+		private readonly RepositoryContext context;
+
+        public OrganizationBusinessDivisionRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<OrganizationBusinessDivision> All
+        {
+            get { return context.OrganizationBusinessDivision; }
+        }
+
+		public IQueryable<OrganizationBusinessDivision> AllIncluding(params Expression<Func<OrganizationBusinessDivision, object>>[] includeProperties)
+        {
+            IQueryable<OrganizationBusinessDivision> query = context.OrganizationBusinessDivision;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+		        public IQueryable<OrganizationBusinessDivision> AllIncluding(int organizationId,params Expression<Func<OrganizationBusinessDivision, object>>[] includeProperties)
+        {
+            IQueryable<OrganizationBusinessDivision> query = context.OrganizationBusinessDivision;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query.Where(item=>item.OrganizationID==organizationId);
+        }
+		
+        public OrganizationBusinessDivision Find(int id)
+        {
+            return context.OrganizationBusinessDivision.Find(id);
+        }
+
+        public void InsertOrUpdate(OrganizationBusinessDivision organizationbusinessdivision)
+        {
+            if (organizationbusinessdivision.OrganizationBusinessDivisionID == default(int)) {
+                // New entity
+                context.OrganizationBusinessDivision.Add(organizationbusinessdivision);
+            } else {
+                // Existing entity
+                context.Entry(organizationbusinessdivision).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var organizationbusinessdivision = context.OrganizationBusinessDivision.Find(id);
+            context.OrganizationBusinessDivision.Remove(organizationbusinessdivision);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface IOrganizationBusinessDivisionRepository
+    {
+        IQueryable<OrganizationBusinessDivision> All { get; }
+        IQueryable<OrganizationBusinessDivision> AllIncluding(params Expression<Func<OrganizationBusinessDivision, object>>[] includeProperties);
+		        IQueryable<OrganizationBusinessDivision> AllIncluding(int organizationId,params Expression<Func<OrganizationBusinessDivision, object>>[] includeProperties);
+                OrganizationBusinessDivision Find(int id);
+        void InsertOrUpdate(OrganizationBusinessDivision organizationbusinessdivision);
+        void Delete(int id);
+        void Save();
+    }
+}

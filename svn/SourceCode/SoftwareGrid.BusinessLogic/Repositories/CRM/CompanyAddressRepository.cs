@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories.Context;
+
+namespace SoftwareGrid.BusinessLogic.Repositories
+{ 
+    public class CompanyAddressRepository : ICompanyAddressRepository
+    {
+		private readonly RepositoryContext context;
+
+        public CompanyAddressRepository(RepositoryContext context)
+        {
+            this.context = context;
+        }
+
+        public IQueryable<CompanyAddress> All
+        {
+            get { return context.CompanyAddress; }
+        }
+
+        public IQueryable<CompanyAddress> AllIncluding(int companyId,params Expression<Func<CompanyAddress, object>>[] includeProperties)
+        {
+            IQueryable<CompanyAddress> query = context.CompanyAddress;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query.Where(item=>item.CompanyID==companyId);
+        }
+
+        public CompanyAddress Find(int id)
+        {
+            return context.CompanyAddress.Find(id);
+        }
+
+        public void InsertOrUpdate(CompanyAddress companyaddress)
+        {
+            if (companyaddress.CompanyAddressID == default(int)) {
+                // New entity
+                context.CompanyAddress.Add(companyaddress);
+            } else {
+                // Existing entity
+                context.Entry(companyaddress).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var companyaddress = context.CompanyAddress.Find(id);
+            context.CompanyAddress.Remove(companyaddress);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+    }
+
+    public interface ICompanyAddressRepository
+    {
+        IQueryable<CompanyAddress> All { get; }
+        IQueryable<CompanyAddress> AllIncluding(int companyId,params Expression<Func<CompanyAddress, object>>[] includeProperties);
+        CompanyAddress Find(int id);
+        void InsertOrUpdate(CompanyAddress companyaddress);
+        void Delete(int id);
+        void Save();
+    }
+}

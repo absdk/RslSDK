@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.SkillsExpEdu
+
+@{
+    ViewBag.Title = "SkillsExpEdu";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Skills Exp Edu</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Skills Exp Edu</h2>
+		<fieldset>
+
+    <label>Title</label>
+    <div class="display-field">@Model.Title</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>SkillsExpEduCategory</label>
+    <div class="display-field">@(Model.SkillsExpEduCategory == null ? "None" : Model.SkillsExpEduCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SkillsExpEduID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

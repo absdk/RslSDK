@@ -1,0 +1,78 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.Religion>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Religion";
+}
+<div class="flat_area grid_16">
+    <h2>Religion List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "Religion"))
+{
+	<div class="box grid_16">
+        <h2 class="box_head">Search</h2>
+        <a href="#" class="grabber">&nbsp;</a>
+        <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+				<div class="search-item">
+									</div>
+				<div style="width:50%; float:left;">
+				&nbsp;
+				</div>
+				<div class="button_bar clearfix" style="float:left;">
+					<button class="green" type="submit">
+							<span>Search</span>
+					</button>
+				</div>
+			</div>
+        </div>
+    </div>
+}
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.ReligionID))
+		.Columns(columns =>
+        {
+		columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "Religion", new { id = @item.ReligionID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "Religion", new { id = @item.ReligionID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

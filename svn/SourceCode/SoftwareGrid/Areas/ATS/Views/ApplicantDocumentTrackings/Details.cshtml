@@ -1,0 +1,62 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantDocumentTracking
+
+@{
+    ViewBag.Title = "ApplicantDocumentTracking";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Document Tracking</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Document Tracking</h2>
+		<fieldset>
+
+    <label>IsMandatory</label>
+    <div class="display-field">@Model.IsMandatory</div>
+
+    <label>IsOriginalRequired</label>
+    <div class="display-field">@Model.IsOriginalRequired</div>
+
+    <label>Instruction</label>
+    <div class="display-field">@Model.Instruction</div>
+
+    <label>IsReceived</label>
+    <div class="display-field">@Model.IsReceived</div>
+
+    <label>ReceiveDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.ReceiveDate)</div>
+
+    <label>IsVerified</label>
+    <div class="display-field">@Model.IsVerified</div>
+
+    <label>VerificationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>VerifiedByUser</label>
+    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+
+    <label>ApplicantDocument</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ApplicantDocument).ToString()</div>
+
+    <label>ApplicantDocumentCategory</label>
+    <div class="display-field">@(Model.ApplicantDocumentCategory == null ? "None" : Model.ApplicantDocumentCategory.Name)</div>
+
+    <label>ApplicantDocumentStatusCategory</label>
+    <div class="display-field">@(Model.ApplicantDocumentStatusCategory == null ? "None" : Model.ApplicantDocumentStatusCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantDocumentTrackingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

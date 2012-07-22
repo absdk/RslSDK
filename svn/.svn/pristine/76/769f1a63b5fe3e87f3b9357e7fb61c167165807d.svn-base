@@ -1,0 +1,102 @@
+﻿@model SoftwareGrid.DataLogic.ViewModels.OrganizationOverviewHeadViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+<div class="box grid_8">
+	<h2 class="box_head grad_black">Organization Details</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Contact Details</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_black">Requisitions</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_black">Campaigns</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Leads</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Notes</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">Documents</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box grid_8">
+	<h2 class="box_head grad_blue">References</h2>
+	<a href="#" class="grabber"></a>
+	<a href="#" class="toggle"></a>
+	<div class="toggle_container">					
+		<div class="block">
+			<div class="section">
+				<p>Content goes here</p>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionDocument
+
+@{
+    ViewBag.Title = "Requisition Document";
+    Layout = "_LayoutRequisition";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Document</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>Title</label>
+		    <div class="display-field">@Model.Title</div>
+		</div>
+				<div class="form-item">
+		    <label>ImageFile</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.ImageFile).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>OriginalFileNameSize</label>
+		    <div class="display-field">@Model.OriginalFileNameSize</div>
+		</div>
+				<div class="form-item">
+		    <label>Requisition</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

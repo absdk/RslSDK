@@ -1,0 +1,40 @@
+@model SoftwareGrid.DataLogic.Models.VendorServiceCategory
+
+@{
+    ViewBag.Title = "VendorServiceCategory";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Service Category</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Service Category</h2>
+		<fieldset>
+
+    <label>OrganizationServiceCode</label>
+    <div class="display-field">@Model.OrganizationServiceCode</div>
+
+    <label>NACISCode</label>
+    <div class="display-field">@Model.NACISCode</div>
+
+    <label>ExpenseCode</label>
+    <div class="display-field">@Model.ExpenseCode</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.VendorServiceCategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,13 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantInterviewFeedbackCategory>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant Interview Feedback Category";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant Interview Feedback Category List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+		Exception Object reference not set to an instance of an object.
+	

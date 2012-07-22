@@ -1,0 +1,80 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfileWidgetAccess
+
+@{
+    ViewBag.Title = "ApplicantProfileWidgetAccess";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Profile Widget Access</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Profile Widget Access</h2>
+		<fieldset>
+
+    <label>ContactInfoWidget</label>
+    <div class="display-field">@Model.ContactInfoWidget</div>
+
+    <label>NoteWidget</label>
+    <div class="display-field">@Model.NoteWidget</div>
+
+    <label>DocumentWidget</label>
+    <div class="display-field">@Model.DocumentWidget</div>
+
+    <label>ProfileWidget</label>
+    <div class="display-field">@Model.ProfileWidget</div>
+
+    <label>PassportInfoWidget</label>
+    <div class="display-field">@Model.PassportInfoWidget</div>
+
+    <label>DriverLicenseWidget</label>
+    <div class="display-field">@Model.DriverLicenseWidget</div>
+
+    <label>VisaInfoWidget</label>
+    <div class="display-field">@Model.VisaInfoWidget</div>
+
+    <label>AdditionalPersonalDataWidget</label>
+    <div class="display-field">@Model.AdditionalPersonalDataWidget</div>
+
+    <label>JobCartWidget</label>
+    <div class="display-field">@Model.JobCartWidget</div>
+
+    <label>ReferenceInfoWidget</label>
+    <div class="display-field">@Model.ReferenceInfoWidget</div>
+
+    <label>PhotoProfileWidget</label>
+    <div class="display-field">@Model.PhotoProfileWidget</div>
+
+    <label>VideoProfileWidget</label>
+    <div class="display-field">@Model.VideoProfileWidget</div>
+
+    <label>SecurityClearanceInfoWidget</label>
+    <div class="display-field">@Model.SecurityClearanceInfoWidget</div>
+
+    <label>SubmissionReportWidget</label>
+    <div class="display-field">@Model.SubmissionReportWidget</div>
+
+    <label>SocialNetworkWidget</label>
+    <div class="display-field">@Model.SocialNetworkWidget</div>
+
+    <label>ViewerListWidget</label>
+    <div class="display-field">@Model.ViewerListWidget</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>ProfileAccessUser</label>
+    <div class="display-field">@(Model.ProfileAccessUser == null ? "None" : Model.ProfileAccessUser.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantProfileWidgetAccessID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

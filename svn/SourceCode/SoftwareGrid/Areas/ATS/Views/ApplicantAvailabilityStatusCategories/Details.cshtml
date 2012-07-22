@@ -1,0 +1,29 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantAvailabilityStatusCategory
+
+@{
+    ViewBag.Title = "ApplicantAvailabilityStatusCategory";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Availability Status Category</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Availability Status Category</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantAvailabilityStatusCategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

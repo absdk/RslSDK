@@ -1,0 +1,138 @@
+
+
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  Http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace SoftwareGrid.DataLogic.Models
+{
+	public class ReferralProgram
+	{
+		
+		[Required]
+		[Display(AutoGenerateField=false)]
+		[Key]
+    	public Int32 ReferralProgramID { get; set; }
+
+		[Required(ErrorMessage="Referral Program Title is required")]
+		[Display(Name="Title")]
+		[StringLength(100)]
+    	public String ReferralProgramTitle { get; set; }
+
+		[Required(ErrorMessage="Referral Program Description is required")]
+		[Display(Name="Referral Program Description")]
+        [MaxLength]
+        [DataType(DataType.Html)]
+    	public String ReferralProgramDescription { get; set; }
+
+		[Required(ErrorMessage="Referral Program Status is required")]
+		[Display(Name=" Referral Program Status")]
+        [ForeignKey("ReferralProgramStatusCategory")]
+        public Int32 ReferralProgramStatusCategoryID { get; set; }
+
+        public virtual ReferralProgramStatusCategory ReferralProgramStatusCategory { get; set; }
+
+
+	}
+
+    public class ReferralProgramRewardDistributionInfo
+    {
+
+        [Required(ErrorMessage = "Referral Program Reward Distribution Info is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 ReferralProgramRewardDistributionInfoID { get; set; }
+
+        [Required(ErrorMessage = "User is required")]
+        [ForeignKey("ReferredByUser")]
+        [Display(Name = "Referred By User")]
+        public Int32 ReferredByUserID { get; set; }
+
+        [Required(ErrorMessage = "Referred Applicant is required")]
+        [ForeignKey("ReferredApplicant")]
+        [Display(Name = "Referred Applicant Name")]
+        public Int32 ReferredApplicantID { get; set; }
+
+        [Required(ErrorMessage = "ReferrelProgram is required")]
+        [ForeignKey("ReferralProgram")]
+        [Display(Name = "Referral Program ID During Referral ")]
+        public Int32 ReferralProgramID { get; set; }
+
+        [Display(Name = "Reward Value Amount")]
+        public Decimal RewardValueAmount { get; set; }
+
+        [Display(Name = "Reward Value Currency")]
+        [ForeignKey("Currency")]
+        public Int32 RewardValueCurrencyID { get; set; }
+
+        [Display(Name = "Reward Note")]
+        [StringLength(500)]
+        public String RewardNote { get; set; }
+
+        [Display(Name = "Reward Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime Date { get; set; }
+
+        public virtual Currency Currency { get; set; }
+        public virtual User ReferredByUser { get; set; }
+        public virtual ReferralProgram ReferralProgram { get; set; }
+        public virtual Applicant ReferredApplicant { get; set; }
+
+    }
+
+    public class ReferralProgramSchedule
+    {
+
+        [Required(ErrorMessage = "Referral Program Schedule Info is required")]
+        [Display(AutoGenerateField = false)]
+        [Key]
+        public Int32 ReferralProgramScheduleID { get; set; }
+
+        [Required(ErrorMessage = "Referral Program is required")]
+        [Display(Name = "Referral Program")]
+        [ForeignKey("ReferralProgram")]
+        public Int32 ReferralProgramID { get; set; }
+
+        [Required(ErrorMessage = "Start Date is required")]
+        [Display(Name = "Start Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime StartDate { get; set; }
+
+        [Required(ErrorMessage = "End Date is required")]
+        [Display(Name = "End Date")]
+        [DataType(DataType.DateTime)]
+        public DateTime EndDate { get; set; }
+
+        [Required(ErrorMessage = "Is Current is required")]
+        [Display(Name = "Is Current")]
+        public Boolean IsCurrent { get; set; }
+
+        public virtual ReferralProgram ReferralProgram { get; set; }
+
+    }
+
+    public class ReferralProgramStatusCategory
+	{
+		
+		[Required]
+		[Display(AutoGenerateField=false)]
+		[Key]
+        public Int32 ReferralProgramStatusCategoryID { get; set; }
+
+		[Required(ErrorMessage="Name is required")]
+		[Display(Name="Name")]
+		[StringLength(100)]
+    	public String Name { get; set; }
+        //Metadata, Active, Closed	
+		
+	}
+}
+
+	

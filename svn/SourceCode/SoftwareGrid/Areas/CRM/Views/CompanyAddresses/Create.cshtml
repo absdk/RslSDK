@@ -1,0 +1,23 @@
+@model SoftwareGrid.DataLogic.Models.CompanyAddress
+@{
+    ViewBag.Title = "Company Address";
+    Layout = "~/Views/Shared/_LayoutCRM.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Company Address</h2>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="box grid_16">
+        <div class="block">
+            <h2 class="box_head">
+                Company Address</h2>
+            @Html.HiddenFor(model => model.CompanyID)
+            @Html.Partial("_CreateOrEdit", Model)
+            <div class="form-item">
+                @Html.ActionLink("Back to List", "Index", new { companyId = ViewBag.CompanyId })
+            </div>
+        </div>
+    </div>
+}

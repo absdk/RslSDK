@@ -1,0 +1,54 @@
+
+@model SoftwareGrid.DataLogic.Models.RequisitionNote
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.RequisitionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.RequisitionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Requisition>)ViewBag.PossibleRequisitions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.RequisitionID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionID == Model.RequisitionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.UserID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.UserID, ((IEnumerable<SoftwareGrid.DataLogic.Models.User>)ViewBag.PossibleUsers).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.UserID.ToString(),
+			        Selected = (Model != null) && (option.UserID == Model.UserID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Date)
+            <div>
+								@Html.EditorFor(model => model.Date)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Notes)
+            <div>
+								@Html.EditorFor(model => model.Notes)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

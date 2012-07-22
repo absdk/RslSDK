@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationPositionSalaryStaffingRate
+
+@{
+    ViewBag.Title = "Organization Position Salary Staffing Rate";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+	<h2>Organization Position Salary Staffing Rate</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Organization Position Salary Staffing Rate</h2>
+						        @Html.HiddenFor(model => model.OrganizationPositionSalaryStaffingRateID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

@@ -1,0 +1,42 @@
+
+@model SoftwareGrid.DataLogic.Models.Position
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.DepartmentID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.DepartmentID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Department>)ViewBag.PossibleDepartments).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.DepartmentID.ToString(),
+			        Selected = (Model != null) && (option.DepartmentID == Model.DepartmentID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.Name)
+            <div>
+								@Html.EditorFor(model => model.Name)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.JobDescription)
+            <div>
+								@Html.EditorFor(model => model.JobDescription)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

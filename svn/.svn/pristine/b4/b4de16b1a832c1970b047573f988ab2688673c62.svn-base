@@ -1,0 +1,44 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantPreferredWorkLocation
+
+@{
+    ViewBag.Title = "ApplicantPreferredWorkLocation";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Preferred Work Location</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Preferred Work Location</h2>
+		<fieldset>
+
+    <label>CityDistance</label>
+    <div class="display-field">@String.Format("{0:F}", Model.CityDistance)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+
+    <label>Country</label>
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>City</label>
+    <div class="display-field">@(Model.City == null ? "None" : Model.City.Name)</div>
+
+    <label>Region</label>
+    <div class="display-field">@(Model.Region == null ? "None" : Model.Region.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantPreferredWorkLocationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

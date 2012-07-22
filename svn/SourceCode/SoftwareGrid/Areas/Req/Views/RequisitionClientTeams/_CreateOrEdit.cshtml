@@ -1,0 +1,52 @@
+
+@model SoftwareGrid.DataLogic.Models.RequisitionClientTeam
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.RequisitionClientInfoID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.RequisitionClientInfoID, ((IEnumerable<SoftwareGrid.DataLogic.Models.RequisitionClientInfo>)ViewBag.PossibleRequisitionClientInfoes).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.RequisitionClientInfoID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionClientInfoID == Model.RequisitionClientInfoID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ContactID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ContactID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Contact>)ViewBag.PossibleContacts).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ContactID.ToString(),
+			        Selected = (Model != null) && (option.ContactID == Model.ContactID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.HireDecisionSequence)
+            <div>
+								@Html.EditorFor(model => model.HireDecisionSequence)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ContactType)
+            <div>
+								@Html.EditorFor(model => model.ContactType)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

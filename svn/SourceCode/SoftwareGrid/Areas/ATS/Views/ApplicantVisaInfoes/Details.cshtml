@@ -1,0 +1,86 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantVisaInfo
+
+@{
+    ViewBag.Title = "ApplicantVisaInfo";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Visa Info</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Visa Info</h2>
+		<fieldset>
+
+    <label>VisaNumber</label>
+    <div class="display-field">@Model.VisaNumber</div>
+
+    <label>ImmigrationFileNumber</label>
+    <div class="display-field">@Model.ImmigrationFileNumber</div>
+
+    <label>TrackingNumber</label>
+    <div class="display-field">@Model.TrackingNumber</div>
+
+    <label>ProfessionOnVisa</label>
+    <div class="display-field">@Model.ProfessionOnVisa</div>
+
+    <label>VisaApplicationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.VisaApplicationDate)</div>
+
+    <label>VisaFee</label>
+    <div class="display-field">@String.Format("{0:F}", Model.VisaFee)</div>
+
+    <label>IssueDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.IssueDate)</div>
+
+    <label>ExpirationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.ExpirationDate)</div>
+
+    <label>IssuedCity</label>
+    <div class="display-field">@Model.IssuedCity</div>
+
+    <label>EntryByDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.EntryByDate)</div>
+
+    <label>SpouseAccompanyInfo</label>
+    <div class="display-field">@Model.SpouseAccompanyInfo</div>
+
+    <label>CancellationDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.CancellationDate)</div>
+
+    <label>IsCurrent</label>
+    <div class="display-field">@Model.IsCurrent</div>
+
+    <label>RemarksAboutVisa</label>
+    <div class="display-field">@Model.RemarksAboutVisa</div>
+
+    <label>IsVisaTransferbleOrNocAvailable</label>
+    <div class="display-field">@Model.IsVisaTransferbleOrNocAvailable</div>
+
+    <label>VisaStatus</label>
+    <div class="display-field">@(Model.VisaStatus == null ? "None" : Model.VisaStatus.Name)</div>
+
+    <label>VisaType</label>
+    <div class="display-field">@(Model.VisaType == null ? "None" : Model.VisaType.Name)</div>
+
+    <label>State</label>
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+
+    <label>IssuanceCountry</label>
+    <div class="display-field">@(Model.IssuanceCountry == null ? "None" : Model.IssuanceCountry.Name)</div>
+
+    <label>Applicant</label>
+    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AplicantVisaInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

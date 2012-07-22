@@ -1,0 +1,63 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantEduCertLicense>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant Education & Certification List";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant Education & Certification List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create", new { applicantId = ViewBag.ApplicantId })
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.ApplicantEduCertLicenseID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.CertificationIssueDate).Title("Certification Issue Date").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.InstituteName).Title("Institute Or University Name").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.LicenseExpirationDate).Title("License Expiration Date").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Country.Name).Title("Country").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.City).Title("City").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.IsVerified).Title("Is  Verified ").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "ApplicantEduCertLicenses", new { id = @item.ApplicantEduCertLicenseID, applicantId = @item.ApplicantID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "ApplicantEduCertLicenses", new { id = @item.ApplicantEduCertLicenseID, applicantId = @item.ApplicantID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

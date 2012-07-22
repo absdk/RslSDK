@@ -1,0 +1,80 @@
+
+@model SoftwareGrid.DataLogic.Models.RequisitionApplicantInterviewQuestionAnswer
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.RequisitionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.RequisitionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Requisition>)ViewBag.PossibleRequisitions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.RequisitionID.ToString(),
+			        Selected = (Model != null) && (option.RequisitionID == Model.RequisitionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.InterviewQuestionCategoryID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.InterviewQuestionCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.InterviewQuestionCategory>)ViewBag.PossibleInterviewQuestionCategories).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.InterviewQuestionCategoryID.ToString(),
+			        Selected = (Model != null) && (option.InterviewQuestionCategoryID == Model.InterviewQuestionCategoryID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.InterviewQuestionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.InterviewQuestionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.InterviewQuestionAnswer>)ViewBag.PossibleInterviewQuestions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.InterviewQuestionAnswerID.ToString(),
+			        Selected = (Model != null) && (option.InterviewQuestionAnswerID == Model.InterviewQuestionID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.ApplicantAnswer)
+            <div>
+								@Html.EditorFor(model => model.ApplicantAnswer)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AnswerDateTime)
+            <div>
+								@Html.EditorFor(model => model.AnswerDateTime)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsRight)
+            <div>
+								@Html.EditorFor(model => model.IsRight)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

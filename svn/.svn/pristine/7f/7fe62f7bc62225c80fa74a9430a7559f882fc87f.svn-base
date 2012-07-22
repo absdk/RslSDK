@@ -1,0 +1,65 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantExperience>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Applicant Experience";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>Applicant Experience List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+		.DataKeys(keys => keys.Add(c => c.ApplicantExperienceID))
+		.Columns(columns =>
+        {
+		columns.Bound(c => c.EmployerName).Title("Employer Name").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.City).Title("City").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.Country.Name).Title("Country").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.JobTitle).Title("Job Title").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.DateFrom).Title("Date From").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.DateTo).Title("Date To").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.IsVerified).Title("Is  Verified ").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Bound(c => c.ExperienceMonthYear).Title("Experience Month Year").Width("100px").Sortable(false).Groupable(true).Filterable(true); 
+				columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "ApplicantExperience", new { id = @item.ApplicantExperienceID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+            ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "ApplicantExperience", new { id = @item.ApplicantExperienceID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+		})
+		.Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters => 
+        {
+			        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>
+

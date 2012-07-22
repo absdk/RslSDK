@@ -1,0 +1,38 @@
+@model SoftwareGrid.DataLogic.Models.RequisitionDocument
+
+@{
+    ViewBag.Title = "RequisitionDocument";
+    Layout = "_LayoutRequisition";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Requisition Document</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Requisition Document</h2>
+		<fieldset>
+
+    <label>Title</label>
+    <div class="display-field">@Model.Title</div>
+
+    <label>ImageFile</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ImageFile).ToString()</div>
+
+    <label>OriginalFileNameSize</label>
+    <div class="display-field">@Model.OriginalFileNameSize</div>
+
+    <label>Requisition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Requisition).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RequisitionDocumentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

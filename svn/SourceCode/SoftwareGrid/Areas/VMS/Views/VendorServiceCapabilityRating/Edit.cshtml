@@ -1,0 +1,25 @@
+@model SoftwareGrid.DataLogic.Models.VendorServiceCapabilityRating
+
+@{
+    ViewBag.Title = "Vendor Service Capability Rating";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+	<h2>Vendor Service Capability Rating</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Vendor Service Capability Rating</h2>
+						        @Html.HiddenFor(model => model.VendorServiceCapabilityRatingID)
+									@Html.HiddenFor(model => model.VendorID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+									@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+						    </div>
+		</div>
+	</div>
+}

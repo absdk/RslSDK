@@ -1,0 +1,38 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantEmailTemplate
+
+@{
+    ViewBag.Title = "ApplicantEmailTemplate";
+    Layout = "_LayoutApplicant";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Email Template</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Email Template</h2>
+		<fieldset>
+
+    <label>TemplateTitle</label>
+    <div class="display-field">@Model.TemplateTitle</div>
+
+    <label>EmailSubject</label>
+    <div class="display-field">@Model.EmailSubject</div>
+
+    <label>EmailMessage</label>
+    <div class="display-field">@Model.EmailMessage</div>
+
+    <label>TemplateCreatedByUser</label>
+    <div class="display-field">@(Model.TemplateCreatedByUser == null ? "None" : Model.TemplateCreatedByUser.LastName)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantEmailTemplateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

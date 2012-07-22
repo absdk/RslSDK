@@ -1,0 +1,63 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantVideo
+
+@{
+    ViewBag.Title = "Applicant Video";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Video</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>VideoTitle</label>
+		    <div class="display-field">@Model.VideoTitle</div>
+		</div>
+				<div class="form-item">
+		    <label>BriefDescription</label>
+		    <div class="display-field">@Model.BriefDescription</div>
+		</div>
+				<div class="form-item">
+		    <label>YouTubeVideoLink</label>
+		    <div class="display-field">@Model.YouTubeVideoLink</div>
+		</div>
+				<div class="form-item">
+		    <label>VideoFile</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.VideoFile).ToString()</div>
+		</div>
+				<div class="form-item">
+		    <label>OriginalFileInfo</label>
+		    <div class="display-field">@Model.OriginalFileInfo</div>
+		</div>
+				<div class="form-item">
+		    <label>IsDisplayInPortfolio</label>
+		    <div class="display-field">@Model.IsDisplayInPortfolio</div>
+		</div>
+				<div class="form-item">
+		    <label>UploadDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.UploadDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>Applicant</label>
+		    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

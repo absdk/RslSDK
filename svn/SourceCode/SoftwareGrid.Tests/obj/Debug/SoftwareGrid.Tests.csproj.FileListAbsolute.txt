@@ -1,0 +1,11 @@
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\SoftwareGrid.Tests.dll.config
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\SoftwareGrid.Tests.dll
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\SoftwareGrid.Tests.pdb
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\Autofac.Configuration.dll
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\Autofac.dll
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\Autofac.Integration.Mvc.dll
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\EntityFramework.dll
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\Autofac.xml
+C:\svn\SourceCode\SoftwareGrid.Tests\bin\Debug\EntityFramework.xml
+C:\svn\SourceCode\SoftwareGrid.Tests\obj\Debug\SoftwareGrid.Tests.dll
+C:\svn\SourceCode\SoftwareGrid.Tests\obj\Debug\SoftwareGrid.Tests.pdb

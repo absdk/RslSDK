@@ -1,0 +1,55 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.RequisitionStatusForVendorCategory>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Requisition Status For Vendor Category";
+}
+<div class="flat_area grid_16">
+    <h2>Requisition Status For Vendor Category List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+    .Name("Grid")
+    .DataKeys(keys => keys.Add(c => c.RequisitionStatusForVendorCategoryID))
+    .Columns(columns =>
+                    {   
+                        columns.AutoGenerate(column =>
+                                                {
+                                                    if (column.Member == "RequisitionStatusForVendorCategoryID")
+                                                        column.Visible = false;
+                                                });
+						columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="@Url.Action("Edit", "RequisitionStatusForVendorCategory", new { id = @item.RequisitionStatusForVendorCategoryID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Edit</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+							            columns.Template(
+							                @<text>
+							                    <center>
+							                        <a href="/RequisitionStatusForVendorCategory/Delete/@item.RequisitionStatusForVendorCategoryID" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+							                    </center>
+							                </text>
+							            ).HeaderTemplate(
+							                @<text>
+							                    <center>
+							                        <span>Delete</span>
+							                    </center>
+							                </text>
+							            ).Width("10px");
+                    })
+    .Sortable()
+    .Pageable()
+) 
+</div>
+

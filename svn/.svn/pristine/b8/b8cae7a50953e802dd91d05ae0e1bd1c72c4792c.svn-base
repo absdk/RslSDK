@@ -1,0 +1,145 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.ATS.Controllers
+{   
+    public class ApplicantPassportInfoesController : Controller
+    {
+		private readonly IApplicantRepository applicantRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly IUserRepository userRepository;
+		private readonly IApplicantPassportInfoRepository applicantpassportinfoRepository;
+        public ApplicantPassportInfoesController(IApplicantRepository applicantRepository, ICountryRepository countryRepository, IStateRepository stateRepository, IUserRepository userRepository, IApplicantPassportInfoRepository applicantpassportinfoRepository)
+        {
+			this.applicantRepository = applicantRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.userRepository = userRepository;
+			this.applicantpassportinfoRepository = applicantpassportinfoRepository;
+        }
+
+        //
+        // GET: /ApplicantPassportInfoes/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(applicantpassportinfoRepository.AllIncluding(applicantpassportinfo => applicantpassportinfo.Applicant, applicantpassportinfo => applicantpassportinfo.NationalityCountry, applicantpassportinfo => applicantpassportinfo.IssuanceCountry, applicantpassportinfo => applicantpassportinfo.State, applicantpassportinfo => applicantpassportinfo.VerifiedByUser));
+        }
+		
+		public ViewResult Search(ApplicantPassportInfo searchApplicantPassportInfo)
+        {
+			if(searchApplicantPassportInfo!=null)
+			{
+							}
+						return View("Index",applicantpassportinfoRepository.AllIncluding(applicantpassportinfo => applicantpassportinfo.Applicant, applicantpassportinfo => applicantpassportinfo.NationalityCountry, applicantpassportinfo => applicantpassportinfo.IssuanceCountry, applicantpassportinfo => applicantpassportinfo.State, applicantpassportinfo => applicantpassportinfo.VerifiedByUser));
+		}
+
+        //
+        // GET: /ApplicantPassportInfoes/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(applicantpassportinfoRepository.Find(id));
+        }
+
+        //
+        // GET: /ApplicantPassportInfoes/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			ApplicantPassportInfo applicantpassportinfo = new ApplicantPassportInfo();
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleNationalityCountries = countryRepository.All;
+			ViewBag.PossibleIssuanceCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+            return View(applicantpassportinfo);
+        } 
+
+        //
+        // POST: /ApplicantPassportInfoes/Create
+        [HttpPost]
+        public ActionResult Create(ApplicantPassportInfo applicantpassportinfo)
+        {
+            if (ModelState.IsValid) {
+                applicantpassportinfoRepository.InsertOrUpdate(applicantpassportinfo);
+                applicantpassportinfoRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleNationalityCountries = countryRepository.All;
+				ViewBag.PossibleIssuanceCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(applicantpassportinfo);
+			}
+        }
+        
+        //
+        // GET: /ApplicantPassportInfoes/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleApplicants = applicantRepository.All;
+			ViewBag.PossibleNationalityCountries = countryRepository.All;
+			ViewBag.PossibleIssuanceCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+			ViewBag.PossibleVerifiedByUsers = userRepository.All;
+             return View(applicantpassportinfoRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantPassportInfoes/Edit/5
+        [HttpPost]
+        public ActionResult Edit(ApplicantPassportInfo applicantpassportinfo)
+        {
+            if (ModelState.IsValid) {
+                applicantpassportinfoRepository.InsertOrUpdate(applicantpassportinfo);
+                applicantpassportinfoRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleApplicants = applicantRepository.All;
+				ViewBag.PossibleNationalityCountries = countryRepository.All;
+				ViewBag.PossibleIssuanceCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				ViewBag.PossibleVerifiedByUsers = userRepository.All;
+				return View(applicantpassportinfo);
+			}
+        }
+
+        //
+        // GET: /ApplicantPassportInfoes/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(applicantpassportinfoRepository.Find(id));
+        }
+
+        //
+        // POST: /ApplicantPassportInfoes/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            applicantpassportinfoRepository.Delete(id);
+            applicantpassportinfoRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

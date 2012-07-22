@@ -1,0 +1,87 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantWorkReferenceRecommendation
+
+@{
+    ViewBag.Title = "Applicant Work Reference Recommendation";
+    Layout = "~/Views/Shared/_LayoutApplicant.cshtml";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Work Reference Recommendation</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>CompanyName</label>
+		    <div class="display-field">@Model.CompanyName</div>
+		</div>
+				<div class="form-item">
+		    <label>FirstName</label>
+		    <div class="display-field">@Model.FirstName</div>
+		</div>
+				<div class="form-item">
+		    <label>LastName</label>
+		    <div class="display-field">@Model.LastName</div>
+		</div>
+				<div class="form-item">
+		    <label>JobTitle</label>
+		    <div class="display-field">@Model.JobTitle</div>
+		</div>
+				<div class="form-item">
+		    <label>OfficePhone</label>
+		    <div class="display-field">@Model.OfficePhone</div>
+		</div>
+				<div class="form-item">
+		    <label>MobileNumber</label>
+		    <div class="display-field">@Model.MobileNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>Email</label>
+		    <div class="display-field">@Model.Email</div>
+		</div>
+				<div class="form-item">
+		    <label>RecommendationInfo</label>
+		    <div class="display-field">@Model.RecommendationInfo</div>
+		</div>
+				<div class="form-item">
+		    <label>ShowOrHideRecommendation</label>
+		    <div class="display-field">@Model.ShowOrHideRecommendation</div>
+		</div>
+				<div class="form-item">
+		    <label>IsVerified</label>
+		    <div class="display-field">@Model.IsVerified</div>
+		</div>
+				<div class="form-item">
+		    <label>VerificationDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>VerifiedByUser</label>
+		    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>Applicant</label>
+		    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>ApplicantExperience</label>
+		    <div class="display-field">@Html.DisplayTextFor(_ => Model.ApplicantExperience).ToString()</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

@@ -1,0 +1,76 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationAddress
+
+@{
+    ViewBag.Title = "OrganizationAddress";
+    Layout = "~/Views/Shared/_LayoutOrganization.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Address</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Address</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.LocationName)
+    <div class="display-field">@Model.LocationName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.AddressLine)
+    <div class="display-field">@Model.AddressLine</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.PostBoxNumber)
+    <div class="display-field">@Model.PostBoxNumber</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CityName)
+    <div class="display-field">@Model.CityName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.ZipCode)
+    <div class="display-field">@Model.ZipCode</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OfficePhone)
+    <div class="display-field">@Model.OfficePhone</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.FaxNumber)
+    <div class="display-field">@Model.FaxNumber</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.EmailAddress)
+    <div class="display-field">@Model.EmailAddress</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Organization)
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.OrganizationAddressCategory)
+    <div class="display-field">@(Model.OrganizationAddressCategory == null ? "None" : Model.OrganizationAddressCategory.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Country)
+    <div class="display-field">@(Model.Country == null ? "None" : Model.Country.Name)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.State)
+    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationAddressID, organizationId = ViewBag.OrganizationId }) |
+	@Html.ActionLink("Back to List", "Index",new { organizationId = ViewBag.OrganizationId })
+    
+</div>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.SalesProductServiceDocument
+
+@{
+    ViewBag.Title = "SalesProductServiceDocument";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Sales Product Service Document</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Sales Product Service Document</h2>
+		<fieldset>
+
+    <label>DocumentTitle</label>
+    <div class="display-field">@Model.DocumentTitle</div>
+
+    <label>FileContent</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.FileContent).ToString()</div>
+
+    <label>SalesProductServiceCatelog</label>
+    <div class="display-field">@(Model.SalesProductServiceCatelog == null ? "None" : Model.SalesProductServiceCatelog.Title)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SalesProductServiceDocumentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

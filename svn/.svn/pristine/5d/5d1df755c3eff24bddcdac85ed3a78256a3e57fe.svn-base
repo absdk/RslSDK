@@ -1,0 +1,5 @@
+﻿<?xml version="1.0"?>
+<connectionStrings>
+  <add name="sqlConnection" connectionString="Data Source=FAZLUR-VAIO;Initial Catalog=SoftwareGrid;user id=sa;password=admin123#@;" providerName="System.Data.SqlClient" />
+</connectionStrings>
+

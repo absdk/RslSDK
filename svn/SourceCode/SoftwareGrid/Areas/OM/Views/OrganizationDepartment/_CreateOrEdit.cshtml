@@ -1,0 +1,73 @@
+
+@model SoftwareGrid.DataLogic.Models.OrganizationDepartment
+@* This partial view defines form fields that will appear when creating and editing entities *@
+	<fieldset>
+		@Html.ValidationSummary()
+			<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Organization>)ViewBag.PossibleOrganizations).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.OrganizationID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationID == Model.OrganizationID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+						</div>
+						<div class="form-item">
+			@Html.LabelFor(model => model.OrganizationBusinessDivisionID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.OrganizationBusinessDivisionID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationBusinessDivision>)ViewBag.PossibleOrganizationBusinessDivisions).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationBusinessDivisionID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationBusinessDivisionID == Model.OrganizationBusinessDivisionID)
+			    }), "Choose...")
+			</div>
+						</div>
+						<div class="form-item">
+			@Html.LabelFor(model => model.ParentDepartmentID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ParentDepartmentID, ((IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationDepartment>)ViewBag.PossibleParentDepartments).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.OrganizationDepartmentID.ToString(),
+			        Selected = (Model != null) && (option.OrganizationDepartmentID == Model.ParentDepartmentID)
+			    }), "Choose...")
+			</div>
+						</div>
+					
+		<div class="form-item">
+            @Html.LabelFor(model => model.DepartmentName)
+            <div>
+								@Html.EditorFor(model => model.DepartmentName)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DepartmentCodeNumber)
+            <div>
+								@Html.EditorFor(model => model.DepartmentCodeNumber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.DepartmentNumber)
+            <div>
+								@Html.EditorFor(model => model.DepartmentNumber)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.Description)
+            <div>
+								@Html.EditorFor(model => model.Description)
+				            </div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

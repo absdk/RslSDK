@@ -1,0 +1,24 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationDocument
+
+@{
+    ViewBag.Title = "Organization Document";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+	<h2>Organization Document</h2>
+</div>
+
+@using (Html.BeginForm()) {
+	<div class="box grid_16">
+	    <div class="block">
+	        <h2 class="box_head">
+	            Organization Document</h2>
+						        @Html.HiddenFor(model => model.OrganizationDocumentID)
+						@Html.Partial("_CreateOrEdit", Model)
+			<div class="form-item">
+			    @Html.ActionLink("Back to List", "Index")
+		    </div>
+		</div>
+	</div>
+}

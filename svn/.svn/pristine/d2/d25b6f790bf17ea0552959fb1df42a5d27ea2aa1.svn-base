@@ -1,0 +1,83 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantPassportInfo
+
+@{
+    ViewBag.Title = "Applicant Passport Info";
+    Layout = "_LayoutApplicant";
+}
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Passport Info</h2>
+</div>
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Are you sure you want to delete this?</h2>
+@using (Html.BeginForm()) {
+	<fieldset>
+				<div class="form-item">
+		    <label>PassportNumber</label>
+		    <div class="display-field">@Model.PassportNumber</div>
+		</div>
+				<div class="form-item">
+		    <label>PassportType</label>
+		    <div class="display-field">@Model.PassportType</div>
+		</div>
+				<div class="form-item">
+		    <label>PassportProfession</label>
+		    <div class="display-field">@Model.PassportProfession</div>
+		</div>
+				<div class="form-item">
+		    <label>IssuanceCity</label>
+		    <div class="display-field">@Model.IssuanceCity</div>
+		</div>
+				<div class="form-item">
+		    <label>IssueDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.IssueDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>ExpireDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.ExpireDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>IsVerified</label>
+		    <div class="display-field">@Model.IsVerified</div>
+		</div>
+				<div class="form-item">
+		    <label>VerificationDate</label>
+		    <div class="display-field">@String.Format("{0:g}", Model.VerificationDate)</div>
+		</div>
+				<div class="form-item">
+		    <label>VerifiedByUser</label>
+		    <div class="display-field">@(Model.VerifiedByUser == null ? "None" : Model.VerifiedByUser.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>Applicant</label>
+		    <div class="display-field">@(Model.Applicant == null ? "None" : Model.Applicant.LastName)</div>
+		</div>
+				<div class="form-item">
+		    <label>IssuanceCountry</label>
+		    <div class="display-field">@(Model.IssuanceCountry == null ? "None" : Model.IssuanceCountry.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>NationalityCountry</label>
+		    <div class="display-field">@(Model.NationalityCountry == null ? "None" : Model.NationalityCountry.Name)</div>
+		</div>
+				<div class="form-item">
+		    <label>State</label>
+		    <div class="display-field">@(Model.State == null ? "None" : Model.State.Name)</div>
+		</div>
+				<div class="form-item">
+	<div class="button_bar clearfix">
+			<button class="green" type="submit">
+				<span>Delete</span>
+			</button>
+		</div>
+	</div>
+	</fieldset>
+}
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+	

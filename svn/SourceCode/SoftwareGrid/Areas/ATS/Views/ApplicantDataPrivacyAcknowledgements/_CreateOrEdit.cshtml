@@ -1,0 +1,63 @@
+
+@model SoftwareGrid.DataLogic.Models.ApplicantDataPrivacyAcknowledgement
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantID, ((IEnumerable<SoftwareGrid.DataLogic.Models.Applicant>)ViewBag.PossibleApplicants).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.LastName), 
+			        Value = option.ApplicantID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantID == Model.ApplicantID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				<div class="form-item">
+			@Html.LabelFor(model => model.ApplicantDataPrivacyTemplateID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.ApplicantDataPrivacyTemplateID, ((IEnumerable<SoftwareGrid.DataLogic.Models.ApplicantDataPrivacyTemplate>)ViewBag.PossibleApplicantDataPrivacyTemplates).Select(option => new SelectListItem {
+			        Text = Html.DisplayTextFor(_ => option).ToString(), 
+			        Value = option.ApplicantDataPrivacyTemplateID.ToString(),
+			        Selected = (Model != null) && (option.ApplicantDataPrivacyTemplateID == Model.ApplicantDataPrivacyTemplateID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.IsAgreed)
+            <div>
+								@Html.EditorFor(model => model.IsAgreed)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ApplicantDataPrivacyAgreementInfo)
+            <div>
+								@Html.EditorFor(model => model.ApplicantDataPrivacyAgreementInfo)
+				            </div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.AgreementDateTime)
+            <div>
+								@Html.EditorFor(model => model.AgreementDateTime)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

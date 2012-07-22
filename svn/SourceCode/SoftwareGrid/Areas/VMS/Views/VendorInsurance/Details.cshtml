@@ -1,0 +1,64 @@
+@model SoftwareGrid.DataLogic.Models.VendorInsurance
+
+@{
+    ViewBag.Title = "VendorInsurance";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Insurance</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Insurance</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.InsuranceProviderCompanyName)
+    <div class="display-field">@Model.InsuranceProviderCompanyName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.InsuranceProviderPhoneName)
+    <div class="display-field">@Model.InsuranceProviderPhoneName</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.InsuranceNumber)
+    <div class="display-field">@Model.InsuranceNumber</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CertificateIssueDate)
+    <div class="display-field">@String.Format("{0:g}", Model.CertificateIssueDate)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.CertificationExpireDate)
+    <div class="display-field">@String.Format("{0:g}", Model.CertificationExpireDate)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.InsuranceCoverageInformation)
+    <div class="display-field">@Model.InsuranceCoverageInformation</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.IsVerified)
+    <div class="display-field">@Model.IsVerified</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Vendor)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VendorInsuranceCategory)
+    <div class="display-field">@(Model.VendorInsuranceCategory == null ? "None" : Model.VendorInsuranceCategory.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.VendorInsuranceID, vendorId = ViewBag.VendorId }) |
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+    
+</div>
+	</div>
+</div>
+
+
+

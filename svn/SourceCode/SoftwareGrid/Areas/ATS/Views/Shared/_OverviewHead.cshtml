@@ -1,0 +1,55 @@
+﻿@using SoftwareGrid.DataLogic.Models;
+@using SoftwareGrid.BusinessLogic.Helpers;
+@if (ViewBag.OverviewApplicant != null)
+{
+    Applicant overviewApplicant = (Applicant)ViewBag.OverviewApplicant;
+<div class="box grid_16">
+<div class="block">
+<div class="section">
+    <div class="overview-img-td">
+        <img src='@Url.Action("ShowApplicantPhoto", new { applicantId = overviewApplicant.ApplicantID })' width="140px"
+                    alt='@overviewApplicant.FullName' />
+    </div>
+	<div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Name:</span> <span>@overviewApplicant.FullName</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Job Title:</span> <span>@overviewApplicant.JobTitle</span></div>    
+        <div class="overview-tr"><span class="overview-td-title">Current Company:</span> <span>@MiscUtility.GetApplicantCurrentCompany(overviewApplicant.ApplicantID)</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Address:</span> <span>@overviewApplicant.Address</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Location:</span> <span>@MiscUtility.GetLocation(overviewApplicant.City, overviewApplicant.State, overviewApplicant.Country)</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Email:</span> <span>@overviewApplicant.EmailAddress</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Phone:</span> <span>@overviewApplicant.Phone</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Mobile:</span> <span>@MiscUtility.GetApplicantMobile(overviewApplicant.ApplicantID)</span></div>
+    </div>
+    <div class="overview-td">
+        <div class="overview-tr"><span class="overview-td-title">Resume Source:</span> <span>@MiscUtility.GetApplicantResumeSource(overviewApplicant.ApplicantSourceCategory)</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Status:</span> <span>@MiscUtility.GetApplicantStatus(overviewApplicant.ApplicantAvailabilityStatusCategory)</span></div>
+        <div class="overview-tr"><span class="overview-td-title">Last Updated:</span> <span>@overviewApplicant.LastUpdateDate.ToShortDateString()</span></div>
+    </div>
+	</div>
+</div>
+</div>
+@*
+<div class="overview-td">
+    <div class"overview-tr"><span>Name:</span><span>@overviewApplicant.FullName</span></div>
+    <div class"overview-tr"><span>Job Title:</span><span>@overviewApplicant.JobTitle</span></div>
+    <div class"overview-tr"><span>Current Company:</span><span>@MiscUtility.GetApplicantCurrentCompany(overviewApplicant.ApplicantID)</span></div>
+</div>
+<div class="overview-td">
+    <span>Address:</span><span>@overviewApplicant.Address</span>
+    <span>Location:</span><span>@MiscUtility.GetLocation(overviewApplicant.City, overviewApplicant.State, overviewApplicant.Country)</span>
+</div>
+<div class="overview-td">
+    <span>Email:</span><span>@overviewApplicant.EmailAddress</span>
+    <span>Phone:</span><span>@overviewApplicant.Phone</span>
+    <span>Mobile:</span><span>@MiscUtility.GetApplicantMobile(overviewApplicant.ApplicantID)</span>
+</div>
+<div class="overview-td">
+    <span>Resume Source:</span><span>@MiscUtility.GetApplicantResumeSource(overviewApplicant.ApplicantSourceCategory)</span>
+    <span>Status:</span><span>@MiscUtility.GetApplicantStatus(overviewApplicant.ApplicantAvailabilityStatusCategory)</span>
+    <span>Last Updated:</span><span>@overviewApplicant.LastUpdateDate.ToShortDateString()</span>
+</div>*@
+}

@@ -1,0 +1,35 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationPositionCompetency
+
+@{
+    ViewBag.Title = "OrganizationPositionCompetency";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Position Competency</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Position Competency</h2>
+		<fieldset>
+
+    <label>HierarchicalNumber</label>
+    <div class="display-field">@String.Format("{0:F}", Model.HierarchicalNumber)</div>
+
+    <label>OrganizationPosition</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationPosition).ToString()</div>
+
+    <label>SkillsExpEdu</label>
+    <div class="display-field">@(Model.SkillsExpEdu == null ? "None" : Model.SkillsExpEdu.Title)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationPositionCompetencyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

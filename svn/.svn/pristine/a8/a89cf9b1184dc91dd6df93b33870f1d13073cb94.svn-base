@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationPosition
+
+@{
+    ViewBag.Title = "OrganizationPosition";
+    Layout = "_LayoutOM";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Position</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Position</h2>
+		<fieldset>
+
+    <label>PositionName</label>
+    <div class="display-field">@Model.PositionName</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>ChartHierarchicalNumber</label>
+    <div class="display-field">@String.Format("{0:F}", Model.ChartHierarchicalNumber)</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+
+    <label>OrganizationDepartment</label>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.OrganizationDepartment).ToString()</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationPositionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

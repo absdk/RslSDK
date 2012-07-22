@@ -1,0 +1,261 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
+using EasySoft.Helper;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.DataLogic.Models;
+namespace SoftwareGrid.BusinessLogic.Helpers
+{
+    public static class MiscUtility
+    {
+        public static IEnumerable<SelectListItem> GetAreas()
+        {
+            List<SelectListItem> listArea = new List<SelectListItem>();
+            Assembly assembly = Assembly.Load("SoftwareGrid");
+
+            IEnumerable<String> areas = assembly.GetTypes()
+                                                .Select(t => t.Namespace)
+                                                .Where(t => t != null && t.Contains("Areas") && t.Contains("Controllers"))
+                                                .Distinct();
+            foreach (String area in areas)
+            {
+                SelectListItem currentItem = new SelectListItem();
+                currentItem.Text = area.Substring("Areas.", ".Controllers");
+                currentItem.Value = currentItem.Text;
+                listArea.Add(currentItem);
+            }
+
+            return listArea;
+        }
+
+        public static IEnumerable<SelectListItem> GetControllers(string areaName)
+        {
+            List<SelectListItem> listControllers = new List<SelectListItem>();
+            if (areaName.IsNotNullOrEmpty())
+            {
+                Assembly assembly = Assembly.Load("SoftwareGrid");
+
+                IEnumerable<Type> controllerTypes = from t in assembly.GetExportedTypes()
+                                                    where typeof(IController).IsAssignableFrom(t) && t.Namespace.Contains(areaName)
+                                                    select t;
+                foreach (var controllerType in controllerTypes)
+                {
+                    SelectListItem currentItem = new SelectListItem();
+                    currentItem.Text = controllerType.Name.Replace("Controller", string.Empty);
+                    currentItem.Value = currentItem.Text;
+                    listControllers.Add(currentItem);
+                }
+            }
+
+            return listControllers;
+        }
+
+        public static IEnumerable<SelectListItem> GetActions(string controllerName)
+        {
+            List<SelectListItem> listActions = new List<SelectListItem>();
+            if (controllerName.IsNotNullOrEmpty())
+            {
+                Assembly assembly = Assembly.Load("SoftwareGrid");
+
+                IEnumerable<Type> controllerTypes = from t in assembly.GetExportedTypes()
+                                                    where typeof(IController).IsAssignableFrom(t) && t.Name.Contains(controllerName)
+                                                    select t;
+                foreach (var controllerType in controllerTypes)
+                {
+                    List<string> actionNames = new List<string>();
+                    MethodInfo[] mi = controllerType.GetMethods();
+
+                    foreach (MethodInfo m in mi)
+                    {
+                        if (m.IsPublic)
+                        {
+                            if (typeof(ActionResult).IsAssignableFrom(m.ReturnParameter.ParameterType))
+                            {
+                                SelectListItem currentItem = new SelectListItem();
+                                currentItem.Text = m.Name;
+                                currentItem.Value = currentItem.Text;
+                                listActions.Add(currentItem);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return listActions;
+        }
+
+        public static IEnumerable<UserRolePermission> GetAllActions()
+        {
+            List<UserRolePermission> actionList = new List<UserRolePermission>();
+            Assembly assembly = Assembly.Load("SoftwareGrid");
+
+            IEnumerable<String> areas = assembly.GetTypes()
+                                                .Select(t => t.Namespace)
+                                                .Where(t => t != null && t.Contains("Areas"))
+                                                .Distinct();
+            int index = 1;
+            foreach (String area in areas)
+            {
+                IEnumerable<Type> controllerTypes = from t in assembly.GetExportedTypes()
+                                                    where typeof(IController).IsAssignableFrom(t) && t.Namespace == area
+                                                    select t;
+                foreach (var controllerType in controllerTypes)
+                {
+                    List<string> actionNames = new List<string>();
+                    MethodInfo[] mi = controllerType.GetMethods();
+
+                    foreach (MethodInfo m in mi)
+                    {
+                        if (m.IsPublic)
+                        {
+                            object[] userAuthorizeAttribute = m.GetCustomAttributes(typeof(UserAuthorize), true);
+
+                            if (typeof(ActionResult).IsAssignableFrom(m.ReturnParameter.ParameterType) && userAuthorizeAttribute != null && userAuthorizeAttribute.Length>0)
+                            {
+                                UserRolePermission userRolePermission = new UserRolePermission();
+                                userRolePermission.AreaName = area.Substring("Areas.", ".Controllers");
+                                userRolePermission.ControllerName = controllerType.Name.Replace("Controller", string.Empty);
+                                userRolePermission.ActionName = m.Name;
+                                userRolePermission.UserRoleID = index;
+                                index++;
+                                actionNames.Add(m.Name);
+                                actionList.Add(userRolePermission);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return actionList;
+        }
+
+        public static string RenderPartialViewToString(this Controller controller, string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = controller.ControllerContext.RouteData.GetRequiredString("action");
+
+            controller.ViewData.Model = model;
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(controller.ControllerContext, viewName);
+                var viewContext = new ViewContext(controller.ControllerContext, viewResult.View, controller.ViewData, controller.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
+        public static bool UserRolePermissionToAction(int roleIndex, string areaName, string controllerName, string actionName,List<UserRole> userRoleList)
+        {
+            if (userRoleList != null && roleIndex < userRoleList.Count && areaName.IsNotNullOrEmpty() && controllerName.IsNotNullOrEmpty() && actionName.IsNotNullOrEmpty())
+            {
+                IUserRolePermissionRepository userRolePermissionRepository = DependencyResolver.Current.GetService(typeof(IUserRolePermissionRepository)) as IUserRolePermissionRepository;
+                return userRolePermissionRepository.HasPermission(userRoleList[roleIndex].UserRoleID, areaName, controllerName, actionName);
+            }
+            return false;
+        }
+
+        public static string GetPhysicalFilePath(string virtualDirPath,string fileName)
+        {
+            string physicalPath = HttpContext.Current.Server.MapPath(virtualDirPath);
+            if (!Directory.Exists(physicalPath))
+            {
+                Directory.CreateDirectory(physicalPath);
+            }
+            if (fileName.IsNotNullOrEmpty())
+            {
+                physicalPath = Path.Combine(physicalPath, fileName);
+            }
+            return physicalPath;
+        }
+
+        public static string GetLocation(string strCityName, string strState)
+        {
+            string strLocation = strCityName.Trim();
+            if (strState.IsNotNullOrEmpty())
+            {
+                strLocation = strLocation.Concate(", ", strState.Trim());
+            }
+            return strLocation;
+        }
+
+        public static string GetLocation(string strCityName, string strState, string strCountry)
+        {
+            string strLocation = strCityName.Trim();
+            if (strState.IsNotNullOrEmpty())
+            {
+                strLocation = strLocation.Concate(", ", strState.Trim());
+            }
+            if (strCountry.IsNotNullOrEmpty())
+            {
+                strLocation = strLocation.Concate(", ", strCountry.Trim());
+            }
+            return strLocation;
+        }
+
+        public static string GetLocation(string strCityName, State state, Country country)
+        {
+            string strLocation = strCityName.Trim();
+            if (state != null && state.Name.IsNotNullOrEmpty())
+            {
+                strLocation = strLocation.Concate(", ", state.Name.Trim());
+            }
+            if (country != null && country.Name.IsNotNullOrEmpty())
+            {
+                strLocation = strLocation.Concate(", ", country.Name.Trim());
+            }
+            return strLocation;
+        }
+
+        public static string GetApplicantMobile(int applicantId)
+        {
+            //IApplicantAddressRepository repository = DependencyResolver.Current.GetService(typeof(IApplicantAddressRepository)) as IApplicantAddressRepository;
+            //ApplicantAddress presentAddress = repository.FindPresentAddress(applicantId);
+            //if (presentAddress != null)
+            //{
+            //    return presentAddress.MobilePhone;
+            //}
+            return string.Empty;
+        }
+
+        public static string GetApplicantCurrentCompany(int applicantId)
+        {
+            //IApplicantExperienceRepository repository = DependencyResolver.Current.GetService(typeof(IApplicantExperienceRepository)) as IApplicantExperienceRepository;
+            //ApplicantExperience currentExperience = repository.FindCurrentExperience(applicantId);
+            //if (currentExperience != null)
+            //{
+            //    return currentExperience.EmployerName;
+            //}
+            return string.Empty;
+        }
+
+        public static string GetApplicantResumeSource(ApplicantSourceCategory applicantSource)
+        {
+            if (applicantSource != null)
+            {
+                return applicantSource.Name;
+            }
+            return string.Empty;
+        }
+
+        public static string GetApplicantStatus(ApplicantAvailabilityStatusCategory applicantStatus)
+        {
+            if (applicantStatus != null)
+            {
+                return applicantStatus.Name;
+            }
+            return string.Empty;
+        }
+
+        public static string GetApplicantPersonalizedId()
+        {
+            string id = DateTime.Now.ToString("yyyyMMddhhmmssffff");
+            return id;
+        }
+    }
+}

@@ -1,0 +1,141 @@
+//*********************************************************
+//
+//    Copyright (c) SoftwareGrid LLC. All rights reserved.
+//	  Contact: Faisal Alam, sal@softwaregrid.com
+//	  http://www.softwaregrid.com
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SoftwareGrid.DataLogic.Models;
+using SoftwareGrid.BusinessLogic.Repositories;
+using SoftwareGrid.BusinessLogic.Helpers;
+namespace SoftwareGrid.Areas.CRM.Controllers
+{   
+    public class CompanyAddressesController : Controller
+    {
+		private readonly ICompanyRepository companyRepository;
+		private readonly ICompanyAddressCategoryRepository companyaddresscategoryRepository;
+		private readonly ICountryRepository countryRepository;
+		private readonly IStateRepository stateRepository;
+		private readonly ICompanyAddressRepository companyaddressRepository;
+        public CompanyAddressesController(ICompanyRepository companyRepository, ICompanyAddressCategoryRepository companyaddresscategoryRepository, ICountryRepository countryRepository, IStateRepository stateRepository, ICompanyAddressRepository companyaddressRepository)
+        {
+			this.companyRepository = companyRepository;
+			this.companyaddresscategoryRepository = companyaddresscategoryRepository;
+			this.countryRepository = countryRepository;
+			this.stateRepository = stateRepository;
+			this.companyaddressRepository = companyaddressRepository;
+        }
+
+        //
+        // GET: /CompanyAddresses/
+		[UserAuthorize]
+        public ViewResult Index()
+        {
+						            return View(companyaddressRepository.AllIncluding(companyaddress => companyaddress.Company, companyaddress => companyaddress.CompanyAddressCategory, companyaddress => companyaddress.Country, companyaddress => companyaddress.State));
+        }
+		
+		public ViewResult Search(CompanyAddress searchCompanyAddress)
+        {
+			if(searchCompanyAddress!=null)
+			{
+							}
+						return View("Index",companyaddressRepository.AllIncluding(companyaddress => companyaddress.Company, companyaddress => companyaddress.CompanyAddressCategory, companyaddress => companyaddress.Country, companyaddress => companyaddress.State));
+		}
+
+        //
+        // GET: /CompanyAddresses/Details/5
+		[UserAuthorize]
+        public ViewResult Details(int id)
+        {
+            return View(companyaddressRepository.Find(id));
+        }
+
+        //
+        // GET: /CompanyAddresses/Create
+		[UserAuthorize]
+        public ActionResult Create()
+        {
+			CompanyAddress companyaddress = new CompanyAddress();
+			ViewBag.PossibleCompanies = companyRepository.All;
+			ViewBag.PossibleCompanyAddressCategories = companyaddresscategoryRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+            return View(companyaddress);
+        } 
+
+        //
+        // POST: /CompanyAddresses/Create
+        [HttpPost]
+        public ActionResult Create(CompanyAddress companyaddress)
+        {
+            if (ModelState.IsValid) {
+                companyaddressRepository.InsertOrUpdate(companyaddress);
+                companyaddressRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleCompanies = companyRepository.All;
+				ViewBag.PossibleCompanyAddressCategories = companyaddresscategoryRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				return View(companyaddress);
+			}
+        }
+        
+        //
+        // GET: /CompanyAddresses/Edit/5
+		[UserAuthorize]
+        public ActionResult Edit(int id)
+        {
+			ViewBag.PossibleCompanies = companyRepository.All;
+			ViewBag.PossibleCompanyAddressCategories = companyaddresscategoryRepository.All;
+			ViewBag.PossibleCountries = countryRepository.All;
+			ViewBag.PossibleStates = stateRepository.All;
+             return View(companyaddressRepository.Find(id));
+        }
+
+        //
+        // POST: /CompanyAddresses/Edit/5
+        [HttpPost]
+        public ActionResult Edit(CompanyAddress companyaddress)
+        {
+            if (ModelState.IsValid) {
+                companyaddressRepository.InsertOrUpdate(companyaddress);
+                companyaddressRepository.Save();
+                return RedirectToAction("Index");
+            } else {
+				ViewBag.PossibleCompanies = companyRepository.All;
+				ViewBag.PossibleCompanyAddressCategories = companyaddresscategoryRepository.All;
+				ViewBag.PossibleCountries = countryRepository.All;
+				ViewBag.PossibleStates = stateRepository.All;
+				return View(companyaddress);
+			}
+        }
+
+        //
+        // GET: /CompanyAddresses/Delete/5
+		[UserAuthorize]
+        public ActionResult Delete(int id)
+        {
+            return View(companyaddressRepository.Find(id));
+        }
+
+        //
+        // POST: /CompanyAddresses/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            companyaddressRepository.Delete(id);
+            companyaddressRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+    }
+}
+

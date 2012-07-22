@@ -1,0 +1,41 @@
+@model SoftwareGrid.DataLogic.Models.OrganizationWorkforcePlan
+
+@{
+    ViewBag.Title = "OrganizationWorkforcePlan";
+    Layout = "_LayoutOrganization";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Organization Workforce Plan</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Organization Workforce Plan</h2>
+		<fieldset>
+
+    <label>Title</label>
+    <div class="display-field">@Model.Title</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>Startdate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.Startdate)</div>
+
+    <label>EndDate</label>
+    <div class="display-field">@String.Format("{0:g}", Model.EndDate)</div>
+
+    <label>Organization</label>
+    <div class="display-field">@(Model.Organization == null ? "None" : Model.Organization.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizationWorkforcePlanID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

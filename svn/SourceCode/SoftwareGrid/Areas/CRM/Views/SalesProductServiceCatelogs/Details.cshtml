@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.SalesProductServiceCatelog
+
+@{
+    ViewBag.Title = "SalesProductServiceCatelog";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Sales Product Service Catelog</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Sales Product Service Catelog</h2>
+		<fieldset>
+
+    <label>Title</label>
+    <div class="display-field">@Model.Title</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>SalesProductServiceCategory</label>
+    <div class="display-field">@(Model.SalesProductServiceCategory == null ? "None" : Model.SalesProductServiceCategory.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SalesProductServiceCatelogID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,57 @@
+﻿@using System.Web.Mvc;
+
+@helper Script(string fileName,UrlHelper url)
+{
+    <script src="@url.Content("~/Scripts/" + fileName)" type="text/javascript"></script>
+}
+
+@helper Image(string fileName,string height,string width,string title,UrlHelper url)
+{
+    <img height="@height" width="@width" alt="@title" src="@url.Content("~/Images/" + fileName)"/>
+}
+
+@helper Button(string title)
+{
+    <input type="submit" title="@title" value="@title" class="CommonButton" />
+}
+
+@helper Button(string title,string confirmationText)
+{
+    <input type="submit" title="@title" value="@title" class="CommonButton" onclick="return confirm('@confirmationText')" />
+}
+
+@helper MenuLink(string title, string actionName, string controllerName, string  areaName, UrlHelper url)
+{
+    string link = url.Action(actionName, controllerName, new { area=areaName });
+    <li><a href="@link"><span>@title</span></a></li>
+}
+
+@helper ImageMenuLink(string title, string actionName, string controllerName, string areaName, string imageUrl, UrlHelper url)
+{
+    string link = url.Action(actionName, controllerName, new { area = areaName });
+    <li><a href="@link">@if(imageUrl!=string.Empty){<img src="@imageUrl" />}@if(title!=string.Empty){<span>@title</span>}</a></li>
+}
+
+@helper ApplicantAccordionImageMenuLink(string title, string actionName, string controllerName, string areaName, string imageUrl,string routeValue, UrlHelper url)
+{
+    string link = url.Action(actionName, controllerName, new { area = areaName, applicantId = routeValue });
+    <li><a href="@link">@if(imageUrl!=string.Empty){<img src="@imageUrl" />}@if(title!=string.Empty){@title}</a></li>
+}
+
+@helper CompanyAccordionImageMenuLink(string title, string actionName, string controllerName, string areaName, string imageUrl,string routeValue, UrlHelper url)
+{
+    string link = url.Action(actionName, controllerName, new { area = areaName, companyId = routeValue });
+    <li><a href="@link">@if(imageUrl!=string.Empty){<img src="@imageUrl" />}@if(title!=string.Empty){@title}</a></li>
+}
+
+@helper VendorAccordionImageMenuLink(string title, string actionName, string controllerName, string areaName, string imageUrl, string routeValue, UrlHelper url)
+{
+    string link = url.Action(actionName, controllerName, new { area = areaName, vendorId = routeValue });
+    <li><a href="@link">@if(imageUrl!=string.Empty){<img src="@imageUrl" />}@if(title!=string.Empty){@title}</a></li>
+}
+
+@helper OrganizationAccordionImageMenuLink(string title, string actionName, string controllerName, string areaName, string imageUrl, string routeValue, UrlHelper url)
+{
+    string link = url.Action(actionName, controllerName, new { area = areaName, organizationId = routeValue });
+    <li><a href="@link">@if(imageUrl!=string.Empty){<img src="@imageUrl" />}@if(title!=string.Empty){@title}</a></li>
+}

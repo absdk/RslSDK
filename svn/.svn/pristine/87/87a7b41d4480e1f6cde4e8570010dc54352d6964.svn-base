@@ -1,0 +1,84 @@
+@model SoftwareGrid.DataLogic.Models.VendorSupplierDiversityCertificateInfo
+@* This partial view defines form fields that will appear when creating and editing entities *@
+@using SoftwareGrid.DataLogic.Models
+@{
+    Country selectedCountry = new Country();
+    if(Model.CountryID.HasValue)
+    {
+        selectedCountry.CountryID = Model.CountryID.Value;
+    }
+    State selectedState = new State();
+    if (Model.StateID.HasValue)
+    {
+        selectedState.StateID = Model.StateID.Value;
+    }
+}
+<fieldset>
+    @Html.ValidationSummary()
+    <div class="form-item">
+        @Html.LabelFor(model => model.VendorSupplierDiversityCertificationCategoryID)
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.VendorSupplierDiversityCertificationCategoryID, ((IEnumerable<SoftwareGrid.DataLogic.Models.VendorSupplierDiversityCertificationCategory>)ViewBag.PossibleVendorSupplierDiversityCertificationCategories).Select(option => new SelectListItem
+       {
+           Text = (option == null ? "None" : option.Name),
+           Value = option.VendorSupplierDiversityCertificationCategoryID.ToString(),
+           Selected = (Model != null) && (option.VendorSupplierDiversityCertificationCategoryID == Model.VendorSupplierDiversityCertificationCategoryID)
+       }), "Choose...")
+        </div>
+        <div class="required_tag">
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Title)
+        <div>
+            @Html.EditorFor(model => model.Title)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CertificateIssueDate)
+        <div>
+            @Html.EditorFor(model => model.CertificateIssueDate)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CertificationExpireDate)
+        <div>
+            @Html.EditorFor(model => model.CertificationExpireDate)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IssueCity)
+        <div>
+            @Html.EditorFor(model => model.IssueCity)
+        </div>
+    </div>
+    @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_Country, selectedCountry)
+    <div id="divCountryID">
+        @Html.Partial(SoftwareGrid.Common.Constants.PartialViews.DropDownList_State, selectedState)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.CertificateNumber)
+        <div>
+            @Html.EditorFor(model => model.CertificateNumber)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Description)
+        <div>
+            @Html.EditorFor(model => model.Description)
+        </div>
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.IsVerified)
+        <div>
+            @Html.EditorFor(model => model.IsVerified)
+        </div>
+    </div>
+    <div class="form-item">
+        <div class="button_bar clearfix">
+            <button class="green" type="submit">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,14 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.OrganizationWorkforcePlanDetail>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "Organization Workforce Plan Detail";
+    Layout = "_LayoutOrganization";
+}
+<div class="flat_area grid_16">
+    <h2>Organization Workforce Plan Detail List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+		Exception Object reference not set to an instance of an object.
+	

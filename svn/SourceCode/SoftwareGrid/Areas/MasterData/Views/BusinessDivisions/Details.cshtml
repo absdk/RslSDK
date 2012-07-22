@@ -1,0 +1,34 @@
+@model SoftwareGrid.DataLogic.Models.BusinessDivision
+
+@{
+    ViewBag.Title = "BusinessDivision";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Business Division</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Business Division</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+
+    <label>Industry</label>
+    <div class="display-field">@(Model.Industry == null ? "None" : Model.Industry.Name)</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BusinessDivisionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

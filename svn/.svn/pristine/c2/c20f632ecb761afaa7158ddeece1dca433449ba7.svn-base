@@ -1,0 +1,155 @@
+@model IEnumerable<SoftwareGrid.DataLogic.Models.AppMenu>
+@using EasySoft.Helper;
+@{
+    ViewBag.Title = "App Menu";
+}
+<div class="flat_area grid_16">
+    <h2>App Menu List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+@using (Html.BeginForm("Search", "AppMenu"))
+{
+	<div class="box grid_16">
+        <h2 class="box_head">Search</h2>
+        <a href="#" class="grabber">&nbsp;</a>
+        <a href="#" class="toggle">&nbsp;</a>
+        <div class="toggle_container">
+            <div class="block">
+				<div class="search-item">
+									    <div class="search-item-left">
+										        <div class="label-container">
+				            @Html.Label("Select Menu Category") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("AppMenuCategoryID", ((IEnumerable<SoftwareGrid.DataLogic.Models.AppMenuCategory>)ViewBag.PossibleAppMenuCategories).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.AppMenuCategoryID.ToString(),
+            }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Select Parent Menu") 
+				        </div>
+				        <div class="text-container">
+													    @Html.DropDownList("AppParentMenuID", ((IEnumerable<SoftwareGrid.DataLogic.Models.AppMenu>)ViewBag.PossibleAppParentMenus).Select(option => new SelectListItem
+            {
+                Text = (option == null ? "None" : option.Name),
+                Value = option.AppMenuID.ToString(),
+            }), "Choose...")
+										        </div>
+									        <div class="label-container">
+				            @Html.Label("Menu Name") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("Name") 
+											        </div>
+									    </div>
+				    <div class="search-item-right">
+										        <div class="label-container">
+				            @Html.Label("Area Name") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("AreaName") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Controller Name") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("ControllerName") 
+											        </div>
+									        <div class="label-container">
+				            @Html.Label("Action Name") 
+				        </div>
+				        <div class="text-container">
+											            @Html.TextBox("ActionName") 
+											        </div>
+									    </div>
+										</div>
+				<div style="width:50%; float:left;">
+				&nbsp;
+				</div>
+				<div class="button_bar clearfix" style="float:left;">
+					<button class="green" type="submit">
+							<span>Search</span>
+					</button>
+				</div>
+			</div>
+        </div>
+    </div>
+}
+<div style="clear:both;"></div>
+<div class="box grid_16">
+@(Html.Telerik().Grid(Model)
+        .Name("Grid")
+        .DataKeys(keys => keys.Add(c => c.AppMenuID))
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.AppMenuCategory.Name).Title("Select Menu Category").Width("15%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.AppParentMenu.Name).Title("Select Parent Menu").Width("15%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.Name).Title("Menu Name").Width("20%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.AreaName).Title("Area Name").Width("10%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.ControllerName).Title("Controller Name").Width("20%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Bound(c => c.ActionName).Title("Action Name").Width("10%").Sortable(true).Groupable(true).Filterable(true);
+            columns.Template(
+            @<text>
+                    <center>
+                        <a href="@Url.Action("Edit", "AppMenu", new { id = @item.AppMenuID })" title="Edit"><img alt="Edit"  src="/content/images/edit.png" /></a>
+                    </center>
+                </text>
+        ).HeaderTemplate(
+            @<text>
+                    <center>
+                        <span>Edit</span>
+                    </center>
+                </text>
+        ).Width("20px");
+            columns.Template(
+                @<text>
+                    <center>
+                        <a href="@Url.Action("Delete", "AppMenu", new { id = @item.AppMenuID })" title="Delete" onclick="return confirmSubmit()"><img alt="Edit"  src="/content/images/delete.png" /></a>
+                    </center>
+                </text>
+            ).HeaderTemplate(
+                @<text>
+                    <center>
+                        <span>Delete</span>
+                    </center>
+                </text>
+            ).Width("20px");
+        })
+        .Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Filters(filters =>
+        {
+            if (ViewData["AppMenuCategoryID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.AppMenuCategoryID).IsEqualTo(ViewData["AppMenuCategoryID"].ToInteger(true));
+            }
+            if (ViewData["AppParentMenuID"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.AppParentMenuID).IsEqualTo(ViewData["AppParentMenuID"].ToInteger(true));
+            }
+            if (ViewData["Name"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.Name).Contains(ViewData["Name"].ToString(true));
+            }
+            if (ViewData["AreaName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.AreaName).Contains(ViewData["AreaName"].ToString(true));
+            }
+            if (ViewData["ControllerName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ControllerName).Contains(ViewData["ControllerName"].ToString(true));
+            }
+            if (ViewData["ActionName"].ToString(true) != string.Empty)
+            {
+                filters.Add(o => o.ActionName).Contains(ViewData["ActionName"].ToString(true));
+            }
+        }))
+        .Groupable(grouping => grouping.Enabled(true))
+        .Footer(true)
+)
+</div>

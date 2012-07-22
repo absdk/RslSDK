@@ -1,0 +1,54 @@
+
+@model SoftwareGrid.DataLogic.Models.UserRolePermission
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+	<fieldset>
+		@Html.ValidationSummary()
+		<div class="form-item">
+			@Html.LabelFor(model => model.UserRoleID)
+			<div class="editor-field">
+			    @Html.DropDownListFor(model => model.UserRoleID, ((IEnumerable<SoftwareGrid.DataLogic.Models.UserRole>)ViewBag.PossibleUserRoles).Select(option => new SelectListItem {
+			        Text = (option == null ? "None" : option.Name), 
+			        Value = option.UserRoleID.ToString(),
+			        Selected = (Model != null) && (option.UserRoleID == Model.UserRoleID)
+			    }), "Choose...")
+			</div>
+			<div class="required_tag"></div>
+			</div>
+				
+		<div class="form-item">
+            @Html.LabelFor(model => model.AreaName)
+            <div>
+								@Html.EditorFor(model => model.AreaName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ControllerName)
+            <div>
+								@Html.EditorFor(model => model.ControllerName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+		
+		<div class="form-item">
+            @Html.LabelFor(model => model.ActionName)
+            <div>
+								@Html.EditorFor(model => model.ActionName)
+				            </div>
+					
+			<div class="required_tag"></div>
+					</div>
+	
+		<div class="form-item">
+			<div class="button_bar clearfix">
+				<button class="green" type="submit">
+						<span>Submit</span>
+				</button>
+			</div>
+		</div>
+	</fieldset>

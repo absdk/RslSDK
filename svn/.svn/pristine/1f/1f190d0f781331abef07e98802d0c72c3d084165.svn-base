@@ -1,0 +1,52 @@
+@model SoftwareGrid.DataLogic.Models.VendorNote
+
+@{
+    ViewBag.Title = "VendorNote";
+    Layout = "~/Views/Shared/_LayoutVMS.cshtml";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Vendor Note</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Vendor Note</h2>
+		<fieldset>
+<div class="form-item">
+    @Html.LabelFor(model => model.WrittenByUserID)
+    <div class="display-field">@Model.WrittenByUserID</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.DateTime)
+    <div class="display-field">@String.Format("{0:g}", Model.DateTime)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Notes)
+    <div class="display-field">@Model.Notes</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.User)
+    <div class="display-field">@(Model.User == null ? "None" : Model.User.LastName)</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.Vendor)
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Vendor).ToString()</div>
+</div>
+<div class="form-item">
+    @Html.LabelFor(model => model.VendorNoteCategory)
+    <div class="display-field">@(Model.VendorNoteCategory == null ? "None" : Model.VendorNoteCategory.Name)</div>
+</div>
+		</fieldset>
+		<div class="form-item">
+	@Html.ActionLink("Edit", "Edit", new { id = Model.VendorNoteID, vendorId = ViewBag.VendorId }) |
+	@Html.ActionLink("Back to List", "Index",new { vendorId = ViewBag.VendorId })
+    
+</div>
+	</div>
+</div>
+
+
+

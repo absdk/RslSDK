@@ -1,0 +1,31 @@
+@model SoftwareGrid.DataLogic.Models.ApplicantProfileTagLibrary
+
+@{
+    ViewBag.Title = "ApplicantProfileTagLibrary";
+}
+
+<div class="flat_area grid_16">
+    <h2>
+        Applicant Profile Tag Library</h2>
+</div>
+
+<div class="box grid_16">
+    <div class="block">
+        <h2 class="box_head">
+            Applicant Profile Tag Library</h2>
+		<fieldset>
+
+    <label>Name</label>
+    <div class="display-field">@Model.Name</div>
+
+    <label>Description</label>
+    <div class="display-field">@Model.Description</div>
+		</fieldset>
+	</div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ApplicantProfileTagLibraryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
